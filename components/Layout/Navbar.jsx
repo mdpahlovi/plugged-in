@@ -3,6 +3,7 @@ import Link from "next/link";
 import LightLogo from "../../public/logo/light-logo.png";
 import Image from "next/image";
 import { CgMenuRightAlt, CgClose } from "react-icons/cg";
+import ThemeToggle from "../ThemeToggle";
 
 const NavItems = () => {
     return (
@@ -37,7 +38,8 @@ const Navbar = () => {
                     <Link href="/login" className="btn btn-primary btn-outline btn-sm">
                         Login
                     </Link>
-                    <label className="swap swap-rotate text-xl btn btn-primary btn-outline btn-sm md:hidden">
+                    <ThemeToggle />
+                    <label className="swap swap-rotate text-xl btn btn-primary btn-outline btn-sm md:hidden p-2">
                         <input type="checkbox" onClick={() => setOpen(!open)} />
                         <CgMenuRightAlt className="swap-off" />
                         <CgClose className="swap-on" />
