@@ -1,146 +1,63 @@
 import React from 'react';
-
+import Image from "next/image";
+import ScreenRecorder from "../public/images/screen-recorder.jpg";
+import AudioRecorder from "../public/images/audio-recorder.jpg"
+import VideoEditing from "../public/images/video-editing.jpg"
+import Webcam from "../public/images/webcam.jpg"
 const Features = () => {
     return (
         <div>
-            <div className="px-4 py-16 mx-auto sm:max-w-xl md:max-w-full lg:max-w-screen-xl md:px-24 lg:px-8 lg:py-20">
-                {/* <div className="flex flex-col mb-6 lg:flex-row md:mb-10">
-                    <div className="lg:w-1/2">
-                        <h2 className="max-w-md mb-6 font-sans text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl sm:leading-none xl:max-w-lg">
-                            The quick, brown fox jumps over a lazy dog
-                        </h2>
-                    </div>
-                    <div className="lg:w-1/2">
-                        <p className="text-base text-gray-700 md:text-lg">
-                            Sed ut perspiciatis unde omnis iste natus error sit voluptatem
-                            accusantium doloremque rem aperiam, eaque ipsa quae. Sed ut unde
-                            omnis iste natus.
-                        </p>
-                    </div>
-                </div> */}
-                <div className='flex items-center justify-center '><h2 className="max-w-md mb-6 font-sans text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl sm:leading-none xl:max-w-lg">
-                    Our Features
-                </h2> </div>
-                <div className="grid gap-8 row-gap-10 sm:grid-cols-2 lg:grid-cols-4">
-                    <div className="max-w-md">
-                        <div className="flex items-center justify-center w-16 h-16 mb-4 rounded-full bg-indigo-50">
-                            <svg
-                                className="w-12 h-12 text-deep-purple-accent-400"
-                                stroke="currentColor"
-                                viewBox="0 0 52 52"
-                            >
-                                <polygon
-                                    strokeWidth="3"
-                                    strokeLinecap="round"
-                                    strokeLinejoin="round"
-                                    fill="none"
-                                    points="29 13 14 29 25 29 23 39 38 23 27 23"
-                                />
-                            </svg>
+            <section className="m-4 md:m-8 dark:bg-gray-800 dark:text-gray-100">
+                <div className="container mx-auto p-4 my-6 space-y-2 text-center">
+                    <h2 className="text-5xl font-bold">Our Features</h2>
+                </div>
+                <div className="container mx-auto grid justify-center gap-4 sm:grid-cols-2 lg:grid-cols-4">
+                    <div className="flex flex-col items-center p-4">
+                        <div className="mb-10">
+                            <div className="w-40 h-20 rounded">
+                                <Image src={ScreenRecorder} alt="" />
+                            </div>
                         </div>
-                        <h6 className="mb-2 font-semibold leading-5">The deep ocean</h6>
-                        <p className="mb-3 text-sm text-gray-900">
-                            A flower in my garden, a mystery in my panties. Heart attack never
-                            stopped old Big Bear. I didn't even know we were calling him Big
-                            Bear.
-                        </p>
-                        <a
-                            href="/"
-                            aria-label=""
-                            className="inline-flex items-center font-semibold transition-colors duration-200 text-deep-purple-accent-400 hover:text-deep-purple-800"
-                        >
-                            Learn more
-                        </a>
-                    </div>
-                    <div className="max-w-md">
-                        <div className="flex items-center justify-center w-16 h-16 mb-4 rounded-full bg-indigo-50">
-                            <svg
-                                className="w-12 h-12 text-deep-purple-accent-400"
-                                stroke="currentColor"
-                                viewBox="0 0 52 52"
-                            >
-                                <polygon
-                                    strokeWidth="3"
-                                    strokeLinecap="round"
-                                    strokeLinejoin="round"
-                                    fill="none"
-                                    points="29 13 14 29 25 29 23 39 38 23 27 23"
-                                />
-                            </svg>
+                        <h3 className="my-3 text-3xl font-semibold">Screen Recording</h3>
+                        <div className="space-y-1 leading-tight text-center">
+                            <p>Capture any activities on your desktop screen and browser. Record meetings, lectures, video tutorials etc. Online screen recorder with no hassle.</p>
                         </div>
-                        <h6 className="mb-2 font-semibold leading-5">When has justice</h6>
-                        <p className="mb-3 text-sm text-gray-900">
-                            Rough pomfret lemon shark plownose chimaera southern sandfish
-                            kokanee northern sea robin Antarctic cod.
-                        </p>
-                        <a
-                            href="/"
-                            aria-label=""
-                            className="inline-flex items-center font-semibold transition-colors duration-200 text-deep-purple-accent-400 hover:text-deep-purple-800"
-                        >
-                            Learn more
-                        </a>
                     </div>
-                    <div className="max-w-md">
-                        <div className="flex items-center justify-center w-16 h-16 mb-4 rounded-full bg-indigo-50">
-                            <svg
-                                className="w-12 h-12 text-deep-purple-accent-400"
-                                stroke="currentColor"
-                                viewBox="0 0 52 52"
-                            >
-                                <polygon
-                                    strokeWidth="3"
-                                    strokeLinecap="round"
-                                    strokeLinejoin="round"
-                                    fill="none"
-                                    points="29 13 14 29 25 29 23 39 38 23 27 23"
-                                />
-                            </svg>
+                    <div className="flex flex-col items-center p-4">
+                        <div className="mb-10">
+                            <div className="w-40 h-20 rounded">
+                                <Image src={AudioRecorder} alt="" />
+                            </div>
                         </div>
-                        <h6 className="mb-2 font-semibold leading-5">Organically grow</h6>
-                        <p className="mb-3 text-sm text-gray-900">
-                            A slice of heaven. O for awesome, this chocka full cuzzie is as
-                            rip-off as a cracker.
-                        </p>
-                        <a
-                            href="/"
-                            aria-label=""
-                            className="inline-flex items-center font-semibold transition-colors duration-200 text-deep-purple-accent-400 hover:text-deep-purple-800"
-                        >
-                            Learn more
-                        </a>
+                        <h3 className="my-3 text-3xl font-semibold">Audio Recording</h3>
+                        <div className="space-y-1 leading-tight text-center">
+                            <p>Capture sounds from system/browser and microphone. Record screen with audio (internal/external) with no quality loss.</p>
+                        </div>
                     </div>
-                    <div className="max-w-md">
-                        <div className="flex items-center justify-center w-16 h-16 mb-4 rounded-full bg-indigo-50">
-                            <svg
-                                className="w-12 h-12 text-deep-purple-accent-400"
-                                stroke="currentColor"
-                                viewBox="0 0 52 52"
-                            >
-                                <polygon
-                                    strokeWidth="3"
-                                    strokeLinecap="round"
-                                    strokeLinejoin="round"
-                                    fill="none"
-                                    points="29 13 14 29 25 29 23 39 38 23 27 23"
-                                />
-                            </svg>
+                    <div className="flex flex-col items-center p-4">
+                        <div className="mb-10">
+                            <div className="w-40 h-20 rounded">
+                                <Image src={Webcam} alt="" />
+                            </div>
                         </div>
-                        <h6 className="mb-2 font-semibold leading-5">A slice of heaven</h6>
-                        <p className="mb-3 text-sm text-gray-900">
-                            Disrupt inspire and think tank, social entrepreneur but preliminary
-                            thinking think tank compelling.
-                        </p>
-                        <a
-                            href="/"
-                            aria-label=""
-                            className="inline-flex items-center font-semibold transition-colors duration-200 text-deep-purple-accent-400 hover:text-deep-purple-800"
-                        >
-                            Learn more
-                        </a>
+                        <h3 className="my-3 text-3xl font-semibold">Webcam Recording</h3>
+                        <div className="space-y-1 leading-tight  text-center">
+                            <p>Capture webcam to record screen and yourself simultaneously. Creat presentation, gameplay, reaction videos with facecam recording.</p>
+                        </div>
+                    </div>
+                    <div className="flex flex-col items-center p-4">
+                        <div className="mb-10">
+                            <div className="w-40 h-20 rounded">
+                                <Image src={VideoEditing} alt="" />
+                            </div>
+                        </div>
+                        <h3 className="my-3 text-3xl font-semibold">Video Editing</h3>
+                        <div className="space-y-1 leading-tight text-center">
+                            <p>Create your online screen video and then you will be editing your video. it will help your video editing experience.It has no bug. So enjoy it.</p>
+                        </div>
                     </div>
                 </div>
-            </div>
+            </section>
         </div>
     );
 };
