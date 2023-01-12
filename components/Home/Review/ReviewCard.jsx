@@ -1,5 +1,3 @@
-import React from 'react';
-
 const ReviewCard = ({ name, location, time, img, review }) => {
     return (
         <div>

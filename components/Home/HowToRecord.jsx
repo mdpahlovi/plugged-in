@@ -1,12 +1,9 @@
-import React from 'react';
-
 const HowToRecord = () => {
     return (
         <div>
             <div className="px-4 py-16 mx-auto sm:max-w-xl md:max-w-full lg:max-w-screen-xl md:px-24 lg:px-8 lg:py-20">
                 <div className="grid gap-6 row-gap-10 lg:grid-cols-2">
                     <div className="lg:py-6 lg:pr-16">
-
                         <h2 className="max-w-md mb-6 font-sans text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl sm:leading-none xl:max-w-lg">
                             How to Record Screen Online
                         </h2>
@@ -21,9 +18,7 @@ const HowToRecord = () => {
                             </div>
                             <div className="pt-1 pb-8">
                                 <p className="mb-2 text-xl font-bold">Select Layout</p>
-                                <p className="text-gray-700 font-semibold">
-                                    Choose the recording mode, region, and audio settings.
-                                </p>
+                                <p className="text-gray-700 font-semibold">Choose the recording mode, region, and audio settings.</p>
                             </div>
                         </div>
                         <div className="flex grow mb-3 p-2">
@@ -37,9 +32,7 @@ const HowToRecord = () => {
                             </div>
                             <div className="pt-1 pb-8">
                                 <p className="mb-2 text-xl font-bold">Record Screen and Audio</p>
-                                <p className="text-gray-700 font-semibold">
-                                    Start recording your screen, webcam, and microphone after the countdown.
-                                </p>
+                                <p className="text-gray-700 font-semibold">Start recording your screen, webcam, and microphone after the countdown.</p>
                             </div>
                         </div>
                         <div className="flex p-2">

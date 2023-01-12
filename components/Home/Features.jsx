@@ -1,10 +1,9 @@
-
-import React from 'react';
 import Image from "next/image";
-import ScreenRecorder from "../public/images/screen-recorder.jpg";
-import AudioRecorder from "../public/images/audio-recorder.jpg"
-import VideoEditing from "../public/images/video-editing.jpg"
-import Webcam from "../public/images/webcam.jpg"
+import ScreenRecorder from "../../public/images/screen-recorder.jpg";
+import AudioRecorder from "../../public/images/audio-recorder.jpg";
+import VideoEditing from "../../public/images/video-editing.jpg";
+import Webcam from "../../public/images/webcam.jpg";
+
 const Features = () => {
     return (
         <div>
@@ -21,7 +20,10 @@ const Features = () => {
                         </div>
                         <h3 className="my-3 text-3xl font-semibold">Screen Recording</h3>
                         <div className="space-y-1 leading-tight text-center">
-                            <p>Capture any activities on your desktop screen and browser. Record meetings, lectures, video tutorials etc. Online screen recorder with no hassle.</p>
+                            <p>
+                                Capture any activities on your desktop screen and browser. Record meetings, lectures, video tutorials etc. Online screen
+                                recorder with no hassle.
+                            </p>
                         </div>
                     </div>
                     <div className="flex flex-col items-center p-4">
@@ -43,7 +45,10 @@ const Features = () => {
                         </div>
                         <h3 className="my-3 text-3xl font-semibold">Webcam Recording</h3>
                         <div className="space-y-1 leading-tight  text-center">
-                            <p>Capture webcam to record screen and yourself simultaneously. Creat presentation, gameplay, reaction videos with facecam recording.</p>
+                            <p>
+                                Capture webcam to record screen and yourself simultaneously. Creat presentation, gameplay, reaction videos with facecam
+                                recording.
+                            </p>
                         </div>
                     </div>
                     <div className="flex flex-col items-center p-4">
@@ -54,9 +59,11 @@ const Features = () => {
                         </div>
                         <h3 className="my-3 text-3xl font-semibold">Video Editing</h3>
                         <div className="space-y-1 leading-tight text-center">
-                            <p>Create your online screen video and then you will be editing your video. it will help your video editing experience.It has no bug. So enjoy it.</p>
+                            <p>
+                                Create your online screen video and then you will be editing your video. it will help your video editing experience.It has no
+                                bug. So enjoy it.
+                            </p>
                         </div>
-
                     </div>
                 </div>
             </section>
