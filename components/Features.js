@@ -1,3 +1,4 @@
+
 import React from 'react';
 import Image from "next/image";
 import ScreenRecorder from "../public/images/screen-recorder.jpg";
@@ -55,6 +56,7 @@ const Features = () => {
                         <div className="space-y-1 leading-tight text-center">
                             <p>Create your online screen video and then you will be editing your video. it will help your video editing experience.It has no bug. So enjoy it.</p>
                         </div>
+
                     </div>
                 </div>
             </section>
