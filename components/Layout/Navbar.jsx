@@ -1,6 +1,6 @@
 import { useState } from "react";
 import Link from "next/link";
-import LightLogo from "../../public/logo/light-logo.png";
+import LightLogo from "../../public/logo/light-logo (2).png";
 import Image from "next/image";
 import { CgMenuRightAlt, CgClose } from "react-icons/cg";
 import ThemeToggle from "../ThemeToggle";
@@ -26,9 +26,9 @@ const Navbar = () => {
 
     return (
         <>
-            <nav className="navbar px-6 border-b">
+            <nav className="navbar px-6">
                 <Link href="/" className="navbar-start">
-                    <Image src={LightLogo} alt="logo" width={90} />
+                    <Image src={LightLogo} alt="logo" width={100} />
                 </Link>
 
                 <div className="navbar-end gap-4 md:gap-6">
