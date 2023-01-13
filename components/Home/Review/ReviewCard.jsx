@@ -20,7 +20,7 @@ const ReviewCard = ({ name, location, time, img, review }) => {
                 </div>
             </div>
             <div className="space-y-2 text-sm dark:text-gray-400 pt-4">
-                <p className="line-clamp-4 sm:line-clamp-3 lg:line-clamp-4 xl:line-clamp-3">{review}</p>
+                <p className="line-clamp-4 sm:line-clamp-3 lg:line-clamp-4 xl:line-clamp-3 2xl:line-clamp-2">{review}</p>
             </div>
         </div>
     );

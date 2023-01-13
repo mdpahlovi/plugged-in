@@ -37,7 +37,9 @@ const Navbar = () => {
                     <div className="mr-2 hidden md:flex gap-6">
                         <NavItems />
                     </div>
-                    <SecButton href="/login">Login</SecButton>
+                    <SecButton href="/login" sm>
+                        Login
+                    </SecButton>
                     <ThemeToggle />
                     <label className="swap swap-rotate md:hidden">
                         <input type="checkbox" onClick={() => setOpen(!open)} />
