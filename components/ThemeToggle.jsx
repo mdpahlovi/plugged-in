@@ -1,5 +1,6 @@
 import { useTheme } from "../hooks/useTheme";
 import { HiSun, HiMoon } from "react-icons/hi";
+import IconButton from "./Button/IconButton";
 
 const ThemeToggle = () => {
     const { theme, setTheme } = useTheme();
@@ -15,10 +16,14 @@ const ThemeToggle = () => {
     };
 
     return (
-        <label className="swap swap-rotate text-xl btn btn-primary btn-outline btn-sm px-2">
+        <label className="swap swap-rotate">
             <input type="checkbox" onClick={() => changeTheme(theme, setTheme)} />
-            <HiSun className="swap-off" />
-            <HiMoon className="swap-on" />
+            <IconButton className="swap-off text-xl">
+                <HiSun />
+            </IconButton>
+            <IconButton className="swap-on text-xl">
+                <HiMoon />
+            </IconButton>
         </label>
     );
 };

@@ -1,3 +1,27 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer base {
+    h1 {
+        @apply text-4xl font-bold text-center mb-8;
+    }
+    h2 {
+        @apply text-2xl font-bold;
+    }
+}
+
+@layer components {
+    .border,
+    .border-r,
+    .border-l,
+    .border-t,
+    .border-b,
+    .border-x,
+    .border-y {
+        @apply border-base-content/10;
+    }
+    .section-gap {
+        @apply mt-12 sm:mt-16 md:mt-20;
+    }
+}

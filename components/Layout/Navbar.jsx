@@ -1,9 +1,11 @@
 import { useState } from "react";
 import Link from "next/link";
-import LightLogo from "../../public/logo/light-logo (2).png";
+import Logo from "../../public/logo/logo.png";
 import Image from "next/image";
 import { CgMenuRightAlt, CgClose } from "react-icons/cg";
 import ThemeToggle from "../ThemeToggle";
+import SecButton from "../Button/SecButton";
+import IconButton from "../Button/IconButton";
 
 const NavItems = () => {
     return (
@@ -25,27 +27,29 @@ const Navbar = () => {
     const [open, setOpen] = useState(false);
 
     return (
-        <>
-            <nav className="navbar px-6">
-                <Link href="/" className="navbar-start">
-                    <Image src={LightLogo} alt="logo" width={100} />
+        <nav className="border-b fixed w-full z-10 bg-base-100">
+            <div className="navbar justify-between container mx-auto px-6 sm:px-8">
+                <Link href="/" className="navbar-start w-max">
+                    <Image src={Logo} alt="logo" width={100} />
                 </Link>
 
-                <div className="navbar-end gap-4 md:gap-6">
-                    <div className="hidden md:flex gap-6">
+                <div className="navbar-end w-max gap-4">
+                    <div className="mr-2 hidden md:flex gap-6">
                         <NavItems />
                     </div>
-                    <Link href="/login" className="btn btn-primary btn-outline btn-sm">
-                        Login
-                    </Link>
+                    <SecButton href="/login">Login</SecButton>
                     <ThemeToggle />
-                    <label className="swap swap-rotate text-xl btn btn-primary btn-outline btn-sm md:hidden p-2">
+                    <label className="swap swap-rotate md:hidden">
                         <input type="checkbox" onClick={() => setOpen(!open)} />
-                        <CgMenuRightAlt className="swap-off" />
-                        <CgClose className="swap-on" />
+                        <IconButton className="swap-off text-xl">
+                            <CgMenuRightAlt />
+                        </IconButton>
+                        <IconButton className="swap-on text-xl">
+                            <CgClose />
+                        </IconButton>
                     </label>
                 </div>
-            </nav>
+            </div>
 
             <div
                 className={`w-[calc(100%-3rem)] fixed mx-6 mt-2 p-4 border rounded-lg bg-base-100 flex flex-col items-center gap-4 ${
@@ -54,7 +58,7 @@ const Navbar = () => {
             >
                 <NavItems />
             </div>
-        </>
+        </nav>
     );
 };
 

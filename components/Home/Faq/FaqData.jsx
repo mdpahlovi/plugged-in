@@ -1,5 +1,7 @@
 import { useState } from "react";
 import FaqCard from "./FaqCard";
+import FAQ from "../../../public/images/faq.png";
+import Image from "next/image";
 
 const FaqData = () => {
     const [open, setOpen] = useState(false);
@@ -15,17 +17,17 @@ const FaqData = () => {
         {
             id: 3,
             question: "The main features of this app?",
-            answer: "There are lot of features we have implement in this app already. You can video confference with high quality video and audio system. Meeting can be recording for future uses. Multiple users can join at atime.",
+            answer: "There are lot of features we have implement in this app already. You can video conference with high quality video and audio system. Meeting can be recording for future uses. Multiple users can join at atime.",
         },
         {
             id: 4,
             question: "The main features of this app?",
-            answer: "There are lot of features we have implement in this app already. You can video confference with high quality video and audio system. Meeting can be recording for future uses. Multiple users can join at atime.",
+            answer: "There are lot of features we have implement in this app already. You can video conference with high quality video and audio system. Meeting can be recording for future uses. Multiple users can join at atime.",
         },
         {
             id: 1,
             question: "How Many Participant can join at a time?",
-            answer: "Plugged in is multi dimentional meeting platform. Here more than 500 persons can join at a time. Our research and development team is working regularly and we hope that it will be increased in 1000 person.",
+            answer: "Plugged in is multi dimensional meeting platform. Here more than 500 persons can join at a time. Our research and development team is working regularly and we hope that it will be increased in 1000 person.",
         },
         {
             id: 2,
@@ -35,19 +37,22 @@ const FaqData = () => {
         {
             id: 3,
             question: "The main features of this app?",
-            answer: "There are lot of features we have implement in this app already. You can video confference with high quality video and audio system. Meeting can be recording for future uses. Multiple users can join at atime.",
+            answer: "There are lot of features we have implement in this app already. You can video conference with high quality video and audio system. Meeting can be recording for future uses. Multiple users can join at atime.",
         },
     ];
 
     return (
-        <section className="bg-[#3d3db9] h-screen grid place-items-center">
-            <p className="text-5xl text-white font-bold">Frequently Asked Questins</p>
-            <div className="px-[40px] max-w-[800px]">
+        <div className="section-gap grid lg:grid-cols-2 gap-x-8 max-w-screen-sm lg:max-w-full mx-auto">
+            <div>
+                <h1 className="lg:text-left">Frequently Asked Questions</h1>
+                <Image src={FAQ} alt="" className="hidden lg:block max-w-sm mx-auto" />
+            </div>
+            <div className="space-y-6">
                 {qusNAns.map((data, index) => {
                     return <FaqCard key={data.id} open={index === open} question={data.question} answer={data.answer} toggle={() => toggle(index)}></FaqCard>;
                 })}
             </div>
-        </section>
+        </div>
     );
 };
 
