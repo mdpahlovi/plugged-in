@@ -21,7 +21,14 @@
     .border-y {
         @apply border-base-content/10;
     }
+    .divide-x,
+    .divide-y {
+        @apply divide-base-content/10;
+    }
     .section-gap {
         @apply mt-12 sm:mt-16 md:mt-20;
+    }
+    .active-link {
+        @apply relative transition-all duration-300 after:absolute after:content-[''] after:w-full after:h-[1.5px] after:rounded after:left-0 after:-bottom-0.5 md:after:-bottom-2 after:bg-base-content after:transition after:duration-300;
     }
 }

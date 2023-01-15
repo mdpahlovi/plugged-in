@@ -1,29 +1,22 @@
 import { useState } from "react";
 import Link from "next/link";
-import Logo from "../../public/logo/logo.png";
 import Image from "next/image";
-import { CgMenuRightAlt, CgClose } from "react-icons/cg";
+import { useRouter } from "next/router";
+import Logo from "../../public/logo/logo.png";
 import ThemeToggle from "../ThemeToggle";
 import SecButton from "../Button/SecButton";
 import IconButton from "../Button/IconButton";
+import { CgMenuRightAlt, CgClose } from "react-icons/cg";
 
-const NavItems = () => {
-    return (
-        <>
-            <div>
-                <Link href="/">Home</Link>
-            </div>
-            <div>
-                <Link href="/pricing">Pricing</Link>
-            </div>
-            <div>
-                <Link href="/about">About Us</Link>
-            </div>
-        </>
-    );
-};
+const navItems = [
+    { href: "/", name: "Home" },
+    { href: "/about", name: "About" },
+    { href: "/price", name: "Pricing" },
+    { href: "/contact", name: "Contact" },
+];
 
 const Navbar = () => {
+    const { pathname } = useRouter();
     const [open, setOpen] = useState(false);
 
     return (
@@ -35,7 +28,18 @@ const Navbar = () => {
 
                 <div className="navbar-end w-max gap-4">
                     <div className="mr-2 hidden md:flex gap-6">
-                        <NavItems />
+                        {navItems.map(({ href, name }, index) => (
+                            <div
+                                key={index}
+                                className={
+                                    pathname === href
+                                        ? "active-link tracking-wider font-semibold"
+                                        : "active-link hover:tracking-wider after:scale-x-0 hover:after:scale-x-105"
+                                }
+                            >
+                                <Link href={href}>{name}</Link>
+                            </div>
+                        ))}
                     </div>
                     <SecButton href="/login" sm>
                         Login
@@ -58,7 +62,16 @@ const Navbar = () => {
                     open ? "scale-y-100" : "scale-y-0"
                 } transition-all origin-top duration-500 md:hidden`}
             >
-                <NavItems />
+                {navItems.map(({ href, name }, index) => (
+                    <div
+                        key={index}
+                        className={
+                            pathname === href ? "active-link tracking-wider" : "active-link hover:tracking-wider after:scale-x-0 hover:after:scale-x-105"
+                        }
+                    >
+                        <Link href={href}>{name}</Link>
+                    </div>
+                ))}
             </div>
         </nav>
     );

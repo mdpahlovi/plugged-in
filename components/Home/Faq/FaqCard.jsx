@@ -7,10 +7,10 @@ const FaqCard = ({ open, toggle, question, answer }) => {
         <div className="border rounded-lg">
             <div className="py-4 px-6 flex justify-between items-center cursor-pointer" onClick={toggle}>
                 <h2>{question}</h2>
-                <div className="text-[30px]">{open ? <AiOutlineMinus /> : <AiOutlinePlus />}</div>
+                <div className="text-3xl">{open ? <AiOutlineMinus /> : <AiOutlinePlus />}</div>
             </div>
             <Collapse isOpened={open}>
-                <div className="bg-white px-[50px] pb-[20px]">{answer}</div>
+                <div className="px-12 pb-6 opacity-70">{answer}</div>
             </Collapse>
         </div>
     );

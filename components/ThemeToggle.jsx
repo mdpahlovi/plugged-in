@@ -1,9 +1,19 @@
 import { useTheme } from "../hooks/useTheme";
 import { HiSun, HiMoon } from "react-icons/hi";
 import IconButton from "./Button/IconButton";
+import { useEffect, useRef } from "react";
 
 const ThemeToggle = () => {
+    const checkbox = useRef();
     const { theme, setTheme } = useTheme();
+
+    useEffect(() => {
+        if (theme === "dark") {
+            checkbox.current.checked = true;
+        } else {
+            checkbox.current.checked = false;
+        }
+    }, [theme]);
 
     const changeTheme = (theme, setTheme) => {
         if (theme === "dark") {
@@ -17,7 +27,7 @@ const ThemeToggle = () => {
 
     return (
         <label className="swap swap-rotate">
-            <input type="checkbox" onClick={() => changeTheme(theme, setTheme)} />
+            <input ref={checkbox} type="checkbox" onClick={() => changeTheme(theme, setTheme)} />
             <IconButton className="swap-off text-xl">
                 <HiSun />
             </IconButton>

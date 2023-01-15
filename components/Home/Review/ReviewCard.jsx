@@ -8,8 +8,8 @@ const ReviewCard = ({ name, location, time, img, review }) => {
                     </div>
                     <div>
                         <h4 className="font-bold">{name}</h4>
-                        <p className="text-xs text-base-content/70">{location}</p>
-                        <p className="text-xs text-base-content/70">{time}</p>
+                        <p className="text-xs opacity-70">{location}</p>
+                        <p className="text-xs opacity-70">{time}</p>
                     </div>
                 </div>
                 <div className="flex items-center space-x-2 text-primary">
@@ -19,7 +19,7 @@ const ReviewCard = ({ name, location, time, img, review }) => {
                     <span className="text-xl font-bold">4.5</span>
                 </div>
             </div>
-            <div className="space-y-2 text-sm dark:text-gray-400 pt-4">
+            <div className="space-y-2 text-sm opacity-70 pt-4">
                 <p className="line-clamp-4 sm:line-clamp-3 lg:line-clamp-4 xl:line-clamp-3 2xl:line-clamp-2">{review}</p>
             </div>
         </div>
