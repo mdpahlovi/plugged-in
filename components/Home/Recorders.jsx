@@ -2,7 +2,14 @@
 
 import IconButton from "../Button/IconButton";
 
-const Recorders = () => {
+const Recorders = ({
+  setStartVideo,
+  startVideo,
+  setStartAudio,
+  startAudio,
+  setStartScreen,
+  startScreen,
+}) => {
   //   const { status, startRecording, stopRecording, mediaBlobUrl } =
   //     useReactMediaRecorder({ screen: true });
 
@@ -28,22 +35,49 @@ const Recorders = () => {
           </figure>
           <div className="card-body items-center text-center">
             <h2 className="mb-2">Webcam Record</h2>
-            <label htmlFor="videoModal" className="cursor-pointer">
+            <label
+              onClick={() => {
+                if (startVideo === "stop") {
+                  setStartVideo("start");
+                } else {
+                  console.log("recording");
+                }
+              }}
+              htmlFor="videoModal"
+              className="cursor-pointer"
+            >
               <IconButton>
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  strokeWidth="1.5"
-                  stroke="currentColor"
-                  className="w-6 h-6"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    d="M5.25 5.653c0-.856.917-1.398 1.667-.986l11.54 6.348a1.125 1.125 0 010 1.971l-11.54 6.347a1.125 1.125 0 01-1.667-.985V5.653z"
-                  />
-                </svg>
+                {startVideo === "stop" ? (
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    strokeWidth="1.5"
+                    stroke="currentColor"
+                    className="w-6 h-6"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      d="M5.25 5.653c0-.856.917-1.398 1.667-.986l11.54 6.348a1.125 1.125 0 010 1.971l-11.54 6.347a1.125 1.125 0 01-1.667-.985V5.653z"
+                    />
+                  </svg>
+                ) : (
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke-width="1.5"
+                    stroke="currentColor"
+                    class="w-6 h-6"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      d="M19.5 8.25l-7.5 7.5-7.5-7.5"
+                    />
+                  </svg>
+                )}
               </IconButton>
             </label>
           </div>
@@ -67,22 +101,49 @@ const Recorders = () => {
           </figure>
           <div className="card-body items-center text-center">
             <h2 className="mb-2">Audio Record</h2>
-            <label htmlFor="audioModal" className="cursor-pointer">
+            <label
+              onClick={() => {
+                if (startAudio === "stop") {
+                  setStartAudio("start");
+                } else {
+                  console.log("recording");
+                }
+              }}
+              htmlFor="audioModal"
+              className="cursor-pointer"
+            >
               <IconButton>
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  strokeWidth="1.5"
-                  stroke="currentColor"
-                  className="w-6 h-6"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    d="M5.25 5.653c0-.856.917-1.398 1.667-.986l11.54 6.348a1.125 1.125 0 010 1.971l-11.54 6.347a1.125 1.125 0 01-1.667-.985V5.653z"
-                  />
-                </svg>
+                {startAudio === "stop" ? (
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    strokeWidth="1.5"
+                    stroke="currentColor"
+                    className="w-6 h-6"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      d="M5.25 5.653c0-.856.917-1.398 1.667-.986l11.54 6.348a1.125 1.125 0 010 1.971l-11.54 6.347a1.125 1.125 0 01-1.667-.985V5.653z"
+                    />
+                  </svg>
+                ) : (
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke-width="1.5"
+                    stroke="currentColor"
+                    class="w-6 h-6"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      d="M19.5 8.25l-7.5 7.5-7.5-7.5"
+                    />
+                  </svg>
+                )}
               </IconButton>
             </label>
           </div>
@@ -106,22 +167,49 @@ const Recorders = () => {
           </figure>
           <div className="card-body items-center text-center">
             <h2 className="mb-2">Screen Record</h2>
-            <label htmlFor="screenModal" className="cursor-pointer">
+            <label
+              onClick={() => {
+                if (startScreen === "stop") {
+                  setStartScreen("start");
+                } else {
+                  console.log("recording");
+                }
+              }}
+              htmlFor="screenModal"
+              className="cursor-pointer"
+            >
               <IconButton>
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  strokeWidth="1.5"
-                  stroke="currentColor"
-                  className="w-6 h-6"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    d="M5.25 5.653c0-.856.917-1.398 1.667-.986l11.54 6.348a1.125 1.125 0 010 1.971l-11.54 6.347a1.125 1.125 0 01-1.667-.985V5.653z"
-                  />
-                </svg>
+                {startScreen === "stop" ? (
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    strokeWidth="1.5"
+                    stroke="currentColor"
+                    className="w-6 h-6"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      d="M5.25 5.653c0-.856.917-1.398 1.667-.986l11.54 6.348a1.125 1.125 0 010 1.971l-11.54 6.347a1.125 1.125 0 01-1.667-.985V5.653z"
+                    />
+                  </svg>
+                ) : (
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke-width="1.5"
+                    stroke="currentColor"
+                    class="w-6 h-6"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      d="M19.5 8.25l-7.5 7.5-7.5-7.5"
+                    />
+                  </svg>
+                )}
               </IconButton>
             </label>
           </div>
