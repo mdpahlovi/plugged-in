@@ -8,12 +8,12 @@ import githubImg from '../public/logo/icons8-github.svg'
 const Login = () => {
 //google handler function
     async function handleGoogleLogin() {
-        signIn('google', { callbackUrl: "http://localhost:3000/login" })
+        signIn('google', { callbackUrl: "https://pluggedin.vercel.app/login" })
         console.log('gh');
     }
     //github handler function
     async function handleGithubLogin() {
-        signIn('github', { callbackUrl: "http://localhost:3000/login" })
+        signIn('github', { callbackUrl: "https://pluggedin.vercel.app/login" })
         console.log('gh');
     }
 
