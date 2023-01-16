@@ -1,7 +1,6 @@
 import Image from "next/image";
 import heroImg from "../../public/logo/heroImage.jpg";
-import Button from "../Button/Button";
-import SecButton from "../Button/SecButton";
+import { Button, ButtonOutline } from "../Buttons";
 
 const Hero = () => {
     return (
@@ -27,8 +26,8 @@ const Hero = () => {
                     </div>
                 </div>
                 <div className="pt-2 flex gap-4">
-                    <Button href="/">Get Started</Button>
-                    <SecButton href="/">Learn More</SecButton>
+                    <Button>Get Started</Button>
+                    <ButtonOutline>Learn More</ButtonOutline>
                 </div>
             </div>
             <Image src={heroImg} alt="logo" className="mx-auto rounded-lg w-full" />

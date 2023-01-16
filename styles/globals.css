@@ -9,6 +9,9 @@
     h2 {
         @apply text-2xl font-bold;
     }
+    p {
+        @apply opacity-75;
+    }
 }
 
 @layer components {

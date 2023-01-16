@@ -1,34 +1,41 @@
 import Main from "../components/Layout/Main";
-import { signIn, signOut } from "next-auth/react"
-import Button from "../components/Button/Button";
+import { signIn } from "next-auth/react";
 import Image from "next/image";
-import googleImg from '../public/logo/icons8-google.svg'
-import githubImg from '../public/logo/icons8-github.svg'
+import googleImg from "../public/logo/google.svg";
+import githubImg from "../public/logo/github.svg";
+import { ButtonOutline } from "../components/Buttons";
 
 const Login = () => {
-//google handler function
+    //google handler function
     async function handleGoogleLogin() {
-        signIn('google', { callbackUrl: "https://pluggedin.vercel.app/login" })
-        console.log('gh');
+        signIn("google", { callbackUrl: "https://pluggedin.vercel.app/login" });
+        console.log("gh");
     }
     //github handler function
     async function handleGithubLogin() {
-        signIn('github', { callbackUrl: "https://pluggedin.vercel.app/login" })
-        console.log('gh');
+        signIn("github", { callbackUrl: "https://pluggedin.vercel.app/login" });
+        console.log("gh");
     }
 
-    return <Main title="Login your account">
-        <div className='mt-10'>
-        <button className=" flex gap-2 px-6 py-3 text-white transition-all duration-300 rounded-full outline bg-gradient-to-br from-[#2F0D77] via-[#201172] to-[#816EEF]  hover:from-[#816EEF] hover:via-[#201172] hover:to-[#2F0D77] md:w-auto" onClick={handleGoogleLogin}>
-                Login with Google<Image src={googleImg} alt="logo" width={20} />
-            </button>
-            
+    return (
+        <Main title="Login your account">
+            <div className="section-gap flex gap-6">
+                <ButtonOutline onClick={handleGoogleLogin}>
+                    <div className="flex gap-1">
+                        <Image src={googleImg} alt="logo" width={20} />
+                        Login with Google
+                    </div>
+                </ButtonOutline>
 
-            <button className="mt-5 flex gap-2 px-6 py-3 text-white transition-all duration-300 rounded-full outline bg-gradient-to-br from-[#2F0D77] via-[#201172] to-[#816EEF]  hover:from-[#816EEF] hover:via-[#201172] hover:to-[#2F0D77] md:w-auto" onClick={handleGithubLogin}>
-                Login with Github<Image src={githubImg} alt="logo" width={22} />
-                    </button>
-       </div>
-    </Main>;
+                <ButtonOutline onClick={handleGithubLogin}>
+                    <div className="flex gap-1">
+                        <Image src={githubImg} alt="logo" width={22} />
+                        Login with Github
+                    </div>
+                </ButtonOutline>
+            </div>
+        </Main>
+    );
 };
 
 export default Login;

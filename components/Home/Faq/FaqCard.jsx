@@ -10,7 +10,7 @@ const FaqCard = ({ open, toggle, question, answer }) => {
                 <div className="text-3xl">{open ? <AiOutlineMinus /> : <AiOutlinePlus />}</div>
             </div>
             <Collapse isOpened={open}>
-                <div className="px-12 pb-6 opacity-70">{answer}</div>
+                <p className="px-12 pb-6">{answer}</p>
             </Collapse>
         </div>
     );

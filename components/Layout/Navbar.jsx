@@ -4,10 +4,8 @@ import Image from "next/image";
 import { useRouter } from "next/router";
 import Logo from "../../public/logo/logo.png";
 import ThemeToggle from "../ThemeToggle";
-import SecButton from "../Button/SecButton";
-import IconButton from "../Button/IconButton";
 import { CgMenuRightAlt, CgClose } from "react-icons/cg";
-
+import { ButtonOutline, IconButton } from "../Buttons";
 
 const navItems = [
     { href: "/", name: "Home" },
@@ -17,7 +15,6 @@ const navItems = [
 ];
 
 const Navbar = () => {
-    
     const { pathname } = useRouter();
     const [open, setOpen] = useState(false);
 
@@ -43,10 +40,9 @@ const Navbar = () => {
                             </div>
                         ))}
                     </div>
-                   
-                    <SecButton href="/login" sm>
-                        Login
-                    </SecButton>
+                    <Link href="/login">
+                        <ButtonOutline sm>Login</ButtonOutline>
+                    </Link>
                     <ThemeToggle />
                     <label className="swap swap-rotate md:hidden">
                         <input type="checkbox" onClick={() => setOpen(!open)} />

@@ -1,8 +1,8 @@
 import React, { useEffect, useRef, useState } from "react";
 import { useReactMediaRecorder } from "react-media-recorder";
-import IconButton from "../../Button/IconButton";
 import { HiOutlinePlay, HiOutlinePause, HiOutlinePlayPause } from "react-icons/hi2";
 import { BsDownload } from "react-icons/bs";
+import { IconButton } from "../../Buttons";
 
 const VideoPreview = ({ stream }) => {
     const videoRef = useRef(null);
@@ -23,7 +23,7 @@ const VideoRecorderModal = ({ startVideo, setStartVideo }) => {
     const { status, startRecording, stopRecording, pauseRecording, resumeRecording, mediaBlobUrl, previewStream } = useReactMediaRecorder({
         video: true,
         blobPropertyBag: {
-            type: "video/webm",
+            type: "video/mp4",
         },
     });
 
