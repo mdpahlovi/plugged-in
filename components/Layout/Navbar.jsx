@@ -8,6 +8,7 @@ import SecButton from "../Button/SecButton";
 import IconButton from "../Button/IconButton";
 import { CgMenuRightAlt, CgClose } from "react-icons/cg";
 
+
 const navItems = [
     { href: "/", name: "Home" },
     { href: "/about", name: "About" },
@@ -16,6 +17,7 @@ const navItems = [
 ];
 
 const Navbar = () => {
+    
     const { pathname } = useRouter();
     const [open, setOpen] = useState(false);
 
@@ -41,6 +43,7 @@ const Navbar = () => {
                             </div>
                         ))}
                     </div>
+                   
                     <SecButton href="/login" sm>
                         Login
                     </SecButton>
