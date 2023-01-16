@@ -6,44 +6,43 @@ import Recorders from "../components/Home/Recorders/Recorders";
 import HowToRecord from "../components/Home/HowToRecord/HowToRecord";
 import Features from "../components/Home/Features";
 import FaqData from "../components/Home/Faq/FaqData";
-// import ReviewSlider from "../components/Home/Review/ReviewSlider";
-// import VideoRecorderModal from "../components/Home/Recorders/VideoRecorderModal";
-// import AudioRecorderModal from "../components/Home/Recorders/AudioRecorderModal";
-// import ScreenRecorderModal from "../components/Home/Recorders/ScreenRecorderModal";
+import ReviewSlider from "../components/Home/Review/ReviewSlider";
+import ScreenRecorderModal from "../components/Home/Recorders/ScreenRecorderModal";
+import VideoRecorderModal from "../components/Home/Recorders/VideoRecorderModal";
+import AudioRecorderModal from "../components/Home/Recorders/AudioRecorderModal";
 
-const ReviewSlider = dynamic(() => import("../components/Home/Review/ReviewSlider"), {
-    ssr: false,
-});
-const VideoRecorderModal = dynamic(() => import("../components/Home/Recorders/VideoRecorderModal"), {
-    ssr: false,
-});
-const AudioRecorderModal = dynamic(() => import("../components/Home/Recorders/AudioRecorderModal"), {
-    ssr: false,
-});
-const ScreenRecorderModal = dynamic(() => import("../components/Home/Recorders/ScreenRecorderModal"), {
-    ssr: false,
-});
+// const ReviewSlider = dynamic(() => import("../components/Home/Review/ReviewSlider"), {
+//     ssr: false,
+// });
+// const ScreenRecorderModal = dynamic(() => import("../components/Home/Recorders/ScreenRecorderModal"), {
+//     ssr: false,
+// });
+// const VideoRecorderModal = dynamic(() => import("../components/Home/Recorders/VideoRecorderModal"), {
+//     ssr: false,
+// });
+// const AudioRecorderModal = dynamic(() => import("../components/Home/Recorders/AudioRecorderModal"), {
+//     ssr: false,
+// });
 
 export default function Home() {
+    const [startScreen, setStartScreen] = useState("stop");
     const [startVideo, setStartVideo] = useState("stop");
     const [startAudio, setStartAudio] = useState("stop");
-    const [startScreen, setStartScreen] = useState("stop");
 
     return (
         <Main title="Plugged In | Record Everything Online" className="">
             <Hero />
-
             <Recorders
+                setStartScreen={setStartScreen}
+                startScreen={startScreen}
                 setStartVideo={setStartVideo}
                 startVideo={startVideo}
                 setStartAudio={setStartAudio}
                 startAudio={startAudio}
-                setStartScreen={setStartScreen}
-                startScreen={startScreen}
             ></Recorders>
+            <ScreenRecorderModal startScreen={startScreen} setStartScreen={setStartScreen} />
             <VideoRecorderModal startVideo={startVideo} setStartVideo={setStartVideo} />
             <AudioRecorderModal startAudio={startAudio} setStartAudio={setStartAudio} />
-            <ScreenRecorderModal startScreen={startScreen} setStartScreen={setStartScreen} />
             <HowToRecord />
             <Features />
             <ReviewSlider />
