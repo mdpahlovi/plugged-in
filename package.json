@@ -26,7 +26,8 @@
     "react-icons": "^4.7.1",
     "react-media-recorder": "^1.6.5",
     "react-wavify": "^1.7.0",
-    "swiper": "^8.4.5"
+    "swiper": "^8.4.5",
+    "typewriter-effect": "^2.19.0"
   },
   "devDependencies": {
     "@tailwindcss/line-clamp": "^0.4.2",
