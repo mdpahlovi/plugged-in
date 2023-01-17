@@ -16,7 +16,7 @@ const Features = () => {
                         </div>
                     </div>
                     <h2 className="my-3">Screen Recording</h2>
-                    <p className="text-center opacity-70">
+                    <p className="text-center">
                         Capture any activities on your desktop screen and browser. Record meetings, lectures, video tutorials etc. Online screen recorder with
                         no hassle.
                     </p>
@@ -28,7 +28,7 @@ const Features = () => {
                         </div>
                     </div>
                     <h2 className="my-3">Audio Recording</h2>
-                    <p className="text-center opacity-70">
+                    <p className="text-center">
                         Capture sounds from system/browser and microphone. Record screen with audio (internal/external) with no quality loss.
                     </p>
                 </div>
@@ -39,7 +39,7 @@ const Features = () => {
                         </div>
                     </div>
                     <h2 className="my-3">Webcam Recording</h2>
-                    <p className="text-center opacity-70">
+                    <p className="text-center">
                         Capture webcam to record screen and yourself simultaneously. Creat presentation, gameplay, reaction videos with facecam recording.
                     </p>
                 </div>
@@ -50,7 +50,7 @@ const Features = () => {
                         </div>
                     </div>
                     <h2 className="my-3">Video Editing</h2>
-                    <p className="text-center opacity-70">
+                    <p className="text-center">
                         Create your online screen video and then you will be editing your video. it will help your video editing experience.It has no bug. So
                         enjoy it.
                     </p>

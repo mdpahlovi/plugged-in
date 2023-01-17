@@ -1,7 +1,7 @@
 import { useTheme } from "../hooks/useTheme";
 import { HiSun, HiMoon } from "react-icons/hi";
-import IconButton from "./Button/IconButton";
 import { useEffect, useRef } from "react";
+import { IconButton } from "./Buttons";
 
 const ThemeToggle = () => {
     const checkbox = useRef();

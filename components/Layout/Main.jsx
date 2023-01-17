@@ -10,7 +10,7 @@ const Main = ({ title, className, children }) => {
                 <link rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
             </Head>
             <Navbar />
-            <main className={`container mx-auto px-6 sm:px-8 ${className}`}>
+            <main className={className}>
                 <div className="p-9"></div>
                 {children}
             </main>

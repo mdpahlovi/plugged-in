@@ -9,9 +9,15 @@
     h2 {
         @apply text-2xl font-bold;
     }
+    p {
+        @apply opacity-75;
+    }
 }
 
 @layer components {
+    .container {
+        @apply mx-auto px-6 sm:px-8;
+    }
     .border,
     .border-r,
     .border-l,
@@ -30,5 +36,8 @@
     }
     .active-link {
         @apply relative transition-all duration-300 after:absolute after:content-[''] after:w-full after:h-[1.5px] after:rounded after:left-0 after:-bottom-0.5 md:after:-bottom-2 after:bg-base-content after:transition after:duration-300;
+    }
+    .input {
+        @apply input-bordered w-full;
     }
 }
