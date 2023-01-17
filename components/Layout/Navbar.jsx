@@ -6,6 +6,8 @@ import Logo from "../../public/logo/logo.png";
 import ThemeToggle from "../ThemeToggle";
 import { CgMenuRightAlt, CgClose } from "react-icons/cg";
 import { ButtonOutline, IconButton } from "../Buttons";
+import { useSession } from "next-auth/react";
+import Avatar from "../../public/images/avatar.png";
 
 const navItems = [
     { href: "/", name: "Home" },
@@ -15,6 +17,7 @@ const navItems = [
 ];
 
 const Navbar = () => {
+    const { data: session } = useSession();
     const { pathname } = useRouter();
     const [open, setOpen] = useState(false);
 
@@ -40,9 +43,31 @@ const Navbar = () => {
                             </div>
                         ))}
                     </div>
-                    <Link href="/login">
-                        <ButtonOutline sm>Login</ButtonOutline>
-                    </Link>
+                    {session?.user ? (
+                        session?.user?.image ? (
+                            <div className="relative">
+                                <Image src={session?.user?.image} alt="" width={34} height={34} className="absolute rounded-full top-0.5 left-0.5 z-10" />
+                                <Link href="/dashboard">
+                                    <ButtonOutline sm>
+                                        <div className="pl-6">Dashboard</div>
+                                    </ButtonOutline>
+                                </Link>
+                            </div>
+                        ) : (
+                            <div className="relative">
+                                <Image src={Avatar} alt="" width={34} height={34} className="absolute rounded-full top-0.5 left-0.5 z-10" />
+                                <Link href="/dashboard">
+                                    <ButtonOutline sm>
+                                        <div className="pl-6">Dashboard</div>
+                                    </ButtonOutline>
+                                </Link>
+                            </div>
+                        )
+                    ) : (
+                        <Link href="/login">
+                            <ButtonOutline sm>Login</ButtonOutline>
+                        </Link>
+                    )}
                     <ThemeToggle />
                     <label className="swap swap-rotate md:hidden">
                         <input type="checkbox" onClick={() => setOpen(!open)} />
