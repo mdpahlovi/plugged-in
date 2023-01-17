@@ -30,7 +30,7 @@ export default function Home() {
     const [startAudio, setStartAudio] = useState("stop");
 
     return (
-        <Main title="Plugged In | Record Everything Online" className="">
+        <Main title="Plugged In | Record Everything Online" className="container">
             <Hero />
             <Recorders
                 setStartScreen={setStartScreen}
