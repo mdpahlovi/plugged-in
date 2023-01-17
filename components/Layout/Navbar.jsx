@@ -40,7 +40,7 @@ const Navbar = () => {
                             </div>
                         ))}
                     </div>
-                    <Link href="/login">
+                    <Link href="/Login">
                         <ButtonOutline sm>Login</ButtonOutline>
                     </Link>
                     <ThemeToggle />
@@ -57,9 +57,8 @@ const Navbar = () => {
             </div>
 
             <div
-                className={`w-[calc(100%-3rem)] fixed mx-6 mt-2 p-4 border rounded-lg bg-base-100 flex flex-col items-center gap-4 ${
-                    open ? "scale-y-100" : "scale-y-0"
-                } transition-all origin-top duration-500 md:hidden`}
+                className={`w-[calc(100%-3rem)] fixed mx-6 mt-2 p-4 border rounded-lg bg-base-100 flex flex-col items-center gap-4 ${open ? "scale-y-100" : "scale-y-0"
+                    } transition-all origin-top duration-500 md:hidden`}
             >
                 {navItems.map(({ href, name }, index) => (
                     <div
