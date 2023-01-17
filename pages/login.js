@@ -11,11 +11,11 @@ import { useForm } from "react-hook-form";
 const Login = () => {
     //google handler function
     async function handleGoogleLogin() {
-        signIn("google", { callbackUrl: "http://localhost:3000" });
+        signIn("google", { redirect: false, callbackUrl: "http://localhost:3000" });
     }
     //github handler function
     async function handleGithubLogin() {
-        signIn("github", { callbackUrl: "http://localhost:3000" });
+        signIn("github", { redirect: false, callbackUrl: "http://localhost:3000" });
     }
 
     // Login using react-hook-form
