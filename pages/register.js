@@ -3,19 +3,26 @@ import Main from "../components/Layout/Main";
 import { Button } from "../components/Buttons";
 import Wave from "react-wavify";
 import { useForm } from "react-hook-form";
+import axios from "axios";
 
 const Registration = () => {
     // Registration using react-hook-form
     const { register, handleSubmit } = useForm();
-    const Registration = (data) => {
-        console.log(data);
+
+    const handleRegistration = (data) => {
+        axios
+            .post("http://localhost:3000/api/auth/signup", data)
+            .then(({ data }) => console.log(data))
+            .catch(({ message }) => console.log(message));
     };
+
+    console.log(process.env.MONGO_URL);
 
     return (
         <Main title="Registration to PluggedIn">
             <div className="section-gap bg-base-100 max-w-lg sm:mx-auto shadow-lg drop-shadow p-8 space-y-6 rounded-lg mx-8">
                 <h2 className="text-center">Create your account</h2>
-                <form action="" onSubmit={handleSubmit(Registration)} className="space-y-4">
+                <form action="" onSubmit={handleSubmit(handleRegistration)} className="space-y-4">
                     <div className="space-y-1">
                         <label htmlFor="name" className="block font-semibold">
                             Full Name
