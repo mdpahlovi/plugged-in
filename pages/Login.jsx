@@ -1,11 +1,10 @@
-import Main from "../components/Layout/Main";
-import { signIn } from "next-auth/react";
+import Link from "next/link";
 import Image from "next/image";
-import login from "../public/logo/animation.gif";
-import logo from "../public/logo/logo.png";
-import { ButtonOutline } from "../components/Buttons";
-import { FcGoogle } from 'react-icons/fc';
-import { BsGithub } from 'react-icons/bs';
+import Main from "../components/Layout/Main";
+import { Button, ButtonOutline } from "../components/Buttons";
+import { BsGoogle, BsGithub } from "react-icons/bs";
+import LoginGif from "../public/logo/animation.gif";
+import { signIn } from "next-auth/react";
 import { useForm } from "react-hook-form";
 
 const Login = () => {
@@ -21,59 +20,51 @@ const Login = () => {
     }
 
     // login using react-hook-form
-    const { register, handleSubmit } = useForm()
+    const { register, handleSubmit } = useForm();
 
-    const handleLogin = data => {
+    const handleLogin = (data) => {
         console.log(data);
-    }
+    };
 
     return (
         <Main title="Login your account">
-            <div className='grid grid-cols-1 lg:grid-cols-2 -mt-24'>
-                <div className='h-[800px] flex justify-center items-center'>
-                    <div className='w-96 p-7 border'>
-                        <p className='text-center text-xl font-bold'>Log in to Account</p>
-                        <div className='border-2 w-16 border-purple-700 ml-32 mb-2 inline-block'></div>
-                        <form onSubmit={handleSubmit(handleLogin)}>
-
-                            <div className="form-control w-full max-w-xs mt-4 mb-4 flex items-center">
-                                <input type="text" {...register("email")} placeholder="Email " className="input input-bordered w-full max-w-xs" />
-                            </div>
-                            <div className="form-control w-full max-w-xs">
-                                <input type="password" {...register("password")} placeholder="Password" className="input input-bordered w-full max-w-xs" />
-                                <label className="label"><span className="label-text"><a>Forget Password?</a></span></label>
-                            </div>
-                            <input className='btn btn-accent w-full' value="Login" type="submit" />
-                        </form>
-                        <p>Dont have an account? <a className='text-secondary'>Create Account</a></p>
-                        <div className="divider">OR Sign up with</div>
-                        <div className="flex gap-2">
-                            <button className='btn btn-outline w-1/2 gap-2'>Google  <FcGoogle /></button>
-                            <button className='btn btn-outline w-1/2 gap-2'>Github <BsGithub /></button>
+            <div className="section-gap grid lg:grid-cols-2">
+                <div className="p-6 border">
+                    <h1 className="mb-6">Log in to Account</h1>
+                    <form onSubmit={handleSubmit(handleLogin)} className="space-y-4">
+                        <input type="email" {...register("email")} placeholder="Email" className="input input-bordered w-full" />
+                        <input type="password" {...register("password")} placeholder="Password" className="input input-bordered w-full" />
+                        <div>
+                            <a>Forget Password?</a>
                         </div>
+                        <Button className="w-full">Login</Button>
+                    </form>
+                    <p className="mt-5">
+                        Don&apos;t have an account?
+                        <Link href="/register" className="text-indigo-900 font-semibold">
+                            Create Account
+                        </Link>
+                    </p>
+                    <div className="divider">OR</div>
+                    <div className="grid grid-cols-2 gap-4">
+                        <ButtonOutline onClick={handleGoogleLogin}>
+                            <div className="flex justify-center items-center gap-1.5">
+                                Login with Google
+                                <BsGoogle className="text-sm" />
+                            </div>
+                        </ButtonOutline>
+                        <ButtonOutline onClick={handleGithubLogin}>
+                            <div className="flex justify-center items-center gap-1.5">
+                                Login with Github
+                                <BsGithub />
+                            </div>
+                        </ButtonOutline>
                     </div>
                 </div>
-                <div className='mt-16 items-center justify-center mr-48 disabled:sm'>
-                    <Image src={login} alt=''></Image>
-                    <Image src={logo} alt='' width={280}></Image>
+                <div className="">
+                    <Image src={LoginGif} alt=""></Image>
                 </div>
-
             </div>
-            {/* <div className="section-gap flex gap-6">
-                <ButtonOutline onClick={handleGoogleLogin}>
-                    <div className="flex gap-1">
-                        <Image src={googleImg} alt="logo" width={20} />
-                        Login with Google
-                    </div>
-                </ButtonOutline>
-
-                <ButtonOutline onClick={handleGithubLogin}>
-                    <div className="flex gap-1">
-                        <Image src={githubImg} alt="logo" width={22} />
-                        Login with Github
-                    </div>
-                </ButtonOutline>
-            </div> */}
         </Main>
     );
 };
