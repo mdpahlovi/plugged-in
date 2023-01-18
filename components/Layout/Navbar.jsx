@@ -43,7 +43,9 @@ const Navbar = () => {
                             </div>
                         ))}
                     </div>
-                    {authUser?.uid ? (
+                    {loading ? (
+                        <ButtonOutline sm>Loading...</ButtonOutline>
+                    ) : authUser?.uid ? (
                         authUser?.photoURL ? (
                             <div className="relative">
                                 <Image src={authUser.photoURL} alt="" width={34} height={34} className="absolute rounded-full top-0.5 left-0.5 z-10" />

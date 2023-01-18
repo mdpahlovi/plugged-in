@@ -3,20 +3,32 @@ import Main from "../components/Layout/Main";
 import { Button } from "../components/Buttons";
 import Wave from "react-wavify";
 import { useForm } from "react-hook-form";
-import axios from "axios";
+import { useAuth } from "../hooks/useAuth";
+import { toast } from "react-toastify";
 
 const Registration = () => {
+    const { loading, setLoading, createUser, updateUserProfile } = useAuth();
     // Registration using react-hook-form
+
     const { register, handleSubmit } = useForm();
-
-    const handleRegistration = (data) => {
-        axios
-            .post("http://localhost:3000/api/auth/signup", data)
-            .then(({ data }) => console.log(data))
-            .catch(({ message }) => console.log(message));
+    const handleRegistration = ({ name, email, password }) => {
+        createUser(email, password)
+            .then(({ user }) => {
+                updateUserProfile(name)
+                    .then(() => {
+                        toast.success("Account Created");
+                        setLoading(false);
+                    })
+                    .catch(({ message }) => {
+                        toast.error(message);
+                        setLoading(false);
+                    });
+            })
+            .catch(({ message }) => {
+                toast.error(message);
+                setLoading(false);
+            });
     };
-
-    console.log(process.env.MONGO_URL);
 
     return (
         <Main title="Registration to PluggedIn">
@@ -49,7 +61,7 @@ const Registration = () => {
                     </div>
                     <div className="pt-2">
                         <Button className="w-full" type="submit">
-                            Login
+                            {loading ? "Loading" : "Register"}
                         </Button>
                     </div>
                 </form>

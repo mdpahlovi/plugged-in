@@ -26,11 +26,10 @@ export const UserContext = ({ children }) => {
         setLoading(true);
         return createUserWithEmailAndPassword(auth, email, password);
     };
-    const updateUserProfile = (name, photo) => {
+    const updateUserProfile = (name) => {
         setLoading(true);
         return updateProfile(auth.currentUser, {
             displayName: name,
-            photoURL: photo,
         });
     };
 
@@ -78,6 +77,5 @@ export const UserContext = ({ children }) => {
 
 export const useAuth = () => {
     const context = useContext(AuthContext);
-
     return context;
 };

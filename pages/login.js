@@ -10,12 +10,12 @@ import { useAuth } from "../hooks/useAuth";
 import { toast } from "react-toastify";
 
 const Login = () => {
-    const { setAuthUser, loading, setLoading, login, loginWithGoogle, loginWithGithub } = useAuth();
+    const { loading, setLoading, login, loginWithGoogle, loginWithGithub } = useAuth();
+
     //google handler function
     const handleGoogleLogin = () => {
         loginWithGoogle()
             .then(({ user }) => {
-                setAuthUser(user);
                 toast.success("Google Login Done");
             })
             .catch(({ message }) => {
@@ -27,7 +27,6 @@ const Login = () => {
     const handleGithubLogin = () => {
         loginWithGithub()
             .then(({ user }) => {
-                setAuthUser(user);
                 toast.success("Google Login Done");
             })
             .catch(({ message }) => {
@@ -41,7 +40,6 @@ const Login = () => {
     const handleLogin = async ({ email, password }) => {
         login(email, password)
             .then(({ user }) => {
-                setAuthUser(user);
                 toast.success("User Login Done");
             })
             .catch(({ message }) => {
@@ -69,7 +67,7 @@ const Login = () => {
                     </div>
                     <div className="pt-2">
                         <Button className="w-full" type="submit">
-                            Login
+                            {loading ? "Loading..." : "Login"}
                         </Button>
                     </div>
                 </form>
