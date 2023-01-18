@@ -11,6 +11,7 @@ import { MdVideoCameraBack, MdMenuOpen } from "react-icons/md";
 import { HiOutlineLogout } from "react-icons/hi";
 import { FaUserSecret } from "react-icons/fa";
 import { TiArrowBackOutline } from "react-icons/ti";
+import { Protect } from "../ProtectedRoute";
 
 const navItems = [
     { href: "/dashboard", name: "Profile", icon: <FaUserSecret /> },
@@ -103,4 +104,4 @@ const Dashboard = ({ title, children, className }) => {
     );
 };
 
-export default Dashboard;
+export default Protect(Dashboard);
