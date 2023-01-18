@@ -1,5 +1,6 @@
 
 import React from 'react';
+import Profile from './profile';
 
 const DashboardPages = () => {
     return (
@@ -75,15 +76,15 @@ const DashboardPages = () => {
                                             </button>
                                         </div>
                                     </div>
+                                    {/*  Content Here */}
+                                    <Profile></Profile>
                                 </div>
                             </div>
                         </div>
                         {/* header section end */}
-                        <div className='flex  items-center justify-center'>
-                            {/*  Content Here */}
-                            <h1>Content</h1>
-                        </div>
 
+                        {/* <div className='flex items-center justify-center'>
+                        </div> */}
 
                         <label htmlFor="my-drawer-2" className=" bg-teal-500 rounded-full text-white p-2   absolute top-5 left-5 drawer-button lg:hidden">
                             <svg
@@ -106,11 +107,22 @@ const DashboardPages = () => {
                     <div className="drawer-side">
                         <label htmlFor="my-drawer-2" className="drawer-overlay"></label>
                         <ul className="menu font-semibold z-10 md:bg-white bg-gray-300  p-2 w-80  text-base-content">
-                            <div className='text-[#BE123B] font bold text-lg'>
-                                <div class=" mb-10">
+                            <div className=' font bold text-lg'>
+                                <div class="mb-7 ">
                                     <button href="#" title="home">
                                         <img src="https://pluggedin.vercel.app/_next/image?url=%2F_next%2Fstatic%2Fmedia%2Flogo.27196d2f.png&w=128&q=75" class="w-32" alt="tailus logo" />
                                     </button>
+                                </div>
+                                <div id="profile" class="px-2 mb-2">
+                                    <p class="">Welcome back,</p>
+                                    <a href="#" class="inline-flex space-x-2 items-center">
+                                        <span>
+                                            <img class="rounded-full w-10 h-10" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSv31krV1KwK-JjywgloPbfaYhasBfy2XYDDQ&usqp=CAU" alt="" />
+                                        </span>
+                                        <span class="text-sm md:text-base font-bold">
+                                            Jhankar Mahbub
+                                        </span>
+                                    </a>
                                 </div>
                                 <li>
                                     <button
