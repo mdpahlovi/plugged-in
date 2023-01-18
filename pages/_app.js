@@ -1,12 +1,15 @@
 import { ThemeProvider } from "../hooks/useTheme";
 import "../styles/globals.css";
-import{SessionProvider} from 'next-auth/react'
+import { UserContext } from "../hooks/useAuth";
+import Toastify from "../components/Toastify";
+
 export default function App({ Component, pageProps }) {
     return (
         <ThemeProvider>
-            <SessionProvider session={pageProps.session}>
-            <Component {...pageProps} />
-           </SessionProvider>
+            <UserContext>
+                <Component {...pageProps} />
+                <Toastify />
+            </UserContext>
         </ThemeProvider>
     );
 }

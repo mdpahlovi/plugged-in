@@ -5,30 +5,49 @@ import googleImg from "../public/logo/google.svg";
 import githubImg from "../public/logo/github.svg";
 import { Button, ButtonOutline } from "../components/Buttons";
 import Wave from "react-wavify";
-import { signIn } from "next-auth/react";
 import { useForm } from "react-hook-form";
+import { useAuth } from "../hooks/useAuth";
+import { toast } from "react-toastify";
 
 const Login = () => {
+    const { setAuthUser, loading, setLoading, login, loginWithGoogle, loginWithGithub } = useAuth();
     //google handler function
-    async function handleGoogleLogin() {
-        signIn("google", { redirect: false, callbackUrl: "http://localhost:3000" });
-    }
+    const handleGoogleLogin = () => {
+        loginWithGoogle()
+            .then(({ user }) => {
+                setAuthUser(user);
+                toast.success("Google Login Done");
+            })
+            .catch(({ message }) => {
+                toast.error(message);
+                setLoading(false);
+            });
+    };
     //github handler function
-    async function handleGithubLogin() {
-        signIn("github", { redirect: false, callbackUrl: "http://localhost:3000" });
-    }
+    const handleGithubLogin = () => {
+        loginWithGithub()
+            .then(({ user }) => {
+                setAuthUser(user);
+                toast.success("Google Login Done");
+            })
+            .catch(({ message }) => {
+                toast.error(message);
+                setLoading(false);
+            });
+    };
 
     // Login using react-hook-form
     const { register, handleSubmit } = useForm();
-    const handleLogin = async (data) => {
-        const status = await signIn("credentials", {
-            redirect: false,
-            email: data.email,
-            password: data.password,
-            callbackUrl: "/",
-        });
-
-        if (status.ok) router.push(status.url);
+    const handleLogin = async ({ email, password }) => {
+        login(email, password)
+            .then(({ user }) => {
+                setAuthUser(user);
+                toast.success("User Login Done");
+            })
+            .catch(({ message }) => {
+                toast.error(message);
+                setLoading(false);
+            });
     };
 
     return (
