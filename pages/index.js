@@ -6,14 +6,14 @@ import Recorders from "../components/Home/Recorders/Recorders";
 import HowToRecord from "../components/Home/HowToRecord/HowToRecord";
 import Features from "../components/Home/Features";
 import FaqData from "../components/Home/Faq/FaqData";
-import ReviewSlider from "../components/Home/Review/ReviewSlider";
-// import ScreenRecorderModal from "../components/Home/Recorders/ScreenRecorderModal";
-// import VideoRecorderModal from "../components/Home/Recorders/VideoRecorderModal";
-// import AudioRecorderModal from "../components/Home/Recorders/AudioRecorderModal";
+// import ReviewSlider from "../components/Home/Review/ReviewSlider";
+import ScreenRecorderModal from "../components/Home/Recorders/ScreenRecorderModal";
+import VideoRecorderModal from "../components/Home/Recorders/VideoRecorderModal";
+import AudioRecorderModal from "../components/Home/Recorders/AudioRecorderModal";
 
-// const ReviewSlider = dynamic(() => import("../components/Home/Review/ReviewSlider"), {
-//     ssr: false,
-// });
+const ReviewSlider = dynamic(() => import("../components/Home/Review/ReviewSlider"), {
+    ssr: false,
+});
 // const ScreenRecorderModal = dynamic(() => import("../components/Home/Recorders/ScreenRecorderModal"), {
 //     ssr: false,
 // });
@@ -40,9 +40,9 @@ export default function Home() {
                 setStartAudio={setStartAudio}
                 startAudio={startAudio}
             ></Recorders>
-            {/* <ScreenRecorderModal startScreen={startScreen} setStartScreen={setStartScreen} />
+            <ScreenRecorderModal startScreen={startScreen} setStartScreen={setStartScreen} />
             <VideoRecorderModal startVideo={startVideo} setStartVideo={setStartVideo} />
-            <AudioRecorderModal startAudio={startAudio} setStartAudio={setStartAudio} /> */}
+            <AudioRecorderModal startAudio={startAudio} setStartAudio={setStartAudio} />
             <HowToRecord />
             <Features />
             <ReviewSlider />

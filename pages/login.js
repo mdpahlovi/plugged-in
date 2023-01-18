@@ -11,19 +11,24 @@ import { useForm } from "react-hook-form";
 const Login = () => {
     //google handler function
     async function handleGoogleLogin() {
-        signIn("google", { callbackUrl: "https://pluggedin.vercel.app/login" });
-        console.log("gh");
+        signIn("google", { redirect: false, callbackUrl: "http://localhost:3000" });
     }
     //github handler function
     async function handleGithubLogin() {
-        signIn("github", { callbackUrl: "https://pluggedin.vercel.app/login" });
-        console.log("gh");
+        signIn("github", { redirect: false, callbackUrl: "http://localhost:3000" });
     }
 
     // Login using react-hook-form
     const { register, handleSubmit } = useForm();
-    const handleLogin = (data) => {
-        console.log(data);
+    const handleLogin = async (data) => {
+        const status = await signIn("credentials", {
+            redirect: false,
+            email: data.email,
+            password: data.password,
+            callbackUrl: "/",
+        });
+
+        if (status.ok) router.push(status.url);
     };
 
     return (

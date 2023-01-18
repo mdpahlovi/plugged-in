@@ -1,8 +1,8 @@
 import Image from "next/image";
-import ScreenRecorder from "../../public/images/screen-recorder.png";
-import AudioRecorder from "../../public/images/audio-recorder.png";
-import VideoEditing from "../../public/images/video-editing.png";
-import Webcam from "../../public/images/webcam.png";
+import ScreenRecorder from "../../public/images/feature/screen-recorder.png";
+import AudioRecorder from "../../public/images/feature/audio-recorder.png";
+import VideoEditing from "../../public/images/feature/video-editing.png";
+import Webcam from "../../public/images/feature/webcam.png";
 
 const Features = () => {
     return (
@@ -40,7 +40,7 @@ const Features = () => {
                     </div>
                     <h2 className="my-3">Webcam Recording</h2>
                     <p className="text-center">
-                        Capture webcam to record screen and yourself simultaneously. Creat presentation, gameplay, reaction videos with facecam recording.
+                        Capture webcam to record screen and yourself simultaneously. Create presentation, game play, reaction videos with face cam recording.
                     </p>
                 </div>
                 <div className="flex flex-col items-center">
