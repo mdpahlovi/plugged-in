@@ -13,11 +13,9 @@ import { useState } from "react";
 import { useRouter } from "next/router";
 
 const Login = () => {
-    const { loading, setLoading, login, loginWithGoogle, loginWithGithub, passwordReset } = useAuth();
-
-    const [logedInUser, setLogedInUser] = useState(null);
-    const { confirmation } = useSetUserToDb(logedInUser);
-    const [blurUserEmail, setBlurUserEmail] = useState("");
+    const { loading, setLoading, login, loginWithGoogle, loginWithGithub } = useAuth();
+    const [loggedInUser, setLoggedInUser] = useState(null);
+    const { confirmation } = useSetUserToDb(loggedInUser);
     const [error, setError] = useState("");
     const router = useRouter();
 
@@ -28,11 +26,8 @@ const Login = () => {
     //google handler function
     const handleGoogleLogin = () => {
         loginWithGoogle()
-            .then((result) => {
-                const user = result.user;
-                console.log(user);
-                setLogedInUser(user);
-                // toast.success("Google Login Done");
+            .then(({ user }) => {
+                setLoggedInUser(user);
             })
             .catch(({ message }) => {
                 console.error(message);
@@ -42,11 +37,8 @@ const Login = () => {
     //github handler function
     const handleGithubLogin = () => {
         loginWithGithub()
-            .then((result) => {
-                const user = result.user;
-                console.log(user);
-                setLogedInUser(user);
-                // toast.success("Google Login Done");
+            .then(({ user }) => {
+                setLoggedInUser(user);
             })
             .catch(({ message }) => {
                 console.error(message);
@@ -60,29 +52,12 @@ const Login = () => {
         setError("");
         login(email, password)
             .then(({ user }) => {
-                toast.success("User Login Done");
+                setLoggedInUser(user);
             })
             .catch(({ message }) => {
                 setError(message);
                 setLoading(false);
             });
-    };
-
-    const handleBlur = (event) => {
-        setBlurUserEmail(event.target.value);
-    };
-
-    const handleReset = () => {
-        if (!blurUserEmail) {
-            setError("Please provide your email to reset the password");
-            return;
-        } else {
-            passwordReset(blurUserEmail)
-                .then(() => {})
-                .then((err) => {
-                    console.error(err);
-                });
-        }
     };
 
     return (
@@ -94,7 +69,7 @@ const Login = () => {
                         <label htmlFor="email" className="block font-semibold">
                             Email
                         </label>
-                        <input type="email" onBlur={handleBlur} {...register("email")} id="email" placeholder="Your Email" className="input" />
+                        <input type="email" {...register("email")} id="email" placeholder="Your Email" className="input" />
                     </div>
                     <div className="space-y-1">
                         <label htmlFor="password" className="block font-semibold">
@@ -103,10 +78,10 @@ const Login = () => {
                         <input type="password" {...register("password")} id="password" placeholder="Your Password" className="input" />
                     </div>
                     <div className="flex items-center">
-                        <p className="text-blue-800 font-bold">Forgot Password ?</p>
-                        <span className="btn btn-ghost" onClick={handleReset}>
-                            Reset
-                        </span>
+                        <p className="text-red-900 font-bold">{error}</p>
+                    </div>
+                    <div className="flex items-center">
+                        <p className="text-indigo-900 font-bold">Forgot Password ?</p>
                     </div>
                     <div className="pt-2">
                         <Button className="w-full" type="submit">

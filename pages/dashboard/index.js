@@ -1,6 +1,7 @@
 import Image from "next/image";
 import Dashboard from "../../components/Layout/Dashboard";
 import { useAuth } from "../../hooks/useAuth";
+import Avatar from "../../public/images/avatar.png";
 
 const Profile = () => {
     const { authUser } = useAuth();
@@ -11,13 +12,29 @@ const Profile = () => {
             <div className="container mt-28">
                 <div className="bg-white relative shadow rounded-lg w-full md:w-full  lg:w-full xl:w-full ">
                     <div className="flex justify-center">
-                        <Image
-                            src={authUser?.photoURL}
-                            alt=""
-                            className="rounded-full mx-auto absolute -top-20 shadow-md border-4 border-white transition duration-200 transform hover:scale-110"
-                            width={128}
-                            height={128}
-                        />
+                        {authUser?.photoURL ? (
+                            <Image
+                                src={authUser.photoURL}
+                                alt=""
+                                className="rounded-full mx-auto absolute -top-20 shadow-md border-4 border-white transition duration-200 transform hover:scale-110"
+                                width={128}
+                                height={128}
+                            />
+                        ) : (
+                            <>
+                                <Image
+                                    src={Avatar}
+                                    alt=""
+                                    className="rounded-full mx-auto absolute -top-20 shadow-md border-4 border-white transition duration-200 transform hover:scale-110"
+                                    width={128}
+                                    height={128}
+                                />
+                                <div className="relative text-lg text-center mt-20 -mb-10 px-4 py-2 border rounded-lg">
+                                    Upload Your Profile
+                                    <input type="file" className="absolute w-full h-full inset-0 opacity-0" />
+                                </div>
+                            </>
+                        )}
                     </div>
 
                     <div className="mt-16">

@@ -9,7 +9,6 @@ import {
     signInWithPopup,
     signOut,
     updateProfile,
-    sendPasswordResetEmail,
 } from "firebase/auth";
 import { app } from "../config/firebase.config";
 
@@ -32,12 +31,6 @@ export const UserContext = ({ children }) => {
         return updateProfile(auth.currentUser, {
             displayName: name,
         });
-    };
-
-    // resetPassword
-    const passwordReset = (email) => {
-        setLoading(true);
-        return sendPasswordResetEmail(auth, email);
     };
 
     // Signin & Signin With Social
@@ -78,7 +71,6 @@ export const UserContext = ({ children }) => {
         loginWithGoogle,
         loginWithGithub,
         logout,
-        passwordReset,
     };
     return <AuthContext.Provider value={authInfo}>{children}</AuthContext.Provider>;
 };
