@@ -1,3 +1,4 @@
+
 import { useQuery } from "@tanstack/react-query";
 import { useEffect } from "react";
 import MediaCard from "../../components/DashBoard/Recordings/MediaCard";
@@ -24,6 +25,7 @@ const Recordings = () => {
       </div>
     </Dashboard>
   );
+    );
 };
 
 export default Recordings;

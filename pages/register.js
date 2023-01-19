@@ -23,6 +23,7 @@ const Registration = () => {
     toast.success("User created successfully");
   }
 
+
   const { register, handleSubmit } = useForm();
   //   const handleRegistration = (userInfo) => {
   //     const userData = {

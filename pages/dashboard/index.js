@@ -1,15 +1,18 @@
 import Image from "next/image";
 import Dashboard from "../../components/Layout/Dashboard";
+import { useAuth } from "../../hooks/useAuth";
 
 const Profile = () => {
+    const { authUser } = useAuth();
+
     return (
-        <Dashboard title="Profile - PluggedIn">
-            <h1 className="mt-10 text-center">Welcome To PluggedIn</h1>
+        <Dashboard title={`${authUser?.displayName} in PluggedIn`}>
+            <h1 className="mt-10 text-center">Welcome {authUser?.displayName} To PluggedIn</h1>
             <div className="container mt-28">
                 <div className="bg-white relative shadow rounded-lg w-full md:w-full  lg:w-full xl:w-full ">
                     <div className="flex justify-center">
                         <Image
-                            src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSv31krV1KwK-JjywgloPbfaYhasBfy2XYDDQ&usqp=CAU"
+                            src={authUser?.photoURL}
                             alt=""
                             className="rounded-full mx-auto absolute -top-20 shadow-md border-4 border-white transition duration-200 transform hover:scale-110"
                             width={128}
@@ -18,7 +21,7 @@ const Profile = () => {
                     </div>
 
                     <div className="mt-16">
-                        <h1 className="font-bold text-center text-3xl text-gray-900">Jhankar Mahbub</h1>
+                        <h2 className="text-center">{authUser?.displayName}</h2>
                         <p className="text-center text-sm text-gray-400 font-medium">Online Video Service System</p>
                         <p>
                             <span></span>

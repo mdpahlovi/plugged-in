@@ -13,8 +13,8 @@ const Contact = () => {
             <div className="container section-gap grid lg:grid-cols-2 gap-12">
                 {/* textual content */}
                 <div className="">
-                    <h1 className="text-4xl font-bold text-purple-600">Get In Touch</h1>
-                    <p className="font-bold text-xl my-5">Fill up the form.....</p>
+                    <h1 className="text-left mb-4">Get In Touch</h1>
+                    <p className="font-bold text-xl">Fill up the form.....</p>
                     <p className="font-semibold text-xl">
                         <Typewriter
                             options={{
@@ -24,7 +24,7 @@ const Contact = () => {
                             }}
                         />
                     </p>
-                    <div className="flex-col gap-5 flex my-10">
+                    <div className="flex-col gap-5 flex my-6">
                         <div className="bg-purple-100 shadow-xl flex gap-5 p-4 border border-gray-500 hover:border-blue-700 md:w-1/2 w-full rounded-lg group cursor-pointer items-center">
                             <BsTelephoneFill className="text-green-800 text-xl group-hover:text-purple-900" />
                             <p className="text-green-800 font-semibold group-hover:text-purple-900">+01-0123456789</p>
@@ -47,52 +47,17 @@ const Contact = () => {
                     </div>
                 </div>
                 {/* Contact form */}
-                <div className="h-max bg-purple-200 p-12 rounded-lg shadow-2xl">
-                    <form>
-                        <div className="grid xl:grid-cols-2 xl:gap-10">
-                            <input
-                                type="text"
-                                name="first_name"
-                                id="first_name"
-                                className="form-control block w-full px-3 py-2 mb-5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded-md transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
-                                placeholder="First Name "
-                                required={true}
-                            />
-
-                            <input
-                                type="text"
-                                name="last_name"
-                                id="last_name"
-                                className="form-control block w-full px-3 py-2 mb-5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded-md transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
-                                placeholder="Last Name "
-                                required=""
-                            />
+                <div className="h-max bg-purple-200 p-8 rounded-lg shadow-lg">
+                    <form className="space-y-5">
+                        <div className="grid sm:grid-cols-2 gap-5">
+                            <input type="text" name="first_name" className="input" placeholder="First Name" />
+                            <input type="text" name="last_name" className="input" placeholder="Last Name" />
                         </div>
-                        <input
-                            type="email"
-                            name="email"
-                            className="form-control block w-full px-3 py-2 mb-5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded-md transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
-                            placeholder="Email "
-                            required={true}
-                        />
-                        <input
-                            type="text"
-                            name="subject"
-                            className="form-control block w-full px-3 py-2 mb-5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded-md transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
-                            placeholder="Subject "
-                            required={true}
-                        />
-
+                        <input type="email" name="email" className="input" placeholder="Email" />
+                        <input type="text" name="subject" className="input" placeholder="Subject" />
                         <div className="flex justify-center">
-                            <textarea
-                                className="form-control block w-full px-3 py-2 mb-5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded-md transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
-                                id="exampleFormControlTextarea1"
-                                rows="3"
-                                placeholder="Your message"
-                                required={true}
-                            ></textarea>
+                            <textarea className="textarea textarea-bordered w-full" rows="3" placeholder="Your message"></textarea>
                         </div>
-
                         <Button type="submit" className="w-full">
                             Send Message
                         </Button>

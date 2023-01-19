@@ -22,11 +22,13 @@ const Login = () => {
     passwordReset,
   } = useAuth();
 
+
   const [logedInUser, setLogedInUser] = useState(null);
   const { confirmation } = useSetUserToDb(logedInUser);
   const [blurUserEmail, setBlurUserEmail] = useState("");
   const [error, setError] = useState("");
   const router = useRouter();
+
 
   if (confirmation.acknowledged || confirmation.message) {
     toast.success("Logged In Successfully");
@@ -145,11 +147,13 @@ const Login = () => {
               <Image src={googleImg} alt="logo" width={20} />
               Login with Google
             </div>
+
           </ButtonOutline>
           <ButtonOutline onClick={handleGithubLogin}>
             <div className="flex justify-center items-center gap-1">
               <Image src={githubImg} alt="logo" width={22} />
               Login with Github
+
             </div>
           </ButtonOutline>
         </div>
