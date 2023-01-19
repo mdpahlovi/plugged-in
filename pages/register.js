@@ -46,7 +46,7 @@ const Registration = () => {
                             Password
                         </label>
                         <input type="password" {...register("password", {
-                            required: true, minLength: 6, maxLength: 10,
+                            required: true, minLength: 6, maxLength: 10
                         })} id="password" placeholder="Your Password" className={errors.password ? "input border-red-600" : "input"} />
                         <error className="text-red-600">
                             {errors?.password?.type === "required" && "Password is required"}
