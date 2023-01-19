@@ -74,7 +74,7 @@ const Registration = () => {
             </div>
             <div className="-mt-20 md:-mt-16 -mb-14 sm:-mb-[72px] md:-mb-[88px] w-screen">
                 <Wave
-                    fill="#201172"
+                    fill="url(#gradient)"
                     paused={false}
                     options={{
                         height: 20,
@@ -82,7 +82,15 @@ const Registration = () => {
                         speed: 0.15,
                         points: 6,
                     }}
-                />
+                >
+                    <defs>
+                        <linearGradient id="gradient" gradientTransform="rotate(90)">
+                            <stop offset="0%" stopColor="#816EEF" />
+                            <stop offset="100%" stopColor="#2F0D77" />
+                            <stop offset="50%" stopColor="#201172" />
+                        </linearGradient>
+                    </defs>
+                </Wave>
             </div>
         </Main>
     );
