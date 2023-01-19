@@ -40,9 +40,9 @@ const Login = () => {
                         <label htmlFor="email" className="block font-semibold">
                             Email
                         </label>
-                        <input type="email" {...register("email", { required: true })} id="email" placeholder="Your Email" className={errors.email ? "input border-red-600" : "input"} />
+                        <input type="email" {...register("email", { required: true })} id="email" placeholder="Your Email" className={errors?.email ? "input border-red-600" : "input"} />
                         <error className="text-red-600">
-                            {errors.email?.type === "required" && "Email is required"}
+                            {errors?.email?.type === "required" && "Email is required"}
                         </error>
                     </div>
                     <div className="space-y-1">
@@ -51,7 +51,7 @@ const Login = () => {
                         </label>
                         <input type="password" {...register("password", {
                             required: true
-                        })} id="password" placeholder="Your Password" className={errors.password ? "input border-red-600" : "input"} />
+                        })} id="password" placeholder="Your Password" className={errors?.password ? "input border-red-600" : "input"} />
                         <error className="text-red-600">
                             {errors?.password?.type === "required" && "Password is required"}
                         </error>

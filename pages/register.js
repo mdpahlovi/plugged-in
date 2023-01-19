@@ -27,18 +27,18 @@ const Registration = () => {
                         <label htmlFor="name" className="block font-semibold">
                             Full Name
                         </label>
-                        <input type="text" {...register("name", { required: true })} id="name" placeholder="Full Name" className={errors.name ? "input border-red-600" : "input"} />
+                        <input type="text" {...register("name", { required: true })} id="name" placeholder="Full Name" className={errors?.name ? "input border-red-600" : "input"} />
                         <error className="text-red-600">
-                            {errors.name?.type === "required" && "Name is required"}
+                            {errors?.name?.type === "required" && "Name is required"}
                         </error>
                     </div>
                     <div className="space-y-1">
                         <label htmlFor="email" className="block font-semibold">
                             Email
                         </label>
-                        <input type="email" {...register("email", { required: true })} id="email" placeholder="Your Email" className={errors.email ? "input border-red-600" : "input"} />
+                        <input type="email" {...register("email", { required: true })} id="email" placeholder="Your Email" className={errors?.email ? "input border-red-600" : "input"} />
                         <error className="text-red-600">
-                            {errors.email?.type === "required" && "Email is required"}
+                            {errors?.email?.type === "required" && "Email is required"}
                         </error>
                     </div>
                     <div className="space-y-1">
@@ -47,7 +47,7 @@ const Registration = () => {
                         </label>
                         <input type="password" {...register("password", {
                             required: true, minLength: 6, maxLength: 10
-                        })} id="password" placeholder="Your Password" className={errors.password ? "input border-red-600" : "input"} />
+                        })} id="password" placeholder="Your Password" className={errors?.password ? "input border-red-600" : "input"} />
                         <error className="text-red-600">
                             {errors?.password?.type === "required" && "Password is required"}
                             {errors?.password?.type === "minLength" &&
@@ -66,7 +66,7 @@ const Registration = () => {
                                     return "Password Not Matched"
                                 }
                             }
-                        })} id="cPassword" placeholder="Confirm Password" className={errors.cPassword ? "input border-red-600" : "input"} />
+                        })} id="cPassword" placeholder="Confirm Password" className={errors?.cPassword ? "input border-red-600" : "input"} />
                         <error className="text-red-600">
                             {errors?.cPassword?.message}
                         </error>
