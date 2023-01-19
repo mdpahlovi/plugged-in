@@ -85,7 +85,7 @@ const Dashboard = ({ title, children, className }) => {
                             ))}
                         </div>
 
-                        <div className="flex flex-col gap-4 border-t">
+                        <div className="flex flex-col gap-4">
                             <Link href="/">
                                 <ButtonOutline>
                                     <div className="flex items-center gap-2">

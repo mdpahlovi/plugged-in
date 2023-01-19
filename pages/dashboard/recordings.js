@@ -11,9 +11,11 @@ const Recordings = () => {
         queryFn: () => fetch(`https://plugged-in-server.vercel.app/userMedia?email=${authUser?.email}`).then((res) => res.json()),
     });
 
+    // grid-template-columns: repeat(auto-fill, minmax(96px, 1fr))
+
     return (
         <Dashboard title={`${authUser?.displayName} Recordings in PluggedIn`}>
-            <div className="grid lg:grid-cols-3 grid-cols-1 gap-10">
+            <div className="grid grid-cols-[repeat(auto-fill,_minmax(20rem,_1fr))] gap-6">
                 {medias.map((media) => (
                     <MediaCard key={media._id} media={media}></MediaCard>
                 ))}

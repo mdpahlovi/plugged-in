@@ -13,43 +13,30 @@ const Registration = () => {
     const { loading, setLoading, createUser, updateUserProfile } = useAuth();
     const router = useRouter();
     const [createdUser, setCreatedUser] = useState("");
-    const [error, setError] = useState("");
     const { confirmation } = useSetUserToDb(createdUser);
-    // Registration using react-hook-form
 
     if (confirmation.acknowledged) {
         router.push("/dashboard");
-        toast.success("User created successfully");
+        toast.success("User Created Successfully");
     }
 
+    // Registration using react-hook-form
     const { register, handleSubmit } = useForm();
     const handleRegistration = (userInfo) => {
-        setError("");
-
-        if (userInfo.password !== userInfo.cpassword) {
-            setError("Password did't matched");
-            return;
-        } else if (userInfo.password.length < 6) {
-            setError("Password must contain at least 6 characters");
-            return;
-        }
         createUser(userInfo.email, userInfo.password)
-            .then((result) => {
-                const user = result.user;
-                updateProfile(userInfo.name);
-                setCreatedUser(user);
+            .then(({ user }) => {
+                updateUserProfile(userInfo.name)
+                    .then(() => {
+                        setCreatedUser(user);
+                    })
+                    .catch(({ message }) => {
+                        toast.error(message);
+                        setLoading(false);
+                    });
             })
-            .catch((err) => {
-                console.error(err);
-                setError(err.message);
-            });
-    };
-
-    const updateProfile = (name) => {
-        updateUserProfile(name)
-            .then(() => {})
-            .catch((data) => {
-                console.error(data);
+            .catch(({ message }) => {
+                toast.error(message);
+                setLoading(false);
             });
     };
 
@@ -82,7 +69,6 @@ const Registration = () => {
                         </label>
                         <input type="password" name="cPassword" id="cPassword" {...register("cpassword")} placeholder="Confirm Password" className="input" />
                     </div>
-                    <p className="text-red-800 font-bold">{error}</p>
                     <div className="pt-2">
                         <Button className="w-full" type="submit">
                             {loading ? "Loading" : "Register"}
@@ -91,10 +77,7 @@ const Registration = () => {
                 </form>
                 <p className="text-center">
                     Already have a account?
-                    {/* <Link href="/login" className="ml-2 underline text-indigo-900">
-            Login Now
-          </Link> */}
-                    <Link href="/login" className="btn btn-link">
+                    <Link href="/login" className="ml-2 text-indigo-900 font-semibold underline">
                         Login Now
                     </Link>
                 </p>

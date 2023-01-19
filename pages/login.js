@@ -16,7 +16,6 @@ const Login = () => {
     const { loading, setLoading, login, loginWithGoogle, loginWithGithub } = useAuth();
     const [loggedInUser, setLoggedInUser] = useState(null);
     const { confirmation } = useSetUserToDb(loggedInUser);
-    const [error, setError] = useState("");
     const router = useRouter();
 
     if (confirmation.acknowledged || confirmation.message) {
@@ -30,7 +29,7 @@ const Login = () => {
                 setLoggedInUser(user);
             })
             .catch(({ message }) => {
-                console.error(message);
+                toast.error(message);
                 setLoading(false);
             });
     };
@@ -41,7 +40,7 @@ const Login = () => {
                 setLoggedInUser(user);
             })
             .catch(({ message }) => {
-                console.error(message);
+                toast.error(message);
                 setLoading(false);
             });
     };
@@ -49,13 +48,12 @@ const Login = () => {
     // Login using react-hook-form
     const { register, handleSubmit } = useForm();
     const handleLogin = async ({ email, password }) => {
-        setError("");
         login(email, password)
             .then(({ user }) => {
                 setLoggedInUser(user);
             })
             .catch(({ message }) => {
-                setError(message);
+                toast.error(message);
                 setLoading(false);
             });
     };
@@ -77,17 +75,10 @@ const Login = () => {
                         </label>
                         <input type="password" {...register("password")} id="password" placeholder="Your Password" className="input" />
                     </div>
-                    <div className="flex items-center">
-                        <p className="text-red-900 font-bold">{error}</p>
-                    </div>
-                    <div className="flex items-center">
-                        <p className="text-indigo-900 font-bold">Forgot Password ?</p>
-                    </div>
-                    <div className="pt-2">
-                        <Button className="w-full" type="submit">
-                            {loading ? "Loading..." : "Login"}
-                        </Button>
-                    </div>
+                    <p className="text-indigo-900 font-bold">Forgot Password ?</p>
+                    <Button className="w-full" type="submit">
+                        {loading ? "Loading..." : "Login"}
+                    </Button>
                 </form>
                 <p className="divider">Login with social accounts</p>
                 <div className="grid sm:grid-cols-2 gap-4">
@@ -106,10 +97,7 @@ const Login = () => {
                 </div>
                 <p className="text-center">
                     Don&apos;t have a account?
-                    {/* <Link href="/register" className="ml-2 underline text-indigo-900">
-            Register Now
-          </Link> */}
-                    <Link href="/register" className="btn btn-link">
+                    <Link href="/register" className="ml-2 text-indigo-900 font-semibold underline">
                         Register Now
                     </Link>
                 </p>
