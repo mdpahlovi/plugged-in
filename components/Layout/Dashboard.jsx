@@ -14,19 +14,17 @@ import { TiArrowBackOutline } from "react-icons/ti";
 import { Protect } from "../ProtectedRoute";
 
 const navItems = [
-  { href: "/dashboard", name: "Profile", icon: <FaUserSecret /> },
-  {
-    href: "/dashboard/recordings",
-    name: "Recordings",
-    icon: <MdVideoCameraBack className="text-lg" />,
-  },
+    { href: "/dashboard", name: "Profile", icon: <FaUserSecret /> },
+    {
+        href: "/dashboard/recordings",
+        name: "Recordings",
+        icon: <MdVideoCameraBack className="text-lg" />,
+    },
 ];
 
 const Dashboard = ({ title, children, className }) => {
-  const { logout } = useAuth();
-  const router = useRouter();
-  const { pathname } = router;
-
+    const { logout } = useAuth();
+    const { pathname } = useRouter();
 
     return (
         <>
@@ -87,32 +85,32 @@ const Dashboard = ({ title, children, className }) => {
                             ))}
                         </div>
 
-            <div className="flex flex-col gap-4 border-t">
-              <Link href="/">
-                <ButtonOutline>
-                  <div className="flex items-center gap-2">
-                    <TiArrowBackOutline className="text-xl" />
-                    Back To Home
-                  </div>
-                </ButtonOutline>
-              </Link>
-              <ButtonOutline
-                onClick={() => {
-                  logout();
-                  router.push("/login");
-                }}
-              >
-                <div className="flex items-center gap-2">
-                  <HiOutlineLogout className="text-xl" />
-                  Log Out
+                        <div className="flex flex-col gap-4 border-t">
+                            <Link href="/">
+                                <ButtonOutline>
+                                    <div className="flex items-center gap-2">
+                                        <TiArrowBackOutline className="text-xl" />
+                                        Back To Home
+                                    </div>
+                                </ButtonOutline>
+                            </Link>
+                            <ButtonOutline
+                                onClick={() => {
+                                    logout();
+                                    router.push("/login");
+                                }}
+                            >
+                                <div className="flex items-center gap-2">
+                                    <HiOutlineLogout className="text-xl" />
+                                    Log Out
+                                </div>
+                            </ButtonOutline>
+                        </div>
+                    </div>
                 </div>
-              </ButtonOutline>
-            </div>
-          </div>
-        </div>
-      </section>
-    </>
-  );
+            </section>
+        </>
+    );
 };
 
 export default Protect(Dashboard);
