@@ -6,7 +6,7 @@ const Profile = () => {
     const { authUser } = useAuth();
 
     return (
-        <Dashboard title={`${authUser?.displayName} - PluggedIn`}>
+        <Dashboard title={`${authUser?.displayName} in PluggedIn`}>
             <h1 className="mt-10 text-center">Welcome {authUser?.displayName} To PluggedIn</h1>
             <div className="container mt-28">
                 <div className="bg-white relative shadow rounded-lg w-full md:w-full  lg:w-full xl:w-full ">

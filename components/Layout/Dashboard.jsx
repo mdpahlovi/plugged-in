@@ -28,11 +28,11 @@ const Dashboard = ({ title, children, className }) => {
                 <title>{title}</title>
                 <link rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
             </Head>
-            <section className="drawer z-10 drawer-mobile">
+            <section className="drawer drawer-mobile">
                 <input id="drawer" type="checkbox" className="drawer-toggle" />
                 <div className="drawer-content">
                     {/* Header Section */}
-                    <header className="min-h-[64px] fixed border-b w-full bg-base-100 flex items-center justify-between px-6 lg:w-[calc(100%-18rem)]">
+                    <header className="min-h-[64px] z-10 fixed border-b w-full bg-base-100 flex items-center justify-between px-6 lg:w-[calc(100%-18rem)]">
                         <div className="flex items-center gap-5">
                             <label htmlFor="drawer" className="lg:hidden mt-1">
                                 <IconButton>
