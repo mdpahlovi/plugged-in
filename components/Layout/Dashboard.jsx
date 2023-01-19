@@ -24,7 +24,7 @@ const navItems = [
 
 const Dashboard = ({ title, children, className }) => {
     const { logout } = useAuth();
-    const { pathname } = useRouter();
+    const { pathname, push } = useRouter();
 
     return (
         <>
@@ -97,7 +97,7 @@ const Dashboard = ({ title, children, className }) => {
                             <ButtonOutline
                                 onClick={() => {
                                     logout();
-                                    router.push("/login");
+                                    push("/login");
                                 }}
                             >
                                 <div className="flex items-center gap-2">
