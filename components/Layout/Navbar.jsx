@@ -13,6 +13,7 @@ const navItems = [
     { href: "/", name: "Home" },
     { href: "/about", name: "About" },
     { href: "/price", name: "Pricing" },
+    { href: "/todo", name: "ToDo" },
     { href: "/contact", name: "Contact" },
 ];
 
@@ -84,9 +85,8 @@ const Navbar = () => {
             </div>
 
             <div
-                className={`w-[calc(100%-3rem)] fixed mx-6 mt-2 p-4 border rounded-lg bg-base-100 flex flex-col items-center gap-4 ${
-                    open ? "scale-y-100" : "scale-y-0"
-                } transition-all origin-top duration-500 md:hidden`}
+                className={`w-[calc(100%-3rem)] fixed mx-6 mt-2 p-4 border rounded-lg bg-base-100 flex flex-col items-center gap-4 ${open ? "scale-y-100" : "scale-y-0"
+                    } transition-all origin-top duration-500 md:hidden`}
             >
                 {navItems.map(({ href, name }, index) => (
                     <div
