@@ -46,7 +46,11 @@ const Login = () => {
     };
 
     // Login using react-hook-form
-    const { register, handleSubmit } = useForm();
+    const {
+        register,
+        handleSubmit,
+        formState: { errors },
+    } = useForm();
     const handleLogin = async ({ email, password }) => {
         login(email, password)
             .then(({ user }) => {
@@ -67,13 +71,29 @@ const Login = () => {
                         <label htmlFor="email" className="block font-semibold">
                             Email
                         </label>
-                        <input type="email" {...register("email")} id="email" placeholder="Your Email" className="input" />
+                        <input
+                            type="email"
+                            {...register("email", { required: true })}
+                            id="email"
+                            placeholder="Your Email"
+                            className={errors?.email ? "input input-error" : "input"}
+                        />
+                        <error className="text-red-600">{errors?.email?.type === "required" && "Email is required"}</error>
                     </div>
                     <div className="space-y-1">
                         <label htmlFor="password" className="block font-semibold">
                             Password
                         </label>
-                        <input type="password" {...register("password")} id="password" placeholder="Your Password" className="input" />
+                        <input
+                            type="password"
+                            {...register("password", {
+                                required: true,
+                            })}
+                            id="password"
+                            placeholder="Your Password"
+                            className={errors?.password ? "input input-error" : "input"}
+                        />
+                        <error className="text-red-600">{errors?.password?.type === "required" && "Password is required"}</error>
                     </div>
                     <p className="text-indigo-900 font-bold">Forgot Password ?</p>
                     <Button className="w-full" type="submit">
