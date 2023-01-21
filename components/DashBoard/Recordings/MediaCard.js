@@ -4,7 +4,6 @@ import React from "react";
 import audioImage from "../../../public/logo/audioImage.png";
 
 const MediaCard = ({ media }) => {
-    console.log(media);
     const { authorEmail, authorName, date, mediaType, mediaUrl } = media;
 
     const date_is = format(parseISO(date), "PP");

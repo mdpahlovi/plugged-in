@@ -6,8 +6,20 @@ import { HiLocationMarker } from "react-icons/hi";
 import Typewriter from "typewriter-effect";
 import { FaInstagram, FaTwitter, FaYoutube, FaPinterest, FaGithub } from "react-icons/fa";
 import { Button } from "../components/Buttons";
+import { useForm } from "react-hook-form";
 
 const Contact = () => {
+    const {
+        register,
+        handleSubmit,
+        formState: { errors },
+        watch,
+    } = useForm();
+
+    const handleContact = (data) => {
+        console.log(data);
+    };
+
     return (
         <Main title="Contact - PluggedIn">
             <div className="container section-gap grid lg:grid-cols-2 gap-12">
@@ -18,7 +30,7 @@ const Contact = () => {
                     <p className="font-semibold text-xl">
                         <Typewriter
                             options={{
-                                strings: ["For contact with us", "Our team will respons within 1 hr", "you will know everything"],
+                                strings: ["For contact with us", "Our team will response within 1 hr", "you will know everything"],
                                 autoStart: true,
                                 loop: true,
                             }}
@@ -48,16 +60,54 @@ const Contact = () => {
                 </div>
                 {/* Contact form */}
                 <div className="h-max bg-purple-200 p-8 rounded-lg shadow-lg">
-                    <form className="space-y-5">
+                    <form onSubmit={handleSubmit(handleContact)} className="space-y-5">
                         <div className="grid sm:grid-cols-2 gap-5">
-                            <input type="text" name="first_name" className="input" placeholder="First Name" />
-                            <input type="text" name="last_name" className="input" placeholder="Last Name" />
+                            <div>
+                                <input
+                                    type="text"
+                                    {...register("first_name", { required: true })}
+                                    className={errors?.first_name ? "input input-error" : "input"}
+                                    placeholder="First Name"
+                                />
+                                <error className="text-red-600">{errors?.first_name?.type === "required" && "First Name is required"}</error>
+                            </div>
+                            <div>
+                                <input
+                                    type="text"
+                                    {...register("last_name", { required: true })}
+                                    className={errors?.last_name ? "input input-error" : "input"}
+                                    placeholder="Last Name"
+                                />
+                                <error className="text-red-600">{errors?.last_name?.type === "required" && "Last Name is required"}</error>
+                            </div>
                         </div>
-                        <input type="email" name="email" className="input" placeholder="Email" />
-                        <input type="text" name="subject" className="input" placeholder="Subject" />
-                        <div className="flex justify-center">
-                            <textarea className="textarea textarea-bordered w-full" rows="3" placeholder="Your message"></textarea>
-                        </div>
+                        <input
+                            type="email"
+                            {...register("email", { required: true })}
+                            className={errors?.email ? "input input-error" : "input"}
+                            placeholder="Email"
+                        />
+                        <error className="text-red-600">{errors?.email?.type === "required" && "Email is required"}</error>
+                        <input
+                            type="text"
+                            {...register("subject", { required: true })}
+                            className={errors?.subject ? "input input-error" : "input"}
+                            placeholder="Subject"
+                        />
+                        <error className="text-red-600">{errors?.subject?.type === "required" && "Subject is required"}</error>
+
+                        <textarea
+                            {...register("message", { required: true, minLength: 20, maxLength: 200 })}
+                            className={errors?.email ? "textarea textarea-bordered textarea-error w-full" : "textarea textarea-bordered w-full"}
+                            rows="3"
+                            placeholder="Your message"
+                        ></textarea>
+                        <error className="text-red-600">
+                            {errors?.message?.type === "required" && "Message is required"}
+                            {errors?.message?.type === "minLength" && "Entered Your Message Minimum 20 letter"}
+                            {errors?.message?.type === "maxLength" && "You are no longer exceed 200 letter of message"}
+                        </error>
+
                         <Button type="submit" className="w-full">
                             Send Message
                         </Button>

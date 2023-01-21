@@ -14,12 +14,7 @@ const useSetMediaToDb = (media, user) => {
                 body: JSON.stringify(media),
             })
                 .then((res) => res.json())
-                .then((data) => {
-                    console.log(data);
-                    setConfirmation(data);
-                });
-
-            //   console.log(user, media);
+                .then((data) => setConfirmation(data));
         }
     }, [user, media]);
 

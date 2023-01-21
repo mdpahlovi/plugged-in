@@ -43,7 +43,7 @@ const Dashboard = ({ title, children, className }) => {
                                     <MdMenuOpen className="text-xl" />
                                 </IconButton>
                             </label>
-                            <h2>PluggedIn</h2>
+                            <h2>Dashboard</h2>
                         </div>
                         <div className="flex items-center gap-6">
                             <div hidden className="relative h-full sm:flex items-center">
