@@ -32,13 +32,16 @@ const MediaCard = ({ media }) => {
         <div className="">
             <figure>
                 {mediaType === "video" || mediaType === "screen" ? (
-                    <video src={mediaUrl} controls className="aspect-video w-full rounded-lg"></video>
+                    <video src={mediaUrl} controls className="video"></video>
                 ) : (
-                    <Image src={audioImage} alt="" className="aspect-video w-full rounded-lg" />
+                    <div className="relative aspect-video border border-b-0 rounded-lg">
+                        <audio src={mediaUrl} controls className="absolute bottom-0 w-full"></audio>
+                        <Image src={audioImage} alt="" className="w-1/2 mx-auto rounded-lg" />
+                    </div>
                 )}
             </figure>
             <div className="-mt-4 border border-t-0 rounded-lg p-5">
-                <div className="pt-2 mb-1 flex justify-between items-center">
+                <div className="pt-2 flex justify-between items-center">
                     <p className="text-sm">
                         {date_is} at {time_is}
                     </p>
@@ -52,7 +55,7 @@ const MediaCard = ({ media }) => {
                     </div>
                 </div>
                 {isEditing ? (
-                    <form onSubmit={handleSubmit(handleDetails)} className="space-y-1">
+                    <form onSubmit={handleSubmit(handleDetails)} className="pt-1.5 space-y-1">
                         <textarea {...register("title")} className="textarea textarea-bordered w-full" rows="1" placeholder="Recording Title"></textarea>
                         <textarea {...register("details")} className="textarea textarea-bordered w-full" rows="3" placeholder="Recording Details"></textarea>
                         <Button type="submit" className="w-full">
@@ -60,13 +63,13 @@ const MediaCard = ({ media }) => {
                         </Button>
                     </form>
                 ) : (
-                    <>
+                    <div className="space-y-1.5">
                         <h3 className="text-xl leading-6 font-semibold">If a dog chews shoes whose shoes does he choose?</h3>
-                        <p className="mt-1.5 leading-5">
+                        <p className="leading-5">
                             Photos contain data that can give you useful information about the picture. Information such as shutter speed and focal length are
                             stored inside an image. Likewise, you can find out where the photo was taken by looking at the location information
                         </p>
-                    </>
+                    </div>
                 )}
             </div>
         </div>

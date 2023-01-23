@@ -40,4 +40,7 @@
     .input {
         @apply input-bordered w-full;
     }
+    .video {
+        @apply w-full aspect-video rounded-xl bg-base-content/10;
+    }
 }
