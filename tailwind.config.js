@@ -30,7 +30,7 @@ module.exports = {
                     "base-content": "#000000",
                     neutral: "#000000",
                     "neutral-content": "#ffffff",
-                    "card-bg": "#F2F4F4"
+                    accent: "#A5B4FC",
                 },
                 dark: {
                     ...require("daisyui/src/colors/themes")["[data-theme=dark]"],
@@ -38,7 +38,7 @@ module.exports = {
                     "base-content": "#ffffff",
                     neutral: "#ffffff",
                     "neutral-content": "#171717",
-                    "card-bg": "#212F3C"
+                    accent: "#4338CA",
                 },
             },
             "light",

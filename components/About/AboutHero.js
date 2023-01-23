@@ -6,7 +6,7 @@ import trimVideo from "../../public/logo/video-editing.png";
 
 const AboutHero = () => {
     return (
-        <header className="section-gap grid lg:grid-cols-2 gap-x-6 xl:gap-x-8 gap-y-10 items-center">
+        <header className="section-gap grid lg:grid-cols-2 gap-10 items-center">
             <Image src={aboutImage} alt="logo" className="mx-auto rounded-lg w-full" />
             <div className="space-y-4">
                 <h1 className="font-extrabold text-left mb-0">What is PluggedIn?</h1>
