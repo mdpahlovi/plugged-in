@@ -29,8 +29,8 @@ const useSetMediaToDb = (media, blob_url) => {
             //
         }
     }, [media, blob_url]);
-
-    return { confirmation };
+    
+  return { confirmation };
 };
 
 export default useSetMediaToDb;
