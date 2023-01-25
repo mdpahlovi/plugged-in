@@ -46,6 +46,18 @@ const Login = () => {
     };
 
     // Login using react-hook-form
+<<<<<<< HEAD
+    const { register, handleSubmit, formState: { errors } } = useForm();
+    const handleLogin = async (data) => {
+        const status = await signIn("credentials", {
+            redirect: false,
+            email: data.email,
+            password: data.password,
+            callbackUrl: "/",
+        });
+
+        if (status.ok) router.push(status.url);
+=======
     const {
         register,
         handleSubmit,
@@ -60,6 +72,7 @@ const Login = () => {
                 toast.error(message);
                 setLoading(false);
             });
+>>>>>>> e6b3a84c0d8f2d9262f47f93b16b74928c337672
     };
 
     return (
@@ -71,6 +84,12 @@ const Login = () => {
                         <label htmlFor="email" className="block font-semibold">
                             Email
                         </label>
+<<<<<<< HEAD
+                        <input type="email" {...register("email", { required: true })} id="email" placeholder="Your Email" className={errors?.email ? "input border-red-600" : "input"} />
+                        <error className="text-red-600">
+                            {errors?.email?.type === "required" && "Email is required"}
+                        </error>
+=======
                         <input
                             type="email"
                             {...register("email", { required: true })}
@@ -79,11 +98,25 @@ const Login = () => {
                             className={errors?.email ? "input input-error" : "input"}
                         />
                         <error className="text-red-600">{errors?.email?.type === "required" && "Email is required"}</error>
+>>>>>>> e6b3a84c0d8f2d9262f47f93b16b74928c337672
                     </div>
                     <div className="space-y-1">
                         <label htmlFor="password" className="block font-semibold">
                             Password
                         </label>
+<<<<<<< HEAD
+                        <input type="password" {...register("password", {
+                            required: true
+                        })} id="password" placeholder="Your Password" className={errors?.password ? "input border-red-600" : "input"} />
+                        <error className="text-red-600">
+                            {errors?.password?.type === "required" && "Password is required"}
+                        </error>
+                    </div>
+                    <div className="pt-2">
+                        <Button className="w-full" type="submit">
+                            Login
+                        </Button>
+=======
                         <input
                             type="password"
                             {...register("password", {
@@ -94,6 +127,7 @@ const Login = () => {
                             className={errors?.password ? "input input-error" : "input"}
                         />
                         <error className="text-red-600">{errors?.password?.type === "required" && "Password is required"}</error>
+>>>>>>> e6b3a84c0d8f2d9262f47f93b16b74928c337672
                     </div>
                     <p className="text-indigo-900 font-bold">Forgot Password ?</p>
                     <Button className="w-full" type="submit">
