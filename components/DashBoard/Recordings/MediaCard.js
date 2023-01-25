@@ -4,20 +4,22 @@ import { useState } from "react";
 import { toast } from "react-toastify";
 import { useForm } from "react-hook-form";
 import { format, parseISO } from "date-fns";
-import { Button, IconButton } from "../../Buttons";
+import { Button, ButtonOutline, IconButton } from "../../Buttons";
 import audioImage from "../../../public/logo/audioImage.png";
-import { MdEditNote, MdDeleteSweep } from "react-icons/md";
+import { MdEditNote, MdDeleteSweep, MdOutlineCloudDownload } from "react-icons/md";
+import { TbListDetails } from "react-icons/tb";
+import Link from "next/link";
 
 const MediaCard = ({ media, refetch, setDeletingRecordId }) => {
-    const { _id, date, mediaType, mediaUrl, details, title } = media;
+    const { _id, date, mediaType, mediaUrl, title } = media;
     const [isEditing, setIsEditing] = useState(false);
 
     const date_is = format(parseISO(date), "PP");
     const time_is = format(parseISO(date), "p");
 
     const { register, handleSubmit } = useForm();
-    const handleEdit = ({ title, details }) => {
-        const updatingRecord = { _id, title, details };
+    const handleEdit = ({ title }) => {
+        const updatingRecord = { _id, title };
         axios
             .put(`https://plugged-in-server.vercel.app/record`, updatingRecord)
             .then((res) => {
@@ -56,22 +58,9 @@ const MediaCard = ({ media, refetch, setDeletingRecordId }) => {
                         </IconButton>
                     </div>
                 </div>
-                {isEditing || !title || !details ? (
-                    <form onSubmit={handleSubmit(handleEdit)} className="mt-1.5 space-y-1">
-                        <textarea
-                            {...register("title")}
-                            className="textarea textarea-bordered w-full"
-                            rows="1"
-                            placeholder="Recording Title"
-                            defaultValue={title}
-                        ></textarea>
-                        <textarea
-                            {...register("details")}
-                            className="textarea textarea-bordered w-full"
-                            rows="3"
-                            placeholder="Recording Details"
-                            defaultValue={details}
-                        ></textarea>
+                {isEditing || !title ? (
+                    <form onSubmit={handleSubmit(handleEdit)} className="mt-1.5 space-y-4">
+                        <input {...register("title")} className="input" placeholder="Recording Title" defaultValue={title} />
                         <Button type="submit" className="w-full">
                             Submit
                         </Button>
@@ -79,9 +68,26 @@ const MediaCard = ({ media, refetch, setDeletingRecordId }) => {
                 ) : (
                     <>
                         <h3 className="text-xl leading-6 font-semibold">{title}</h3>
-                        <p className="mt-1.5 leading-5">{details}</p>
                     </>
                 )}
+                <div className="mt-4 grid grid-cols-[auto_auto] gap-4">
+                    <a href={mediaUrl} download="media/mp4">
+                        <ButtonOutline>
+                            <div className="flex items-center justify-center gap-2">
+                                Download
+                                <MdOutlineCloudDownload className="text-lg" />
+                            </div>
+                        </ButtonOutline>
+                    </a>
+                    <Link href={`/dashboard/record/${_id}`}>
+                        <ButtonOutline>
+                            <div className="flex items-center justify-center gap-2">
+                                Details
+                                <TbListDetails className="text-lg" />
+                            </div>
+                        </ButtonOutline>
+                    </Link>
+                </div>
             </div>
         </div>
     );
