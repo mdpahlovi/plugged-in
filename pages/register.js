@@ -3,10 +3,25 @@ import Main from "../components/Layout/Main";
 import { Button } from "../components/Buttons";
 import Wave from "react-wavify";
 import { useForm } from "react-hook-form";
-import axios from "axios";
+import { useAuth } from "../hooks/useAuth";
+import { toast } from "react-toastify";
+import { useRouter } from "next/router";
+import useSetUserToDb from "../hooks/useSetUserToDb";
+import { useState } from "react";
 
 const Registration = () => {
+    const { loading, setLoading, createUser, updateUserProfile } = useAuth();
+    const router = useRouter();
+    const [createdUser, setCreatedUser] = useState("");
+    const { confirmation } = useSetUserToDb(createdUser);
+
+    if (confirmation.acknowledged) {
+        router.push("/dashboard");
+        toast.success("User Created Successfully");
+    }
+
     // Registration using react-hook-form
+<<<<<<< HEAD
     const { register, handleSubmit, formState: { errors }, watch } = useForm();
 
     const handleRegistration = (data) => {
@@ -14,9 +29,31 @@ const Registration = () => {
             .post("http://localhost:3000/api/auth/signup", data)
             .then(({ data }) => console.log(data))
             .catch(({ message }) => console.log(message));
+=======
+    const {
+        register,
+        handleSubmit,
+        formState: { errors },
+        watch,
+    } = useForm();
+    const handleRegistration = (userInfo) => {
+        createUser(userInfo.email, userInfo.password)
+            .then(({ user }) => {
+                updateUserProfile(userInfo.name)
+                    .then(() => {
+                        setCreatedUser(user);
+                    })
+                    .catch(({ message }) => {
+                        toast.error(message);
+                        setLoading(false);
+                    });
+            })
+            .catch(({ message }) => {
+                toast.error(message);
+                setLoading(false);
+            });
+>>>>>>> e6b3a84c0d8f2d9262f47f93b16b74928c337672
     };
-
-    console.log(process.env.MONGO_URL);
 
     return (
         <Main title="Registration to PluggedIn">
@@ -27,24 +64,47 @@ const Registration = () => {
                         <label htmlFor="name" className="block font-semibold">
                             Full Name
                         </label>
+<<<<<<< HEAD
                         <input type="text" {...register("name", { required: true })} id="name" placeholder="Full Name" className={errors?.name ? "input border-red-600" : "input"} />
                         <error className="text-red-600">
                             {errors?.name?.type === "required" && "Name is required"}
                         </error>
+=======
+                        <input
+                            type="text"
+                            {...register("name", { required: true })}
+                            id="name"
+                            placeholder="Full Name"
+                            className={errors?.name ? "input input-error" : "input"}
+                        />
+                        <error className="text-red-600">{errors?.name?.type === "required" && "Name is Required"}</error>
+>>>>>>> e6b3a84c0d8f2d9262f47f93b16b74928c337672
                     </div>
                     <div className="space-y-1">
                         <label htmlFor="email" className="block font-semibold">
                             Email
                         </label>
+<<<<<<< HEAD
                         <input type="email" {...register("email", { required: true })} id="email" placeholder="Your Email" className={errors?.email ? "input border-red-600" : "input"} />
                         <error className="text-red-600">
                             {errors?.email?.type === "required" && "Email is required"}
                         </error>
+=======
+                        <input
+                            type="email"
+                            {...register("email", { required: true })}
+                            id="email"
+                            placeholder="Your Email"
+                            className={errors?.email ? "input input-error" : "input"}
+                        />
+                        <error className="text-red-600">{errors?.email?.type === "required" && "Email is Required"}</error>
+>>>>>>> e6b3a84c0d8f2d9262f47f93b16b74928c337672
                     </div>
                     <div className="space-y-1">
                         <label htmlFor="password" className="block font-semibold">
                             Password
                         </label>
+<<<<<<< HEAD
                         <input type="password" {...register("password", {
                             required: true, minLength: 6, maxLength: 10
                         })} id="password" placeholder="Your Password" className={errors?.password ? "input border-red-600" : "input"} />
@@ -54,12 +114,30 @@ const Registration = () => {
                                 "Entered password is less than 6 characters"}
                             {errors?.password?.type === "maxLength" &&
                                 "Entered password is more than 10 characters"}
+=======
+                        <input
+                            type="password"
+                            {...register("password", {
+                                required: true,
+                                minLength: 6,
+                                maxLength: 10,
+                            })}
+                            id="password"
+                            placeholder="Your Password"
+                            className={errors?.password ? "input input-error" : "input"}
+                        />
+                        <error className="text-red-600">
+                            {errors?.password?.type === "required" && "Password is required"}
+                            {errors?.password?.type === "minLength" && "Entered password is less than 6 characters"}
+                            {errors?.password?.type === "maxLength" && "Entered password is more than 10 characters"}
+>>>>>>> e6b3a84c0d8f2d9262f47f93b16b74928c337672
                         </error>
                     </div>
                     <div className="space-y-1">
                         <label htmlFor="password" className="block font-semibold">
                             Confirm Password
                         </label>
+<<<<<<< HEAD
                         <input type="password" {...register("cPassword", {
                             validate: data => {
                                 if (watch("password") !== data) {
@@ -70,16 +148,32 @@ const Registration = () => {
                         <error className="text-red-600">
                             {errors?.cPassword?.message}
                         </error>
+=======
+                        <input
+                            type="password"
+                            {...register("cPassword", {
+                                validate: (data) => {
+                                    if (watch("password") !== data) {
+                                        return "Password Not Matched";
+                                    }
+                                },
+                            })}
+                            id="cPassword"
+                            placeholder="Confirm Password"
+                            className={errors?.cPassword ? "input input-error" : "input"}
+                        />
+                        <error className="text-red-600">{errors?.cPassword?.message}</error>
+>>>>>>> e6b3a84c0d8f2d9262f47f93b16b74928c337672
                     </div>
                     <div className="pt-2">
                         <Button className="w-full" type="submit">
-                            Login
+                            {loading ? "Loading" : "Register"}
                         </Button>
                     </div>
                 </form>
                 <p className="text-center">
                     Already have a account?
-                    <Link href="/login" className="ml-2 underline text-indigo-900">
+                    <Link href="/login" className="ml-2 text-indigo-900 font-semibold underline">
                         Login Now
                     </Link>
                 </p>

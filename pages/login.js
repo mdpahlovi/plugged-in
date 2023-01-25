@@ -5,20 +5,48 @@ import googleImg from "../public/logo/google.svg";
 import githubImg from "../public/logo/github.svg";
 import { Button, ButtonOutline } from "../components/Buttons";
 import Wave from "react-wavify";
-import { signIn } from "next-auth/react";
 import { useForm } from "react-hook-form";
+import { useAuth } from "../hooks/useAuth";
+import { toast } from "react-toastify";
+import useSetUserToDb from "../hooks/useSetUserToDb";
+import { useState } from "react";
+import { useRouter } from "next/router";
 
 const Login = () => {
+    const { loading, setLoading, login, loginWithGoogle, loginWithGithub } = useAuth();
+    const [loggedInUser, setLoggedInUser] = useState(null);
+    const { confirmation } = useSetUserToDb(loggedInUser);
+    const router = useRouter();
+
+    if (confirmation.acknowledged || confirmation.message) {
+        toast.success("Logged In Successfully");
+        router.push("/dashboard");
+    }
     //google handler function
-    async function handleGoogleLogin() {
-        signIn("google", { redirect: false, callbackUrl: "http://localhost:3000" });
-    }
+    const handleGoogleLogin = () => {
+        loginWithGoogle()
+            .then(({ user }) => {
+                setLoggedInUser(user);
+            })
+            .catch(({ message }) => {
+                toast.error(message);
+                setLoading(false);
+            });
+    };
     //github handler function
-    async function handleGithubLogin() {
-        signIn("github", { redirect: false, callbackUrl: "http://localhost:3000" });
-    }
+    const handleGithubLogin = () => {
+        loginWithGithub()
+            .then(({ user }) => {
+                setLoggedInUser(user);
+            })
+            .catch(({ message }) => {
+                toast.error(message);
+                setLoading(false);
+            });
+    };
 
     // Login using react-hook-form
+<<<<<<< HEAD
     const { register, handleSubmit, formState: { errors } } = useForm();
     const handleLogin = async (data) => {
         const status = await signIn("credentials", {
@@ -29,6 +57,22 @@ const Login = () => {
         });
 
         if (status.ok) router.push(status.url);
+=======
+    const {
+        register,
+        handleSubmit,
+        formState: { errors },
+    } = useForm();
+    const handleLogin = async ({ email, password }) => {
+        login(email, password)
+            .then(({ user }) => {
+                setLoggedInUser(user);
+            })
+            .catch(({ message }) => {
+                toast.error(message);
+                setLoading(false);
+            });
+>>>>>>> e6b3a84c0d8f2d9262f47f93b16b74928c337672
     };
 
     return (
@@ -40,15 +84,27 @@ const Login = () => {
                         <label htmlFor="email" className="block font-semibold">
                             Email
                         </label>
+<<<<<<< HEAD
                         <input type="email" {...register("email", { required: true })} id="email" placeholder="Your Email" className={errors?.email ? "input border-red-600" : "input"} />
                         <error className="text-red-600">
                             {errors?.email?.type === "required" && "Email is required"}
                         </error>
+=======
+                        <input
+                            type="email"
+                            {...register("email", { required: true })}
+                            id="email"
+                            placeholder="Your Email"
+                            className={errors?.email ? "input input-error" : "input"}
+                        />
+                        <error className="text-red-600">{errors?.email?.type === "required" && "Email is required"}</error>
+>>>>>>> e6b3a84c0d8f2d9262f47f93b16b74928c337672
                     </div>
                     <div className="space-y-1">
                         <label htmlFor="password" className="block font-semibold">
                             Password
                         </label>
+<<<<<<< HEAD
                         <input type="password" {...register("password", {
                             required: true
                         })} id="password" placeholder="Your Password" className={errors?.password ? "input border-red-600" : "input"} />
@@ -60,7 +116,23 @@ const Login = () => {
                         <Button className="w-full" type="submit">
                             Login
                         </Button>
+=======
+                        <input
+                            type="password"
+                            {...register("password", {
+                                required: true,
+                            })}
+                            id="password"
+                            placeholder="Your Password"
+                            className={errors?.password ? "input input-error" : "input"}
+                        />
+                        <error className="text-red-600">{errors?.password?.type === "required" && "Password is required"}</error>
+>>>>>>> e6b3a84c0d8f2d9262f47f93b16b74928c337672
                     </div>
+                    <p className="text-indigo-900 font-bold">Forgot Password ?</p>
+                    <Button className="w-full" type="submit">
+                        {loading ? "Loading..." : "Login"}
+                    </Button>
                 </form>
                 <p className="divider">Login with social accounts</p>
                 <div className="grid sm:grid-cols-2 gap-4">
@@ -79,7 +151,7 @@ const Login = () => {
                 </div>
                 <p className="text-center">
                     Don&apos;t have a account?
-                    <Link href="/register" className="ml-2 underline text-indigo-900">
+                    <Link href="/register" className="ml-2 text-indigo-900 font-semibold underline">
                         Register Now
                     </Link>
                 </p>

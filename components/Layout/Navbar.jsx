@@ -6,7 +6,7 @@ import Logo from "../../public/logo/logo.png";
 import ThemeToggle from "../ThemeToggle";
 import { CgMenuRightAlt, CgClose } from "react-icons/cg";
 import { ButtonOutline, IconButton } from "../Buttons";
-import { useSession } from "next-auth/react";
+import { useAuth } from "../../hooks/useAuth";
 import Avatar from "../../public/images/avatar.png";
 
 const navItems = [
@@ -17,7 +17,7 @@ const navItems = [
 ];
 
 const Navbar = () => {
-    const { data: session } = useSession();
+    const { authUser, loading } = useAuth();
     const { pathname } = useRouter();
     const [open, setOpen] = useState(false);
 
@@ -43,10 +43,12 @@ const Navbar = () => {
                             </div>
                         ))}
                     </div>
-                    {session?.user ? (
-                        session?.user?.image ? (
+                    {loading ? (
+                        <ButtonOutline sm>Loading...</ButtonOutline>
+                    ) : authUser?.uid ? (
+                        authUser?.photoURL ? (
                             <div className="relative">
-                                <Image src={session?.user?.image} alt="" width={34} height={34} className="absolute rounded-full top-0.5 left-0.5 z-10" />
+                                <Image src={authUser.photoURL} alt="" width={34} height={34} className="absolute rounded-full top-0.5 left-0.5 z-10" />
                                 <Link href="/dashboard">
                                     <ButtonOutline sm>
                                         <div className="pl-6">Dashboard</div>

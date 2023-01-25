@@ -16,8 +16,6 @@ const Recorders = ({ setStartVideo, startVideo, setStartAudio, startAudio, setSt
                             onClick={() => {
                                 if (startScreen === "stop") {
                                     setStartScreen("start");
-                                } else {
-                                    console.log("recording");
                                 }
                             }}
                             htmlFor="screenModal"
@@ -37,8 +35,6 @@ const Recorders = ({ setStartVideo, startVideo, setStartAudio, startAudio, setSt
                             onClick={() => {
                                 if (startVideo === "stop") {
                                     setStartVideo("start");
-                                } else {
-                                    console.log("recording");
                                 }
                             }}
                             htmlFor="videoModal"
@@ -58,8 +54,6 @@ const Recorders = ({ setStartVideo, startVideo, setStartAudio, startAudio, setSt
                             onClick={() => {
                                 if (startAudio === "stop") {
                                     setStartAudio("start");
-                                } else {
-                                    console.log("recording");
                                 }
                             }}
                             htmlFor="audioModal"

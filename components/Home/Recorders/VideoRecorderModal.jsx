@@ -3,6 +3,9 @@ import { useReactMediaRecorder } from "react-media-recorder";
 import { HiOutlinePlay, HiOutlinePause, HiOutlinePlayPause } from "react-icons/hi2";
 import { BsDownload } from "react-icons/bs";
 import { IconButton } from "../../Buttons";
+import { useAuth } from "../../../hooks/useAuth";
+import useSetMediaToDb from "../../../hooks/useSetMediaToDb";
+import { toast } from "react-toastify";
 
 const VideoPreview = ({ stream }) => {
     const videoRef = useRef(null);
@@ -15,17 +18,26 @@ const VideoPreview = ({ stream }) => {
     if (!stream) {
         return null;
     }
-    return <video className="rounded-xl" ref={videoRef} autoPlay controls />;
+    return <video className="video" ref={videoRef} autoPlay controls />;
 };
 
 const VideoRecorderModal = ({ startVideo, setStartVideo }) => {
     const [enable, setEnable] = useState(true);
-    const { status, startRecording, stopRecording, pauseRecording, resumeRecording, mediaBlobUrl, previewStream } = useReactMediaRecorder({
+    const { status, startRecording, stopRecording, pauseRecording, resumeRecording, mediaBlobUrl, clearBlobUrl, previewStream } = useReactMediaRecorder({
         video: true,
         blobPropertyBag: {
             type: "video/mp4",
         },
     });
+    const { authUser } = useAuth();
+    const [media, setMedia] = useState(null);
+    const { confirmation } = useSetMediaToDb(media, mediaBlobUrl);
+
+    useEffect(() => {
+        if (confirmation.acknowledged) {
+            toast.success("Media saved successfully");
+        }
+    }, [confirmation]);
 
     useEffect(() => {
         if (startVideo === "start") {
@@ -33,7 +45,6 @@ const VideoRecorderModal = ({ startVideo, setStartVideo }) => {
             startRecording();
             if (status === "recording") {
                 setStartVideo("recording");
-                console.log(startVideo);
             } else {
                 setStartVideo("denied");
             }
@@ -42,14 +53,31 @@ const VideoRecorderModal = ({ startVideo, setStartVideo }) => {
             stopRecording();
         }
     }, [startVideo, startRecording, stopRecording, setStartVideo, status]);
-    console.log(startVideo);
+
+    useEffect(() => {
+        if (mediaBlobUrl && authUser) {
+            setMedia({
+                date: new Date(),
+                authorEmail: authUser?.email,
+                mediaType: "video",
+            });
+        }
+    }, [mediaBlobUrl, authUser]);
 
     return (
         <div>
             <input type="checkbox" id="videoModal" className="modal-toggle" />
             <div className="modal">
                 <div className="modal-box relative">
-                    <label htmlFor="videoModal" className="btn btn-sm btn-circle absolute right-2 top-2">
+                    <label
+                        htmlFor="videoModal"
+                        className="btn btn-sm btn-circle absolute right-2 top-2"
+                        onClick={() => {
+                            if (status === "stopped") {
+                                clearBlobUrl();
+                            }
+                        }}
+                    >
                         ✕
                     </label>
                     <div>
@@ -98,7 +126,11 @@ const VideoRecorderModal = ({ startVideo, setStartVideo }) => {
                                 )}
                             </div>
                             {/* <video src={mediaBlobUrl} controls autoPlay loop /> */}
-                            {enable ? <VideoPreview stream={previewStream} /> : <video className="rounded-xl" src={mediaBlobUrl} controls autoPlay loop />}
+                            {enable ? (
+                                <VideoPreview stream={previewStream} />
+                            ) : (
+                                status !== "idle" && <video className="video" src={mediaBlobUrl} controls autoPlay loop />
+                            )}
                             {/* <video src={mediaBlobUrl} controls autoPlay loop />
                     {enable && <VideoPreview stream={previewStream} />} */}
                         </div>

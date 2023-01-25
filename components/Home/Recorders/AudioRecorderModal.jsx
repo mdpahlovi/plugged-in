@@ -1,16 +1,28 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useReactMediaRecorder } from "react-media-recorder";
 import { HiOutlinePlay, HiOutlinePause, HiOutlinePlayPause } from "react-icons/hi2";
 import { BsDownload } from "react-icons/bs";
 import { IconButton } from "../../Buttons";
+import { useAuth } from "../../../hooks/useAuth";
+import useSetMediaToDb from "../../../hooks/useSetMediaToDb";
+import { toast } from "react-toastify";
 
 const AudioRecorderModal = ({ startAudio, setStartAudio }) => {
-    const { status, startRecording, stopRecording, pauseRecording, resumeRecording, mediaBlobUrl } = useReactMediaRecorder({
+    const { status, startRecording, stopRecording, pauseRecording, resumeRecording, clearBlobUrl, mediaBlobUrl } = useReactMediaRecorder({
         audio: true,
         blobPropertyBag: {
             type: "audio/wav",
         },
     });
+    const { authUser } = useAuth();
+    const [media, setMedia] = useState(null);
+    const { confirmation } = useSetMediaToDb(media, mediaBlobUrl);
+
+    useEffect(() => {
+        if (confirmation.acknowledged) {
+            toast.success("Media saved successfully");
+        }
+    }, [confirmation]);
 
     useEffect(() => {
         if (startAudio === "start") {
@@ -25,12 +37,30 @@ const AudioRecorderModal = ({ startAudio, setStartAudio }) => {
         }
     }, [startAudio, startRecording, stopRecording, setStartAudio, status]);
 
+    useEffect(() => {
+        if (mediaBlobUrl && authUser) {
+            setMedia({
+                date: new Date(),
+                authorEmail: authUser?.email,
+                mediaType: "audio",
+            });
+        }
+    }, [mediaBlobUrl, authUser]);
+
     return (
         <div>
             <input type="checkbox" id="audioModal" className="modal-toggle" />
             <div className="modal">
                 <div className="modal-box relative">
-                    <label htmlFor="audioModal" className="btn btn-sm btn-circle absolute right-2 top-2">
+                    <label
+                        htmlFor="audioModal"
+                        className="btn btn-sm btn-circle absolute right-2 top-2"
+                        onClick={() => {
+                            if (status === "stopped") {
+                                clearBlobUrl();
+                            }
+                        }}
+                    >
                         ✕
                     </label>
                     <p className={`font-bold mb-2`}>
@@ -77,7 +107,7 @@ const AudioRecorderModal = ({ startAudio, setStartAudio }) => {
                                 </IconButton>
                             )}
                         </div>
-                        <audio src={mediaBlobUrl} autoPlay controls loop className="w-full" />
+                        {status !== "idle" && <audio src={mediaBlobUrl} autoPlay controls loop className="w-full" />}
                     </div>
                 </div>
             </div>
