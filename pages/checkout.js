@@ -5,19 +5,14 @@ import checkImg from "../public/images/checkImg.png";
 import { HiFlag } from "react-icons/hi2";
 import { Button } from "../components/Buttons";
 import { Protect } from "../components/ProtectedRoute";
-import { Elements } from "@stripe/react-stripe-js";
-import { loadStripe } from "@stripe/stripe-js";
-import CheckoutForm from "./checkoutform";
 
 const checkout = () => {
-    const stripePromise = loadStripe('pk_test_51M9swIGM4fA70V34l1NUizGStGTdfiZfm6eB2IuZGduRNPyQIz8eHM0hTDBZlBtmE9Zwsltib51c0xSvcUXu8Hdk000nf1hdyy');
-    console.log(stripePromise);
     return (
         <Main title="Pricing - PluggedIn" className="container">
             <h1 className="section-gap">Checkout</h1>
             <div className="flex flex-col lg:flex-row gap-4 justify-center items-center">
                 <Image className="w-1/2" src={checkImg} alt="" />
-                {/* <form>
+                <form>
                     <div className="mt-10 px-4 pt-8 lg:mt-0">
                         <p className="text-xl font-medium base-content ">Payment Details</p>
                         <p className="">Complete your order by providing your payment details.</p>
@@ -121,23 +116,7 @@ const checkout = () => {
                         </div>
                         <Button className="mt-6 w-full"> Place Order</Button>
                     </div>
-                </form> */}
-                <div className="p-5 mx-4 bg-white rounded-lg shadow-lg my-10 ">
-                    <h1 className="text-xl font-semibold">
-                        Confirm Payment for
-                    </h1>
-                    <p className="text-semibold">
-                        Please Pay <strong></strong> tk
-                    </p>
-                    <div className="my-4">
-                        <Elements stripe={stripePromise}>
-                            <CheckoutForm
-
-                            />
-                        </Elements>
-                    </div>
-                </div>
-
+                </form>
             </div>
         </Main>
     );
