@@ -9,16 +9,6 @@ import { Button } from "../components/Buttons";
 import { useForm } from "react-hook-form";
 
 const Contact = () => {
-<<<<<<< HEAD
-    const { register, handleSubmit, formState: { errors }, watch } = useForm();
-
-    const handleContact = (data) => {
-        axios
-            .post("http://localhost:3000/api/auth/signup", data)
-            .then(({ data }) => console.log(data))
-            .catch(({ message }) => console.log(message));
-    };
-=======
     const {
         register,
         handleSubmit,
@@ -30,7 +20,6 @@ const Contact = () => {
         console.log(data);
     };
 
->>>>>>> e6b3a84c0d8f2d9262f47f93b16b74928c337672
     return (
         <Main title="Contact - PluggedIn">
             <div className="container section-gap grid lg:grid-cols-2 gap-12">
@@ -41,11 +30,7 @@ const Contact = () => {
                     <p className="font-semibold text-xl">
                         <Typewriter
                             options={{
-<<<<<<< HEAD
-                                strings: ["For contact with us", "Our team will respons within 1 hr", "you will know everything"],
-=======
                                 strings: ["For contact with us", "Our team will response within 1 hr", "you will know everything"],
->>>>>>> e6b3a84c0d8f2d9262f47f93b16b74928c337672
                                 autoStart: true,
                                 loop: true,
                             }}
@@ -78,38 +63,6 @@ const Contact = () => {
                     <form onSubmit={handleSubmit(handleContact)} className="space-y-5">
                         <div className="grid sm:grid-cols-2 gap-5">
                             <div>
-<<<<<<< HEAD
-                                <input type="text" {...register("first_name", { required: true })} className={errors?.first_name ? "input border-red-600" : "input"} placeholder="First Name" />
-                                <error className="text-red-600">
-                                    {errors?.first_name?.type === "required" && "First Name is required"}
-                                </error>
-                            </div>
-                            <div>
-                                <input type="text" {...register("last_name", { required: true })} className={errors?.last_name ? "input border-red-600" : "input"} placeholder="Last Name" />
-                                <error className="text-red-600">
-                                    {errors?.last_name?.type === "required" && "Last Name is required"}
-                                </error>
-                            </div>
-                        </div>
-                        <input type="email" {...register("email", { required: true })} className={errors?.email ? "input border-red-600" : "input"} placeholder="Email" />
-                        <error className="text-red-600">
-                            {errors?.email?.type === "required" && "Email is required"}
-                        </error>
-                        <input type="text"  {...register("subject", { required: true })} className={errors?.subject ? "input border-red-600" : "input"} placeholder="Subject" />
-                        <error className="text-red-600">
-                            {errors?.subject?.type === "required" && "Subject is required"}
-                        </error>
-                        <div className="flex justify-center">
-                            <textarea {...register("message", { required: true, minLength: 20, maxLength: 200 })} className={errors?.email ? "textarea w-full border-red-600" : "textarea textarea-bordered w-full"} rows="3" placeholder="Your message"></textarea>
-                        </div>
-                        <error className="text-red-600">
-                            {errors?.message?.type === "required" && "Message is required"}
-                            {errors?.message?.type === "minLength" &&
-                                "Entered Your Message Minimum 20 letter"}
-                            {errors?.message?.type === "maxLength" &&
-                                "You are no longer exceed 200 letter of message"}
-                        </error>
-=======
                                 <input
                                     type="text"
                                     {...register("first_name", { required: true })}
@@ -155,7 +108,6 @@ const Contact = () => {
                             {errors?.message?.type === "maxLength" && "You are no longer exceed 200 letter of message"}
                         </error>
 
->>>>>>> e6b3a84c0d8f2d9262f47f93b16b74928c337672
                         <Button type="submit" className="w-full">
                             Send Message
                         </Button>
