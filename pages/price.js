@@ -1,10 +1,20 @@
 import Main from "../components/Layout/Main";
-import { PricingPlans } from "../components/Pricing/PricingData";
+// import { pricingPlans } from "../components/Pricing/PricingData";
 import { FaCheckCircle } from "react-icons/fa";
 import { Button } from "../components/Buttons";
 import Link from "next/link";
+import { useEffect, useState } from "react";
+
 // import { Button, ButtonOutline } from "../components/Buttons";
 const Price = () => {
+    const [pricingPlans, setPricingPlans] = useState([])
+
+    useEffect(() => {
+        fetch('https://server-assignment-11-seven.vercel.app/price')
+            .then(res => res.json())
+            .then(data => setPricingPlans(data))
+    }, []);
+
     return (
         <Main title="Pricing - PluggedIn" className="container">
             <div className="flex justify-around items-center pt-10 flex-col lg:flex-row">
@@ -15,7 +25,7 @@ const Price = () => {
                 </div>
             </div>
             <div className="grid lg:grid-cols-3 gap-8 pt-10">
-                {PricingPlans.map((plan) => (
+                {pricingPlans.map((plan) => (
                     <div key={plan.name} className="border p-8 shadow-lg rounded-lg relative">
                         <h3 className="text-lg font-semibold">{plan.name}</h3>
                         {plan.mostpopuler && (
@@ -39,7 +49,7 @@ const Price = () => {
                             ))}
                         </ul>
                         {/* call to action  */}
-                        <Link href="/checkout">
+                        <Link href="/checkout" as={`/pricingPlans/${plan.name}`}>
                             <Button className="mt-6 w-full">{plan.cta}</Button>
                         </Link>
                     </div>
