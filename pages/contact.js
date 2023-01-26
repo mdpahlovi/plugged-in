@@ -25,25 +25,17 @@ const Contact = () => {
     return (
         <Main title="Contact - PluggedIn">
             <Header>
-                <h1 className="mb-0 font-extrabold">Choose a Pricing Plan</h1>
-                <h3 className="mt-2">Get a pricing plan what is suitable for you. </h3>
-                <Breadcrumbs href="/contact" page="Contact" />
+                <h1 className="mb-0 font-extrabold">Have some query?</h1>
+                <p className="mt-2 max-w-xl">
+                    Let&apos;s chat, tell us about your query. Firstly fill up the form. Our team will response within 1 hour. You can also connect us through
+                    social. thank you.
+                </p>
+                <Breadcrumbs href="/contact" page="Contact"></Breadcrumbs>
             </Header>
             <div className="container section-gap grid lg:grid-cols-2 gap-12">
                 {/* textual content */}
                 <div className="">
-                    <h1 className="text-left mb-4">Get In Touch</h1>
-                    <p className="font-bold text-xl">Fill up the form.....</p>
-                    <p className="font-semibold text-xl">
-                        <Typewriter
-                            options={{
-                                strings: ["For contact with us", "Our team will response within 1 hr", "you will know everything"],
-                                autoStart: true,
-                                loop: true,
-                            }}
-                        />
-                    </p>
-                    <div className="flex-col gap-5 flex my-6">
+                    <div className="flex-col gap-5 flex mb-6">
                         <div className="bg-purple-100 shadow-xl flex gap-5 p-4 border border-gray-500 hover:border-blue-700 md:w-1/2 w-full rounded-lg group cursor-pointer items-center">
                             <BsTelephoneFill className="text-green-800 text-xl group-hover:text-purple-900" />
                             <p className="text-green-800 font-semibold group-hover:text-purple-900">+01-0123456789</p>

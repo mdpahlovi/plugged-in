@@ -7,13 +7,14 @@ import { Button, ButtonOutline, IconButton } from "../../../components/Buttons";
 import { format, parseISO } from "date-fns";
 import TaskList from "../../../components/DashBoard/Recordings/TaskList";
 import Link from "next/link";
-import { TbListDetails } from "react-icons/tb";
+import { BiTrim } from "react-icons/bi";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 
 const RecordDetails = () => {
     const { query } = useRouter();
     const [isEditing, setIsEditing] = useState(false);
+    const [show, setShow] = useState(false);
 
     const { register, handleSubmit } = useForm();
     const handleEdit = ({ title }) => {
@@ -41,8 +42,7 @@ const RecordDetails = () => {
     if (isLoading) {
         return <Dashboard>Loading</Dashboard>;
     } else {
-        const { _id, authorEmail, date, mediaType, mediaUrl, title } = media;
-
+        const { _id, authorEmail, date, mediaType, mediaUrl, title, tasks = [6, 5, 35, 6, 67, 7] } = media;
         const date_is = format(parseISO(date), "PP");
         const time_is = format(parseISO(date), "p");
 
@@ -88,35 +88,33 @@ const RecordDetails = () => {
                             <Link href={`/dashboard/record/${_id}`}>
                                 <ButtonOutline>
                                     <div className="flex items-center justify-center gap-2">
-                                        Details
-                                        <TbListDetails className="text-lg" />
+                                        Trim
+                                        <BiTrim className="text-lg" />
                                     </div>
                                 </ButtonOutline>
                             </Link>
                         </div>
                     </div>
                 </div>
-                <div className="space-y-4">
-                    <div>
-                        <div className="flex justify-end gap-4 pb-4">
-                            <FaBold />
-                            <FaHighlighter />
-                            <MdFormatColorText />
-                            <FaLink />
-                            <FaImage />
+                <div className="md:relative md:overflow-hidden md:overflow-y-auto">
+                    <div className="md:absolute w-full flex flex-col gap-4">
+                        <div className={tasks.length && !show ? "hidden" : ""}>
+                            <div className="flex justify-end gap-4 pb-4 pr-4">
+                                <FaBold />
+                                <FaHighlighter />
+                                <MdFormatColorText />
+                                <FaLink />
+                                <FaImage />
+                            </div>
+                            <textarea rows={6} className="textarea focus:outline-none textarea-bordered w-full"></textarea>
                         </div>
-                        <textarea rows={6} className="textarea textarea-bordered w-full"></textarea>
-                        <Button className="mt-2">Add Todo List</Button>
+                        <div>
+                            <Button onClick={() => setShow(!show)}>Add Todo List</Button>
+                        </div>
+                        {tasks.map((task, index) => (
+                            <TaskList key={index} data={date} />
+                        ))}
                     </div>
-                    <TaskList data={date} />
-                    <TaskList data={date} />
-                    <TaskList data={date} />
-                    <TaskList data={date} />
-                    <TaskList data={date} />
-                    <TaskList data={date} />
-                    <TaskList data={date} />
-                    <TaskList data={date} />
-                    <TaskList data={date} />
                 </div>
             </Dashboard>
         );

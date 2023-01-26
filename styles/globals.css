@@ -10,7 +10,21 @@
         @apply text-2xl font-bold;
     }
     p {
-        @apply opacity-75;
+        @apply opacity-80;
+    }
+    /* Scrollbar Styling */
+    ::-webkit-scrollbar {
+        @apply w-2;
+    }
+
+    ::-webkit-scrollbar-track {
+        @apply bg-base-content/10 rounded-full;
+        -webkit-border-radius: 8px;
+    }
+
+    ::-webkit-scrollbar-thumb {
+        @apply bg-gradient-to-tr from-[#2F0D77] via-[#201172] to-[#816EEF] rounded-full;
+        -webkit-border-radius: 8px;
     }
 }
 

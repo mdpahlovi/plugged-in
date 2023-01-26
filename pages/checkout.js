@@ -14,7 +14,7 @@ const checkout = () => {
             <Header>
                 <h1 className="mb-0 font-extrabold">Checkout</h1>
                 <h3 className="mt-2">Get a pricing plan what is suitable for you. </h3>
-                <Breadcrumbs href="/checkout" page="Checkout" />
+                <Breadcrumbs href="/checkout" page="Checkout"></Breadcrumbs>
             </Header>
             <div className="container flex flex-col lg:flex-row gap-4 justify-center items-center">
                 <Image className="w-1/2" src={checkImg} alt="" />
