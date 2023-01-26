@@ -7,6 +7,8 @@ import Typewriter from "typewriter-effect";
 import { FaInstagram, FaTwitter, FaYoutube, FaPinterest, FaGithub } from "react-icons/fa";
 import { Button } from "../components/Buttons";
 import { useForm } from "react-hook-form";
+import Header from "../components/Header";
+import Breadcrumbs from "../components/Breadcrumbs";
 
 const Contact = () => {
     const {
@@ -22,6 +24,11 @@ const Contact = () => {
 
     return (
         <Main title="Contact - PluggedIn">
+            <Header>
+                <h1 className="mb-0 font-extrabold">Choose a Pricing Plan</h1>
+                <h3 className="mt-2">Get a pricing plan what is suitable for you. </h3>
+                <Breadcrumbs href="/contact" page="Contact" />
+            </Header>
             <div className="container section-gap grid lg:grid-cols-2 gap-12">
                 {/* textual content */}
                 <div className="">

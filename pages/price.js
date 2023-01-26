@@ -3,18 +3,25 @@ import { PricingPlans } from "../components/Pricing/PricingData";
 import { FaCheckCircle } from "react-icons/fa";
 import { Button } from "../components/Buttons";
 import Link from "next/link";
+import Header from "../components/Header";
+import Breadcrumbs from "../components/Breadcrumbs";
 
 const Price = () => {
     return (
-        <Main title="Pricing - PluggedIn" className="container">
-            <div className="flex justify-around items-center pt-10 flex-col lg:flex-row">
+        <Main title="Pricing - PluggedIn">
+            <Header>
+                <h1 className="mb-0 font-extrabold">Choose a Pricing Plan</h1>
+                <h3 className="mt-2">Get a pricing plan what is suitable for you. </h3>
+                <Breadcrumbs href="/price" page="Pricing" />
+            </Header>
+            <div className="container flex justify-around items-center pt-10 flex-col lg:flex-row">
                 <p className="text-3xl font-semibold">For Individuals</p>
                 <div className="flex items-center flex-col lg:flex-row ">
                     <p className="text-3xl font-semibold">For Team</p>
                     <span className="bg-[#201172] text-white text-sm px-1.5 py-0.5 rounded-md ml-2">Now In Beta:Free 30-day trial</span>
                 </div>
             </div>
-            <div className="grid lg:grid-cols-3 gap-8 pt-10">
+            <div className="container grid lg:grid-cols-3 gap-8 pt-10">
                 {PricingPlans.map((plan) => (
                     <div key={plan.name} className="border p-8 shadow-lg rounded-lg relative">
                         <h3 className="text-lg font-semibold">{plan.name}</h3>

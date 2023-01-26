@@ -5,12 +5,18 @@ import checkImg from "../public/images/checkImg.png";
 import { HiFlag } from "react-icons/hi2";
 import { Button } from "../components/Buttons";
 import { Protect } from "../components/ProtectedRoute";
+import Header from "../components/Header";
+import Breadcrumbs from "../components/Breadcrumbs";
 
 const checkout = () => {
     return (
         <Main title="Pricing - PluggedIn" className="container">
-            <h1 className="section-gap">Checkout</h1>
-            <div className="flex flex-col lg:flex-row gap-4 justify-center items-center">
+            <Header>
+                <h1 className="mb-0 font-extrabold">Checkout</h1>
+                <h3 className="mt-2">Get a pricing plan what is suitable for you. </h3>
+                <Breadcrumbs href="/checkout" page="Checkout" />
+            </Header>
+            <div className="container flex flex-col lg:flex-row gap-4 justify-center items-center">
                 <Image className="w-1/2" src={checkImg} alt="" />
                 <form>
                     <div className="mt-10 px-4 pt-8 lg:mt-0">

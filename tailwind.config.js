@@ -15,7 +15,7 @@ module.exports = {
         },
         extend: {
             backgroundImage: {
-                header: "url('/src/Assets/header.png')",
+                header: "url('/images/header.png')",
             },
         },
     },
