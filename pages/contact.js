@@ -26,7 +26,7 @@ const Contact = () => {
         <Main title="Contact - PluggedIn">
             <Header>
                 <h1 className="mb-0 font-extrabold">Have some query?</h1>
-                <p className="mt-2 max-w-xl">
+                <p className="mt-2 max-w-xl px-6">
                     Let&apos;s chat, tell us about your query. Firstly fill up the form. Our team will response within 1 hour. You can also connect us through
                     social. thank you.
                 </p>

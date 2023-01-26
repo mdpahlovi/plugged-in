@@ -5,14 +5,13 @@ import { Button } from "../components/Buttons";
 import Link from "next/link";
 import Header from "../components/Header";
 import Breadcrumbs from "../components/Breadcrumbs";
-import { Tab } from "@headlessui/react";
 
 const Price = () => {
     return (
         <Main title="Pricing - PluggedIn">
             <Header>
                 <h1 className="mb-0 font-extrabold">Choose a Pricing Plan</h1>
-                <p className="mt-2 max-w-xl">
+                <p className="mt-2 max-w-xl px-6">
                     Get a pricing plan what is suitable for you. We recommend to get business plan for manpage a team daily bases task and meeting. You can also
                     try our plan for 2 weeks. That will help to get a best plan.
                 </p>
@@ -50,7 +49,7 @@ const Price = () => {
                             ))}
                         </ul>
                         {/* call to action  */}
-                        <Link href="/checkout">
+                        <Link href={`/checkout/${plan.name.toLowerCase()}?price=${plan.price}`}>
                             <Button className="mt-6 w-full">{plan.cta}</Button>
                         </Link>
                     </div>

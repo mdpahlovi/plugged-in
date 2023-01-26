@@ -10,11 +10,21 @@ import Link from "next/link";
 import { BiTrim } from "react-icons/bi";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
+import RecordLoader from "../../../components/DashBoard/Recordings/RecordLoader";
 
 const RecordDetails = () => {
     const { query } = useRouter();
     const [isEditing, setIsEditing] = useState(false);
     const [show, setShow] = useState(false);
+
+    const {
+        data: media,
+        isLoading,
+        refetch,
+    } = useQuery({
+        queryKey: ["media", query?.id],
+        queryFn: () => fetch(`https://plugged-in-server.vercel.app/media/${query?.id}`).then((res) => res.json()),
+    });
 
     const { register, handleSubmit } = useForm();
     const handleEdit = ({ title }) => {
@@ -31,23 +41,19 @@ const RecordDetails = () => {
             .catch((error) => console.log(error.message));
     };
 
-    const {
-        data: media,
-        isLoading,
-        refetch,
-    } = useQuery({
-        queryKey: ["media", query?.id],
-        queryFn: () => fetch(`https://plugged-in-server.vercel.app/media/${query?.id}`).then((res) => res.json()),
-    });
     if (isLoading) {
-        return <Dashboard>Loading</Dashboard>;
+        return (
+            <Dashboard title="Record Details" className="grid md:grid-cols-[7fr,_5fr] gap-6 animate-pulse">
+                <RecordLoader />
+            </Dashboard>
+        );
     } else {
         const { _id, authorEmail, date, mediaType, mediaUrl, title, tasks = [6, 5, 35, 6, 67, 7] } = media;
         const date_is = format(parseISO(date), "PP");
         const time_is = format(parseISO(date), "p");
 
         return (
-            <Dashboard className="grid md:grid-cols-[7fr,_5fr] gap-6">
+            <Dashboard title="Record Details" className="grid md:grid-cols-[7fr,_5fr] gap-6">
                 <div>
                     <video src={mediaUrl} controls className="video"></video>
                     <div className="-mt-4 border border-t-0 rounded-lg p-5">
