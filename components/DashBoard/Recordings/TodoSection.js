@@ -5,24 +5,25 @@ import TextEditor from "./TextEditor";
 
 const TodoSection = ({ tasks, refetch }) => {
     const [show, setShow] = useState(false);
-    const [todoTexts, setTodoTexts] = useState(null);
+    const [todoText, setTodoText] = useState(null);
+    const [todoTasks, setTodoTexts] = useState([]);
 
     const handleTask = (data) => {
-        setShow(!show);
-        console.log(data);
+        setShow(true);
+        setTodoTexts([...todoTasks, { date: new Date(), details: data }]);
     };
 
     return (
         <div className="md:relative md:overflow-hidden md:overflow-y-auto">
             <div className="md:absolute w-full flex flex-col gap-4">
-                <div className={tasks.length && !show ? "hidden" : ""}>
-                    <TextEditor setTodoTexts={setTodoTexts} />
+                <div className={todoTasks.length && show ? "hidden" : ""}>
+                    <TextEditor setTodoText={setTodoText} />
                 </div>
                 <div>
-                    <Button onClick={() => handleTask(todoTexts)}>Add Todo List</Button>
+                    <Button onClick={() => handleTask(todoText)}>Add Todo List</Button>
                 </div>
-                {tasks.map((task, index) => (
-                    <TaskList key={index} data={date} />
+                {todoTasks.map((task, index) => (
+                    <TaskList key={index} task={task} setTodoTexts={setTodoTexts} />
                 ))}
             </div>
         </div>

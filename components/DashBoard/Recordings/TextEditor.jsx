@@ -88,7 +88,7 @@ const MenuBar = ({ editor }) => {
     );
 };
 
-const TextEditor = ({ setTodoTexts }) => {
+const TextEditor = ({ setTodoText }) => {
     const editor = useEditor({
         extensions: [
             StarterKit,
@@ -106,7 +106,7 @@ const TextEditor = ({ setTodoTexts }) => {
         },
         content: ``,
         onBlur: ({ editor }) => {
-            setTodoTexts(editor.getHTML());
+            setTodoText(editor.getHTML());
         },
     });
 

@@ -1,9 +1,10 @@
 import { format, parseISO } from "date-fns";
 import { MdEditNote, MdDeleteSweep } from "react-icons/md";
 
-const TaskList = ({ data }) => {
-    const date_is = format(parseISO(data), "PP");
-    const time_is = format(parseISO(data), "p");
+const TaskList = ({ task, setTodoTexts }) => {
+    const { date, details } = task;
+    const date_is = format(date, "PP");
+    const time_is = format(date, "p");
 
     return (
         <div className="border p-4 rounded-lg space-y-2">
@@ -14,13 +15,10 @@ const TaskList = ({ data }) => {
                 <div className="flex gap-4">
                     <input type="checkbox" className="checkbox checkbox-sm" />
                     <MdEditNote className="text-xl" />
-                    <MdDeleteSweep className="text-xl" />
+                    <MdDeleteSweep className="text-xl cursor-pointer" onClick={() => setTodoTexts([])} />
                 </div>
             </div>
-            <p>
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Aperiam, sapiente explicabo. Saepe perferendis quaerat temporibus, esse animi
-                consectetur iste fuga corrupti dolorum sint perspiciatis ratione quae voluptatibus, in ipsa assumenda.
-            </p>
+            <div dangerouslySetInnerHTML={{ __html: details }} />
         </div>
     );
 };
