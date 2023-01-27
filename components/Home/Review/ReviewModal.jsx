@@ -1,9 +1,7 @@
 import { Dialog, Transition } from "@headlessui/react";
-import Image from "next/image";
 import { Fragment } from "react";
 import { useForm } from "react-hook-form";
-import { Button, ButtonOutline } from "../../Buttons";
-import Avatar from "../../../public/images/avatar.png";
+import { Button } from "../../Buttons";
 
 const ReviewModal = ({ isOpen, setIsOpen, handleEdit }) => {
     const { register, handleSubmit } = useForm();
@@ -34,7 +32,7 @@ const ReviewModal = ({ isOpen, setIsOpen, handleEdit }) => {
                             leaveFrom="opacity-100 scale-100"
                             leaveTo="opacity-0 scale-95"
                         >
-                            <Dialog.Panel className="w-full max-w-md transform overflow-hidden rounded-2xl bg-white p-6 text-left align-middle shadow-xl transition-all">
+                            <Dialog.Panel className="w-full max-w-md transform overflow-hidden rounded-2xl bg-base-100 p-6 text-left align-middle shadow-xl transition-all">
                                 <form action="" onSubmit={handleSubmit(handleEdit)} className="space-y-2">
                                     <div className="flex justify-between">
                                         <h2>Add Your Review</h2>
@@ -53,7 +51,7 @@ const ReviewModal = ({ isOpen, setIsOpen, handleEdit }) => {
                                         placeholder="Recording Details"
                                     ></textarea>
                                     <div className="flex justify-center">
-                                        <Button type="submit" onClick={() => setIsOpen(false)} className="w-1/2 mx-auto">
+                                        <Button type="submit" className="w-1/2 mx-auto">
                                             Submit
                                         </Button>
                                     </div>
