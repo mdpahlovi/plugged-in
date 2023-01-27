@@ -51,7 +51,9 @@ const Navbar = () => {
                                 <Image src={authUser.photoURL} alt="" width={34} height={34} className="absolute rounded-full top-0.5 left-0.5 z-10" />
                                 <Link href="/dashboard">
                                     <ButtonOutline sm>
-                                        <div className="pl-6">Dashboard</div>
+                                        <div className="pl-6">
+                                            D<span className="hidden xs:inline-block">ashboard</span>
+                                        </div>
                                     </ButtonOutline>
                                 </Link>
                             </div>
