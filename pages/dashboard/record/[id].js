@@ -1,7 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
 import { useRouter } from "next/router";
 import Dashboard from "../../../components/Layout/Dashboard";
-import { FaBold, FaHighlighter, FaLink, FaImage } from "react-icons/fa";
 import { MdDeleteSweep, MdEditNote, MdFormatColorText, MdOutlineCloudDownload } from "react-icons/md";
 import { Button, ButtonOutline, IconButton } from "../../../components/Buttons";
 import { format, parseISO } from "date-fns";
@@ -11,49 +10,60 @@ import { BiTrim } from "react-icons/bi";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import RecordLoader from "../../../components/DashBoard/Recordings/RecordLoader";
+import TextEditor from "../../../components/DashBoard/Recordings/TextEditor";
+import TodoSection from "../../../components/DashBoard/Recordings/TodoSection";
 
 const RecordDetails = () => {
     const { query } = useRouter();
     const [isEditing, setIsEditing] = useState(false);
-    const [show, setShow] = useState(false);
+    const { register, handleSubmit } = useForm();
 
     const {
         data: media,
-        isLoading,
+        isLoading: mediaLoading,
         refetch,
     } = useQuery({
         queryKey: ["media", query?.id],
         queryFn: () => fetch(`https://plugged-in-server.vercel.app/media/${query?.id}`).then((res) => res.json()),
     });
 
-    const { register, handleSubmit } = useForm();
-    const handleEdit = ({ title }) => {
-        const updatingRecord = { _id, title };
-        axios
-            .put(`https://plugged-in-server.vercel.app/record`, updatingRecord)
-            .then((res) => {
-                if (res.data.matchedCount > 0) {
-                    refetch();
-                    toast.success("Record updated successfully");
-                    setIsEditing(false);
-                }
-            })
-            .catch((error) => console.log(error.message));
-    };
+    const {
+        data: tasks = [],
+        isLoading: tasksLoading,
+        refetch: taskRefetch,
+    } = useQuery({
+        queryKey: ["tasks", query?.id],
+        queryFn: () => fetch(`https://plugged-in-server.vercel.app/tasks/${query?.id}`).then((res) => res.json()),
+    });
 
-    if (isLoading) {
+    if (mediaLoading || tasksLoading) {
         return (
             <Dashboard title="Record Details" className="grid md:grid-cols-[7fr,_5fr] gap-6 animate-pulse">
                 <RecordLoader />
             </Dashboard>
         );
     } else {
-        const { _id, authorEmail, date, mediaType, mediaUrl, title, tasks = [6, 5, 35, 6, 67, 7] } = media;
+        const { _id, authorEmail, date, mediaType, mediaUrl, title } = media;
         const date_is = format(parseISO(date), "PP");
         const time_is = format(parseISO(date), "p");
 
+        // Add Title to DB
+        const handleEdit = ({ title }) => {
+            const updatingRecord = { _id, title };
+            axios
+                .put(`https://plugged-in-server.vercel.app/record`, updatingRecord)
+                .then((res) => {
+                    if (res.data.matchedCount > 0) {
+                        refetch();
+                        toast.success("Record updated successfully");
+                        setIsEditing(false);
+                    }
+                })
+                .catch((error) => console.log(error.message));
+        };
+
         return (
-            <Dashboard title="Record Details" className="grid md:grid-cols-[7fr,_5fr] gap-6">
+            <Dashboard title="Record Details" className="grid md:grid-cols-[7fr,_5fr] gap-x-6 gap-y-10">
                 <div>
                     <video src={mediaUrl} controls className="video"></video>
                     <div className="-mt-4 border border-t-0 rounded-lg p-5">
@@ -91,37 +101,16 @@ const RecordDetails = () => {
                                     </div>
                                 </ButtonOutline>
                             </a>
-                            <Link href={`/dashboard/record/${_id}`}>
-                                <ButtonOutline>
-                                    <div className="flex items-center justify-center gap-2">
-                                        Trim
-                                        <BiTrim className="text-lg" />
-                                    </div>
-                                </ButtonOutline>
-                            </Link>
+                            <ButtonOutline>
+                                <div className="flex items-center justify-center gap-2">
+                                    Trim
+                                    <BiTrim className="text-lg" />
+                                </div>
+                            </ButtonOutline>
                         </div>
                     </div>
                 </div>
-                <div className="md:relative md:overflow-hidden md:overflow-y-auto">
-                    <div className="md:absolute w-full flex flex-col gap-4">
-                        <div className={tasks.length && !show ? "hidden" : ""}>
-                            <div className="flex justify-end gap-4 pb-4 pr-4">
-                                <FaBold />
-                                <FaHighlighter />
-                                <MdFormatColorText />
-                                <FaLink />
-                                <FaImage />
-                            </div>
-                            <textarea rows={6} className="textarea focus:outline-none textarea-bordered w-full"></textarea>
-                        </div>
-                        <div>
-                            <Button onClick={() => setShow(!show)}>Add Todo List</Button>
-                        </div>
-                        {tasks.map((task, index) => (
-                            <TaskList key={index} data={date} />
-                        ))}
-                    </div>
-                </div>
+                <TodoSection tasks={tasks} refetch={taskRefetch} />
             </Dashboard>
         );
     }
