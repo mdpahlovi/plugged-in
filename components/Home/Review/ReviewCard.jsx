@@ -1,7 +1,10 @@
+import { format, parseISO } from "date-fns";
 import Image from "next/image";
 
 const ReviewCard = ({ review }) => {
     const { name, location, time, avatar, rating, details } = review;
+    const date = format(parseISO(time), "PP");
+    const time_is = format(parseISO(time), "p");
 
     return (
         <div className="max-w-screen-sm lg:max-w-full mx-auto flex flex-col p-6 divide-y rounded-lg divide-base-content/20 border">
@@ -13,7 +16,9 @@ const ReviewCard = ({ review }) => {
                     <div>
                         <h4 className="font-bold">{name}</h4>
                         <p className="text-xs">{location}</p>
-                        <p className="text-xs">{time}</p>
+                        <p className="text-xs">
+                            {date} at {time_is}
+                        </p>
                     </div>
                 </div>
                 <div className="flex items-center space-x-2 text-indigo-800">
