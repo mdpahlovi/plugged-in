@@ -110,7 +110,7 @@ const RecordDetails = () => {
                         </div>
                     </div>
                 </div>
-                <TodoSection tasks={tasks} refetch={taskRefetch} />
+                <TodoSection tasks={tasks} media_id={_id} refetch={taskRefetch} />
             </Dashboard>
         );
     }
