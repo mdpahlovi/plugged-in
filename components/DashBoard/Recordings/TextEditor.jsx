@@ -104,7 +104,7 @@ const TextEditor = ({ setTodoText }) => {
                 class: "textarea focus:outline-none textarea-bordered w-full h-60 pt-4 leading-5",
             },
         },
-        content: ``,
+        content: "",
         onBlur: ({ editor }) => {
             setTodoText(editor.getHTML());
         },

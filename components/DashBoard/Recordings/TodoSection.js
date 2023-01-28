@@ -1,29 +1,35 @@
+import axios from "axios";
 import React, { useState } from "react";
+import { toast } from "react-toastify";
 import { Button } from "../../Buttons";
 import TaskList from "./TaskList";
 import TextEditor from "./TextEditor";
 
-const TodoSection = ({ tasks, refetch }) => {
-    const [show, setShow] = useState(false);
-    const [todoText, setTodoText] = useState(null);
-    const [todoTasks, setTodoTexts] = useState([]);
+const TodoSection = ({ tasks, media_id, refetch }) => {
+    const [todoText, setTodoText] = useState("");
 
     const handleTask = (data) => {
-        setShow(true);
-        setTodoTexts([...todoTasks, { date: new Date(), details: data }]);
+        const task = { media_id, date: new Date(), details: data, done: false };
+        axios
+            .post(`https://plugged-in-server.vercel.app/task`, task)
+            .then((res) => {
+                if (res.data) {
+                    refetch();
+                    toast.success("Task added successfully");
+                }
+            })
+            .catch((error) => console.log(error.message));
     };
 
     return (
         <div className="md:relative md:overflow-hidden md:overflow-y-auto">
             <div className="md:absolute w-full flex flex-col gap-4">
-                <div className={todoTasks.length && show ? "hidden" : ""}>
-                    <TextEditor setTodoText={setTodoText} />
-                </div>
+                <TextEditor setTodoText={setTodoText} />
                 <div>
                     <Button onClick={() => handleTask(todoText)}>Add Todo List</Button>
                 </div>
-                {todoTasks.map((task, index) => (
-                    <TaskList key={index} task={task} setTodoTexts={setTodoTexts} />
+                {tasks.map((task, index) => (
+                    <TaskList key={index} task={task} refetch={refetch} />
                 ))}
             </div>
         </div>
