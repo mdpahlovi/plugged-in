@@ -4,19 +4,20 @@ import { useEffect, useRef } from "react";
 import { MdEditNote, MdDeleteSweep } from "react-icons/md";
 import { toast } from "react-toastify";
 
-const TaskList = ({ task, refetch }) => {
+const TaskList = ({ task, refetch, editor }) => {
     const check_box = useRef();
     const { _id, date, details, done } = task;
     const date_is = format(parseISO(date), "PP");
     const time_is = format(parseISO(date), "p");
 
-    const handleDelete = (id) => {
+    const handleDelete = (id, button) => {
         axios
             .delete(`https://plugged-in-server.vercel.app/task/${id}`)
             .then((res) => {
                 if (res.data) {
                     refetch();
-                    toast.success("Task Deleted Successfully");
+                    toast.success(`Task ${button === "edit" ? "sent for edit" : "Deleted Successfully"}`);
+                    button === "edit" ? editor.commands.setContent(details) : "";
                 }
             })
             .catch((error) => console.log(error.message));
@@ -49,8 +50,8 @@ const TaskList = ({ task, refetch }) => {
                 </p>
                 <div className="flex gap-4">
                     <input ref={check_box} onClick={() => handleDone(_id)} type="checkbox" className="checkbox checkbox-sm" />
-                    <MdEditNote className="text-xl cursor-pointer" onClick={() => handleDelete(_id)} />
-                    <MdDeleteSweep className="text-xl cursor-pointer" onClick={() => handleDelete(_id)} />
+                    <MdEditNote className="text-xl cursor-pointer" onClick={() => handleDelete(_id, "edit")} />
+                    <MdDeleteSweep className="text-xl cursor-pointer" onClick={() => handleDelete(_id, "delete")} />
                 </div>
             </div>
             <div dangerouslySetInnerHTML={{ __html: details }} />

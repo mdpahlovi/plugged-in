@@ -88,28 +88,7 @@ const MenuBar = ({ editor }) => {
     );
 };
 
-const TextEditor = ({ setTodoText }) => {
-    const editor = useEditor({
-        extensions: [
-            StarterKit,
-            Underline,
-            Link.configure({
-                HTMLAttributes: {
-                    class: "text-indigo-900 opacity-90 underline",
-                },
-            }),
-        ],
-        editorProps: {
-            attributes: {
-                class: "textarea focus:outline-none textarea-bordered w-full h-60 pt-4 leading-5",
-            },
-        },
-        content: "",
-        onBlur: ({ editor }) => {
-            setTodoText(editor.getHTML());
-        },
-    });
-
+const TextEditor = ({ editor }) => {
     return (
         <div>
             <MenuBar editor={editor} />
