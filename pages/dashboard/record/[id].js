@@ -1,21 +1,21 @@
 import { useQuery } from "@tanstack/react-query";
 import { useRouter } from "next/router";
 import Dashboard from "../../../components/Layout/Dashboard";
-import { MdDeleteSweep, MdEditNote, MdFormatColorText, MdOutlineCloudDownload } from "react-icons/md";
+import { MdDeleteSweep, MdEditNote, MdOutlineCloudDownload } from "react-icons/md";
 import { Button, ButtonOutline, IconButton } from "../../../components/Buttons";
 import { format, parseISO } from "date-fns";
-import TaskList from "../../../components/DashBoard/Recordings/TaskList";
-import Link from "next/link";
 import { BiTrim } from "react-icons/bi";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import RecordLoader from "../../../components/DashBoard/Recordings/RecordLoader";
-import TextEditor from "../../../components/DashBoard/Recordings/TextEditor";
 import TodoSection from "../../../components/DashBoard/Recordings/TodoSection";
+import { toast } from "react-toastify";
+import TrimModal from "../../../components/DashBoard/Recordings/TrimModal";
 
 const RecordDetails = () => {
     const { query } = useRouter();
     const [isEditing, setIsEditing] = useState(false);
+    const [isOpen, setIsOpen] = useState(false);
     const { register, handleSubmit } = useForm();
 
     const {
@@ -101,7 +101,7 @@ const RecordDetails = () => {
                                     </div>
                                 </ButtonOutline>
                             </a>
-                            <ButtonOutline>
+                            <ButtonOutline onClick={() => setIsOpen(true)}>
                                 <div className="flex items-center justify-center gap-2">
                                     Trim
                                     <BiTrim className="text-lg" />
@@ -111,6 +111,7 @@ const RecordDetails = () => {
                     </div>
                 </div>
                 <TodoSection tasks={tasks} media_id={_id} refetch={taskRefetch} />
+                <TrimModal isOpen={isOpen} setIsOpen={setIsOpen} mediaUrl={mediaUrl} />
             </Dashboard>
         );
     }
