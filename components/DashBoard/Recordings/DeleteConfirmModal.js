@@ -4,8 +4,11 @@ import React, { Fragment } from "react";
 import { Dialog, Transition } from "@headlessui/react";
 import { Button, ButtonOutline } from "../../Buttons";
 import { TiWarningOutline } from "react-icons/ti";
+import { useRouter } from "next/router";
 
 const DeleteConfirmModal = ({ deletingRecordId, setDeletingRecordId, refetch }) => {
+    const { replace } = useRouter();
+
     const handleYes = (id) => {
         axios
             .delete(`https://plugged-in-server.vercel.app/record/${id}`)
@@ -14,6 +17,7 @@ const DeleteConfirmModal = ({ deletingRecordId, setDeletingRecordId, refetch }) 
                     refetch();
                     toast.success("Record deleted successfully");
                     setDeletingRecordId(null);
+                    replace("/dashboard/recordings");
                 }
             })
             .catch((error) => console.log(error.message));

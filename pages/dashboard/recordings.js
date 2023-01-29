@@ -1,5 +1,8 @@
 import { useQuery } from "@tanstack/react-query";
+import Link from "next/link";
 import { useState } from "react";
+import { TbListDetails } from "react-icons/tb";
+import { ButtonOutline } from "../../components/Buttons";
 import DeleteConfirmModal from "../../components/DashBoard/Recordings/DeleteConfirmModal";
 import MediaCard from "../../components/DashBoard/Recordings/MediaCard";
 import Dashboard from "../../components/Layout/Dashboard";
@@ -41,7 +44,18 @@ const Recordings = () => {
                               </div>
                           </div>
                       ))
-                    : medias.map((media) => <MediaCard key={media._id} media={media} refetch={refetch} setDeletingRecordId={setDeletingRecordId}></MediaCard>)}
+                    : medias.map((media) => (
+                          <MediaCard key={media._id} media={media} refetch={refetch} setDeletingRecordId={setDeletingRecordId}>
+                              <Link href={`/dashboard/record/${media._id}`}>
+                                  <ButtonOutline>
+                                      <div className="flex items-center justify-center gap-2">
+                                          Details
+                                          <TbListDetails className="text-lg" />
+                                      </div>
+                                  </ButtonOutline>
+                              </Link>
+                          </MediaCard>
+                      ))}
                 <DeleteConfirmModal deletingRecordId={deletingRecordId} setDeletingRecordId={setDeletingRecordId} refetch={refetch} />
             </div>
         </Dashboard>
