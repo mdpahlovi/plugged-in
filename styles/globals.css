@@ -60,4 +60,7 @@
     .icon-divide {
         @apply divider before:rounded-t-full after:rounded-b-full before:bg-opacity-60 after:bg-opacity-60 divider-horizontal -mx-0.5;
     }
+    .profile-avatar {
+        @apply rounded-full p-2 shadow-lg bg-base-100 transition hover:scale-110 duration-300;
+    }
 }
