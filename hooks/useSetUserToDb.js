@@ -1,29 +1,28 @@
+import axios from "axios";
 import { useEffect, useState } from "react";
+import { api_url } from "../utilities/api";
 
 const useSetUserToDb = (user) => {
-  const [confirmation, setConfirmation] = useState("");
+    const [confirmation, setConfirmation] = useState("");
 
-  useEffect(() => {
-    const sendingUser = {
-      email: user?.email,
-      name: user?.displayName,
-    };
-    if (user) {
-      fetch("https://plugged-in-server.vercel.app/users", {
-        method: "POST",
-        headers: {
-          "content-type": "application/json",
-        },
-        body: JSON.stringify(sendingUser),
-      })
-        .then((res) => res.json())
-        .then((data) => {
-          setConfirmation(data);
-        });
-    }
-  }, [user]);
+    useEffect(() => {
+        const sendingUser = {
+            email: user?.email,
+            name: user?.displayName,
+            avatar: user?.photoURL,
+        };
+        if (user) {
+            axios
+                .put(`${api_url}/user`, sendingUser)
+                .then((res) => {
+                    setConfirmation(res.data.result);
+                    localStorage.setItem("plugged-token", res.data.token);
+                })
+                .catch((error) => console.log(error));
+        }
+    }, [user]);
 
-  return { confirmation };
+    return { confirmation };
 };
 
 export default useSetUserToDb;

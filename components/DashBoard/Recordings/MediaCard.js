@@ -7,10 +7,8 @@ import { format, parseISO } from "date-fns";
 import { Button, ButtonOutline, IconButton } from "../../Buttons";
 import audioImage from "../../../public/logo/audioImage.png";
 import { MdEditNote, MdDeleteSweep, MdOutlineCloudDownload } from "react-icons/md";
-import { TbListDetails } from "react-icons/tb";
-import Link from "next/link";
 
-const MediaCard = ({ media, refetch, setDeletingRecordId }) => {
+const MediaCard = ({ media, refetch, setDeletingRecordId, children }) => {
     const { _id, date, mediaType, mediaUrl, title } = media;
     const [isEditing, setIsEditing] = useState(false);
 
@@ -79,14 +77,7 @@ const MediaCard = ({ media, refetch, setDeletingRecordId }) => {
                             </div>
                         </ButtonOutline>
                     </a>
-                    <Link href={`/dashboard/record/${_id}`}>
-                        <ButtonOutline>
-                            <div className="flex items-center justify-center gap-2">
-                                Details
-                                <TbListDetails className="text-lg" />
-                            </div>
-                        </ButtonOutline>
-                    </Link>
+                    {children}
                 </div>
             </div>
         </div>
