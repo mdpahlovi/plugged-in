@@ -1,17 +1,16 @@
 import Image from "next/image";
 import { useState } from "react";
+import { toast } from "react-toastify";
 import { Button, ButtonOutline } from "../../components/Buttons";
 import ProfileLoading from "../../components/DashBoard/ProfileLoading";
 import Dashboard from "../../components/Layout/Dashboard";
 import { useAuth } from "../../hooks/useAuth";
-import useGetUser from "../../hooks/useGetUser";
 import Avatar from "../../public/images/avatar.png";
 import { api_url, jwt_axios } from "../../utilities/api";
 import { getImageUrl } from "../../utilities/getImageUrl";
 
 const Profile = () => {
-    const { loading, authUser, updateUserAvatar } = useAuth();
-    const { userLoading, user, userRefetch } = useGetUser(authUser?.email);
+    const { loading, userLoading, user, userRefetch } = useAuth();
 
     if (userLoading || loading) {
         return (
@@ -25,12 +24,10 @@ const Profile = () => {
             getImageUrl(file)
                 .then((data) => {
                     jwt_axios
-                        .patch(`${api_url}/user/${authUser.email}`, { avatar: data.url })
+                        .patch(`${api_url}/user/${user?.email}`, { avatar: data.url })
                         .then((res) => {
-                            console.log(res);
-                            updateUserAvatar(data.url)
-                                .then(() => userRefetch)
-                                .catch((error) => console.log(error));
+                            toast.success("User Avatar Added");
+                            userRefetch();
                         })
                         .catch((error) => console.log(error));
                 })

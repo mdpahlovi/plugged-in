@@ -17,7 +17,7 @@ const navItems = [
 ];
 
 const Navbar = () => {
-    const { authUser, loading } = useAuth();
+    const { user, userLoading, loading } = useAuth();
     const { pathname } = useRouter();
     const [open, setOpen] = useState(false);
 
@@ -43,12 +43,12 @@ const Navbar = () => {
                             </div>
                         ))}
                     </div>
-                    {loading ? (
+                    {loading || userLoading ? (
                         <ButtonOutline sm>Loading...</ButtonOutline>
-                    ) : authUser?.uid ? (
-                        authUser?.photoURL ? (
+                    ) : user?._id ? (
+                        user?.avatar ? (
                             <div className="relative">
-                                <Image src={authUser.photoURL} alt="" width={34} height={34} className="absolute rounded-full top-0.5 left-0.5 z-10" />
+                                <Image src={user.avatar} alt="" width={34} height={34} className="absolute rounded-full top-0.5 left-0.5 z-10" />
                                 <Link href="/dashboard">
                                     <ButtonOutline sm>
                                         <div className="pl-6">

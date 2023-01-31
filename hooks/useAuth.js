@@ -10,14 +10,15 @@ import {
     signOut,
     updateProfile,
 } from "firebase/auth";
-
+import useGetUser from "./useGetUser";
 import app from "../config/firebase.config";
 
 export const AuthContext = createContext();
 const auth = getAuth(app);
 
 export const UserContext = ({ children }) => {
-    const [authUser, setAuthUser] = useState(null);
+    const [authEmail, setAuthEmail] = useState("");
+    const { userLoading, user, userRefetch } = useGetUser(authEmail);
     const [loading, setLoading] = useState(true);
     const googleProvider = new GoogleAuthProvider();
     const githubProvider = new GithubAuthProvider();
@@ -31,13 +32,6 @@ export const UserContext = ({ children }) => {
         setLoading(true);
         return updateProfile(auth.currentUser, {
             displayName: name,
-        });
-    };
-
-    const updateUserAvatar = (avatar) => {
-        setLoading(true);
-        return updateProfile(auth.currentUser, {
-            photoURL: avatar,
         });
     };
 
@@ -63,19 +57,20 @@ export const UserContext = ({ children }) => {
 
     useEffect(() => {
         const unSubscribe = onAuthStateChanged(auth, (currentUser) => {
-            setAuthUser(currentUser);
+            setAuthEmail(currentUser?.email);
             setLoading(false);
         });
         return () => unSubscribe();
     }, []);
 
     const authInfo = {
-        authUser,
+        user,
+        userLoading,
+        userRefetch,
         loading,
         setLoading,
         createUser,
         updateUserProfile,
-        updateUserAvatar,
         login,
         loginWithGoogle,
         loginWithGithub,
