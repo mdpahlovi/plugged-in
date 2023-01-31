@@ -1,23 +1,17 @@
-import { useEffect, useState } from "react";
+import { useQuery } from "@tanstack/react-query";
 import { jwt_axios } from "../utilities/api";
 
 const useGetUser = (email) => {
-    const [user, setUser] = useState();
-    const [userLoading, setUserLoading] = useState(true);
+    const {
+        data: user,
+        isLoading: userLoading,
+        refetch: userRefetch,
+    } = useQuery({
+        queryKey: ["user", email],
+        queryFn: () => jwt_axios.get(`/user/${email}`).then((res) => res.data),
+    });
 
-    useEffect(() => {
-        if (email) {
-            jwt_axios
-                .get(`/user/${email}`)
-                .then((res) => {
-                    setUser(res.data);
-                    setUserLoading(false);
-                })
-                .catch((error) => console.log(error));
-        }
-    }, [email]);
-
-    return { userLoading, user };
+    return { userLoading, user, userRefetch };
 };
 
 export default useGetUser;

@@ -13,7 +13,7 @@ const useSetUserToDb = (user) => {
         };
         if (user) {
             axios
-                .put(`${api_url}/user`, sendingUser)
+                .post(`${api_url}/user`, sendingUser)
                 .then((res) => {
                     setConfirmation(res.data.result);
                     localStorage.setItem("plugged-token", res.data.token);

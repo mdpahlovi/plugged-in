@@ -1,15 +1,17 @@
 import Image from "next/image";
+import { useState } from "react";
 import { Button, ButtonOutline } from "../../components/Buttons";
 import ProfileLoading from "../../components/DashBoard/ProfileLoading";
 import Dashboard from "../../components/Layout/Dashboard";
 import { useAuth } from "../../hooks/useAuth";
 import useGetUser from "../../hooks/useGetUser";
 import Avatar from "../../public/images/avatar.png";
+import { api_url, jwt_axios } from "../../utilities/api";
 import { getImageUrl } from "../../utilities/getImageUrl";
 
 const Profile = () => {
-    const { loading, authUser } = useAuth();
-    const { userLoading, user } = useGetUser(authUser?.email);
+    const { loading, authUser, updateUserAvatar } = useAuth();
+    const { userLoading, user, userRefetch } = useGetUser(authUser?.email);
 
     if (userLoading || loading) {
         return (
@@ -22,7 +24,15 @@ const Profile = () => {
             const file = event.target.files[0];
             getImageUrl(file)
                 .then((data) => {
-                    user.avatar == data.url;
+                    jwt_axios
+                        .patch(`${api_url}/user/${authUser.email}`, { avatar: data.url })
+                        .then((res) => {
+                            console.log(res);
+                            updateUserAvatar(data.url)
+                                .then(() => userRefetch)
+                                .catch((error) => console.log(error));
+                        })
+                        .catch((error) => console.log(error));
                 })
                 .catch((error) => console.log(error));
         };
