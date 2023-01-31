@@ -34,6 +34,13 @@ export const UserContext = ({ children }) => {
         });
     };
 
+    const updateUserAvatar = (avatar) => {
+        setLoading(true);
+        return updateProfile(auth.currentUser, {
+            photoURL: avatar,
+        });
+    };
+
     // Signin & Signin With Social
     const login = (email, password) => {
         setLoading(true);
@@ -68,6 +75,7 @@ export const UserContext = ({ children }) => {
         setLoading,
         createUser,
         updateUserProfile,
+        updateUserAvatar,
         login,
         loginWithGoogle,
         loginWithGithub,
