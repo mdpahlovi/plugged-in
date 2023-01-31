@@ -14,7 +14,7 @@ const AudioRecorderModal = ({ startAudio, setStartAudio }) => {
             type: "audio/wav",
         },
     });
-    const { authUser } = useAuth();
+    const { user } = useAuth();
     const [media, setMedia] = useState(null);
     const { confirmation } = useSetMediaToDb(media, mediaBlobUrl);
 
@@ -38,14 +38,14 @@ const AudioRecorderModal = ({ startAudio, setStartAudio }) => {
     }, [startAudio, startRecording, stopRecording, setStartAudio, status]);
 
     useEffect(() => {
-        if (mediaBlobUrl && authUser) {
+        if (mediaBlobUrl && user) {
             setMedia({
                 date: new Date(),
-                authorEmail: authUser?.email,
+                authorEmail: user?.email,
                 mediaType: "audio",
             });
         }
-    }, [mediaBlobUrl, authUser]);
+    }, [mediaBlobUrl, user]);
 
     return (
         <div>
