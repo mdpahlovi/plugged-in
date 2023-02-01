@@ -11,10 +11,12 @@ import { MdVideoCameraBack, MdMenuOpen } from "react-icons/md";
 import { HiOutlineLogout } from "react-icons/hi";
 import { FaUserSecret, FaUsers } from "react-icons/fa";
 import { TiArrowBackOutline } from "react-icons/ti";
+import { SiGooglemessages } from "react-icons/si";
 import { Protect } from "../ProtectedRoute";
 
 const navItems = [
     { href: "/dashboard", name: "Profile", icon: <FaUserSecret /> },
+    { href: "/dashboard/message", name: "Message", icon: <SiGooglemessages /> },
     {
         href: "/dashboard/recordings",
         name: "Recordings",
