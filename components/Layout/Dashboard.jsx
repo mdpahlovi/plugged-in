@@ -15,6 +15,7 @@ import { Protect } from "../ProtectedRoute";
 
 const navItems = [
   { href: "/dashboard", name: "Profile", icon: <FaUserSecret /> },
+  { href: "/dashboard/message", name: "Message", icon: <FaUserSecret /> },
   {
     href: "/dashboard/recordings",
     name: "Recordings",
