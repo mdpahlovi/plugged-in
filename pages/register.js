@@ -118,7 +118,7 @@ const Registration = () => {
                     </div>
                     <div className="pt-2">
                         <Button className="w-full" type="submit">
-                            {loading ? "Loading" : "Register"}
+                            {loading ? "Loading..." : "Register"}
                         </Button>
                     </div>
                 </form>

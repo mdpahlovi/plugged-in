@@ -1,12 +1,10 @@
 import Image from "next/image";
-import { useState } from "react";
+import { toast } from "react-toastify";
 import { Button, ButtonOutline } from "../../components/Buttons";
 import ProfileLoading from "../../components/DashBoard/ProfileLoading";
 import Dashboard from "../../components/Layout/Dashboard";
 import { useAuth } from "../../hooks/useAuth";
-import useGetUser from "../../hooks/useGetUser";
 import Avatar from "../../public/images/avatar.png";
-import { api_url, jwt_axios } from "../../utilities/api";
 import { getImageUrl } from "../../utilities/getImageUrl";
 
 const Profile = () => {

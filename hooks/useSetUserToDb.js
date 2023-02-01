@@ -10,6 +10,7 @@ const useSetUserToDb = (user) => {
             email: user?.email,
             name: user?.displayName,
             avatar: user?.photoURL,
+            role: "basic",
         };
         if (user) {
             axios
