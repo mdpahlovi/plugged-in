@@ -9,10 +9,13 @@ import { Protect } from "../../components/ProtectedRoute";
 import Header from "../../components/Header";
 import Breadcrumbs from "../../components/Breadcrumbs";
 import { useRouter } from "next/router";
+import { capitalize } from "../../utilities/capitalize";
+import { useAuth } from "../../hooks/useAuth";
 
 const Checkout = () => {
     const { query } = useRouter();
-    const plan = query.plan.charAt(0).toUpperCase() + query.plan.slice(1);
+    const { authUser } = useAuth();
+    const plan = capitalize(query.plan);
 
     return (
         <Main title="Checkout - PluggedIn">
@@ -31,7 +34,7 @@ const Checkout = () => {
                             Email
                         </label>
                         <div className="relative">
-                            <input type="text" id="email" name="email" className="pl-10 input" placeholder="your.email@gmail.com" />
+                            <input type="text" id="email" name="email" className="pl-10 input" defaultValue={authUser.email} />
                             <div className="pointer-events-none absolute inset-y-0 left-0 inline-flex items-center px-3">
                                 <MdAlternateEmail />
                             </div>
@@ -40,7 +43,7 @@ const Checkout = () => {
                             Card Holder
                         </label>
                         <div className="relative">
-                            <input type="text" id="card-holder" name="card-holder" className="pl-10 input" placeholder="Your full name" />
+                            <input type="text" id="card-holder" name="card-holder" className="pl-10 input" defaultValue={authUser.displayName} />
                             <div className="pointer-events-none absolute inset-y-0 left-0 inline-flex items-center px-3">
                                 <HiOutlineUserCircle />
                             </div>

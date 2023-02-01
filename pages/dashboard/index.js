@@ -1,18 +1,18 @@
 import Image from "next/image";
 import { useState } from "react";
-import { toast } from "react-toastify";
 import { Button, ButtonOutline } from "../../components/Buttons";
 import ProfileLoading from "../../components/DashBoard/ProfileLoading";
 import Dashboard from "../../components/Layout/Dashboard";
 import { useAuth } from "../../hooks/useAuth";
+import useGetUser from "../../hooks/useGetUser";
 import Avatar from "../../public/images/avatar.png";
 import { api_url, jwt_axios } from "../../utilities/api";
 import { getImageUrl } from "../../utilities/getImageUrl";
 
 const Profile = () => {
-    const { loading, userLoading, user, userRefetch } = useAuth();
+    const { loading, authUser, updateUserAvatar } = useAuth();
 
-    if (userLoading || loading) {
+    if (loading) {
         return (
             <Dashboard title={`User in PluggedIn`}>
                 <ProfileLoading />
@@ -23,23 +23,19 @@ const Profile = () => {
             const file = event.target.files[0];
             getImageUrl(file)
                 .then((data) => {
-                    jwt_axios
-                        .patch(`${api_url}/user/${user?.email}`, { avatar: data.url })
-                        .then((res) => {
-                            toast.success("User Avatar Added");
-                            userRefetch();
-                        })
+                    updateUserAvatar(data.url)
+                        .then(() => toast.success("Profile Uploaded"))
                         .catch((error) => console.log(error));
                 })
                 .catch((error) => console.log(error));
         };
 
         return (
-            <Dashboard title={`${user?.name} in PluggedIn`}>
-                <h1 className="mt-8 mb-5 text-center">Welcome {user?.name} To PluggedIn</h1>
-                <div className={`mx-auto ${user?.avatar ? "-mb-16" : "-mb-32"} w-max h-max`}>
-                    {user?.avatar ? (
-                        <Image src={user.avatar} alt="" width={128} height={128} className="profile-avatar" />
+            <Dashboard title={`${authUser?.displayName} in PluggedIn`}>
+                <h1 className="mt-8 mb-5 text-center">Welcome {authUser?.displayName} To PluggedIn</h1>
+                <div className={`mx-auto ${authUser?.photoURL ? "-mb-16" : "-mb-32"} w-max h-max`}>
+                    {authUser?.photoURL ? (
+                        <Image src={authUser.photoURL} alt="" width={128} height={128} className="profile-avatar" />
                     ) : (
                         <div className="flex flex-col items-center">
                             <Image src={Avatar} alt="" width={128} height={128} className="profile-avatar" />
@@ -50,9 +46,9 @@ const Profile = () => {
                         </div>
                     )}
                 </div>
-                <div className={`shadow rounded-lg space-y-6 ${user?.avatar ? "pt-20" : "pt-36"} px-6`}>
+                <div className={`shadow rounded-lg space-y-6 ${authUser?.photoURL ? "pt-20" : "pt-36"} px-6`}>
                     <div className="text-center">
-                        <h2>{user?.name}</h2>
+                        <h2>{authUser?.displayName}</h2>
                         <p className="text-sm -mb-2">Online Video Service System</p>
                     </div>
                     <Button className="w-full">

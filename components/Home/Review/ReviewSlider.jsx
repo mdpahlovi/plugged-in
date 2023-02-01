@@ -14,7 +14,7 @@ import { toast } from "react-toastify";
 SwiperCore.use([Autoplay]);
 
 const ReviewSlider = () => {
-    const { user } = useAuth();
+    const { authUser } = useAuth();
     const [isOpen, setIsOpen] = useState(false);
 
     const {
@@ -27,8 +27,8 @@ const ReviewSlider = () => {
     });
 
     const handleEdit = (data) => {
-        data.avatar = user?.avatar;
-        data.name = user?.name;
+        data.avatar = authUser?.photoURL;
+        data.name = authUser?.displayName;
         data.location = "C&B Road, Barisal";
         data.time = new Date();
         data.rating = "4";
@@ -70,7 +70,7 @@ const ReviewSlider = () => {
                     );
                 })}
             </Swiper>
-            <div className={`${user?._id ? "flex" : "hidden"} mt-8 justify-center`}>
+            <div className={`${authUser?.uid ? "flex" : "hidden"} mt-8 justify-center`}>
                 <Button
                     onClick={() => {
                         setIsOpen(true);

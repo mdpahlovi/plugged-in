@@ -6,18 +6,18 @@ import { useAuth } from "../hooks/useAuth";
 export function Protect(Component) {
     return function Protect(props) {
         const [screenLoading, setScreenLoading] = useState(true);
-        const { user, userLoading, loading } = useAuth();
+        const { authUser, loading } = useAuth();
         const router = useRouter();
 
         useEffect(() => {
-            if (!loading || !userLoading) {
-                if (!user?._id) {
+            if (!loading) {
+                if (!authUser?.uid) {
                     router.replace("/login");
                 } else {
                     setScreenLoading(false);
                 }
             }
-        }, [loading, userLoading, user, router]);
+        }, [loading, authUser, router]);
 
         if (screenLoading) {
             return (

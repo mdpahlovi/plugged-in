@@ -9,7 +9,7 @@ import Dashboard from "../../components/Layout/Dashboard";
 import { useAuth } from "../../hooks/useAuth";
 
 const Recordings = () => {
-    const { user } = useAuth();
+    const { authUser } = useAuth();
     const [deletingRecordId, setDeletingRecordId] = useState(null);
 
     const {
@@ -17,12 +17,12 @@ const Recordings = () => {
         isLoading,
         refetch,
     } = useQuery({
-        queryKey: ["userMedia", user?.email],
-        queryFn: () => fetch(`https://plugged-in-server.vercel.app/userMedia?email=${user?.email}`).then((res) => res.json()),
+        queryKey: ["userMedia", authUser],
+        queryFn: () => fetch(`https://plugged-in-server.vercel.app/userMedia?email=${authUser?.email}`).then((res) => res.json()),
     });
 
     return (
-        <Dashboard title={`${user?.name} Recordings in PluggedIn`}>
+        <Dashboard title={`${authUser?.displayName} Recordings in PluggedIn`}>
             <div className="grid grid-cols-[repeat(auto-fill,_minmax(20rem,_1fr))] gap-6">
                 {isLoading
                     ? [...Array(6)].map((media, index) => (

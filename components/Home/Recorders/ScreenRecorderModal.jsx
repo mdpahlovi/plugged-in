@@ -29,7 +29,7 @@ const ScreenRecorderModal = ({ startScreen, setStartScreen }) => {
             type: "video/mp4",
         },
     });
-    const { user } = useAuth();
+    const { authUser } = useAuth();
     const [media, setMedia] = useState(null);
     const { confirmation } = useSetMediaToDb(media, mediaBlobUrl);
 
@@ -55,14 +55,14 @@ const ScreenRecorderModal = ({ startScreen, setStartScreen }) => {
     }, [startScreen, startRecording, stopRecording, setStartScreen, status]);
 
     useEffect(() => {
-        if (mediaBlobUrl && user) {
+        if (mediaBlobUrl && authUser) {
             setMedia({
                 date: new Date(),
-                authorEmail: user?.email,
+                authorEmail: authUser?.email,
                 mediaType: "screen",
             });
         }
-    }, [mediaBlobUrl, user]);
+    }, [mediaBlobUrl, authUser]);
 
     return (
         <div>
