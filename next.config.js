@@ -9,6 +9,7 @@ const nextConfig = {
             "encrypted-tbn0.gstatic.com",
             "avatars0.githubusercontent.com",
             "i.ibb.co",
+            "img.freepik.com",
         ],
     },
 };

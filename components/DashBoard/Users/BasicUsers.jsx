@@ -1,6 +1,8 @@
 import Image from "next/image";
 
 const BasicUsers = ({ users, refetch }) => {
+    const basic_user = users.filter((user) => user.role === "basic");
+
     return (
         <div className="overflow-x-auto w-full">
             <table className="table w-full">
@@ -13,7 +15,7 @@ const BasicUsers = ({ users, refetch }) => {
                     </tr>
                 </thead>
                 <tbody>
-                    {users.map(({ _id, name, avatar }) => (
+                    {basic_user.map(({ _id, name, avatar }) => (
                         <tr key={_id}>
                             <td>
                                 <div className="flex items-center space-x-3">

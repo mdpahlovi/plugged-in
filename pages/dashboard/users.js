@@ -6,29 +6,21 @@ import BasicUsers from "../../components/DashBoard/Users/BasicUsers";
 import ProUsers from "../../components/DashBoard/Users/ProUsers";
 import TeamUsers from "../../components/DashBoard/Users/TeamUsers";
 import Dashboard from "../../components/Layout/Dashboard";
-import { useState } from "react";
 
 function classNames(...classes) {
     return classes.filter(Boolean).join(" ");
 }
 
-const roles = [
-    { tab: "All Users", role: "" },
-    { tab: "Team Users", role: "team" },
-    { tab: "Pro Users", role: "pro" },
-    { tab: "Basic Users", role: "basic" },
-];
+const roles = ["All Users", "Team Users", "Pro Users", "Basic Users"];
 
 const Users = () => {
-    const [role, setRole] = useState(null);
-
     const {
         data: users = [],
         isLoading: usersLoading,
         refetch: usersRefetch,
     } = useQuery({
-        queryKey: ["users", role],
-        queryFn: () => jwt_axios(`/users?role=${role}`).then((res) => res.data),
+        queryKey: ["users"],
+        queryFn: () => jwt_axios(`/users`).then((res) => res.data),
     });
 
     return (
@@ -38,10 +30,9 @@ const Users = () => {
             ) : (
                 <Tab.Group>
                     <Tab.List className="flex space-x-1 rounded-lg bg-base-content/5 p-1">
-                        {roles.map(({ tab, role }, index) => (
+                        {roles.map((tab, index) => (
                             <Tab
                                 key={index}
-                                onClick={() => setRole(role)}
                                 className={({ selected }) =>
                                     classNames(
                                         "w-full rounded-md py-2.5",
