@@ -5,12 +5,14 @@ import { TbListDetails } from "react-icons/tb";
 import { ButtonOutline } from "../../components/Buttons";
 import DeleteConfirmModal from "../../components/DashBoard/Recordings/DeleteConfirmModal";
 import MediaCard from "../../components/DashBoard/Recordings/MediaCard";
+import ShareModal from "../../components/DashBoard/Recordings/ShareModal";
 import Dashboard from "../../components/Layout/Dashboard";
 import { useAuth } from "../../hooks/useAuth";
 
 const Recordings = () => {
     const { authUser } = useAuth();
     const [deletingRecordId, setDeletingRecordId] = useState(null);
+    const [shareMedia, setShareMedia] = useState(null);
 
     const {
         data: medias = [],
@@ -23,7 +25,7 @@ const Recordings = () => {
 
     return (
         <Dashboard title={`${authUser?.displayName} Recordings in PluggedIn`}>
-            <div className="grid grid-cols-[repeat(auto-fill,_minmax(20rem,_1fr))] gap-6">
+            <div className="grid xs:grid-cols-[repeat(auto-fill,_minmax(22rem,_1fr))] gap-6">
                 {isLoading
                     ? [...Array(6)].map((media, index) => (
                           <div key={index} className="animate-pulse">
@@ -45,7 +47,7 @@ const Recordings = () => {
                           </div>
                       ))
                     : medias.map((media) => (
-                          <MediaCard key={media._id} media={media} refetch={refetch} setDeletingRecordId={setDeletingRecordId}>
+                          <MediaCard key={media._id} media={media} refetch={refetch} setShareMedia={setShareMedia} setDeletingRecordId={setDeletingRecordId}>
                               <Link href={`/dashboard/record/${media._id}`}>
                                   <ButtonOutline>
                                       <div className="flex items-center justify-center gap-2">
@@ -57,6 +59,7 @@ const Recordings = () => {
                           </MediaCard>
                       ))}
                 <DeleteConfirmModal deletingRecordId={deletingRecordId} setDeletingRecordId={setDeletingRecordId} refetch={refetch} />
+                <ShareModal shareMedia={shareMedia} setShareMedia={setShareMedia} />
             </div>
         </Dashboard>
     );

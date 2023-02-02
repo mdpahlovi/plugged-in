@@ -9,11 +9,13 @@ import TrimModal from "../../../components/DashBoard/Recordings/TrimModal";
 import DeleteConfirmModal from "../../../components/DashBoard/Recordings/DeleteConfirmModal";
 import { ButtonOutline } from "../../../components/Buttons";
 import { BiTrim } from "react-icons/bi";
+import ShareModal from "../../../components/DashBoard/Recordings/ShareModal";
 
 const RecordDetails = () => {
     const { query } = useRouter();
     const [isOpen, setIsOpen] = useState(false);
     const [deletingRecordId, setDeletingRecordId] = useState(null);
+    const [shareMedia, setShareMedia] = useState(null);
 
     const {
         data: media,
@@ -42,7 +44,7 @@ const RecordDetails = () => {
     } else {
         return (
             <Dashboard title="Record Details" className="grid md:grid-cols-[7fr,_5fr] gap-x-6 gap-y-10">
-                <MediaCard media={media} refetch={mediaRefetch} setDeletingRecordId={setDeletingRecordId}>
+                <MediaCard media={media} refetch={mediaRefetch} setShareMedia={setShareMedia} setDeletingRecordId={setDeletingRecordId}>
                     <ButtonOutline onClick={() => setIsOpen(true)}>
                         <div className="flex items-center justify-center gap-2">
                             Trim
@@ -53,6 +55,7 @@ const RecordDetails = () => {
                 <TodoSection tasks={tasks} media_id={media._id} refetch={taskRefetch} />
                 <TrimModal isOpen={isOpen} setIsOpen={setIsOpen} mediaUrl={media.mediaUrl} />
                 <DeleteConfirmModal deletingRecordId={deletingRecordId} setDeletingRecordId={setDeletingRecordId} refetch={mediaRefetch} />
+                <ShareModal shareMedia={shareMedia} setShareMedia={setShareMedia} />
             </Dashboard>
         );
     }
