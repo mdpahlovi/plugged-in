@@ -1,0 +1,38 @@
+{
+    "emmet.includeLanguages": {
+        "javascript": "javascriptreact"
+    },
+    "editor.fontFamily": "JetBrains Mono",
+    "editor.fontLigatures": true,
+    "editor.fontSize": 16,
+    "editor.wordWrap": "on",
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
+    "editor.formatOnSave": true,
+    "editor.tabSize": 4,
+    "prettier.printWidth": 160,
+    "prettier.tabWidth": 4,
+    "prettier.eslintIntegration": true,
+    "eslint.run": "onType",
+    "editor.codeActionsOnSave": {
+        "source.fixAll.eslint": true
+    },
+    "editor.linkedEditing": true,
+    "editor.bracketPairColorization.enabled": true,
+    "editor.guides.bracketPairs": true,
+    "editor.guides.bracketPairsHorizontal": true,
+    "liveServer.settings.donotShowInfoMsg": true,
+    "explorer.confirmDelete": false,
+    "css.lint.unknownAtRules": "ignore",
+    "javascript.updateImportsOnFileMove.enabled": "always",
+    "files.exclude": {
+        "node_modules": true,
+        ".next": true,
+        "config": true,
+        ".babelrc": true,
+        ".eslintrc.json": true,
+        ".gitignore": true,
+        "postcss.config.js": true,
+        "README.md": true,
+        "package-lock.json": true
+    }
+}
