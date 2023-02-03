@@ -7,7 +7,7 @@ import { Button, ButtonOutline, IconButton } from "../Buttons";
 import ThemeToggle from "../ThemeToggle";
 import { useAuth } from "../../hooks/useAuth";
 import { ImSearch } from "react-icons/im";
-import { MdVideoCameraBack, MdMenuOpen } from "react-icons/md";
+import { MdVideoCameraBack, MdMenuOpen, MdOutlineConnectWithoutContact } from "react-icons/md";
 import { HiOutlineLogout } from "react-icons/hi";
 import { FaUserSecret, FaUsers } from "react-icons/fa";
 import { TiArrowBackOutline } from "react-icons/ti";
@@ -26,6 +26,11 @@ const navItems = [
         href: "/dashboard/users",
         name: "Users",
         icon: <FaUsers className="text-lg" />,
+    },
+    {
+        href: "/dashboard/connects",
+        name: "Connects",
+        icon: <MdOutlineConnectWithoutContact className="text-lg" />,
     },
 ];
 
