@@ -9,7 +9,7 @@ const AllUsersRow = ({ user, handleConnect, handleCancelConnect }) => {
   const { authUser } = useAuth();
 
   return (
-    <tr className={`${email === authUser.email && "hidden"}`}>
+    <tr className={`${email === authUser?.email && "hidden"}`}>
       <td>
         <div className="flex items-center space-x-3">
           {avatar && (

@@ -1,12 +1,12 @@
 import { useQuery } from "@tanstack/react-query";
+import { useEffect } from "react";
 import { useAuth } from "./useAuth";
 
 const UseIsPending = (pendingUserEmail) => {
   const { authUser } = useAuth();
   //   const [pendingStatus, setPendingStatus] = useState("");
-
   if (pendingUserEmail && authUser) {
-    const { data: status, refetch: pendingRefetch } = useQuery({
+    const { data: status = "", refetch: pendingRefetch } = useQuery({
       queryKey: ["isPending", authUser, pendingUserEmail],
       queryFn: () =>
         fetch(
@@ -15,7 +15,7 @@ const UseIsPending = (pendingUserEmail) => {
     });
     return { pendingStatus: status?.status, pendingRefetch };
   } else {
-    return null;
+    return { pendingStatus: "holding" };
   }
 };
 
