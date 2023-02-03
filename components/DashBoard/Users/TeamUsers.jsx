@@ -19,7 +19,7 @@ const TeamUsers = ({ users, refetch }) => {
                         <tr key={_id}>
                             <td>
                                 <div className="flex items-center space-x-3">
-                                    <Image src={avatar} alt="" width={48} height={48} className="mask mask-squircle" />
+                                    <Image src={avatar ? avatar : ""} alt="" width={48} height={48} className="mask mask-squircle" />
                                     <div>
                                         <div className="font-bold">{name}</div>
                                         <div className="text-sm opacity-50">United States</div>
