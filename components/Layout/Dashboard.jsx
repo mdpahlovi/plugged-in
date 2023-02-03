@@ -36,6 +36,11 @@ const navItems = [
     name: "Connection Requests",
     icon: <MdOutlineConnectWithoutContact className="text-lg" />,
   },
+  {
+    href: "/dashboard/friends",
+    name: "Friends",
+    icon: <MdOutlineConnectWithoutContact className="text-lg" />,
+  },
 ];
 
 const Dashboard = ({ title, children, className }) => {
