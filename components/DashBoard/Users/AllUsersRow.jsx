@@ -2,6 +2,7 @@ import Image from "next/image";
 import { useIsPending } from "../../../hooks/useIsPending";
 
 const roles = [
+    { value: "admin", name: "Admin" },
     { value: "team", name: "Team" },
     { value: "pro", name: "Pro" },
     { value: "basic", name: "Basic" },

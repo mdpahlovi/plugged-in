@@ -4,7 +4,7 @@ const MessageUser = ({ user, active }) => {
     const { name, avatar } = user;
     return (
         <div
-            className={`flex items-center px-4 py-2 transition duration-300 border-b cursor-pointer ${
+            className={`flex items-center px-4 py-3 transition duration-300 border-b cursor-pointer ${
                 active ? "bg-base-content/10" : "hover:bg-base-content/10"
             }`}
         >

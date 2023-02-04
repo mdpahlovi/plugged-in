@@ -8,6 +8,7 @@ import Message from "../../../components/Layout/Message";
 import MessageFooter from "../../../components/DashBoard/Message/MessageFooter";
 import MessageHeader from "../../../components/DashBoard/Message/MessageHeader";
 import { useRouter } from "next/router";
+import { useAuth } from "../../../hooks/useAuth";
 
 const users = [
     { name: "MD Pahlovi", avatar: pahlovi, email: "mdpahlovi07@gmail.com" },
@@ -18,6 +19,7 @@ const users = [
 
 const ChatSection = () => {
     const { query } = useRouter();
+    const { authUser } = useAuth();
     const user = users.find((user) => user.email === query.email);
 
     return (
@@ -33,7 +35,7 @@ const ChatSection = () => {
                 </div>
                 <div className="chat chat-end">
                     <div className="chat-image avatar">
-                        <Image className="mask mask-squircle" src={user?.avatar} alt="" width={32} height={32} />
+                        <Image className="mask mask-squircle" src={authUser?.photoURL} alt="" width={32} height={32} />
                     </div>
                     <div className="chat-bubble bg-indigo-500">I hate you!</div>
                     <div className="chat-footer opacity-50">Seen at 12:46</div>
