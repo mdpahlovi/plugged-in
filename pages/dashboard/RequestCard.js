@@ -59,6 +59,8 @@ const RequestCard = ({ request, connectionRequestRefetch }) => {
       .then((res) => res.json())
       .then((data) => {
         console.log(data);
+        connectionRequestRefetch();
+        pendingRefetch();
       });
   };
 

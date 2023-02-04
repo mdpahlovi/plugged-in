@@ -93,6 +93,7 @@ const AllUsers = ({ users, refetch }) => {
               key={user._id}
               handleConnect={handleConnect}
               handleCancelConnect={handleCancelConnect}
+              handleEdit={handleEdit}
             />
           ))}
         </tbody>

@@ -1,11 +1,18 @@
 import Image from "next/image";
 import React from "react";
 import { useAuth } from "../../../hooks/useAuth";
+import UseIsFriend from "../../../hooks/UseIsFriend";
 import UseIsPending from "../../../hooks/UseIsPending";
 
-const AllUsersRow = ({ user, handleConnect, handleCancelConnect }) => {
+const AllUsersRow = ({
+  user,
+  handleConnect,
+  handleCancelConnect,
+  handleEdit,
+}) => {
   const { name, avatar, email } = user;
   const { pendingStatus, pendingRefetch } = UseIsPending(email);
+  const { friendStatus, friendRefetch } = UseIsFriend(email);
   const { authUser } = useAuth();
 
   return (
@@ -63,6 +70,12 @@ const AllUsersRow = ({ user, handleConnect, handleCancelConnect }) => {
               d="M9.75 9.75l4.5 4.5m0-4.5l-4.5 4.5M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
             />
           </svg>
+        </td>
+      ) : friendStatus === "friend" ? (
+        <td>
+          <p className="bg-sky-500 px-5 py-1 rounded-btn font-bold text-white">
+            friend
+          </p>
         </td>
       ) : (
         <td
