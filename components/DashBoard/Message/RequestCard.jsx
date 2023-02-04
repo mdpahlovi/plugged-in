@@ -1,3 +1,4 @@
+import Image from "next/image";
 import React from "react";
 import { useAuth } from "../../../hooks/useAuth";
 import useIsPending from "../../../hooks/useIsPending";
@@ -64,7 +65,7 @@ const RequestCard = ({ request, connectionRequestRefetch }) => {
 
     return (
         <div className="card card-compact bg-base-100 shadow-xl">
-            <figure className="h-[200px]">{protoURL && <img className="w-full" src={protoURL} alt="Shoes" />}</figure>
+            <Image className="w-full" src={protoURL ? protoURL : ""} alt="user" width={200} height={200} />
             <div className="card-body">
                 <h2 className="card-title">{displayName}</h2>
                 <p>{email}</p>
