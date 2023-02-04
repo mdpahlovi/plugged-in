@@ -1,5 +1,5 @@
 import Image from "next/image";
-import UseIsPending from "../../../hooks/UseIsPending";
+import useIsPending from "../../../hooks/useIsPending";
 
 const roles = [
     { value: "team", name: "Team" },
@@ -9,7 +9,7 @@ const roles = [
 
 const AllUsersRow = ({ user, index, handleEdit, handleConnect, handleCancelConnect }) => {
     const { name, avatar, email, role } = user;
-    const { pendingStatus, pendingRefetch } = UseIsPending(email);
+    const { pendingStatus, pendingRefetch } = useIsPending(email);
 
     return (
         <tr>

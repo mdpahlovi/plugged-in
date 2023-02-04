@@ -1,12 +1,12 @@
 import React from "react";
 import { useAuth } from "../../../hooks/useAuth";
-import UseIsPending from "../../../hooks/UseIsPending";
+import useIsPending from "../../../hooks/useIsPending";
 
 const RequestCard = ({ request, connectionRequestRefetch }) => {
     const { protoURL, displayName, email } = request;
 
     const { authUser } = useAuth();
-    const { pendingRefetch } = UseIsPending(email);
+    const { pendingRefetch } = useIsPending(email);
 
     const handleDeleteConnect = () => {
         const sender = {
