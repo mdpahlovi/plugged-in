@@ -26,14 +26,14 @@ const ChatSection = () => {
             <div className="relative px-4 py-3 overflow-y-auto">
                 <div className="chat chat-start">
                     <div className="chat-image avatar">
-                        <Image className="mask mask-squircle" src={user.avatar} alt="" width={32} height={32} />
+                        <Image className="mask mask-squircle" src={user?.avatar} alt="" width={32} height={32} />
                     </div>
                     <div className="chat-bubble bg-base-content/30">You were the Chosen One!</div>
                     <div className="chat-footer opacity-50">Delivered</div>
                 </div>
                 <div className="chat chat-end">
                     <div className="chat-image avatar">
-                        <Image className="mask mask-squircle" src={user.avatar} alt="" width={32} height={32} />
+                        <Image className="mask mask-squircle" src={user?.avatar} alt="" width={32} height={32} />
                     </div>
                     <div className="chat-bubble bg-indigo-500">I hate you!</div>
                     <div className="chat-footer opacity-50">Seen at 12:46</div>
