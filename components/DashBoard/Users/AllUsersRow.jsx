@@ -1,5 +1,5 @@
 import Image from "next/image";
-import useIsPending from "../../../hooks/useIsPending";
+import { useIsPending } from "../../../hooks/useIsPending";
 
 const roles = [
     { value: "team", name: "Team" },

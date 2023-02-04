@@ -1,7 +1,7 @@
 import Image from "next/image";
 import React from "react";
 import { useAuth } from "../../../hooks/useAuth";
-import useIsPending from "../../../hooks/useIsPending";
+import { useIsPending } from "../../../hooks/useIsPending";
 
 const RequestCard = ({ request, connectionRequestRefetch }) => {
     const { protoURL, displayName, email } = request;
