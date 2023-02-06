@@ -1,5 +1,5 @@
 import Main from "../components/Layout/Main";
-import React from "react";
+import React, { useRef, useState } from "react";
 import { BsTelephoneFill } from "react-icons/bs";
 import { MdEmail } from "react-icons/md";
 import { HiLocationMarker } from "react-icons/hi";
@@ -9,18 +9,34 @@ import { Button } from "../components/Buttons";
 import { useForm } from "react-hook-form";
 import Header from "../components/Header";
 import Breadcrumbs from "../components/Breadcrumbs";
+import toast, { Toaster } from "react-hot-toast";
+
+import emailjs from "@emailjs/browser";
+// import emailjs, { sendForm } from "emailjs-com";
 
 const Contact = () => {
-    const {
-        register,
-        handleSubmit,
-        formState: { errors },
-        watch,
-    } = useForm();
+    const form = useRef();
+    const [result, showResult] = useState(false);
 
-    const handleContact = (data) => {
-        console.log(data);
+    const sendEmail = (e) => {
+        e.preventDefault();
+        console.log(form.current);
+        emailjs.sendForm("service_5o7ybqc", "template_l446qia", form.current, "fxiuKPm0NteVCZ0H5").then(
+            (result) => {
+                console.log(result.text);
+            },
+            (error) => {
+                console.log(error.text);
+            }
+        );
+        e.target.reset();
+        toast.success("Your message has been successfully sent. I will contact you soon.!");
+        showResult(true);
     };
+    //hide result
+    setTimeout(() => {
+        showResult(false);
+    }, 7000);
 
     return (
         <Main title="Contact - PluggedIn">
@@ -59,57 +75,32 @@ const Contact = () => {
                 </div>
                 {/* Contact form */}
                 <div className="h-max bg-purple-200 p-8 rounded-lg shadow-lg">
-                    <form onSubmit={handleSubmit(handleContact)} className="space-y-5">
+                   
+                    <form ref={form} onSubmit={sendEmail} className="space-y-5">
                         <div className="grid sm:grid-cols-2 gap-5">
                             <div>
-                                <input
-                                    type="text"
-                                    {...register("first_name", { required: true })}
-                                    className={errors?.first_name ? "input input-error" : "input"}
-                                    placeholder="First Name"
-                                />
-                                <error className="text-red-600">{errors?.first_name?.type === "required" && "First Name is required"}</error>
+                                <input className="input" type="text" name="first_name" placeholder="First Name" />
                             </div>
                             <div>
-                                <input
-                                    type="text"
-                                    {...register("last_name", { required: true })}
-                                    className={errors?.last_name ? "input input-error" : "input"}
-                                    placeholder="Last Name"
-                                />
-                                <error className="text-red-600">{errors?.last_name?.type === "required" && "Last Name is required"}</error>
+                                <input className="input" type="text" name="last_name" placeholder="Last Name" />
                             </div>
                         </div>
-                        <input
-                            type="email"
-                            {...register("email", { required: true })}
-                            className={errors?.email ? "input input-error" : "input"}
-                            placeholder="Email"
-                        />
-                        <error className="text-red-600">{errors?.email?.type === "required" && "Email is required"}</error>
-                        <input
-                            type="text"
-                            {...register("subject", { required: true })}
-                            className={errors?.subject ? "input input-error" : "input"}
-                            placeholder="Subject"
-                        />
-                        <error className="text-red-600">{errors?.subject?.type === "required" && "Subject is required"}</error>
 
-                        <textarea
-                            {...register("message", { required: true, minLength: 20, maxLength: 200 })}
-                            className={errors?.email ? "textarea textarea-bordered textarea-error w-full" : "textarea textarea-bordered w-full"}
-                            rows="3"
-                            placeholder="Your message"
-                        ></textarea>
-                        <error className="text-red-600">
-                            {errors?.message?.type === "required" && "Message is required"}
-                            {errors?.message?.type === "minLength" && "Entered Your Message Minimum 20 letter"}
-                            {errors?.message?.type === "maxLength" && "You are no longer exceed 200 letter of message"}
-                        </error>
+                        <div>
+                            <input className="input" type="email" name="user_email" placeholder="Email" />
+                        </div>
+                        <div>
+                            <input className="input" type="text" name="subject" placeholder="subject" />
+                        </div>
 
+                        <div>
+                            <textarea name="message" placeholder="Your message" className=" textarea-bordered  w-full textarea" />
+                        </div>
                         <Button type="submit" className="w-full">
                             Send Message
                         </Button>
+                        <Toaster />
+                        <div>{result ? <Result /> : null}</div>
                     </form>
                 </div>
             </div>
@@ -118,3 +109,7 @@ const Contact = () => {
 };
 
 export default Contact;
+
+const Result = () => {
+    return <p className="text-gray-900">Your message has been successfully sent. I will contact you soon.</p>;
+};
