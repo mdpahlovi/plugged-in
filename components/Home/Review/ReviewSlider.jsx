@@ -10,6 +10,7 @@ import { useState } from "react";
 import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
 import { toast } from "react-toastify";
+import ReviewLoader from "./ReviewLoader";
 
 SwiperCore.use([Autoplay]);
 
@@ -62,13 +63,20 @@ const ReviewSlider = () => {
                     },
                 }}
             >
-                {reviews.map((review, index) => {
-                    return (
-                        <SwiperSlide key={index}>
-                            <ReviewCard review={review}></ReviewCard>
-                        </SwiperSlide>
-                    );
-                })}
+                {isLoading ? (
+                    <div className="grid lg:grid-cols-2 gap-8 animate-pulse">
+                        <ReviewLoader />
+                        <ReviewLoader className="hidden lg:block" />
+                    </div>
+                ) : (
+                    reviews.map((review, index) => {
+                        return (
+                            <SwiperSlide key={index}>
+                                <ReviewCard review={review}></ReviewCard>
+                            </SwiperSlide>
+                        );
+                    })
+                )}
             </Swiper>
             <div className={`${authUser?.uid ? "flex" : "hidden"} mt-8 justify-center`}>
                 <Button

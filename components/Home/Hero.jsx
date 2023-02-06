@@ -6,8 +6,14 @@ const Hero = () => {
     return (
         <header className="section-gap grid lg:grid-cols-2 gap-x-6 xl:gap-x-8 gap-y-10 items-center">
             <div className="space-y-4">
-                <h3 className="text-5xl font-extrabold text-left mb-0">Capture every important moments with PluggedIn</h3>
-                <p>Welcome to PluggedIn. It is an online base meeting recording application. Recording is more easier to use this application.</p>
+                <h1 className="text-4xl sm:text-[44px] lg:text-4xl xl:text-[44px] sm:leading-[44px] xl:leading-[44px] font-black text-left mb-0">
+                    Welcome to PluggedIn, <br />
+                    The Ultimate recording and media manage Solution.
+                </h1>
+                <p>
+                    Say goodbye to missing important points from your online meetings. With PluggedIn, you can effortlessly record, store, and share your
+                    virtual meetings with just a few clicks.
+                </p>
                 <div className="stats stats-vertical sm:stats-horizontal shadow w-full">
                     <div className="stat">
                         <div className="stat-title tracking-wider">Active Users</div>
