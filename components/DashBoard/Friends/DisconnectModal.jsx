@@ -1,27 +1,25 @@
 import React from "react";
 import { useAuth } from "../../../hooks/useAuth";
+import useGetUser from "../../../hooks/useGetUser";
 import useIsFriend from "../../../hooks/UseIsFriend";
 
 const DisconnectModal = ({ disconnectingFriend, friendListRefetch }) => {
-  const { displayName, email, protoURL, room } = disconnectingFriend;
+  const { email, room } = disconnectingFriend;
   console.log(disconnectingFriend);
   const { authUser } = useAuth();
   const { friendRefetch } = useIsFriend(email);
+  const { user } = useGetUser(email);
 
   const handleDisconnect = () => {
     const user = {
       email: authUser?.email,
-      displayName: authUser?.displayName,
-      protoURL: authUser?.photoURL,
       room,
     };
     const friend = {
-      displayName,
       email,
-      protoURL,
       room,
     };
-    fetch("http://localhost:5000/disconnect", {
+    fetch("https://plugged-in-server.onrender.com/disconnect", {
       method: "PUT",
       headers: {
         "content-type": "application/json",
@@ -33,12 +31,17 @@ const DisconnectModal = ({ disconnectingFriend, friendListRefetch }) => {
         if (data.friendDisconnectingResult && data.userDisconnectingResult) {
           // friendListRefetch();
           // friendRefetch();
-          fetch(`http://localhost:5000/deleteRoom?roomName=${room}`, {
-            method: "DELETE",
-          })
+          fetch(
+            `https://plugged-in-server.onrender.com/deleteRoom?roomName=${room}`,
+            {
+              method: "DELETE",
+            }
+          )
             .then((res) => res.json())
             .then((data) => {
-              console.log(data);
+              if (data.acknowledged) {
+                friendListRefetch();
+              }
             });
         }
       });
@@ -50,7 +53,7 @@ const DisconnectModal = ({ disconnectingFriend, friendListRefetch }) => {
       <div className="modal">
         <div className="modal-box">
           <h3 className="font-bold text-lg">
-            Are you sure you want to disconnect {displayName}?
+            Are you sure you want to disconnect {user?.name}?
           </h3>
           <div className="modal-action">
             <label

@@ -17,6 +17,9 @@ import { FaUserSecret, FaUsers } from "react-icons/fa";
 import { TiArrowBackOutline } from "react-icons/ti";
 import { SiGooglemessages } from "react-icons/si";
 import { Protect } from "../ProtectedRoute";
+import { useQuery } from "@tanstack/react-query";
+import { useContext } from "react";
+import { SocketContext } from "../../contexts/SocketProvider";
 
 const navItems = [
   { href: "/dashboard", name: "Profile", icon: <FaUserSecret /> },
@@ -46,6 +49,22 @@ const navItems = [
 const Dashboard = ({ title, children, className }) => {
   const { logout } = useAuth();
   const { pathname } = useRouter();
+  const { socket } = useContext(SocketContext);
+  console.log(pathname);
+
+  const { data: rooms = [] } = useQuery({
+    queryKey: ["getRooms"],
+    queryFn: () =>
+      fetch("https://plugged-in-server.onrender.com/getRooms").then((res) =>
+        res.json()
+      ),
+  });
+
+  rooms.map((room) => {
+    if (room.roomName == pathname.split("/")[2]) {
+      socket.emit("join_room", room.roomName);
+    }
+  });
 
   return (
     <>

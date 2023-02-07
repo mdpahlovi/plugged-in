@@ -12,16 +12,12 @@ const RequestCard = ({ request, connectionRequestRefetch }) => {
   const handleDeleteConnect = () => {
     const sender = {
       email,
-      protoURL,
-      displayName,
     };
     const receiver = {
       email: authUser?.email,
-      protoURL: authUser?.photoURL,
-      displayName: authUser?.displayName,
     };
 
-    fetch("http://localhost:5000/calcelConnect", {
+    fetch("https://plugged-in-server.onrender.com/calcelConnect", {
       method: "PUT",
       headers: {
         "content-type": "application/json",
@@ -41,16 +37,12 @@ const RequestCard = ({ request, connectionRequestRefetch }) => {
   const handleAcceptRequest = () => {
     const sender = {
       email,
-      protoURL,
-      displayName,
     };
     const receiver = {
       email: authUser?.email,
-      protoURL: authUser?.photoURL,
-      displayName: authUser?.displayName,
     };
 
-    fetch("http://localhost:5000/makeFriend", {
+    fetch("https://plugged-in-server.onrender.com/makeFriend", {
       method: "PUT",
       headers: {
         "content-type": "application/json",
@@ -59,6 +51,7 @@ const RequestCard = ({ request, connectionRequestRefetch }) => {
     })
       .then((res) => res.json())
       .then((data) => {
+        console.log(data);
         if (
           data.sendingResult &&
           data.receivingResult &&
@@ -71,19 +64,14 @@ const RequestCard = ({ request, connectionRequestRefetch }) => {
             members: [
               {
                 email: authUser?.email,
-                displayName: authUser?.displayName,
-                photoURL: authUser?.photoURL,
               },
               {
                 email,
-                displayName,
-                photoURL: protoURL,
               },
             ],
           };
-          // connectionRequestRefetch();
-          // pendingRefetch();
-          fetch(`http://localhost:5000/makeRoom`, {
+
+          fetch(`https://plugged-in-server.onrender.com/makeRoom`, {
             method: "POST",
             headers: {
               "content-type": "application/json",
@@ -93,6 +81,10 @@ const RequestCard = ({ request, connectionRequestRefetch }) => {
             .then((res) => res.json())
             .then((data) => {
               console.log(data);
+              if (data.acknowledged) {
+                connectionRequestRefetch();
+                pendingRefetch();
+              }
             });
         }
       });

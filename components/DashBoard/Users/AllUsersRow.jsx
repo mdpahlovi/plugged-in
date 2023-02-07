@@ -57,9 +57,7 @@ const AllUsersRow = ({
       </td> */}
       {pendingStatus === "pending" ? (
         <td
-          onClick={() =>
-            handleCancelConnect({ name, avatar, email, pendingRefetch })
-          }
+          onClick={() => handleCancelConnect({ email, pendingRefetch })}
           className="hover:text-blue-500 cursor-pointer"
         >
           <svg
@@ -85,7 +83,7 @@ const AllUsersRow = ({
         </td>
       ) : (
         <td
-          onClick={() => handleConnect({ name, avatar, email, pendingRefetch })}
+          onClick={() => handleConnect({ email, pendingRefetch })}
           className="hover:text-blue-500 cursor-pointer"
         >
           <svg

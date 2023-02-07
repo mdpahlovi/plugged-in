@@ -9,7 +9,7 @@ const useIsFriend = (friendEmail) => {
       queryKey: ["isFriend", authUser, friendEmail],
       queryFn: () =>
         fetch(
-          `http://localhost:5000/isFriend?userEmail=${authUser?.email}&friendUserEmail=${friendEmail}`
+          `https://plugged-in-server.onrender.com/isFriend?userEmail=${authUser?.email}&friendUserEmail=${friendEmail}`
         ).then((res) => res.json()),
     });
     return { friendStatus: status?.status, friendRefetch };
