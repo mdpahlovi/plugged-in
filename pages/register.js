@@ -1,13 +1,13 @@
 import Link from "next/link";
 import Main from "../components/Layout/Main";
-import { Button } from "../components/Buttons";
+import { Button } from "../components/Common/Buttons";
 import { useForm } from "react-hook-form";
 import { useAuth } from "../hooks/useAuth";
 import { toast } from "react-toastify";
 import { useRouter } from "next/router";
 import useSetUserToDb from "../hooks/useSetUserToDb";
 import { useState } from "react";
-import Wavify from "../components/Wavify";
+import Wavify from "../components/Common/Wavify";
 
 const Registration = () => {
     const { loading, setLoading, createUser, updateUserProfile } = useAuth();

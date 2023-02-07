@@ -1,6 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
-import { Button, ButtonOutline } from "../components/Buttons";
+import { Button, ButtonOutline } from "../components/Common/Buttons";
 import Logo from "../public/logo/logo.png";
 import ErrorImg from "../public/images/ErrorImg.png";
 

@@ -3,12 +3,11 @@ import React, { useRef, useState } from "react";
 import { BsTelephoneFill } from "react-icons/bs";
 import { MdEmail } from "react-icons/md";
 import { HiLocationMarker } from "react-icons/hi";
-import Typewriter from "typewriter-effect";
 import { FaInstagram, FaTwitter, FaYoutube, FaPinterest, FaGithub } from "react-icons/fa";
-import { Button } from "../components/Buttons";
+import { Button } from "../components/Common/Buttons";
 import { useForm } from "react-hook-form";
-import Header from "../components/Header";
-import Breadcrumbs from "../components/Breadcrumbs";
+import Header from "../components/Common/Header";
+import Breadcrumbs from "../components/Common/Breadcrumbs";
 import toast, { Toaster } from "react-hot-toast";
 
 import emailjs from "@emailjs/browser";
@@ -75,7 +74,6 @@ const Contact = () => {
                 </div>
                 {/* Contact form */}
                 <div className="h-max bg-purple-200 p-8 rounded-lg shadow-lg">
-                   
                     <form ref={form} onSubmit={sendEmail} className="space-y-5">
                         <div className="grid sm:grid-cols-2 gap-5">
                             <div>

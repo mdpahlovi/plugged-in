@@ -3,7 +3,7 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import SwiperCore, { Autoplay } from "swiper";
 import "swiper/css";
 import ReviewCard from "./ReviewCard";
-import { Button } from "../../Buttons";
+import { Button } from "../../Common/Buttons";
 import { useAuth } from "../../../hooks/useAuth";
 import ReviewModal from "./ReviewModal";
 import { useState } from "react";
@@ -15,40 +15,36 @@ import ReviewLoader from "./ReviewLoader";
 SwiperCore.use([Autoplay]);
 
 const ReviewSlider = () => {
-  const { authUser } = useAuth();
-  const [isOpen, setIsOpen] = useState(false);
+    const { authUser } = useAuth();
+    const [isOpen, setIsOpen] = useState(false);
 
-  const {
-    data: reviews = [],
-    isLoading,
-    refetch,
-  } = useQuery({
-    queryKey: ["reviews"],
-    queryFn: () =>
-      fetch(`https://plugged-in-server.onrender.com/reviews`).then((res) =>
-        res.json()
-      ),
-  });
+    const {
+        data: reviews = [],
+        isLoading,
+        refetch,
+    } = useQuery({
+        queryKey: ["reviews"],
+        queryFn: () => fetch(`https://plugged-in-server.onrender.com/reviews`).then((res) => res.json()),
+    });
 
-  const handleEdit = (data) => {
-    data.avatar = authUser?.photoURL;
-    data.name = authUser?.displayName;
-    data.location = "C&B Road, Barisal";
-    data.time = new Date();
-    data.rating = "4";
+    const handleEdit = (data) => {
+        data.avatar = authUser?.photoURL;
+        data.name = authUser?.displayName;
+        data.location = "C&B Road, Barisal";
+        data.time = new Date();
+        data.rating = "4";
 
-    axios
-      .post(`https://plugged-in-server.onrender.com/reviews`, data)
-      .then((res) => {
-        if (res.data) {
-          refetch();
-          toast.success("Review updated successfully");
-          setIsOpen(false);
-        }
-      })
-      .catch((error) => console.log(error.message));
-  };
-
+        axios
+            .post(`https://plugged-in-server.onrender.com/reviews`, data)
+            .then((res) => {
+                if (res.data) {
+                    refetch();
+                    toast.success("Review updated successfully");
+                    setIsOpen(false);
+                }
+            })
+            .catch((error) => console.log(error.message));
+    };
 
     return (
         <>
@@ -94,7 +90,6 @@ const ReviewSlider = () => {
             <ReviewModal isOpen={isOpen} setIsOpen={setIsOpen} handleEdit={handleEdit} />
         </>
     );
-
 };
 
 export default ReviewSlider;

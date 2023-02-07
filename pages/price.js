@@ -1,9 +1,9 @@
 import Main from "../components/Layout/Main";
 import { PricingPlans } from "../components/Pricing/PricingData";
-import { Button } from "../components/Buttons";
+import { Button } from "../components/Common/Buttons";
 import Link from "next/link";
-import Header from "../components/Header";
-import Breadcrumbs from "../components/Breadcrumbs";
+import Header from "../components/Common/Header";
+import Breadcrumbs from "../components/Common/Breadcrumbs";
 
 const Price = () => {
     return (

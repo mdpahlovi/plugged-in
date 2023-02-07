@@ -1,4 +1,4 @@
-import { Button } from "../Buttons.jsx";
+import { Button } from "../Common/Buttons";
 
 const AboutSubscribeSection = () => {
     return (

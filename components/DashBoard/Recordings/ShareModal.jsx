@@ -16,7 +16,7 @@ import {
 import React, { Fragment, useState } from "react";
 import CopyToClipboard from "react-copy-to-clipboard";
 import { MdContentCopy, MdOutlineFileDownloadDone } from "react-icons/md";
-import { IconButton } from "../../Buttons";
+import { IconButton } from "../../Common/Buttons";
 
 const ShareModal = ({ shareMedia, setShareMedia }) => {
     const [copy, setCopy] = useState(false);

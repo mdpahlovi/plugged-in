@@ -1,6 +1,6 @@
 import Image from "next/image";
 import { toast } from "react-toastify";
-import { Button, ButtonOutline } from "../../components/Buttons";
+import { Button, ButtonOutline } from "../../components/Common/Buttons";
 import ProfileLoading from "../../components/DashBoard/ProfileLoading";
 import Dashboard from "../../components/Layout/Dashboard";
 import { useAuth } from "../../hooks/useAuth";

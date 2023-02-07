@@ -1,7 +1,7 @@
 import { ThemeProvider } from "../hooks/useTheme";
 import "../styles/globals.css";
 import { UserContext } from "../hooks/useAuth";
-import Toastify from "../components/Toastify";
+import Toastify from "../components/Common/Toastify";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import SocketProvider from "../contexts/SocketProvider";
 

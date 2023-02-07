@@ -1,5 +1,3 @@
-import HeaderImage from "../public/images/header.png";
-
 const Header = ({ className, children }) => {
     return (
         <div className="hero bg-header">

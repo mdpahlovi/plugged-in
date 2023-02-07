@@ -3,9 +3,9 @@ import Link from "next/link";
 import Image from "next/image";
 import { useRouter } from "next/router";
 import Logo from "../../public/logo/logo.png";
-import ThemeToggle from "../ThemeToggle";
+import ThemeToggle from "../Common/ThemeToggle";
 import { CgMenuRightAlt, CgClose } from "react-icons/cg";
-import { ButtonOutline, IconButton } from "../Buttons";
+import { ButtonOutline, IconButton } from "../Common/Buttons";
 import { useAuth } from "../../hooks/useAuth";
 import Avatar from "../../public/images/avatar.png";
 
