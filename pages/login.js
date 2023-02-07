@@ -3,14 +3,14 @@ import Link from "next/link";
 import Main from "../components/Layout/Main";
 import googleImg from "../public/logo/google.svg";
 import githubImg from "../public/logo/github.svg";
-import { Button, ButtonOutline } from "../components/Buttons";
+import { Button, ButtonOutline } from "../components/Common/Buttons";
 import { useForm } from "react-hook-form";
 import { useAuth } from "../hooks/useAuth";
 import { toast } from "react-toastify";
 import useSetUserToDb from "../hooks/useSetUserToDb";
 import { useState } from "react";
 import { useRouter } from "next/router";
-import Wavify from "../components/Wavify";
+import Wavify from "../components/Common/Wavify";
 
 const Login = () => {
     const { loading, setLoading, login, loginWithGoogle, loginWithGithub } = useAuth();

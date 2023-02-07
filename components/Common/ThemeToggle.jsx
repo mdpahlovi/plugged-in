@@ -1,4 +1,4 @@
-import { useTheme } from "../hooks/useTheme";
+import { useTheme } from "../../hooks/useTheme";
 import { HiSun, HiMoon } from "react-icons/hi";
 import { useEffect, useRef } from "react";
 import { IconButton } from "./Buttons";

@@ -1,6 +1,6 @@
 import { Dialog, Transition } from "@headlessui/react";
 import React, { Fragment } from "react";
-import { Button } from "../../Buttons";
+import { Button } from "../../Common/Buttons";
 
 const TrimModal = ({ isOpen, setIsOpen, mediaUrl }) => {
     return (

@@ -2,7 +2,7 @@ import React, { useEffect, useRef, useState } from "react";
 import { useReactMediaRecorder } from "react-media-recorder";
 import { HiOutlinePlay, HiOutlinePause, HiOutlinePlayPause } from "react-icons/hi2";
 import { BsDownload } from "react-icons/bs";
-import { IconButton } from "../../Buttons";
+import { IconButton } from "../../Common/Buttons";
 import { useAuth } from "../../../hooks/useAuth";
 import useSetMediaToDb from "../../../hooks/useSetMediaToDb";
 import { toast } from "react-toastify";

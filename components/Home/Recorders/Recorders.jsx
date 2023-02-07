@@ -1,7 +1,7 @@
 import { HiOutlinePlay } from "react-icons/hi2";
 import { BsCaretDown } from "react-icons/bs";
 import { Audio, Screen, Webcam } from "../Icons/RecordIcons";
-import { IconButton } from "../../Buttons";
+import { IconButton } from "../../Common/Buttons";
 
 const Recorders = ({ setStartVideo, startVideo, setStartAudio, startAudio, setStartScreen, startScreen }) => {
     return (

@@ -1,6 +1,6 @@
 import Image from "next/image";
 import heroImg from "../../public/logo/heroImage.jpg";
-import { Button, ButtonOutline } from "../Buttons";
+import { Button, ButtonOutline } from "../Common/Buttons";
 
 const Hero = () => {
     return (

@@ -1,7 +1,7 @@
 import { Dialog, Transition } from "@headlessui/react";
 import { Fragment } from "react";
 import { useForm } from "react-hook-form";
-import { Button } from "../../Buttons";
+import { Button } from "../../Common/Buttons";
 
 const ReviewModal = ({ isOpen, setIsOpen, handleEdit }) => {
     const { register, handleSubmit } = useForm();

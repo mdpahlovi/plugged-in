@@ -1,5 +1,4 @@
 import Link from "next/link";
-import React from "react";
 import { FaHome } from "react-icons/fa";
 
 const Breadcrumbs = ({ children, href, page }) => {
