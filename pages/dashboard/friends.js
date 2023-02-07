@@ -9,10 +9,15 @@ const Friends = () => {
     const { authUser } = useAuth();
     const [disconnectingFriend, setDisconnectingFriend] = useState(null);
 
-    const { data: friends = [], refetch: friendListRefetch } = useQuery({
-        queryKey: ["friends", authUser],
-        queryFn: () => fetch(`http://localhost:5000/friends?email=${authUser?.email}`).then((res) => res.json()),
-    });
+
+  const { data: friends = [], refetch: friendListRefetch } = useQuery({
+    queryKey: ["friends", authUser],
+    queryFn: () =>
+      fetch(
+        `https://plugged-in-server.onrender.com/friends?email=${authUser?.email}`
+      ).then((res) => res.json()),
+  });
+
 
     return (
         <Dashboard>

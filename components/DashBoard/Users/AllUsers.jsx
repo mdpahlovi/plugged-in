@@ -16,19 +16,15 @@ const AllUsers = ({ users, refetch }) => {
       .catch((error) => console.log(error));
   };
 
-  const handleConnect = ({ name, avatar, email, pendingRefetch }) => {
+  const handleConnect = ({ email, pendingRefetch }) => {
     const sender = {
       email: authUser?.email,
-      protoURL: authUser?.photoURL,
-      displayName: authUser?.displayName,
     };
     const receiver = {
       email,
-      protoURL: avatar,
-      displayName: name,
     };
 
-    fetch("http://localhost:5000/connect", {
+    fetch("https://plugged-in-server.onrender.com/connect", {
       method: "PUT",
       headers: {
         "content-type": "application/json",
@@ -44,19 +40,15 @@ const AllUsers = ({ users, refetch }) => {
       });
   };
 
-  const handleCancelConnect = ({ name, avatar, email, pendingRefetch }) => {
+  const handleCancelConnect = ({ email, pendingRefetch }) => {
     const sender = {
       email: authUser?.email,
-      protoURL: authUser?.photoURL,
-      displayName: authUser?.displayName,
     };
     const receiver = {
       email,
-      protoURL: avatar,
-      displayName: name,
     };
 
-    fetch("http://localhost:5000/calcelConnect", {
+    fetch("https://plugged-in-server.onrender.com/calcelConnect", {
       method: "PUT",
       headers: {
         "content-type": "application/json",

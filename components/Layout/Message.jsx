@@ -9,6 +9,7 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 import { useAuth } from "../../hooks/useAuth";
 import useGetUser from "../../hooks/useGetUser";
+import { useQuery } from "@tanstack/react-query";
 
 // const users = [
 //   { name: "MD Pahlovi", avatar: pahlovi, email: "mdpahlovi07@gmail.com" },
@@ -26,9 +27,17 @@ const Message = ({ children }) => {
   const { authUser } = useAuth();
   const { userLoading, user, userRefetch } = useGetUser(authUser?.email);
 
+  const { data: rooms = [], refetch: roomsRefetch } = useQuery({
+    queryKey: ["getRooms"],
+    queryFn: () =>
+      fetch("https://plugged-in-server.onrender.com/getRooms").then((res) =>
+        res.json()
+      ),
+  });
+
   return (
     <Dashboard title="Message in PluggedIn">
-      <div className="border rounded-lg flex">
+      <div className="border rounded-lg flex h-[screen]">
         <div className="border-r min-w-full sm:min-w-[280px] md:min-w-[320px] xl:min-w-[360px]">
           <div className="mx-4 my-4 relative">
             <ImSearch className="absolute h-full flex items-center left-4" />
@@ -43,12 +52,9 @@ const Message = ({ children }) => {
           <ul className="overflow-auto h-[32rem]">
             <h2 className="ml-4 -mt-1 mb-1 text-xl">Chats</h2>
             <div>
-              {user?.friendList?.map((user, index) => (
-                <Link key={index} href={`/dashboard/message/${user?.room}`}>
-                  <MessageUser
-                    user={user}
-                    active={query.email === user.email ? true : false}
-                  />
+              {rooms?.map((room, index) => (
+                <Link key={index} href={`/dashboard/message/${room?.roomName}`}>
+                  <MessageUser room={room} />
                 </Link>
               ))}
             </div>

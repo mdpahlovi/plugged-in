@@ -11,7 +11,7 @@ const Connects = () => {
       queryKey: ["connectionrequests", authUser],
       queryFn: () =>
         fetch(
-          `http://localhost:5000/connectionrequests?email=${authUser?.email}`
+          `https://plugged-in-server.onrender.com/connectionrequests?email=${authUser?.email}`
         ).then((res) => res.json()),
     });
   console.log(connectionRequests);
