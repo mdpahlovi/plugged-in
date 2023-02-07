@@ -4,7 +4,7 @@ import { Button, ButtonOutline } from "../../components/Common/Buttons";
 import ProfileLoading from "../../components/DashBoard/ProfileLoading";
 import Dashboard from "../../components/Layout/Dashboard";
 import { useAuth } from "../../hooks/useAuth";
-import Avatar from "../../public/images/avatar.png";
+import NoPhoto from "../../public/images/no-photo.jpg";
 import { getImageUrl } from "../../utilities/getImageUrl";
 
 const Profile = () => {
@@ -36,7 +36,7 @@ const Profile = () => {
                         <Image src={authUser.photoURL} alt="" width={128} height={128} className="profile-avatar" />
                     ) : (
                         <div className="flex flex-col items-center">
-                            <Image src={Avatar} alt="" width={128} height={128} className="profile-avatar" />
+                            <Image src={NoPhoto} alt="" width={128} height={128} className="profile-avatar" />
                             <div className="mt-6 relative text-lg text-center px-4 py-2 border rounded-lg">
                                 Upload Your Profile
                                 <input type="file" onChange={(event) => handleProfile(event)} className="absolute w-full h-full inset-0 opacity-0" />

@@ -7,7 +7,7 @@ import ThemeToggle from "../Common/ThemeToggle";
 import { CgMenuRightAlt, CgClose } from "react-icons/cg";
 import { ButtonOutline, IconButton } from "../Common/Buttons";
 import { useAuth } from "../../hooks/useAuth";
-import Avatar from "../../public/images/avatar.png";
+import NoPhoto from "../../public/images/no-photo.jpg";
 
 const navItems = [
     { href: "/", name: "Home" },
@@ -59,7 +59,7 @@ const Navbar = () => {
                             </div>
                         ) : (
                             <div className="relative">
-                                <Image src={Avatar} alt="" width={34} height={34} className="absolute rounded-full top-0.5 left-0.5 z-10" />
+                                <Image src={NoPhoto} alt="" width={34} height={34} className="absolute rounded-full top-0.5 left-0.5 z-10" />
                                 <Link href="/dashboard">
                                     <ButtonOutline sm>
                                         <div className="pl-6">Dashboard</div>
