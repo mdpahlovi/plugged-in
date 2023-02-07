@@ -1,44 +1,32 @@
 import Image from "next/image";
 import { useAuth } from "../../../hooks/useAuth";
-import useIsFriend from "../../../hooks/UseIsFriend";
+import useIsFriend from "../../../hooks/useIsFriend";
 import { useIsPending } from "../../../hooks/useIsPending";
 
 const roles = [
-  { value: "admin", name: "Admin" },
-  { value: "team", name: "Team" },
-  { value: "pro", name: "Pro" },
-  { value: "basic", name: "Basic" },
+    { value: "admin", name: "Admin" },
+    { value: "team", name: "Team" },
+    { value: "pro", name: "Pro" },
+    { value: "basic", name: "Basic" },
 ];
 
-const AllUsersRow = ({
-  user,
-  index,
-  handleEdit,
-  handleConnect,
-  handleCancelConnect,
-}) => {
-  const { name, avatar, email } = user;
-  const { pendingStatus, pendingRefetch } = useIsPending(email);
-  const { friendStatus, friendRefetch } = useIsFriend(email);
-  const { authUser } = useAuth();
+const AllUsersRow = ({ user, index, handleEdit, handleConnect, handleCancelConnect }) => {
+    const { name, avatar, email } = user;
+    const { pendingStatus, pendingRefetch } = useIsPending(email);
+    const { friendStatus, friendRefetch } = useIsFriend(email);
+    const { authUser } = useAuth();
 
-  return (
-    <tr className={`${email === authUser?.email && "hidden"}`}>
-      <td>{index + 1}</td>
-      <td>
-        <Image
-          src={avatar ? avatar : ""}
-          alt=""
-          width={48}
-          height={48}
-          className="mask mask-squircle"
-        />
-      </td>
-      <td>
-        <div className="font-bold">{name}</div>
-        <div className="text-sm opacity-50">{email}</div>
-      </td>
-      {/* <td>{roles ? roles[0].toUpperCase() + roles.substr(1) : ""}</td>
+    return (
+        <tr className={`${email === authUser?.email && "hidden"}`}>
+            <td>{index + 1}</td>
+            <td>
+                <Image src={avatar ? avatar : ""} alt="" width={48} height={48} className="mask mask-squircle" />
+            </td>
+            <td>
+                <div className="font-bold">{name}</div>
+                <div className="text-sm opacity-50">{email}</div>
+            </td>
+            {/* <td>{roles ? roles[0].toUpperCase() + roles.substr(1) : ""}</td>
       <td>
         <select
           className="select text-base font-normal select-bordered w-full"
@@ -55,6 +43,7 @@ const AllUsersRow = ({
           ))}
         </select>
       </td> */}
+
       {pendingStatus === "pending" ? (
         <td
           onClick={() => handleCancelConnect({ email, pendingRefetch })}
@@ -104,6 +93,7 @@ const AllUsersRow = ({
       )}
     </tr>
   );
+
 };
 
 export default AllUsersRow;

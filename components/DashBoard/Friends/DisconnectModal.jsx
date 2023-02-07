@@ -1,5 +1,6 @@
 import React from "react";
 import { useAuth } from "../../../hooks/useAuth";
+
 import useGetUser from "../../../hooks/useGetUser";
 import useIsFriend from "../../../hooks/UseIsFriend";
 
@@ -42,10 +43,10 @@ const DisconnectModal = ({ disconnectingFriend, friendListRefetch }) => {
               if (data.acknowledged) {
                 friendListRefetch();
               }
+
             });
-        }
-      });
-  };
+    };
+
 
   return (
     <div>
@@ -67,10 +68,9 @@ const DisconnectModal = ({ disconnectingFriend, friendListRefetch }) => {
               No
             </label>
           </div>
+
         </div>
-      </div>
-    </div>
-  );
+    );
 };
 
 export default DisconnectModal;

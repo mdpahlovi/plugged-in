@@ -10,6 +10,7 @@ import { useState } from "react";
 import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
 import { toast } from "react-toastify";
+import ReviewLoader from "./ReviewLoader";
 
 SwiperCore.use([Autoplay]);
 
@@ -48,49 +49,52 @@ const ReviewSlider = () => {
       .catch((error) => console.log(error.message));
   };
 
-  return (
-    <>
-      <h1 className="section-gap">User Reviews</h1>
-      <Swiper
-        className="mx-auto"
-        spaceBetween={32}
-        slidesPerView={1}
-        loop={true}
-        autoplay={{
-          delay: 2000,
-        }}
-        breakpoints={{
-          1024: {
-            slidesPerView: 2,
-          },
-        }}
-      >
-        {reviews.map((review, index) => {
-          return (
-            <SwiperSlide key={index}>
-              <ReviewCard review={review}></ReviewCard>
-            </SwiperSlide>
-          );
-        })}
-      </Swiper>
-      <div
-        className={`${authUser?.uid ? "flex" : "hidden"} mt-8 justify-center`}
-      >
-        <Button
-          onClick={() => {
-            setIsOpen(true);
-          }}
-        >
-          Add Review
-        </Button>
-      </div>
-      <ReviewModal
-        isOpen={isOpen}
-        setIsOpen={setIsOpen}
-        handleEdit={handleEdit}
-      />
-    </>
-  );
+
+    return (
+        <>
+            <h1 className="section-gap">User Reviews</h1>
+            <Swiper
+                className="mx-auto"
+                spaceBetween={32}
+                slidesPerView={1}
+                loop={true}
+                autoplay={{
+                    delay: 2000,
+                }}
+                breakpoints={{
+                    1024: {
+                        slidesPerView: 2,
+                    },
+                }}
+            >
+                {isLoading ? (
+                    <div className="grid lg:grid-cols-2 gap-8 animate-pulse">
+                        <ReviewLoader />
+                        <ReviewLoader className="hidden lg:block" />
+                    </div>
+                ) : (
+                    reviews.map((review, index) => {
+                        return (
+                            <SwiperSlide key={index}>
+                                <ReviewCard review={review}></ReviewCard>
+                            </SwiperSlide>
+                        );
+                    })
+                )}
+            </Swiper>
+            <div className={`${authUser?.uid ? "flex" : "hidden"} mt-8 justify-center`}>
+                <Button
+                    onClick={() => {
+                        setIsOpen(true);
+                    }}
+                >
+                    Add Review
+                </Button>
+            </div>
+            <ReviewModal isOpen={isOpen} setIsOpen={setIsOpen} handleEdit={handleEdit} />
+        </>
+    );
+
 };
 
 export default ReviewSlider;
