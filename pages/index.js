@@ -10,6 +10,7 @@ import FaqData from "../components/Home/Faq/FaqData";
 import ScreenRecorderModal from "../components/Home/Recorders/ScreenRecorderModal";
 import VideoRecorderModal from "../components/Home/Recorders/VideoRecorderModal";
 import AudioRecorderModal from "../components/Home/Recorders/AudioRecorderModal";
+import PrivicyPolicy from "./privicy&policy";
 
 const ReviewSlider = dynamic(() => import("../components/Home/Review/ReviewSlider"), {
     ssr: false,
@@ -47,6 +48,7 @@ export default function Home() {
             <Features />
             <ReviewSlider />
             <FaqData />
+            <PrivicyPolicy></PrivicyPolicy>
         </Main>
     );
 }
