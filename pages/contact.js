@@ -75,26 +75,25 @@ const Contact = () => {
                 </div>
                 {/* Contact form */}
                 <div className="h-max bg-purple-200 p-8 rounded-lg shadow-lg">
-                   
                     <form ref={form} onSubmit={sendEmail} className="space-y-5">
                         <div className="grid sm:grid-cols-2 gap-5">
                             <div>
-                                <input className="input" type="text" name="first_name" placeholder="First Name" />
+                                <input className="input" type="text" name="first_name" placeholder="First Name" required />
                             </div>
                             <div>
-                                <input className="input" type="text" name="last_name" placeholder="Last Name" />
+                                <input className="input" type="text" name="last_name" placeholder="Last Name" required />
                             </div>
                         </div>
 
                         <div>
-                            <input className="input" type="email" name="user_email" placeholder="Email" />
+                            <input className="input" type="email" name="user_email" placeholder="Email" required />
                         </div>
                         <div>
-                            <input className="input" type="text" name="subject" placeholder="subject" />
+                            <input className="input" type="text" name="subject" placeholder="subject" required />
                         </div>
 
                         <div>
-                            <textarea name="message" placeholder="Your message" className=" textarea-bordered  w-full textarea" />
+                            <textarea name="message" placeholder="Your message" className=" textarea-bordered  w-full textarea" required />
                         </div>
                         <Button type="submit" className="w-full">
                             Send Message
