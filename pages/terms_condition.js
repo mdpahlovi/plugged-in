@@ -2,7 +2,7 @@ import Main from "../components/Layout/Main";
 
 const TermsCondition = () => {
     return (
-        <Main className="container">
+        <Main title="PluggedIn - Terms Condition" className="container">
             <h1 className="section-gap">Pluggedin Terms & Condition</h1>
 
             <div className="divide-y divide-base-content/20 -my-9">

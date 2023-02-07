@@ -7,47 +7,20 @@ import { Button, ButtonOutline, IconButton } from "../Common/Buttons";
 import ThemeToggle from "../Common/ThemeToggle";
 import { useAuth } from "../../hooks/useAuth";
 import { ImSearch } from "react-icons/im";
-import { MdVideoCameraBack, MdMenuOpen, MdConnectWithoutContact } from "react-icons/md";
+import { MdMenuOpen } from "react-icons/md";
 import { HiOutlineLogout } from "react-icons/hi";
-import { FaUserSecret, FaUsers } from "react-icons/fa";
 import { TiArrowBackOutline } from "react-icons/ti";
-import { SiGooglemessages } from "react-icons/si";
-import { GoGitPullRequest } from "react-icons/go";
 import { Protect } from "../Common/ProtectedRoute";
 import { useQuery } from "@tanstack/react-query";
 import { useContext } from "react";
 import { SocketContext } from "../../contexts/SocketProvider";
-
-const navItems = [
-    { href: "/dashboard", name: "Profile", icon: <FaUserSecret /> },
-    { href: "/dashboard/message", name: "Message", icon: <SiGooglemessages /> },
-    {
-        href: "/dashboard/recordings",
-        name: "Recordings",
-        icon: <MdVideoCameraBack className="text-lg" />,
-    },
-    {
-        href: "/dashboard/users",
-        name: "Users",
-        icon: <FaUsers className="text-lg" />,
-    },
-    {
-        href: "/dashboard/requests",
-        name: "Requests",
-        icon: <GoGitPullRequest className="text-lg" />,
-    },
-    {
-        href: "/dashboard/friends",
-        name: "Friends",
-        icon: <MdConnectWithoutContact className="text-lg" />,
-    },
-];
+import useDashboardRoutes from "../../hooks/useDashboardRoutes";
 
 const Dashboard = ({ title, children, className }) => {
-    const { logout } = useAuth();
+    const { authUser, logout } = useAuth();
     const { pathname } = useRouter();
     const { socket } = useContext(SocketContext);
-    console.log(pathname);
+    const { routes } = useDashboardRoutes(authUser?.email);
 
     const { data: rooms = [] } = useQuery({
         queryKey: ["getRooms"],
@@ -102,7 +75,7 @@ const Dashboard = ({ title, children, className }) => {
                             <Link href="/" className="block pb-6">
                                 <Image src={Logo} alt="logo" width={144} />
                             </Link>
-                            {navItems.map(({ href, name, icon }, index) => (
+                            {routes.map(({ href, name, icon }, index) => (
                                 <Link key={index} href={href}>
                                     {href === pathname ? (
                                         <Button className="w-full text-left flex items-center gap-4">
