@@ -1,6 +1,7 @@
 import Image from "next/image";
 import Logo from "../../public/logo/logo.png";
 import { FaFacebook, FaGithub, FaLinkedin } from "react-icons/fa";
+import Link from "next/link";
 
 const Footer = () => {
     return (
@@ -14,8 +15,8 @@ const Footer = () => {
                     <div className="flex flex-wrap gap-6 md:gap-12 justify-between">
                         <div className="flex flex-wrap md:flex-col gap-x-6 gap-y-1">
                             <div>Services</div>
-                            <div>Terms & Condition</div>
-                            <div>Privacy Policy</div>
+                            <Link href="/terms_condition">Terms & Condition</Link>
+                            <Link href="/privacy_policy">Privacy Policy</Link>
                             <div>FAQ</div>
                         </div>
                         <div>
