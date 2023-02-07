@@ -23,7 +23,7 @@ const data = [
 ];
 
 const HowToRecord = () => {
-    const [plan, setPlan] = useState("Select Layout");
+    const [plan, setPlan] = useState("Select a recording mode");
 
     return (
         <div className="section-gap max-w-screen-sm lg:max-w-full mx-auto grid lg:grid-cols-2 items-center">
