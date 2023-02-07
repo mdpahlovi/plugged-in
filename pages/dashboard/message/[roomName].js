@@ -1,9 +1,5 @@
 import React, { useContext, useEffect, useState } from "react";
 import Image from "next/image";
-import pahlovi from "../../../public/images/team/pahlovi.png";
-import safayet from "../../../public/images/team/safayet.png";
-import ashiq from "../../../public/images/team/ashiqur.png";
-import pran from "../../../public/images/team/gobinda.png";
 import Message from "../../../components/Layout/Message";
 import MessageFooter from "../../../components/DashBoard/Message/MessageFooter";
 import MessageHeader from "../../../components/DashBoard/Message/MessageHeader";
@@ -14,13 +10,7 @@ import { useQuery } from "@tanstack/react-query";
 import ScrollToBottom from "react-scroll-to-bottom";
 import { Icons, Link, Mic, Sent } from "../../../components/DashBoard/Message/MessageIcon";
 import { SocketContext } from "../../../contexts/SocketProvider";
-
-// const users = [
-//     { name: "MD Pahlovi", avatar: pahlovi, email: "mdpahlovi07@gmail.com" },
-//     { name: "Pran Gobinda", avatar: pran, email: "p.gobinda.cb@gmail.com" },
-//     { name: "Safayet Nur", avatar: safayet, email: "safayetnurelectra@gmail.com" },
-//     { name: "MD Ashiqur Ragman", avatar: ashiq, email: "web3.0.ashiq@gmail.com" },
-// ];
+import NoPhoto from "../../../public/images/no-photo.jpg";
 
 const ChatSection = () => {
     const { query } = useRouter();
@@ -105,13 +95,11 @@ const ChatSection = () => {
                     message?.authorEmail === authUser?.email ? (
                         <div key={index} className="chat chat-end">
                             <div className="chat-image avatar">
-                                <div className="w-10 rounded-full">
-                                    <img src={authUser?.photoURL} />
-                                </div>
+                                <Image className="mask mask-circle" src={authUser?.photoURL ? authUser.photoURL : NoPhoto} alt="" width={36} height={36} />
                             </div>
                             <div className="chat-header">
                                 {authUser?.displayName}
-                                <time className="text-xs opacity-50">{message?.time}</time>
+                                <time className="ml-2 text-xs opacity-50">{message?.time}</time>
                             </div>
                             <div className="chat-bubble">{message?.msgContent}</div>
                             <div className="chat-footer opacity-50">Seen at 12:46</div>
@@ -119,9 +107,7 @@ const ChatSection = () => {
                     ) : (
                         <div key={index} className="chat chat-start">
                             <div className="chat-image avatar">
-                                <div className="w-10 rounded-full">
-                                    <img src={user?.avatar} />
-                                </div>
+                                <Image className="mask mask-circle" src={user?.avatar ? user.avatar : NoPhoto} alt="" width={36} height={36} />
                             </div>
                             <div className="chat-header">
                                 {user?.name}
