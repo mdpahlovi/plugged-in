@@ -1,13 +1,13 @@
 import Link from "next/link";
 import Main from "../components/Layout/Main";
 import { Button } from "../components/Buttons";
-import Wave from "react-wavify";
 import { useForm } from "react-hook-form";
 import { useAuth } from "../hooks/useAuth";
 import { toast } from "react-toastify";
 import { useRouter } from "next/router";
 import useSetUserToDb from "../hooks/useSetUserToDb";
 import { useState } from "react";
+import Wavify from "../components/Wavify";
 
 const Registration = () => {
     const { loading, setLoading, createUser, updateUserProfile } = useAuth();
@@ -61,7 +61,7 @@ const Registration = () => {
                             placeholder="Full Name"
                             className={errors?.name ? "input input-error" : "input"}
                         />
-                        <error className="text-red-600">{errors?.name?.type === "required" && "Name is Required"}</error>
+                        <div className="text-red-600">{errors?.name?.type === "required" && "Name is Required"}</div>
                     </div>
                     <div className="space-y-1">
                         <label htmlFor="email" className="block font-semibold">
@@ -74,7 +74,7 @@ const Registration = () => {
                             placeholder="Your Email"
                             className={errors?.email ? "input input-error" : "input"}
                         />
-                        <error className="text-red-600">{errors?.email?.type === "required" && "Email is Required"}</error>
+                        <div className="text-red-600">{errors?.email?.type === "required" && "Email is Required"}</div>
                     </div>
                     <div className="space-y-1">
                         <label htmlFor="password" className="block font-semibold">
@@ -91,11 +91,11 @@ const Registration = () => {
                             placeholder="Your Password"
                             className={errors?.password ? "input input-error" : "input"}
                         />
-                        <error className="text-red-600">
+                        <div className="text-red-600">
                             {errors?.password?.type === "required" && "Password is required"}
                             {errors?.password?.type === "minLength" && "Entered password is less than 6 characters"}
                             {errors?.password?.type === "maxLength" && "Entered password is more than 10 characters"}
-                        </error>
+                        </div>
                     </div>
                     <div className="space-y-1">
                         <label htmlFor="password" className="block font-semibold">
@@ -114,7 +114,7 @@ const Registration = () => {
                             placeholder="Confirm Password"
                             className={errors?.cPassword ? "input input-error" : "input"}
                         />
-                        <error className="text-red-600">{errors?.cPassword?.message}</error>
+                        <div className="text-red-600">{errors?.cPassword?.message}</div>
                     </div>
                     <div className="pt-2">
                         <Button className="w-full" type="submit">
@@ -129,18 +129,7 @@ const Registration = () => {
                     </Link>
                 </p>
             </div>
-            <div className="-mt-20 md:-mt-16 -mb-14 sm:-mb-[72px] md:-mb-[88px] w-screen">
-                <Wave
-                    fill="#201172"
-                    paused={false}
-                    options={{
-                        height: 20,
-                        amplitude: 20,
-                        speed: 0.15,
-                        points: 6,
-                    }}
-                />
-            </div>
+            <Wavify />
         </Main>
     );
 };
