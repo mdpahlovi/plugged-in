@@ -1,7 +1,7 @@
 import React from "react";
 import { useAuth } from "../../../hooks/useAuth";
 import useGetUser from "../../../hooks/useGetUser";
-import useIsFriend from "../../../hooks/UseIsFriend";
+import useIsFriend from "../../../hooks/useIsFriend";
 
 const DisconnectModal = ({ disconnectingFriend, friendListRefetch }) => {
     const { email, room } = disconnectingFriend;
