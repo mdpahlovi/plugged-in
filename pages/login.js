@@ -4,13 +4,13 @@ import Main from "../components/Layout/Main";
 import googleImg from "../public/logo/google.svg";
 import githubImg from "../public/logo/github.svg";
 import { Button, ButtonOutline } from "../components/Buttons";
-import Wave from "react-wavify";
 import { useForm } from "react-hook-form";
 import { useAuth } from "../hooks/useAuth";
 import { toast } from "react-toastify";
 import useSetUserToDb from "../hooks/useSetUserToDb";
 import { useState } from "react";
 import { useRouter } from "next/router";
+import Wavify from "../components/Wavify";
 
 const Login = () => {
     const { loading, setLoading, login, loginWithGoogle, loginWithGithub } = useAuth();
@@ -78,7 +78,7 @@ const Login = () => {
                             placeholder="Your Email"
                             className={errors?.email ? "input input-error" : "input"}
                         />
-                        <error className="text-red-600">{errors?.email?.type === "required" && "Email is required"}</error>
+                        <div className="text-red-600">{errors?.email?.type === "required" && "Email is required"}</div>
                     </div>
                     <div className="space-y-1">
                         <label htmlFor="password" className="block font-semibold">
@@ -93,7 +93,7 @@ const Login = () => {
                             placeholder="Your Password"
                             className={errors?.password ? "input input-error" : "input"}
                         />
-                        <error className="text-red-600">{errors?.password?.type === "required" && "Password is required"}</error>
+                        <div className="text-red-600">{errors?.password?.type === "required" && "Password is required"}</div>
                     </div>
                     <p className="text-indigo-900 font-bold">Forgot Password ?</p>
                     <Button className="w-full" type="submit">
@@ -122,18 +122,7 @@ const Login = () => {
                     </Link>
                 </p>
             </div>
-            <div className="-mt-20 md:-mt-16 -mb-14 sm:-mb-[72px] md:-mb-[88px] w-screen">
-                <Wave
-                    fill="#201172"
-                    paused={false}
-                    options={{
-                        height: 20,
-                        amplitude: 20,
-                        speed: 0.15,
-                        points: 6,
-                    }}
-                />
-            </div>
+            <Wavify />
         </Main>
     );
 };
