@@ -31,14 +31,14 @@ const ChatSection = () => {
     } else {
       setOppositeUserEmail(query?.roomName?.split("_")[0]);
     }
-  }, []);
+  }, [query]);
 
   const { socket } = useContext(SocketContext);
   const [msgContent, setMsgContent] = useState("");
   const [receivedMsg, setReceivedMsg] = useState(null);
 
   const { data: messages = [], refetch: messagesRefetch } = useQuery({
-    queryKey: ["getMessages"],
+    queryKey: ["getMessages", query],
     queryFn: () =>
       fetch(
         `https://plugged-in-server.onrender.com/getMessages?roomName=${query.roomName}`
@@ -117,7 +117,9 @@ const ChatSection = () => {
                 {authUser?.displayName}
                 <time className="ml-2 text-xs opacity-50">{message?.time}</time>
               </div>
-              <div className="chat-bubble">{message?.msgContent}</div>
+              <div className="chat-bubble chat-bubble-primary">
+                {message?.msgContent}
+              </div>
               <div className="chat-footer opacity-50">Seen at 12:46</div>
             </div>
           ) : (
@@ -144,18 +146,17 @@ const ChatSection = () => {
       {/* <MessageFooter /> */}
       <div className="h-max flex items-center justify-between px-4 py-3 border-t gap-3">
         <Icons className="w-8 h-8 cursor-pointer" />
-        <Link className="w-8 h-8 cursor-pointer" />
+        <button>
+          <Link className="w-8 h-8 cursor-pointer" />
+        </button>
         <input
           type="text"
           placeholder="Message"
           className="input rounded-full"
           value={msgContent}
           name="message"
-          onChange={(event) => setMsgContent(event.target.value)}
-          onKeyDown={(event) => {
-            if (event.target.key === "Enter") {
-              setMsgContent(event.target.value);
-            }
+          onChange={(event) => {
+            setMsgContent(event.target.value);
           }}
           required
         />
