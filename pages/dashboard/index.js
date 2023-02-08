@@ -8,7 +8,7 @@ import NoPhoto from "../../public/images/no-photo.jpg";
 import { getImageUrl } from "../../utilities/getImageUrl";
 
 const Profile = () => {
-    const { loading, authUser, updateUserAvatar } = useAuth();
+    const { loading, authUser, updateUserAvatar, authRefetch, setAuthRefetch } = useAuth();
 
     if (loading) {
         return (
@@ -22,7 +22,10 @@ const Profile = () => {
             getImageUrl(file)
                 .then((data) => {
                     updateUserAvatar(data.url)
-                        .then(() => toast.success("Profile Uploaded"))
+                        .then(() => {
+                            setAuthRefetch(!authRefetch);
+                            toast.success("Profile Uploaded");
+                        })
                         .catch((error) => console.log(error));
                 })
                 .catch((error) => console.log(error));

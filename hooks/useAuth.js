@@ -19,6 +19,7 @@ const auth = getAuth(app);
 export const UserContext = ({ children }) => {
     const [authUser, setAuthUser] = useState(null);
     const [loading, setLoading] = useState(true);
+    const [authRefetch, setAuthRefetch] = useState(false);
     const googleProvider = new GoogleAuthProvider();
     const githubProvider = new GithubAuthProvider();
 
@@ -67,7 +68,7 @@ export const UserContext = ({ children }) => {
             setLoading(false);
         });
         return () => unSubscribe();
-    }, []);
+    }, [authRefetch]);
 
     const authInfo = {
         authUser,
@@ -76,6 +77,8 @@ export const UserContext = ({ children }) => {
         createUser,
         updateUserProfile,
         updateUserAvatar,
+        authRefetch,
+        setAuthRefetch,
         login,
         loginWithGoogle,
         loginWithGithub,
