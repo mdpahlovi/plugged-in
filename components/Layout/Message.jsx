@@ -11,21 +11,11 @@ import { useAuth } from "../../hooks/useAuth";
 import useGetUser from "../../hooks/useGetUser";
 import { useQuery } from "@tanstack/react-query";
 
-// const users = [
-//   { name: "MD Pahlovi", avatar: pahlovi, email: "mdpahlovi07@gmail.com" },
-//   { name: "Pran Gobinda", avatar: pran, email: "p.gobinda.cb@gmail.com" },
-//   {
-//     name: "Safayet Nur",
-//     avatar: safayet,
-//     email: "safayetnurelectra@gmail.com",
-//   },
-//   { name: "MD Ashiqur Ragman", avatar: ashiq, email: "web3.0.ashiq@gmail.com" },
-// ];
-
 const Message = ({ children }) => {
   const { query } = useRouter();
   const { authUser } = useAuth();
   const { userLoading, user, userRefetch } = useGetUser(authUser?.email);
+  const router = useRouter();
 
   const { data: rooms = [], refetch: roomsRefetch } = useQuery({
     queryKey: ["getRooms"],
@@ -52,11 +42,19 @@ const Message = ({ children }) => {
           <ul className="overflow-auto h-[32rem]">
             <h2 className="ml-4 -mt-1 mb-1 text-xl">Chats</h2>
             <div>
-              {rooms?.map((room, index) => (
-                <Link key={index} href={`/dashboard/message/${room?.roomName}`}>
-                  <MessageUser room={room} />
-                </Link>
-              ))}
+              {rooms?.map(
+                (room, index) =>
+                  room?.members?.includes(authUser?.email) && (
+                    <div
+                      onClick={() => {
+                        router.push(`/dashboard/message/${room?.roomName}`);
+                      }}
+                      key={index}
+                    >
+                      <MessageUser room={room} />
+                    </div>
+                  )
+              )}
             </div>
           </ul>
         </div>
