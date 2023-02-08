@@ -7,7 +7,7 @@ import { GoGitPullRequest } from "react-icons/go";
 
 const useDashboardRoutes = (email) => {
     const [routes, setRoutes] = useState([]);
-    const { user } = useGetUser(email);
+    const { userLoading, user } = useGetUser(email);
 
     useEffect(() => {
         if (user?._id) {
@@ -78,7 +78,7 @@ const useDashboardRoutes = (email) => {
         }
     }, [user?._id, user?.role]);
 
-    return { routes };
+    return { userLoading, routes };
 };
 
 export default useDashboardRoutes;
