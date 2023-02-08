@@ -33,7 +33,7 @@ const Dashboard = ({ title, children, className }) => {
                 socket.emit("join_room", room.roomName);
             }
         });
-    }, [pathname]);
+    }, [pathname, rooms, socket]);
 
     return (
         <>

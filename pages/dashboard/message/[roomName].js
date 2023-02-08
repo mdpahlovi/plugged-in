@@ -60,8 +60,7 @@ const ChatSection = () => {
         if (receivedMsg) {
             sendMsgToDb(receivedMsg);
         }
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, []);
+    }, [receivedMsg]);
 
     const sendMsgToDb = (sendingMsg) => {
         jwt_axios.put("https://plugged-in-server.onrender.com/messageStore", sendingMsg).then((res) => {

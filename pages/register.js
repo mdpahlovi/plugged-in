@@ -10,7 +10,7 @@ import { useState } from "react";
 import Wavify from "../components/Common/Wavify";
 
 const Registration = () => {
-    const { loading, setLoading, createUser, updateUserProfile } = useAuth();
+    const { loading, setLoading, createUser, updateUserProfile, authRefetch, setAuthRefetch } = useAuth();
     const router = useRouter();
     const [createdUser, setCreatedUser] = useState("");
     const { confirmation } = useSetUserToDb(createdUser);
@@ -32,6 +32,7 @@ const Registration = () => {
             .then(({ user }) => {
                 updateUserProfile(userInfo.name)
                     .then(() => {
+                        setAuthRefetch(!authRefetch);
                         setCreatedUser(user);
                     })
                     .catch(({ message }) => {
