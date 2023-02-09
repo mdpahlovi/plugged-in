@@ -21,8 +21,8 @@ const useDashboardRoutes = (email) => {
                         icon: <MdVideoCameraBack className="text-lg" />,
                     },
                     {
-                        href: "/dashboard/add_member",
-                        name: "Add Member",
+                        href: "/dashboard/team_members",
+                        name: "Team Members",
                         icon: <TiUserAdd className="text-lg" />,
                     },
                     { href: "/dashboard/message", name: "Message", icon: <SiGooglemessages /> },
@@ -53,7 +53,6 @@ const useDashboardRoutes = (email) => {
             } else {
                 setRoutes([
                     { href: "/dashboard", name: "Profile", icon: <FaUserSecret /> },
-                    { href: "/dashboard/message", name: "Message", icon: <SiGooglemessages /> },
                     {
                         href: "/dashboard/recordings",
                         name: "Recordings",
@@ -64,6 +63,7 @@ const useDashboardRoutes = (email) => {
                         name: "Users",
                         icon: <FaUsers className="text-lg" />,
                     },
+                    { href: "/dashboard/message", name: "Message", icon: <SiGooglemessages /> },
                     {
                         href: "/dashboard/requests",
                         name: "Requests",
