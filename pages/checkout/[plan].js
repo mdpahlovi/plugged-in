@@ -11,11 +11,39 @@ import Breadcrumbs from "../../components/Common/Breadcrumbs";
 import { useRouter } from "next/router";
 import { capitalize } from "../../utilities/capitalize";
 import { useAuth } from "../../hooks/useAuth";
+import { useForm } from "react-hook-form";
+import { toast } from "react-toastify";
+import { jwt_axios } from "../../utilities/api";
+import useGetUser from "../../hooks/useGetUser";
+import { user_obj } from "../../utilities/user_obj";
 
 const Checkout = () => {
     const { query } = useRouter();
     const { authUser } = useAuth();
-    const plan = capitalize(query.plan);
+    const { userLoading, user, userRefetch } = useGetUser(authUser?.email);
+    const plan = capitalize(query?.plan);
+
+    const { register, handleSubmit } = useForm();
+    const handleRegisterTeam = ({ name, email }) => {
+        const team = {
+            name: name,
+            leader: email,
+            members: [{ email: email, role: "leader" }],
+        };
+        jwt_axios.post(`/team`, team).then((res) => {
+            if (res.data.acknowledged) {
+                jwt_axios
+                    .patch(`/user/${email}`, user_obj(query?.plan, email, name, user?.team))
+                    .then((res) => {
+                        userRefetch();
+                        toast.success("Team Register to PluggedIn");
+                    })
+                    .catch((error) => console.log(error));
+            } else {
+                toast.error(res.data.message);
+            }
+        });
+    };
 
     return (
         <Main title="Checkout - PluggedIn">
@@ -28,22 +56,22 @@ const Checkout = () => {
             </Header>
             <div className="container grid lg:grid-cols-2 gap-4 items-center">
                 <Image src={checkImg} alt="" className="xl:w-5/6" />
-                <form className="mt-10 px-4 pt-8 lg:mt-0">
+                <form onSubmit={handleSubmit(handleRegisterTeam)} className="mt-10 px-4 pt-8 lg:mt-0">
                     <div className="">
                         <label htmlFor="email" className="mt-4 mb-2 block text-sm font-medium">
                             Email
                         </label>
                         <div className="relative">
-                            <input type="text" id="email" name="email" className="pl-10 input" defaultValue={authUser.email} />
+                            <input type="text" {...register("email")} className="pl-10 input" defaultValue={user?.email} />
                             <div className="pointer-events-none absolute inset-y-0 left-0 inline-flex items-center px-3">
                                 <MdAlternateEmail />
                             </div>
                         </div>
                         <label htmlFor="card-holder" className="mt-4 mb-2 block text-sm font-medium">
-                            Card Holder
+                            {query?.plan === "team" ? "Team Name" : "Your Name"}
                         </label>
                         <div className="relative">
-                            <input type="text" id="card-holder" name="card-holder" className="pl-10 input" defaultValue={authUser.displayName} />
+                            <input type="text" {...register("name")} className="pl-10 input" defaultValue={query?.plan === "team" ? "" : user?.name} required />
                             <div className="pointer-events-none absolute inset-y-0 left-0 inline-flex items-center px-3">
                                 <HiOutlineUserCircle />
                             </div>
