@@ -30,7 +30,7 @@ export const PricingPlans = [
         mostpopuler: false,
     },
     {
-        name: "Business",
+        name: "Team",
         title: "EVERTING IN PRO, PLUS",
         price: 15,
         frequency: "/one time",
