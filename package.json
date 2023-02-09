@@ -24,6 +24,8 @@
         "daisyui": "^2.46.1",
         "date-fns": "^2.29.3",
         "emailjs-com": "^3.2.0",
+        "emoji-mart": "^5.5.2",
+        "emoji-picker-react": "^4.4.7",
         "eslint": "8.31.0",
         "eslint-config-next": "13.1.1",
         "firebase": "^9.15.0",
