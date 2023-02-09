@@ -19,17 +19,19 @@ const AddTeamMember = ({ handleAddMember }) => {
 
     return (
         <div className="relative">
-            <Combobox onChange={(value) => handleAddMember({ name: value?.name, email: value?.email, role: "member", avatar: value.avatar })}>
-                <Combobox.Input className="w-full border input" displayValue={(person) => person.name} onChange={(event) => setQuery(event.target.value)} />
+            <Combobox onChange={(value) => handleAddMember({ email: value?.email, role: "member", team: value?.team })}>
+                <Combobox.Input className="w-full border input" onChange={(event) => setQuery(event.target.value)} placeholder="Add user by email" />
                 <Transition as={Fragment} leave="transition ease-in duration-100" leaveFrom="opacity-100" leaveTo="opacity-0" afterLeave={() => setQuery("")}>
-                    <Combobox.Options className="absolute mt-1 max-h-60 w-full overflow-auto rounded-lg bg-base-100 py-1 shadow-lg">
+                    <Combobox.Options className="absolute z-[1] mt-1 max-h-60 w-full overflow-auto rounded-lg bg-base-100 py-1 shadow-lg">
                         {filtered_users.length === 0 && query !== "" ? (
                             <p className="py-2 px-4">Nothing found.</p>
                         ) : (
                             filtered_users.map((user) => (
                                 <Combobox.Option
                                     key={user._id}
-                                    className={({ active }) => `relative cursor-pointer py-2 px-6 ${active ? "bg-accent text-base-100" : "text-base-content"}`}
+                                    className={({ active }) =>
+                                        `relative cursor-pointer py-2 px-6 ${active ? "bg-[#201172] text-base-100" : "text-base-content"}`
+                                    }
                                     value={user}
                                 >
                                     <h3>{user.name}</h3>
