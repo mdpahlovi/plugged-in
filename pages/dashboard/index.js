@@ -1,14 +1,17 @@
 import Image from "next/image";
+import { useState } from "react";
 import { toast } from "react-toastify";
 import { Button, ButtonOutline } from "../../components/Common/Buttons";
 import ProfileLoading from "../../components/DashBoard/ProfileLoading";
 import Dashboard from "../../components/Layout/Dashboard";
 import { useAuth } from "../../hooks/useAuth";
 import NoPhoto from "../../public/images/no-photo.jpg";
+import { jwt_axios } from "../../utilities/api";
 import { getImageUrl } from "../../utilities/getImageUrl";
 
 const Profile = () => {
     const { loading, authUser, updateUserAvatar, authRefetch, setAuthRefetch } = useAuth();
+    const [updateLoading, setUpdateLoading] = useState(false);
 
     if (loading) {
         return (
@@ -18,13 +21,20 @@ const Profile = () => {
         );
     } else {
         const handleProfile = (event) => {
+            setUpdateLoading(true);
             const file = event.target.files[0];
             getImageUrl(file)
                 .then((data) => {
-                    updateUserAvatar(data.url)
-                        .then(() => {
-                            setAuthRefetch(!authRefetch);
-                            toast.success("Profile Uploaded");
+                    jwt_axios
+                        .patch(`/user/${authUser?.email}`, { avatar: data.url })
+                        .then((res) => {
+                            updateUserAvatar(data.url)
+                                .then(() => {
+                                    setAuthRefetch(!authRefetch);
+                                    setUpdateLoading(false);
+                                    toast.success("Profile Uploaded");
+                                })
+                                .catch((error) => console.log(error));
                         })
                         .catch((error) => console.log(error));
                 })
@@ -41,7 +51,7 @@ const Profile = () => {
                         <div className="flex flex-col items-center">
                             <Image src={NoPhoto} alt="" width={128} height={128} className="profile-avatar" />
                             <div className="mt-6 relative text-lg text-center px-4 py-2 border rounded-lg">
-                                Upload Your Profile
+                                {updateLoading ? "Updating..." : "Upload Your Profile"}
                                 <input type="file" onChange={(event) => handleProfile(event)} className="absolute w-full h-full inset-0 opacity-0" />
                             </div>
                         </div>

@@ -18,7 +18,7 @@ const AllUsersRow = ({ user, index, handleEdit, handleConnect, handleCancelConne
     const { authUser } = useAuth();
 
     return (
-        <tr className={`${email === authUser?.email ? "hidden" : ""}`}>
+        <tr>
             <td>{index + 1}</td>
             <td>
                 <Image src={avatar ? avatar : NoPhoto} alt="" width={48} height={48} className="mask mask-squircle" />
