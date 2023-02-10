@@ -5,6 +5,7 @@ import { FaUserSecret, FaUsers } from "react-icons/fa";
 import { SiGooglemessages } from "react-icons/si";
 import { GoGitPullRequest } from "react-icons/go";
 import { TiUserAdd } from "react-icons/ti";
+import { HiViewGridAdd } from "react-icons/hi";
 
 const useDashboardRoutes = (email) => {
     const [routes, setRoutes] = useState([]);
@@ -21,6 +22,11 @@ const useDashboardRoutes = (email) => {
                         icon: <MdVideoCameraBack className="text-lg" />,
                     },
                     {
+                        href: "/dashboard/add_media",
+                        name: "Add Media",
+                        icon: <HiViewGridAdd className="text-lg" />,
+                    },
+                    {
                         href: "/dashboard/team_members",
                         name: "Team Members",
                         icon: <TiUserAdd className="text-lg" />,
@@ -31,6 +37,11 @@ const useDashboardRoutes = (email) => {
                         name: "Requests",
                         icon: <GoGitPullRequest className="text-lg" />,
                     },
+                    {
+                        href: "/dashboard/peoples",
+                        name: "Peoples",
+                        icon: <FaUsers className="text-lg" />,
+                    },
                 ]);
             } else if (user.role === "pro") {
                 setRoutes([
@@ -39,6 +50,11 @@ const useDashboardRoutes = (email) => {
                         href: "/dashboard/recordings",
                         name: "Recordings",
                         icon: <MdVideoCameraBack className="text-lg" />,
+                    },
+                    {
+                        href: "/dashboard/add_media",
+                        name: "Add Media",
+                        icon: <HiViewGridAdd className="text-lg" />,
                     },
                 ]);
             } else if (user.role === "basic") {
@@ -57,6 +73,11 @@ const useDashboardRoutes = (email) => {
                         href: "/dashboard/recordings",
                         name: "Recordings",
                         icon: <MdVideoCameraBack className="text-lg" />,
+                    },
+                    {
+                        href: "/dashboard/add_media",
+                        name: "Add Media",
+                        icon: <HiViewGridAdd className="text-lg" />,
                     },
                     {
                         href: "/dashboard/users",
