@@ -2,15 +2,17 @@ import Teams from "../../../components/Layout/Teams";
 import AddTeamMember from "../../../components/DashBoard/Add Member/AddMember";
 import { jwt_axios } from "../../../utilities/api";
 import { useQuery } from "@tanstack/react-query";
+import { useAuth } from "../../../hooks/useAuth";
 import Member from "../../../components/DashBoard/Add Member/Member";
+import useGetUser from "../../../hooks/useGetUser";
 import { toast } from "react-toastify";
 import MemberCardLoader from "../../../components/Common/MemberCardLoader";
 import { useRouter } from "next/router";
-import { useAuth } from "../../../hooks/useAuth";
 
 const TeamMembers = () => {
     const { query } = useRouter();
     const { authUser } = useAuth();
+    const { userLoading, user, userRefetch } = useGetUser(authUser?.email);
 
     const {
         data: team,
@@ -25,7 +27,7 @@ const TeamMembers = () => {
         const ifExist = team?.members?.filter((existing_member) => existing_member?.email === member?.email);
 
         if (ifExist.length === 0) {
-            jwt_axios.patch(`/team/${user?.team[0].leader}`, { members: [...team?.members, member] }).then((res) => {
+            jwt_axios.patch(`/team/${query?.leader}`, { members: [...team?.members, member] }).then((res) => {
                 if (res.data.acknowledged) {
                     jwt_axios
                         .patch(`/user/${member?.email}`, {
@@ -65,7 +67,7 @@ const TeamMembers = () => {
         }
     };
 
-    if (teamLoading) {
+    if (userLoading || teamLoading) {
         return (
             <Teams title="Add Member" className="grid xs:grid-cols-[repeat(auto-fill,_minmax(20.5rem,_1fr))] gap-6">
                 {[...Array(6)].map((user, index) => (
@@ -76,10 +78,10 @@ const TeamMembers = () => {
     } else {
         return (
             <Teams title="Add Member">
-                {team?.leader === authUser?.email ? <AddTeamMember handleAddMember={handleAddMember} /> : ""}
+                {team?.leader === user?.email ? <AddTeamMember handleAddMember={handleAddMember} /> : ""}
                 <div className="mt-6 grid xs:grid-cols-[repeat(auto-fill,_minmax(20.5rem,_1fr))] gap-6">
                     {team?.members?.map((member, index) => (
-                        <Member key={index} member={member} handleDeleteCard={handleDeleteCard} team={team} current_user={authUser} />
+                        <Member key={index} member={member} handleDeleteCard={handleDeleteCard} team={team} current_user={user} />
                     ))}
                 </div>
             </Teams>
