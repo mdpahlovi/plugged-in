@@ -39,6 +39,14 @@ const ChatSection = () => {
   const [receivedMsg, setReceivedMsg] = useState(null);
   const [typing, setTyping] = useState(null);
 
+  const { data: rooms = [], refetch: roomsRefetch } = useQuery({
+    queryKey: ["getRooms"],
+    queryFn: () =>
+      fetch("https://plugged-in-server.onrender.com/getRooms").then((res) =>
+        res.json()
+      ),
+  });
+
   const { data: messages = [], refetch: messagesRefetch } = useQuery({
     queryKey: ["getMessages", query],
     queryFn: () =>
@@ -94,6 +102,7 @@ const ChatSection = () => {
       .then((res) => {
         if (res?.data?.acknowledged) {
           messagesRefetch();
+          roomsRefetch();
         }
       });
   };

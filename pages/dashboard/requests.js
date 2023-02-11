@@ -19,7 +19,7 @@ const ConnectRequests = () => {
   return (
     <Dashboard title={`Connect of ${authUser?.displayName}`}>
       These people whats to connect with you
-      <div className="grid grid-cols-1 lg:grid-cols-4 gap-5">
+      <div className="grid grid-cols-[repeat(auto-fill,_minmax(20.5rem,_1fr))] gap-6">
         {connectionRequests?.map((request) => (
           <RequestCard
             key={request.email}

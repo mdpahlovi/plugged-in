@@ -1,12 +1,15 @@
 import Image from "next/image";
 import React from "react";
 import { useAuth } from "../../../hooks/useAuth";
+import useGetUser from "../../../hooks/useGetUser";
 import { useIsPending } from "../../../hooks/useIsPending";
 import NoPhoto from "../../../public/images/no-photo.jpg";
+import { Button, ButtonOutline } from "../../Common/Buttons";
 
 const RequestCard = ({ request, connectionRequestRefetch }) => {
   const { protoURL, displayName, email } = request;
-
+  const { userLoading, user, userRefetch } = useGetUser(email);
+  // console.log(request);
   const { authUser } = useAuth();
   const { pendingRefetch } = useIsPending(email);
 
@@ -85,30 +88,24 @@ const RequestCard = ({ request, connectionRequestRefetch }) => {
   };
 
   return (
-    <div className="card rounded-lg card-compact bg-base-100 shadow-xl">
-      <Image
-        className="w-full rounded-t-lg"
-        src={protoURL ? protoURL : NoPhoto}
-        alt="user"
-        width={200}
-        height={200}
-      />
-      <div className="card-body">
-        <h2 className="card-title">{displayName}</h2>
+    <div className={`relative border rounded-lg`}>
+      <div className="flex flex-col items-center py-8 px-8">
+        <Image
+          src={user?.avatar ? user?.avatar : NoPhoto}
+          className="mb-3 rounded-full shadow-lg"
+          alt=""
+          width={112}
+          height={112}
+        />
+        <h2 className="text-center">
+          <span className="-translate-y-1.5 badge badge-accent">
+            {user?.name}
+          </span>
+        </h2>
         <p>{email}</p>
-        <div className="card-actions">
-          <button
-            onClick={handleAcceptRequest}
-            className="btn btn-primary w-full"
-          >
-            Accept
-          </button>
-          <button
-            onClick={handleDeleteConnect}
-            className="btn btn-active w-full"
-          >
-            Delete
-          </button>
+        <div className="mt-3 flex space-x-4">
+          <Button onClick={handleAcceptRequest}>Accept</Button>
+          <ButtonOutline onClick={handleDeleteConnect}>Delete</ButtonOutline>
         </div>
       </div>
     </div>
