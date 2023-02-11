@@ -1,5 +1,5 @@
 import Image from "next/image";
-import React from "react";
+import React, { useState } from "react";
 import Main from "../../components/Layout/Main";
 import checkImg from "../../public/images/checkImg.png";
 import { HiFlag, HiOutlineCreditCard, HiOutlineUserCircle } from "react-icons/hi2";
@@ -18,13 +18,15 @@ import useGetUser from "../../hooks/useGetUser";
 import { user_obj } from "../../utilities/user_obj";
 
 const Checkout = () => {
-    const { query } = useRouter();
+    const { query, push } = useRouter();
     const { authUser } = useAuth();
+    const [planLoading, setPlanLoading] = useState(false);
     const { userLoading, user, userRefetch } = useGetUser(authUser?.email);
     const plan = capitalize(query?.plan);
 
     const { register, handleSubmit } = useForm();
     const handleRegisterTeam = ({ name, email }) => {
+        setPlanLoading(true);
         const team = {
             name: name,
             leader: email,
@@ -36,11 +38,15 @@ const Checkout = () => {
                     .patch(`/user/${email}`, user_obj(query?.plan, email, name, user?.team))
                     .then((res) => {
                         userRefetch();
+                        setPlanLoading(false);
                         toast.success("Team Register to PluggedIn");
+                        push("/dashboard/teams");
                     })
                     .catch((error) => console.log(error));
             } else {
+                setPlanLoading(false);
                 toast.error(res.data.message);
+                push(`/dashboard/teams/${authUser?.email}`);
             }
         });
     };
@@ -112,7 +118,7 @@ const Checkout = () => {
                             <h2>${query.price}</h2>
                         </div>
                     </div>
-                    <Button className="mt-6 w-full"> Place Order</Button>
+                    <Button className="mt-6 w-full">{planLoading ? "Loading..." : "Place Order"}</Button>
                 </form>
             </div>
         </Main>

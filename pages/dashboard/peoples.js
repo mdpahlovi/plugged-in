@@ -1,31 +1,28 @@
 import { useQuery } from "@tanstack/react-query";
-import React from "react";
+import MemberCardLoader from "../../components/Common/MemberCardLoader";
 import PeopleCard from "../../components/DashBoard/Peoples/PeopleCard";
 import Dashboard from "../../components/Layout/Dashboard";
+import { jwt_axios } from "../../utilities/api";
 
 const Peoples = () => {
-  const { data: ppls = [], refetch: pplsRefetch } = useQuery({
-    queryKey: ["users"],
-    queryFn: () =>
-      fetch(`https://plugged-in-server.onrender.com/users?role=team`).then(
-        (res) => res.json()
-      ),
-  });
-  console.log(ppls);
-  return (
-    <Dashboard title="Peoples of PluggedIn">
-      <h1>This is peoples Route</h1>
-      <div className="mt-6 grid grid-cols-[repeat(auto-fill,_minmax(20.5rem,_1fr))] gap-6">
-        {ppls.map((people) => (
-          <PeopleCard
-            key={people._id}
-            people={people}
-            pplsRefetch={pplsRefetch}
-          ></PeopleCard>
-        ))}
-      </div>
-    </Dashboard>
-  );
+    const {
+        data: peoples = [],
+        refetch: peoplesRefetch,
+        isLoading: peoplesLoading,
+    } = useQuery({
+        queryKey: ["users"],
+        queryFn: () => jwt_axios(`/users?role=team`).then((res) => res.data),
+    });
+
+    return (
+        <Dashboard title="Peoples of PluggedIn">
+            <div className="grid grid-cols-[repeat(auto-fill,_minmax(20.5rem,_1fr))] gap-6">
+                {peoplesLoading
+                    ? [...Array(6)].map((people, index) => <MemberCardLoader key={index} />)
+                    : peoples.map((people) => <PeopleCard key={people._id} people={people} peoplesRefetch={peoplesRefetch}></PeopleCard>)}
+            </div>
+        </Dashboard>
+    );
 };
 
 export default Peoples;
