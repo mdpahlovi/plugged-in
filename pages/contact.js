@@ -5,37 +5,31 @@ import { MdEmail } from "react-icons/md";
 import { HiLocationMarker } from "react-icons/hi";
 import { FaInstagram, FaTwitter, FaYoutube, FaPinterest, FaGithub } from "react-icons/fa";
 import { Button } from "../components/Common/Buttons";
-import { useForm } from "react-hook-form";
 import Header from "../components/Common/Header";
 import Breadcrumbs from "../components/Common/Breadcrumbs";
-import toast, { Toaster } from "react-hot-toast";
-
 import emailjs from "@emailjs/browser";
-// import emailjs, { sendForm } from "emailjs-com";
+import { toast } from "react-toastify";
 
 const Contact = () => {
     const form = useRef();
-    const [result, showResult] = useState(false);
+    const [sentLoading, setSentLoading] = useState(false);
 
     const sendEmail = (e) => {
         e.preventDefault();
-        console.log(form.current);
+        setSentLoading(true);
         emailjs.sendForm("service_5o7ybqc", "template_l446qia", form.current, "fxiuKPm0NteVCZ0H5").then(
             (result) => {
-                console.log(result.text);
+                if (result.text === "OK") {
+                    e.target.reset();
+                    setSentLoading(false);
+                    toast.success("Your message has been successfully sent. I will reach to you soon.");
+                }
             },
             (error) => {
-                console.log(error.text);
+                toast.error(error.text);
             }
         );
-        e.target.reset();
-        toast.success("Your message has been successfully sent. I will contact you soon.!");
-        showResult(true);
     };
-    //hide result
-    setTimeout(() => {
-        showResult(false);
-    }, 7000);
 
     return (
         <Main title="Contact - PluggedIn">
@@ -73,32 +67,18 @@ const Contact = () => {
                     </div>
                 </div>
                 {/* Contact form */}
-                <div className="h-max bg-purple-200 p-8 rounded-lg shadow-lg">
+                <div className="h-max bg-accent p-8 rounded-lg shadow-lg">
                     <form ref={form} onSubmit={sendEmail} className="space-y-5">
                         <div className="grid sm:grid-cols-2 gap-5">
-                            <div>
-                                <input className="input" type="text" name="first_name" placeholder="First Name" />
-                            </div>
-                            <div>
-                                <input className="input" type="text" name="last_name" placeholder="Last Name" />
-                            </div>
+                            <input className="input" type="text" name="first_name" placeholder="First Name" />
+                            <input className="input" type="text" name="last_name" placeholder="Last Name" />
                         </div>
-
-                        <div>
-                            <input className="input" type="email" name="user_email" placeholder="Email" />
-                        </div>
-                        <div>
-                            <input className="input" type="text" name="subject" placeholder="subject" />
-                        </div>
-
-                        <div>
-                            <textarea name="message" placeholder="Your message" className=" textarea-bordered  w-full textarea" />
-                        </div>
+                        <input className="input" type="email" name="user_email" placeholder="Email" />
+                        <input className="input" type="text" name="subject" placeholder="subject" />
+                        <textarea name="message" placeholder="Your message" className=" textarea-bordered  w-full textarea" />
                         <Button type="submit" className="w-full">
-                            Send Message
+                            {sentLoading ? "Sending..." : "Send Message"}
                         </Button>
-                        <Toaster />
-                        <div>{result ? <Result /> : null}</div>
                     </form>
                 </div>
             </div>
@@ -107,7 +87,3 @@ const Contact = () => {
 };
 
 export default Contact;
-
-const Result = () => {
-    return <p className="text-gray-900">Your message has been successfully sent. I will contact you soon.</p>;
-};
