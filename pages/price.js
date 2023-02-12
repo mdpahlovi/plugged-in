@@ -16,7 +16,7 @@ const Price = () => {
                 </p>
                 <Breadcrumbs href="/price" page="Pricing"></Breadcrumbs>
             </Header>
-            <div className="container flex justify-around items-center pt-10 flex-col lg:flex-row">
+            <div className="container hidden justify-around items-center pt-10 lg:flex">
                 <p className="text-3xl font-semibold">For Individuals</p>
                 <div className="flex items-center flex-col lg:flex-row ">
                     <p className="text-3xl font-semibold">For Team</p>
