@@ -1,6 +1,6 @@
 import axios from "axios";
 
-export const api_url = "https://plugged-in-server.onrender.com/";
+export const api_url = "https://plugged-in-server.onrender.com";
 // https://plugged-in-server.onrender.com/
 // https://plugged-in-server.onrender.com
 export const jwt_axios = axios.create({
