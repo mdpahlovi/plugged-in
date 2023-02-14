@@ -1,5 +1,4 @@
 import Image from "next/image";
-import { ActiveStatus } from "./MessageIcon";
 import NoPhoto from "../../../public/images/no-photo.jpg";
 import { useQuery } from "@tanstack/react-query";
 

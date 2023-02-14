@@ -7,16 +7,11 @@ import { useAuth } from "../../../hooks/useAuth";
 import useGetUser from "../../../hooks/useGetUser";
 import { useQuery } from "@tanstack/react-query";
 import ScrollToBottom from "react-scroll-to-bottom";
-import {
-  Icons,
-  Link,
-  Mic,
-  Sent,
-} from "../../../components/DashBoard/Message/MessageIcon";
 import { SocketContext } from "../../../contexts/SocketProvider";
 // import NoPhoto from "../../../public/images/no-photo.jpg";
 import { jwt_axios } from "../../../utilities/api";
 import EmojiPicker from "emoji-picker-react";
+
 import UserChatBubble from "../../../components/Layout/UserChatBubble";
 import OtherChatBubble from "../../../components/Layout/OtherChatBubble";
 
@@ -55,57 +50,58 @@ const ChatSection = () => {
       ).then((res) => res.json()),
   });
 
-  const handleSendMsg = () => {
-    if (msgContent) {
-      const msgData = {
-        msgContent,
-        authorEmail: authUser?.email,
-        time:
-          new Date(Date()).getMinutes() + ":" + new Date(Date()).getSeconds(),
-        roomName: query.roomName,
-      };
-      socket.emit("send_message", msgData);
-      sendMsgToDb(msgData);
-      setMsgContent("");
-      messagesRefetch();
-    }
-  };
+    const { socket } = useContext(SocketContext);
+    const [msgContent, setMsgContent] = useState("");
+    const [receivedMsg, setReceivedMsg] = useState(null);
+    const [typing, setTyping] = useState(null);
 
-  useEffect(() => {
-    socket.on("receive_message", (data) => {
-      setReceivedMsg(data);
+    const { data: messages = [], refetch: messagesRefetch } = useQuery({
+        queryKey: ["getMessages", query],
+        queryFn: () => fetch(`https://plugged-in-server.onrender.com/getMessages?roomName=${query?.roomName}`).then((res) => res.json()),
     });
-  }, [socket]);
+    console.log(messages);
+    console.log(query?.roomName);
 
-  useEffect(() => {
-    socket.on("typing_res", (data) => {
-      console.log(data);
-      setTyping(data);
-    });
-  }, [socket]);
-
-  if (typing) {
-    setTimeout(() => {
-      setTyping(null);
-    }, 1000);
-  }
-
-  useEffect(() => {
-    if (receivedMsg) {
-      sendMsgToDb(receivedMsg);
-    }
-  }, [receivedMsg]);
-
-  const sendMsgToDb = (sendingMsg) => {
-    jwt_axios
-      .put("https://plugged-in-server.onrender.com/messageStore", sendingMsg)
-      .then((res) => {
-        if (res?.data?.acknowledged) {
-          messagesRefetch();
-          roomsRefetch();
+    const handleSendMsg = () => {
+        if (msgContent) {
+            const msgData = {
+                msgContent,
+                authorEmail: authUser?.email,
+                time: new Date(Date()).getMinutes() + ":" + new Date(Date()).getSeconds(),
+                roomName: query.roomName,
+            };
+            socket.emit("send_message", msgData);
+            sendMsgToDb(msgData);
+            setMsgContent("");
+            messagesRefetch();
         }
-      });
-  };
+    };
+
+    useEffect(() => {
+        socket.on("receive_message", (data) => {
+            setReceivedMsg(data);
+        });
+    }, [socket]);
+
+    useEffect(() => {
+        socket.on("typing_res", (data) => {
+            console.log(data);
+            setTyping(data);
+        });
+    }, [socket]);
+
+    if (typing) {
+        setTimeout(() => {
+            setTyping(null);
+        }, 1000);
+    }
+
+    useEffect(() => {
+        if (receivedMsg) {
+            sendMsgToDb(receivedMsg);
+        }
+    }, [receivedMsg]);
+
 
   return (
     <Message>
@@ -148,32 +144,8 @@ const ChatSection = () => {
                 }}
               />
             </div>
-          </div>
-        </div>
-        <Link className="w-8 h-8 cursor-pointer" />
-        <input
-          type="text"
-          placeholder="Message"
-          className="input rounded-full"
-          value={msgContent}
-          name="message"
-          onChange={(event) => {
-            setMsgContent(event.target.value);
-            socket.emit("typing", {
-              msgContent,
-              roomName: query?.roomName,
-            });
-          }}
-          required
-        />
-        <Mic className="w-8 h-8 cursor-pointer" />
-        <Sent
-          onClick={handleSendMsg}
-          className="w-8 h-8 rotate-90 cursor-pointer"
-        />
-      </div>
-    </Message>
-  );
+        </Message>
+    );
 };
 
 export default ChatSection;

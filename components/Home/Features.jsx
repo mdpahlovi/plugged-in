@@ -49,7 +49,7 @@ const Features = () => {
                             <Image src={VideoEditing} alt="" />
                         </div>
                     </div>
-                    <h2 className="my-3">Video Editing</h2>
+                    <h2 className="my-3">Media Management</h2>
                     <p className="text-center">
                         Create your online screen video and then you will be editing your video. it will help your video editing experience.It has no bug. So
                         enjoy it.

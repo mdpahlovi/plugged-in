@@ -11,9 +11,9 @@ const AboutHero = () => {
             <div className="space-y-4">
                 <h1 className="font-extrabold text-left mb-0">What is PluggedIn?</h1>
                 <p>
-                    PluggedIn is an online-based meeting recording web application. It is a single-page application using NextJS. There are many interesting
-                    features here, such as video audio recording, downloading recorded video, screenshot capture, video trimming, and video audio previewing.
-                    Furthermore, the numerous features make it affordable. 
+                    It&apos;s an online base recording and media management Solution. Why PluggedIn among many other good options? Because you can record your
+                    screen, webcam, and audio along with managing those recordings on our server. Recordings will automatically add to our database when you
+                    stop recording. For this, you have to log in first. You can also add a title and to-do tasks list to the record. For your feature use.
                 </p>
                 <div className="stats stats-vertical sm:stats-horizontal shadow w-full">
                     <div className="stat">

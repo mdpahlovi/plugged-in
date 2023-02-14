@@ -10,7 +10,7 @@ const Footer = () => {
                 <div className="py-8 flex flex-col md:flex-row gap-4 md:justify-between">
                     <div>
                         <Image src={Logo} alt="logo" width={100} />
-                        <p className="mt-2">Online meeting recording application using nextJs</p>
+                        <p className="mt-2">Online meeting recording and media management application.</p>
                     </div>
                     <div className="flex flex-wrap gap-6 md:gap-12 justify-between">
                         <div className="flex flex-wrap md:flex-col gap-x-6 gap-y-1">
