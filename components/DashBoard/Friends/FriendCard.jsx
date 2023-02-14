@@ -18,32 +18,6 @@ const FriendCard = ({ friend, setDisconnectingFriend }) => {
   };
 
   return (
-    // <div className="card rounded-lg card-compact bg-base-100 shadow-xl">
-    //   <Image
-    //     className="w-full rounded-t-lg"
-    //     src={user?.avatar ? user.avatar : NoPhoto}
-    //     alt="avatar"
-    //     width={200}
-    //     height={200}
-    //   />
-    //   <div className="card-body">
-    //     <h2 className="card-title">{user?.name}</h2>
-    //     <p>{email}</p>
-    //     <div className="card-actions">
-    //       <button onClick={handleMessage} className="btn btn-primary w-full">
-    //         Message
-    //       </button>
-    //       <label
-    //         onClick={() => setDisconnectingFriend(friend)}
-    //         htmlFor="disconnectModal"
-    //         className="btn btn-active w-full"
-    //       >
-    //         Unfriend
-    //       </label>
-    //     </div>
-    //   </div>
-    // </div>
-
     <div className={`relative border rounded-lg`}>
       <div className="flex flex-col items-center py-8 px-8">
         <Image

@@ -93,8 +93,27 @@ const TeamMembers = () => {
             jwt_axios
               .patch(`/user/${email}`, { role: "basic", team: [...restTeam] })
               .then((res) => {
-                teamRefetch();
-                toast.success("Member Removed Successfully");
+                if (res.data) {
+                  fetch(
+                    `https://plugged-in-server.onrender.com/deleteRoomMate`,
+                    {
+                      method: "PUT",
+                      headers: {
+                        "content-type": "application/json",
+                      },
+                      body: JSON.stringify({
+                        memberEmail: email,
+                        roomName: team?.roomName,
+                      }),
+                    }
+                  )
+                    .then((res) => res.json())
+                    .then((data) => {
+                      console.log(data);
+                      teamRefetch();
+                      toast.success("Member Removed Successfully");
+                    });
+                }
               })
               .catch((error) => console.log(error));
           }

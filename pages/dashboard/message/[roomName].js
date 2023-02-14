@@ -14,23 +14,23 @@ import {
   Sent,
 } from "../../../components/DashBoard/Message/MessageIcon";
 import { SocketContext } from "../../../contexts/SocketProvider";
-import NoPhoto from "../../../public/images/no-photo.jpg";
+// import NoPhoto from "../../../public/images/no-photo.jpg";
 import { jwt_axios } from "../../../utilities/api";
 import EmojiPicker from "emoji-picker-react";
+import UserChatBubble from "../../../components/Layout/UserChatBubble";
+import OtherChatBubble from "../../../components/Layout/OtherChatBubble";
 
 const ChatSection = () => {
   const { query } = useRouter();
   const { authUser } = useAuth();
   const [oppositeUserEmail, setOppositeUserEmail] = useState("");
   const { userLoading, user } = useGetUser(oppositeUserEmail);
-  const [coMembers, setComembers] = useState([]);
-  //   const [emojiData, setEmojiData] = useState(null);
-  const { data: rooms = [], refetch: roomsRefetch } = useQuery({
-    queryKey: ["getRooms"],
+  const { data: room, refetch: roomsRefetch } = useQuery({
+    queryKey: ["singleRoom", query],
     queryFn: () =>
-      fetch("https://plugged-in-server.onrender.com/getRooms").then((res) =>
-        res.json()
-      ),
+      fetch(
+        `https://plugged-in-server.onrender.com/singleRoom?roomName=${query?.roomName}`
+      ).then((res) => res.json()),
   });
 
   useEffect(() => {
@@ -40,19 +40,8 @@ const ChatSection = () => {
       } else {
         setOppositeUserEmail(query?.roomName?.split("_")[0]);
       }
-    } else {
-      rooms?.map(
-        (room) => room?.roomType === "team" && setComembers(room.members)
-      );
     }
   }, [authUser, query]);
-
-  useEffect(() => {
-    if (coMembers) {
-      coMembers.map((member) => setOppositeUserEmail(member));
-    }
-  }, [coMembers]);
-
   const { socket } = useContext(SocketContext);
   const [msgContent, setMsgContent] = useState("");
   const [receivedMsg, setReceivedMsg] = useState(null);
@@ -65,8 +54,6 @@ const ChatSection = () => {
         `https://plugged-in-server.onrender.com/getMessages?roomName=${query?.roomName}`
       ).then((res) => res.json()),
   });
-  console.log(messages);
-  console.log(query?.roomName);
 
   const handleSendMsg = () => {
     if (msgContent) {
@@ -122,52 +109,18 @@ const ChatSection = () => {
 
   return (
     <Message>
-      <MessageHeader user={user} userLoading={userLoading} />
+      <MessageHeader
+        user={user}
+        roomName={query?.roomName}
+        userLoading={userLoading}
+      />
       <ScrollToBottom className="h-[70%]">
         <div className="px-4 py-3">
           {messages?.map((message, index) =>
             message?.authorEmail === authUser?.email ? (
-              <div key={index} className="chat chat-end">
-                <div className="chat-image avatar">
-                  <Image
-                    className="mask mask-circle"
-                    src={authUser?.photoURL ? authUser.photoURL : NoPhoto}
-                    alt=""
-                    width={36}
-                    height={36}
-                  />
-                </div>
-                <div className="chat-header">
-                  {authUser?.displayName}
-                  <time className="ml-2 text-xs opacity-50">
-                    {message?.time}
-                  </time>
-                </div>
-                <div className="chat-bubble chat-bubble-accent break-all">
-                  {message?.msgContent}
-                </div>
-                <div className="chat-footer opacity-50">Seen at 12:46</div>
-              </div>
+              <UserChatBubble kay={index} message={message} />
             ) : (
-              <div key={index} className="chat chat-start">
-                <div className="chat-image avatar">
-                  <Image
-                    className="mask mask-circle"
-                    src={user?.avatar ? user.avatar : NoPhoto}
-                    alt=""
-                    width={36}
-                    height={36}
-                  />
-                </div>
-                <div className="chat-header">
-                  {user?.name}
-                  <time className="ml-2 text-xs opacity-50">12:45</time>
-                </div>
-                <div className="chat-bubble break-all">
-                  {message?.msgContent}
-                </div>
-                <div className="chat-footer opacity-50">Delivered</div>
-              </div>
+              <OtherChatBubble kay={index} message={message} />
             )
           )}
           {typing && typing.roomName == query?.roomName && (
