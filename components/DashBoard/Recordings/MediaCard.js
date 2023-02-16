@@ -13,20 +13,12 @@ import { useQuery } from "@tanstack/react-query";
 import { useAuth } from "../../../hooks/useAuth";
 import useGetUser from "../../../hooks/useGetUser";
 
-
-const MediaCard = ({
-  media,
-  refetch,
-  setShareMedia,
-  setDeletingRecordId,
-  children,
-}) => {
-  const { _id, date, mediaType, mediaUrl, title, teamName } = media;
-  const [isEditing, setIsEditing] = useState(false);
-  const [enabled, setEnabled] = useState(false);
-  const { authUser } = useAuth();
-  const { userLoading, user, userRefetch } = useGetUser(authUser?.email);
-
+const MediaCard = ({ media, refetch, setShareMedia, setDeletingRecordId, children }) => {
+    const { _id, date, mediaType, mediaUrl, title, teamName } = media;
+    const [isEditing, setIsEditing] = useState(false);
+    const [enabled, setEnabled] = useState(false);
+    const { authUser } = useAuth();
+    const { user } = useGetUser(authUser?.email);
 
     const date_is = format(parseISO(date), "PP");
     const time_is = format(parseISO(date), "p");
@@ -99,7 +91,7 @@ const MediaCard = ({
                 {isEditing || !title || !teamName ? (
                     <form onSubmit={handleSubmit(handleEdit)} className="mt-1.5 space-y-4">
                         <input {...register("title")} className="input" placeholder="Recording Title" defaultValue={title} />
-                        <select {...register("teamName")} className="select select-bordered w-full">
+                        <select {...register("teamName")} className={`select select-bordered w-full ${user?.role !== "team" && "hidden"}`}>
                             {teams?.map((team, index) => (
                                 <option key={index} value={`${team?.name}`}>
                                     {team?.name}
@@ -129,54 +121,7 @@ const MediaCard = ({
                 </div>
             </div>
         </div>
-
-        {isEditing || !title || !teamName ? (
-          <form
-            onSubmit={handleSubmit(handleEdit)}
-            className="mt-1.5 space-y-4"
-          >
-            <input
-              {...register("title")}
-              className="input"
-              placeholder="Recording Title"
-              defaultValue={title}
-            />
-            <select
-              {...register("teamName")}
-              className={`select select-bordered w-full ${
-                user?.role !== "team" && "hidden"
-              }`}
-            >
-              {teams?.map((team) => (
-                <option value={`${team?.name}`}>{team?.name}</option>
-              ))}
-            </select>
-            <Button type="submit" className="w-full">
-              Submit
-            </Button>
-          </form>
-        ) : (
-          <>
-            <h3 className="text-xl leading-6 font-semibold">Title :{title}</h3>
-            <h3 className="text-xl leading-6 font-semibold mt-2">
-              Team Name :{teamName}
-            </h3>
-          </>
-        )}
-        <div className="mt-4 grid xs:grid-cols-[auto_auto] gap-4">
-          <a href={mediaUrl} download="media/mp4">
-            <ButtonOutline>
-              <div className="flex items-center justify-center gap-2">
-                Download
-                <MdOutlineCloudDownload className="text-lg" />
-              </div>
-            </ButtonOutline>
-          </a>
-          {children}
-        </div>
-      </div>
-    </div>
-  );
+    );
 };
 
 export default MediaCard;
