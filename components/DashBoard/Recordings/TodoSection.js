@@ -5,11 +5,14 @@ import StarterKit from "@tiptap/starter-kit";
 import axios from "axios";
 import React, { useState } from "react";
 import { toast } from "react-toastify";
+import { useAuth } from "../../../hooks/useAuth";
 import { Button } from "../../Common/Buttons";
 import TaskList from "./TaskList";
 import TextEditor from "./TextEditor";
 
 const TodoSection = ({ tasks, media_id, refetch }) => {
+  const { authUser } = useAuth();
+
   const editor = useEditor({
     extensions: [
       StarterKit,
@@ -30,7 +33,13 @@ const TodoSection = ({ tasks, media_id, refetch }) => {
   });
 
   const handleTask = (data) => {
-    const task = { media_id, date: new Date(), details: data, done: false };
+    const task = {
+      media_id,
+      date: new Date(),
+      details: data,
+      done: false,
+      assignedTo: authUser?.email,
+    };
     axios
       .post(`https://plugged-in-server.onrender.com/task`, task)
       .then((res) => {
