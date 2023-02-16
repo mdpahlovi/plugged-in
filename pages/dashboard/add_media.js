@@ -7,6 +7,7 @@ import Dashboard from "../../components/Layout/Dashboard";
 import { useAuth } from "../../hooks/useAuth";
 import UploadMedia from "../../public/images/file-upload.svg";
 import { readFileAsBase64 } from "../../utilities/readFile";
+import { async } from "@firebase/util";
 
 const AddMedia = () => {
   const { authUser } = useAuth();
@@ -16,8 +17,17 @@ const AddMedia = () => {
 
   const handleAddMedia = async (event) => {
     const file = event.target.files[0];
+    console.log(file);
     setUpdatedMedia(file);
     setUpdatedMediaUrl(await readFileAsBase64(file));
+  };
+
+  const handleDrag = async (event) => {
+    event.preventDefault();
+    const draggedFile = event?.dataTransfer?.files[0];
+    console.log(draggedFile);
+    setUpdatedMedia(draggedFile);
+    setUpdatedMediaUrl(await readFileAsBase64(draggedFile));
   };
 
   const handleUploadMedia = (event, media) => {
@@ -80,7 +90,13 @@ const AddMedia = () => {
             ></video>
           ) : (
             <label className="flex items-center rounded-lg border-4 border-dashed aspect-video group text-center">
-              <div className="text-center mx-auto">
+              <div
+                onDragOver={(event) => {
+                  event.preventDefault();
+                }}
+                onDrop={handleDrag}
+                className="text-center mx-auto"
+              >
                 <Image
                   className="h-36 object-center"
                   src={UploadMedia}
