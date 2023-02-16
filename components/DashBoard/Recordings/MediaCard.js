@@ -13,6 +13,8 @@ import {
 } from "react-icons/md";
 import { HiOutlineShare } from "react-icons/hi";
 import { Switch } from "@headlessui/react";
+import { useQuery } from "@tanstack/react-query";
+import { useAuth } from "../../../hooks/useAuth";
 
 const MediaCard = ({
   media,
@@ -21,16 +23,17 @@ const MediaCard = ({
   setDeletingRecordId,
   children,
 }) => {
-  const { _id, date, mediaType, mediaUrl, title } = media;
+  const { _id, date, mediaType, mediaUrl, title, teamName } = media;
   const [isEditing, setIsEditing] = useState(false);
   const [enabled, setEnabled] = useState(false);
+  const { authUser } = useAuth();
 
   const date_is = format(parseISO(date), "PP");
   const time_is = format(parseISO(date), "p");
 
   const { register, handleSubmit } = useForm();
-  const handleEdit = ({ title }) => {
-    const updatingRecord = { _id, title };
+  const handleEdit = ({ title, teamName }) => {
+    const updatingRecord = { _id, title, teamName };
     axios
       .put(`https://plugged-in-server.onrender.com/record`, updatingRecord)
       .then((res) => {
@@ -42,6 +45,14 @@ const MediaCard = ({
       })
       .catch((error) => console.log(error.message));
   };
+
+  const { data: teams } = useQuery({
+    queryKey: ["team", authUser],
+    queryFn: () =>
+      fetch(
+        `https://plugged-in-server.onrender.com/teamByUser?email=${authUser?.email}`
+      ).then((res) => res.json()),
+  });
 
   return (
     <div className="">
@@ -96,7 +107,7 @@ const MediaCard = ({
             </IconButton>
           </div>
         </div>
-        {isEditing || !title ? (
+        {isEditing || !title || !teamName ? (
           <form
             onSubmit={handleSubmit(handleEdit)}
             className="mt-1.5 space-y-4"
@@ -107,13 +118,24 @@ const MediaCard = ({
               placeholder="Recording Title"
               defaultValue={title}
             />
+            <select
+              {...register("teamName")}
+              className="select select-bordered w-full"
+            >
+              {teams?.map((team) => (
+                <option value={`${team?.name}`}>{team?.name}</option>
+              ))}
+            </select>
             <Button type="submit" className="w-full">
               Submit
             </Button>
           </form>
         ) : (
           <>
-            <h3 className="text-xl leading-6 font-semibold">{title}</h3>
+            <h3 className="text-xl leading-6 font-semibold">Title :{title}</h3>
+            <h3 className="text-xl leading-6 font-semibold mt-2">
+              Team Name :{teamName}
+            </h3>
           </>
         )}
         <div className="mt-4 grid xs:grid-cols-[auto_auto] gap-4">

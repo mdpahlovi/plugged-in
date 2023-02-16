@@ -19,7 +19,9 @@ const PeopleCard = ({ people, peoplesRefetch, setDisconnectingFriend }) => {
 
   const { userLoading, user, userRefetch } = useGetUser(email);
   console.log();
-  const friend = user?.friendList.find((item) => item.email === authUser.email);
+  const friend = user?.friendList?.find(
+    (item) => item.email === authUser.email
+  );
 
   const handleConnect = (email) => {
     const sender = {

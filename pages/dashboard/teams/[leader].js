@@ -8,10 +8,17 @@ import useGetUser from "../../../hooks/useGetUser";
 import { toast } from "react-toastify";
 import MemberCardLoader from "../../../components/Common/MemberCardLoader";
 import { useRouter } from "next/router";
+import TaskDetailsModal from "../../../components/DashBoard/Add Member/TaskDetailsModal";
+import { useState } from "react";
+import SeeRewardModal from "../../../components/DashBoard/Add Member/SeeRewardModal";
+import GiveRewardModal from "../../../components/DashBoard/Add Member/GiveRewardModal";
 
 const TeamMembers = () => {
   const { query } = useRouter();
   const { authUser } = useAuth();
+  const [selectedMemberTask, setSelectedMemberTask] = useState(null);
+  const [seerewardMember, setSeerewardMember] = useState(null);
+  const [giveRewardMember, setGiveRewardMember] = useState(null);
   const { userLoading, user, userRefetch } = useGetUser(authUser?.email);
 
   const {
@@ -148,10 +155,33 @@ const TeamMembers = () => {
               key={index}
               member={member}
               handleDeleteCard={handleDeleteCard}
+              setSelectedMemberTask={setSelectedMemberTask}
+              setSeerewardMember={setSeerewardMember}
+              setGiveRewardMember={setGiveRewardMember}
               team={team}
               current_user={user}
             />
           ))}
+          <TaskDetailsModal
+            team={team}
+            selectedMemberTask={selectedMemberTask}
+          />
+          {/* <SeeRewardModal
+            selectedMemberTask={selectedMemberTask}
+            seerewardMember={seerewardMember}
+          />
+          <GiveRewardModal
+            selectedMemberTask={selectedMemberTask}
+            giveRewardMember={giveRewardMember}
+          /> */}
+          <SeeRewardModal
+            selectedMemberTask={selectedMemberTask}
+            seerewardMember={seerewardMember}
+          />
+          <GiveRewardModal
+            selectedMemberTask={selectedMemberTask}
+            giveRewardMember={giveRewardMember}
+          />
         </div>
       </Teams>
     );
