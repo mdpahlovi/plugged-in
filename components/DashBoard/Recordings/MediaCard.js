@@ -15,6 +15,7 @@ import { HiOutlineShare } from "react-icons/hi";
 import { Switch } from "@headlessui/react";
 import { useQuery } from "@tanstack/react-query";
 import { useAuth } from "../../../hooks/useAuth";
+import useGetUser from "../../../hooks/useGetUser";
 
 const MediaCard = ({
   media,
@@ -27,6 +28,7 @@ const MediaCard = ({
   const [isEditing, setIsEditing] = useState(false);
   const [enabled, setEnabled] = useState(false);
   const { authUser } = useAuth();
+  const { userLoading, user, userRefetch } = useGetUser(authUser?.email);
 
   const date_is = format(parseISO(date), "PP");
   const time_is = format(parseISO(date), "p");
@@ -120,7 +122,9 @@ const MediaCard = ({
             />
             <select
               {...register("teamName")}
-              className="select select-bordered w-full"
+              className={`select select-bordered w-full ${
+                user?.role !== "team" && "hidden"
+              }`}
             >
               {teams?.map((team) => (
                 <option value={`${team?.name}`}>{team?.name}</option>
