@@ -2,34 +2,32 @@ import { useQuery } from "@tanstack/react-query";
 import Dashboard from "../../components/Layout/Dashboard";
 import { useAuth } from "../../hooks/useAuth";
 import RequestCard from "../../components/DashBoard/Message/RequestCard";
+import MemberCardLoader from "../../components/Common/MemberCardLoader";
 
 const ConnectRequests = () => {
-  const { authUser } = useAuth();
+    const { authUser } = useAuth();
 
-  const { data: connectionRequests = [], refetch: connectionRequestRefetch } =
-    useQuery({
-      queryKey: ["connectionrequests", authUser],
-      queryFn: () =>
-        fetch(
-          `https://plugged-in-server.onrender.com/connectionrequests?email=${authUser?.email}`
-        ).then((res) => res.json()),
+    const {
+        data: connectionRequests = [],
+        isLoading: connectionRequestLoading,
+        refetch: connectionRequestRefetch,
+    } = useQuery({
+        queryKey: ["connectionrequests", authUser],
+        queryFn: () => fetch(`https://plugged-in-server.onrender.com/connectionrequests?email=${authUser?.email}`).then((res) => res.json()),
     });
-  console.log(connectionRequests);
+    console.log(connectionRequests);
 
-  return (
-    <Dashboard title={`Connect of ${authUser?.displayName}`}>
-      These people whats to connect with you
-      <div className="grid grid-cols-[repeat(auto-fill,_minmax(20.5rem,_1fr))] gap-6">
-        {connectionRequests?.map((request) => (
-          <RequestCard
-            key={request.email}
-            request={request}
-            connectionRequestRefetch={connectionRequestRefetch}
-          />
-        ))}
-      </div>
-    </Dashboard>
-  );
+    return (
+        <Dashboard title={`Requests of ${authUser?.displayName}`} className="grid grid-cols-[repeat(auto-fill,_minmax(20.5rem,_1fr))] gap-6">
+            {connectionRequestLoading ? (
+                [...Array(6)].map((user, index) => <MemberCardLoader key={index} />)
+            ) : connectionRequests?.length ? (
+                connectionRequests?.map((request) => <RequestCard key={request.email} request={request} connectionRequestRefetch={connectionRequestRefetch} />)
+            ) : (
+                <h1 className="col-span-full h-[calc(100vh_-_7rem)] mx-auto mb-0 flex items-center">No Connection Requests</h1>
+            )}
+        </Dashboard>
+    );
 };
 
 export default ConnectRequests;
