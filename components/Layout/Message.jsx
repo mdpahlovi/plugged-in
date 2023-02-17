@@ -20,7 +20,7 @@ const Message = ({ children }) => {
                 <div
                     className={`${
                         router?.pathname === "/dashboard/message/[roomName]" ? "hidden" : "block"
-                    } border-r min-w-full sm:min-w-[280px] md:min-w-[320px] xl:min-w-[360px]`}
+                    } sm:block border-r min-w-full sm:min-w-[280px] md:min-w-[320px] xl:min-w-[360px]`}
                 >
                     <div className="mx-4 my-4 relative">
                         <ImSearch className="absolute h-full flex items-center left-4" />

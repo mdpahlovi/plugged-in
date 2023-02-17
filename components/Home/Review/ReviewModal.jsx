@@ -2,8 +2,9 @@ import { Dialog, Transition } from "@headlessui/react";
 import { Fragment } from "react";
 import { useForm } from "react-hook-form";
 import { Button } from "../../Common/Buttons";
+import ReactStars from "react-rating-stars-component";
 
-const ReviewModal = ({ isOpen, setIsOpen, handleEdit }) => {
+const ReviewModal = ({ isOpen, setIsOpen, handleEdit, setRating }) => {
     const { register, handleSubmit } = useForm();
 
     return (
@@ -36,13 +37,7 @@ const ReviewModal = ({ isOpen, setIsOpen, handleEdit }) => {
                                 <form action="" onSubmit={handleSubmit(handleEdit)} className="space-y-2">
                                     <div className="flex justify-between">
                                         <h2>Add Your Review</h2>
-                                        <div className="rating">
-                                            <input type="radio" name="rating-2" className="mask mask-star-2 bg-indigo-900" />
-                                            <input type="radio" name="rating-2" className="mask mask-star-2 bg-indigo-900" checked />
-                                            <input type="radio" name="rating-2" className="mask mask-star-2 bg-indigo-900" />
-                                            <input type="radio" name="rating-2" className="mask mask-star-2 bg-indigo-900" />
-                                            <input type="radio" name="rating-2" className="mask mask-star-2 bg-indigo-900" />
-                                        </div>
+                                        <ReactStars count={5} size={28} isHalf={true} activeColor="#201172" onChange={(newRating) => setRating(newRating)} />
                                     </div>
                                     <textarea
                                         {...register("details")}
