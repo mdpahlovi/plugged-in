@@ -88,7 +88,7 @@ const MediaCard = ({ media, refetch, setShareMedia, setDeletingRecordId, childre
                         </IconButton>
                     </div>
                 </div>
-                {isEditing || !title || !teamName ? (
+                {isEditing || !title || (user?.role === "team" && !teamName) ? (
                     <form onSubmit={handleSubmit(handleEdit)} className="mt-1.5 space-y-4">
                         <input {...register("title")} className="input" placeholder="Recording Title" defaultValue={title} />
                         <select {...register("teamName")} className={`select select-bordered w-full ${user?.role !== "team" && "hidden"}`}>
@@ -103,12 +103,11 @@ const MediaCard = ({ media, refetch, setShareMedia, setDeletingRecordId, childre
                         </Button>
                     </form>
                 ) : (
-                    <>
-                        <h3 className="text-xl leading-6 font-semibold">Title :{title}</h3>
-                        <h3 className="text-xl leading-6 font-semibold mt-2">Team Name :{teamName}</h3>
-                    </>
+                    <h2>
+                        {title} <span className="-translate-y-1.5 badge badge-accent">{teamName}</span>
+                    </h2>
                 )}
-                <div className="mt-4 grid xs:grid-cols-[auto_auto] gap-4">
+                <div className="mt-2 grid xs:grid-cols-[auto_auto] gap-4">
                     <a href={mediaUrl} download="media/mp4">
                         <ButtonOutline>
                             <div className="flex items-center justify-center gap-2">
