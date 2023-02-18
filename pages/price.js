@@ -20,7 +20,7 @@ const Price = () => {
                 <p className="text-3xl font-semibold">For Individuals</p>
                 <div className="flex items-center flex-col lg:flex-row ">
                     <p className="text-3xl font-semibold">For Team</p>
-                    <span className="bg-[#201172] text-white text-sm px-1.5 py-0.5 rounded-md ml-2">Now In Beta: Free 2 - weeks trial</span>
+                    <span className="bg-primary text-white text-sm px-1.5 py-0.5 rounded-md ml-2">Now In Beta: Free 2 - weeks trial</span>
                 </div>
             </div>
             <div className="container grid lg:grid-cols-3 gap-8 pt-10">
@@ -28,7 +28,7 @@ const Price = () => {
                     <div key={plan.name} className="border p-8 shadow-lg rounded-lg relative">
                         <h2>{plan.name}</h2>
                         {plan.mostpopuler && (
-                            <p className="absolute top-0 px-3 py-0.5 text-sm font-semibold tracking-wide text-white rounded-full bg-gradient-to-br from-[#392f4f] via-[#201172] to-[#816EEF] shadow-md -translate-y-1/2">
+                            <p className="absolute top-0 px-3 py-0.5 text-sm font-semibold tracking-wide text-white rounded-full bg-gradient-to-br from-[#392f4f] via-primary to-accent shadow-md -translate-y-1/2">
                                 Most Popular
                             </p>
                         )}

@@ -29,9 +29,7 @@ const AddTeamMember = ({ handleAddMember }) => {
                             filtered_users.map((user) => (
                                 <Combobox.Option
                                     key={user._id}
-                                    className={({ active }) =>
-                                        `relative cursor-pointer py-2 px-6 ${active ? "bg-[#201172] text-base-100" : "text-base-content"}`
-                                    }
+                                    className={({ active }) => `relative cursor-pointer py-2 px-6 ${active ? "bg-primary text-base-100" : "text-base-content"}`}
                                     value={user}
                                 >
                                     <h3>{user.name}</h3>

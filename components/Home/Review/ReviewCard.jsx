@@ -1,8 +1,10 @@
+import { useTheme } from "../../../hooks/useTheme";
 import { format, parseISO } from "date-fns";
 import Image from "next/image";
 import ReactStars from "react-rating-stars-component";
 
 const ReviewCard = ({ review }) => {
+    const { theme } = useTheme();
     const { name, location, time, avatar, rating, details } = review;
     const date = format(parseISO(time), "PP");
     const time_is = format(parseISO(time), "p");
@@ -23,7 +25,14 @@ const ReviewCard = ({ review }) => {
                     </div>
                 </div>
                 <div className="flex items-center space-x-2">
-                    <ReactStars count={5} size={28} isHalf={true} activeColor="#201172" value={parseInt(rating)} edit={false} />
+                    <ReactStars
+                        count={5}
+                        size={28}
+                        isHalf={true}
+                        activeColor={theme === "light" ? "#201172" : "#6f2d97"}
+                        value={parseInt(rating)}
+                        edit={false}
+                    />
                 </div>
             </div>
             <div className="text-sm pt-4">

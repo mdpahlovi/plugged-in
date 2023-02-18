@@ -24,7 +24,7 @@
     }
 
     ::-webkit-scrollbar-thumb {
-        @apply bg-gradient-to-tr from-[#2F0D77] via-[#201172] to-[#816EEF] rounded-full;
+        @apply bg-gradient-to-tr from-secondary via-primary to-accent rounded-full;
         -webkit-border-radius: 8px;
     }
 }
