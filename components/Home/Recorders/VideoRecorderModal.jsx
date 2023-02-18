@@ -29,7 +29,7 @@ const VideoRecorderModal = ({ startVideo, setStartVideo }) => {
             type: "video/mp4",
         },
     });
-    const { authUser } = useAuth();
+    const { user } = useAuth();
     const [media, setMedia] = useState(null);
     const { confirmation } = useSetMediaToDb(media, mediaBlobUrl);
 
@@ -55,14 +55,14 @@ const VideoRecorderModal = ({ startVideo, setStartVideo }) => {
     }, [startVideo, startRecording, stopRecording, setStartVideo, status]);
 
     useEffect(() => {
-        if (mediaBlobUrl && authUser) {
+        if (mediaBlobUrl && user) {
             setMedia({
                 date: new Date(),
-                authorEmail: authUser?.email,
+                authorEmail: user?.email,
                 mediaType: "video",
             });
         }
-    }, [mediaBlobUrl, authUser]);
+    }, [mediaBlobUrl, user]);
 
     return (
         <div>

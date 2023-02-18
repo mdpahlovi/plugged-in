@@ -11,7 +11,7 @@ import { readFileAsBase64 } from "../../utilities/readFile";
 import { useTheme } from "../../hooks/useTheme";
 
 const AddMedia = () => {
-    const { authUser } = useAuth();
+    const { user } = useAuth();
     const { theme } = useTheme();
     const [uploadLoading, setUploadLoading] = useState(false);
     const [updatedMedia, setUpdatedMedia] = useState();
@@ -43,7 +43,7 @@ const AddMedia = () => {
             .then((res) => {
                 const mediaData = {
                     date: new Date(),
-                    authorEmail: authUser?.email,
+                    authorEmail: user?.email,
                     mediaType: updatedMedia.type.split("/")[0],
                     mediaUrl: res.data.url,
                     title: event.target.title.value,

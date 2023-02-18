@@ -6,7 +6,7 @@ import { useAuth } from "../../hooks/useAuth";
 import { useQuery } from "@tanstack/react-query";
 
 const Message = ({ children }) => {
-    const { authUser } = useAuth();
+    const { user } = useAuth();
     const router = useRouter();
 
     const { data: rooms = [], refetch: roomsRefetch } = useQuery({
@@ -31,7 +31,7 @@ const Message = ({ children }) => {
                         <div className="">
                             {rooms?.map(
                                 (room, index) =>
-                                    room?.members?.includes(authUser?.email) && (
+                                    room?.members?.includes(user?.email) && (
                                         <div onClick={() => router.push(`/dashboard/message/${room?.roomName}`)} key={index}>
                                             <MessageUser room={room} active={router?.asPath === `/dashboard/message/${room?.roomName}` ? true : false} />
                                         </div>

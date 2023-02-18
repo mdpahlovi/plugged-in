@@ -10,7 +10,7 @@ const RequestCard = ({ request, connectionRequestRefetch }) => {
     const { protoURL, displayName, email } = request;
     const { userLoading, user, userRefetch } = useGetUser(email);
     // console.log(request);
-    const { authUser } = useAuth();
+    const { user: auth_user } = useAuth();
     const { pendingRefetch } = useIsPending(email);
 
     const handleDeleteConnect = () => {
@@ -18,7 +18,7 @@ const RequestCard = ({ request, connectionRequestRefetch }) => {
             email,
         };
         const receiver = {
-            email: authUser?.email,
+            email: auth_user?.email,
         };
 
         fetch("https://plugged-in-server.onrender.com/calcelConnect", {
@@ -43,7 +43,7 @@ const RequestCard = ({ request, connectionRequestRefetch }) => {
             email,
         };
         const receiver = {
-            email: authUser?.email,
+            email: auth_user?.email,
         };
 
         fetch("https://plugged-in-server.onrender.com/makeFriend", {
@@ -58,9 +58,9 @@ const RequestCard = ({ request, connectionRequestRefetch }) => {
                 console.log(data);
                 if (data.sendingResult && data.receivingResult && data.senderFriendListResult && data.receiverFriendListResult) {
                     const roomData = {
-                        roomName: `${authUser?.email}_${email}`,
+                        roomName: `${auth_user?.email}_${email}`,
                         roomType: "single",
-                        members: [authUser?.email, email],
+                        members: [auth_user?.email, email],
                     };
 
                     fetch(`https://plugged-in-server.onrender.com/makeRoom`, {

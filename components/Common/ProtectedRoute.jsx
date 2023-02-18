@@ -7,20 +7,19 @@ import { useTheme } from "../../hooks/useTheme";
 export function Protect(Component) {
     return function Protect(props) {
         const [screenLoading, setScreenLoading] = useState(true);
-        const { authUser, loading } = useAuth();
+        const { user, loading, userLoading } = useAuth();
         const router = useRouter();
         const { theme } = useTheme();
-        console.log(theme);
 
         useEffect(() => {
-            if (!loading) {
-                if (!authUser?.uid) {
+            if (!loading && !userLoading) {
+                if (!user?._id) {
                     router.replace("/login");
                 } else {
                     setScreenLoading(false);
                 }
             }
-        }, [loading, authUser, router]);
+        }, [loading, user, router, userLoading]);
 
         if (screenLoading) {
             return (

@@ -9,7 +9,7 @@ import { Button, ButtonOutline } from "../../Common/Buttons";
 
 const DisconnectModal = ({ disconnectingFriend, friendListRefetch, peoplesRefetch }) => {
     const { email, room } = disconnectingFriend;
-    const { authUser } = useAuth();
+    const { user: auth_user } = useAuth();
     const { friendRefetch } = useIsFriend(email);
     const { user } = useGetUser(email);
     const router = useRouter();
@@ -18,7 +18,7 @@ const DisconnectModal = ({ disconnectingFriend, friendListRefetch, peoplesRefetc
 
     const handleDisconnect = () => {
         const user = {
-            email: authUser?.email,
+            email: auth_user?.email,
             room,
         };
         const friend = {

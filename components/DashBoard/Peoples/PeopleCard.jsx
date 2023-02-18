@@ -11,19 +11,18 @@ import useGetUser from "../../../hooks/useGetUser";
 
 const PeopleCard = ({ people, peoplesRefetch, setDisconnectingFriend }) => {
     const router = useRouter();
-    const { authUser } = useAuth();
+    const { user: auth_user } = useAuth();
     const { avatar, email, name, role, _id } = people;
     const { pendingStatus, pendingRefetch } = useIsPending(email);
     const { friendStatus, friendRefetch } = useIsFriend(email);
     const { requestStatus, requestRefetch } = useIsRequested(email);
 
     const { userLoading, user, userRefetch } = useGetUser(email);
-    console.log();
-    const friend = user?.friendList?.find((item) => item.email === authUser.email);
+    const friend = user?.friendList?.find((item) => item.email === auth_user.email);
 
     const handleConnect = (email) => {
         const sender = {
-            email: authUser?.email,
+            email: auth_user?.email,
         };
         const receiver = {
             email,
@@ -50,7 +49,7 @@ const PeopleCard = ({ people, peoplesRefetch, setDisconnectingFriend }) => {
 
     const handleCancelConnect = ({ email, pendingRefetch }) => {
         const sender = {
-            email: authUser?.email,
+            email: auth_user?.email,
         };
         const receiver = {
             email,
@@ -80,7 +79,7 @@ const PeopleCard = ({ people, peoplesRefetch, setDisconnectingFriend }) => {
             email,
         };
         const receiver = {
-            email: authUser?.email,
+            email: auth_user?.email,
         };
 
         fetch("https://plugged-in-server.onrender.com/calcelConnect", {
@@ -107,7 +106,7 @@ const PeopleCard = ({ people, peoplesRefetch, setDisconnectingFriend }) => {
             email,
         };
         const receiver = {
-            email: authUser?.email,
+            email: auth_user?.email,
         };
 
         fetch("https://plugged-in-server.onrender.com/makeFriend", {
@@ -122,9 +121,9 @@ const PeopleCard = ({ people, peoplesRefetch, setDisconnectingFriend }) => {
                 console.log(data);
                 if (data.sendingResult && data.receivingResult && data.senderFriendListResult && data.receiverFriendListResult) {
                     const roomData = {
-                        roomName: `${authUser?.email}_${email}`,
+                        roomName: `${auth_user?.email}_${email}`,
                         roomType: "single",
-                        members: [authUser?.email, email],
+                        members: [auth_user?.email, email],
                     };
 
                     fetch(`https://plugged-in-server.onrender.com/makeRoom`, {
@@ -149,7 +148,7 @@ const PeopleCard = ({ people, peoplesRefetch, setDisconnectingFriend }) => {
     };
 
     return (
-        <div className={`relative border rounded-lg ${authUser?.email === email ? "hidden" : ""}`}>
+        <div className={`relative border rounded-lg ${auth_user?.email === email ? "hidden" : ""}`}>
             <div className="flex flex-col items-center py-8 px-8">
                 <Image src={avatar ? avatar : NoPhoto} className="mb-3 rounded-full shadow-lg" alt="" width={112} height={112} />
                 <h2 className="text-center">{name}</h2>

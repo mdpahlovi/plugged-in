@@ -7,9 +7,8 @@ import { GoGitPullRequest } from "react-icons/go";
 import { TiUserAdd } from "react-icons/ti";
 import { HiViewGridAdd } from "react-icons/hi";
 
-const useDashboardRoutes = (email) => {
+const useDashboardRoutes = (user) => {
     const [routes, setRoutes] = useState([]);
-    const { userLoading, user } = useGetUser(email);
 
     useEffect(() => {
         if (user?._id) {
@@ -108,7 +107,7 @@ const useDashboardRoutes = (email) => {
         }
     }, [user?._id, user?.role]);
 
-    return { userLoading, routes };
+    return { routes };
 };
 
 export default useDashboardRoutes;

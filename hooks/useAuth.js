@@ -12,12 +12,14 @@ import {
 } from "firebase/auth";
 
 import app from "../config/firebase.config";
+import useGetUser from "./useGetUser";
 
 export const AuthContext = createContext();
 const auth = getAuth(app);
 
 export const UserContext = ({ children }) => {
-    const [authUser, setAuthUser] = useState(null);
+    const [email, setEmail] = useState(null);
+    const { userLoading, user, userRefetch } = useGetUser(email);
     const [loading, setLoading] = useState(true);
     const [authRefetch, setAuthRefetch] = useState(false);
     const googleProvider = new GoogleAuthProvider();
@@ -64,14 +66,16 @@ export const UserContext = ({ children }) => {
 
     useEffect(() => {
         const unSubscribe = onAuthStateChanged(auth, (currentUser) => {
-            setAuthUser(currentUser);
+            setEmail(currentUser?.email);
             setLoading(false);
         });
         return () => unSubscribe();
     }, [authRefetch]);
 
     const authInfo = {
-        authUser,
+        user,
+        userLoading,
+        userRefetch,
         loading,
         setLoading,
         createUser,

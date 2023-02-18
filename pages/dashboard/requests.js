@@ -5,20 +5,20 @@ import RequestCard from "../../components/DashBoard/Message/RequestCard";
 import MemberCardLoader from "../../components/Common/MemberCardLoader";
 
 const ConnectRequests = () => {
-    const { authUser } = useAuth();
+    const { user } = useAuth();
 
     const {
         data: connectionRequests = [],
         isLoading: connectionRequestLoading,
         refetch: connectionRequestRefetch,
     } = useQuery({
-        queryKey: ["connectionrequests", authUser],
-        queryFn: () => fetch(`https://plugged-in-server.onrender.com/connectionrequests?email=${authUser?.email}`).then((res) => res.json()),
+        queryKey: ["connectionrequests", user],
+        queryFn: () => fetch(`https://plugged-in-server.onrender.com/connectionrequests?email=${user?.email}`).then((res) => res.json()),
     });
     console.log(connectionRequests);
 
     return (
-        <Dashboard title={`Requests of ${authUser?.displayName}`} className="grid grid-cols-[repeat(auto-fill,_minmax(20.5rem,_1fr))] gap-6">
+        <Dashboard title={`Requests of ${user?.name}`} className="grid grid-cols-[repeat(auto-fill,_minmax(20.5rem,_1fr))] gap-6">
             {connectionRequestLoading ? (
                 [...Array(6)].map((user, index) => <MemberCardLoader key={index} />)
             ) : connectionRequests?.length ? (

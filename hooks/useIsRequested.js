@@ -1,23 +1,21 @@
 import { useQuery } from "@tanstack/react-query";
-import React from "react";
 import { useAuth } from "./useAuth";
 
 const useIsRequested = (requestedUserEmail) => {
-  const { authUser } = useAuth();
+    const { user } = useAuth();
 
-  if (requestedUserEmail && authUser) {
-    const { data: status = "", refetch: requestRefetch } = useQuery({
-      queryKey: ["isRequested", authUser, requestedUserEmail],
-      queryFn: () =>
-        fetch(
-          `https://plugged-in-server.onrender.com/isRequested?userEmail=${authUser?.email}&friendUserEmail=${requestedUserEmail}`
-        ).then((res) => res.json()),
-    });
-    console.log(status.status);
-    return { requestStatus: status?.status, requestRefetch };
-  } else {
-    return { requestStatus: "holding" };
-  }
+    if (requestedUserEmail && user) {
+        const { data: status = "", refetch: requestRefetch } = useQuery({
+            queryKey: ["isRequested", user, requestedUserEmail],
+            queryFn: () =>
+                fetch(`https://plugged-in-server.onrender.com/isRequested?userEmail=${user?.email}&friendUserEmail=${requestedUserEmail}`).then((res) =>
+                    res.json()
+                ),
+        });
+        return { requestStatus: status?.status, requestRefetch };
+    } else {
+        return { requestStatus: "holding" };
+    }
 };
 
 export default useIsRequested;

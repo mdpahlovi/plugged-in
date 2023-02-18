@@ -17,8 +17,7 @@ const MediaCard = ({ media, refetch, setShareMedia, setDeletingRecordId, childre
     const { _id, date, mediaType, mediaUrl, title, teamName } = media;
     const [isEditing, setIsEditing] = useState(false);
     const [enabled, setEnabled] = useState(false);
-    const { authUser } = useAuth();
-    const { user } = useGetUser(authUser?.email);
+    const { user } = useAuth();
 
     const date_is = format(parseISO(date), "PP");
     const time_is = format(parseISO(date), "p");
@@ -39,8 +38,8 @@ const MediaCard = ({ media, refetch, setShareMedia, setDeletingRecordId, childre
     };
 
     const { data: teams } = useQuery({
-        queryKey: ["team", authUser],
-        queryFn: () => fetch(`https://plugged-in-server.onrender.com/teamByUser?email=${authUser?.email}`).then((res) => res.json()),
+        queryKey: ["team", user],
+        queryFn: () => fetch(`https://plugged-in-server.onrender.com/teamByUser?email=${user?.email}`).then((res) => res.json()),
     });
 
     return (

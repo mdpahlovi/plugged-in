@@ -9,7 +9,7 @@ import Dashboard from "../../components/Layout/Dashboard";
 import { useAuth } from "../../hooks/useAuth";
 
 const Friends = () => {
-    const { authUser } = useAuth();
+    const { user } = useAuth();
     const [disconnectingFriend, setDisconnectingFriend] = useState(null);
 
     const {
@@ -17,12 +17,12 @@ const Friends = () => {
         isLoading: friendsLoading,
         refetch: friendListRefetch,
     } = useQuery({
-        queryKey: ["friends", authUser],
-        queryFn: () => fetch(`https://plugged-in-server.onrender.com/friends?email=${authUser?.email}`).then((res) => res.json()),
+        queryKey: ["friends", user],
+        queryFn: () => fetch(`https://plugged-in-server.onrender.com/friends?email=${user?.email}`).then((res) => res.json()),
     });
 
     return (
-        <Dashboard title={`Friends of ${authUser?.displayName}`} className="grid grid-cols-[repeat(auto-fill,_minmax(20.5rem,_1fr))] gap-6">
+        <Dashboard title={`Friends of ${user?.name}`} className="grid grid-cols-[repeat(auto-fill,_minmax(20.5rem,_1fr))] gap-6">
             {friendsLoading ? (
                 [...Array(6)].map((user, index) => <MemberCardLoader key={index} />)
             ) : friends?.length ? (
