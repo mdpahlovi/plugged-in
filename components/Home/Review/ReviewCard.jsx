@@ -1,10 +1,9 @@
-import { useTheme } from "../../../hooks/useTheme";
 import { format, parseISO } from "date-fns";
 import Image from "next/image";
-import ReactStars from "react-rating-stars-component";
+import Rating from "react-rating";
+import { HiOutlineStar, HiStar } from "react-icons/hi2";
 
 const ReviewCard = ({ review }) => {
-    const { theme } = useTheme();
     const { name, location, time, avatar, rating, details } = review;
     const date = format(parseISO(time), "PP");
     const time_is = format(parseISO(time), "p");
@@ -24,14 +23,12 @@ const ReviewCard = ({ review }) => {
                         </p>
                     </div>
                 </div>
-                <div className="flex items-center space-x-2">
-                    <ReactStars
-                        count={5}
-                        size={28}
-                        isHalf={true}
-                        activeColor={theme === "light" ? "#201172" : "#6f2d97"}
-                        value={parseInt(rating)}
-                        edit={false}
+                <div className="hidden sm:block">
+                    <Rating
+                        initialRating={parseFloat(rating)}
+                        fullSymbol={<HiStar className="text-2xl text-primary" />}
+                        emptySymbol={<HiOutlineStar className="text-2xl text-primary" />}
+                        readonly
                     />
                 </div>
             </div>

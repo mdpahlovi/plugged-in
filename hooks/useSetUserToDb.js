@@ -21,8 +21,10 @@ const useSetUserToDb = (user) => {
                     localStorage.setItem("plugged-token", res.data.token);
                     if (res.data.result.acknowledged) {
                         userRefetch();
+                        setConfirmation(res.data.result);
+                    } else {
+                        setConfirmation(res.data.result);
                     }
-                    setConfirmation(res.data.result);
                 })
                 .catch((error) => console.log(error));
         }
