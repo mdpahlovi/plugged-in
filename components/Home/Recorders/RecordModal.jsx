@@ -1,10 +1,10 @@
 import React, { useEffect, useRef, useState } from "react";
-import { useReactMediaRecorder } from "react-media-recorder";
 import { HiOutlinePlay, HiOutlinePause, HiOutlinePlayPause } from "react-icons/hi2";
 import { BsDownload } from "react-icons/bs";
+import { CgClose } from "react-icons/cg";
 import { IconButton } from "../../Common/Buttons";
-import useSetMediaToDb from "../../../hooks/useSetMediaToDb";
 import { useAuth } from "../../../hooks/useAuth";
+import useSetMediaToDb from "../../../hooks/useSetMediaToDb";
 import { toast } from "react-toastify";
 
 const VideoPreview = ({ stream }) => {
@@ -21,15 +21,21 @@ const VideoPreview = ({ stream }) => {
     return <video className="video" ref={videoRef} autoPlay controls />;
 };
 
-const ScreenRecorderModal = ({ startScreen, setStartScreen }) => {
-    const [enable, setEnable] = useState(true);
-    const { status, startRecording, stopRecording, pauseRecording, resumeRecording, mediaBlobUrl, clearBlobUrl, previewStream } = useReactMediaRecorder({
-        screen: true,
-        blobPropertyBag: {
-            type: "video/mp4",
-        },
-    });
+const RecordModal = ({
+    mode,
+    start,
+    setStart,
+    status,
+    startRecording,
+    stopRecording,
+    pauseRecording,
+    resumeRecording,
+    clearBlobUrl,
+    mediaBlobUrl,
+    previewStream,
+}) => {
     const { user } = useAuth();
+    const [enable, setEnable] = useState(true);
     const [media, setMedia] = useState(null);
     const { confirmation } = useSetMediaToDb(media, mediaBlobUrl);
 
@@ -40,65 +46,65 @@ const ScreenRecorderModal = ({ startScreen, setStartScreen }) => {
     }, [confirmation]);
 
     useEffect(() => {
-        if (startScreen === "start") {
+        if (start === "start") {
             setEnable(true);
             startRecording();
             if (status === "recording") {
-                setStartScreen("recording");
+                setStart("recording");
             } else {
-                setStartScreen("denied");
+                setStart("denied");
             }
-        } else if (startScreen === "stop") {
+        } else if (start === "stop") {
             setEnable(false);
             stopRecording();
         }
-    }, [startScreen, startRecording, stopRecording, setStartScreen, status]);
+    }, [start, startRecording, stopRecording, setStart, status]);
 
     useEffect(() => {
         if (mediaBlobUrl && user) {
             setMedia({
                 date: new Date(),
                 authorEmail: user?.email,
-                mediaType: "screen",
+                mediaType: mode === "Audio Record" ? "audio" : "video",
             });
         }
-    }, [mediaBlobUrl, user]);
+    }, [mediaBlobUrl, mode, user]);
 
     return (
         <div>
-            <input type="checkbox" id="screenModal" className="modal-toggle" />
+            <input type="checkbox" id={mode} className="modal-toggle" />
             <div className="modal">
                 <div className="modal-box relative">
                     <label
-                        htmlFor="screenModal"
-                        className="btn btn-sm btn-circle absolute right-2 top-2"
+                        htmlFor={mode}
+                        className="absolute right-2 top-2"
                         onClick={() => {
-                            if (status === "stopped") {
-                                clearBlobUrl();
-                            }
+                            if (status === "stopped") clearBlobUrl();
                         }}
                     >
-                        ✕
+                        <IconButton>
+                            <CgClose />
+                        </IconButton>
                     </label>
                     <div>
-                        <p className={`font-bold mb-2`}>
-                            Status :{" "}
+                        <h5 className={`font-bold mb-2`}>
+                            Status :
                             <span
-                                className={`btn btn-xs ${
+                                className={`ml-2 btn btn-xs ${
                                     status === "recording" ? "btn-error" : status === "paused" ? "btn-warning" : status === "stopped" ? "btn-success" : ""
                                 }`}
                             >
                                 {status}
                             </span>
-                        </p>
+                        </h5>
                         <div className="flex flex-col-reverse">
                             <div className="flex items-center justify-evenly my-4">
                                 <IconButton
                                     onClick={() => {
                                         if (status === "recording") {
-                                            setStartScreen("stop");
+                                            setStart("stop");
                                         } else {
-                                            setStartScreen("start");
+                                            setStart("start");
                                         }
                                     }}
                                 >
@@ -125,14 +131,16 @@ const ScreenRecorderModal = ({ startScreen, setStartScreen }) => {
                                     </IconButton>
                                 )}
                             </div>
-                            {/* <video src={mediaBlobUrl} controls autoPlay loop /> */}
                             {enable ? (
                                 <VideoPreview stream={previewStream} />
                             ) : (
-                                status !== "idle" && <video className="video" src={mediaBlobUrl} controls autoPlay loop />
+                                status !== "idle" &&
+                                (mode === "Audio Record" ? (
+                                    <audio src={mediaBlobUrl} autoPlay controls loop className="w-full" />
+                                ) : (
+                                    <video className="video" src={mediaBlobUrl} controls autoPlay loop />
+                                ))
                             )}
-                            {/* <video src={mediaBlobUrl} controls autoPlay loop />
-                    {enable && <VideoPreview stream={previewStream} />} */}
                         </div>
                     </div>
                 </div>
@@ -141,4 +149,4 @@ const ScreenRecorderModal = ({ startScreen, setStartScreen }) => {
     );
 };
 
-export default ScreenRecorderModal;
+export default RecordModal;

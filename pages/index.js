@@ -7,22 +7,13 @@ import HowToRecord from "../components/Home/HowToRecord/HowToRecord";
 import Features from "../components/Home/Features";
 import FaqData from "../components/Home/Faq/FaqData";
 // import ReviewSlider from "../components/Home/Review/ReviewSlider";
-import ScreenRecorderModal from "../components/Home/Recorders/ScreenRecorderModal";
-import VideoRecorderModal from "../components/Home/Recorders/VideoRecorderModal";
-import AudioRecorderModal from "../components/Home/Recorders/AudioRecorderModal";
+import ScreenRecorder from "../components/Home/Recorders/ScreenRecorder";
+import VideoRecorder from "../components/Home/Recorders/VideoRecorder";
+import AudioRecorder from "../components/Home/Recorders/AudioRecorder";
 
 const ReviewSlider = dynamic(() => import("../components/Home/Review/ReviewSlider"), {
     ssr: false,
 });
-// const ScreenRecorderModal = dynamic(() => import("../components/Home/Recorders/ScreenRecorderModal"), {
-//     ssr: false,
-// });
-// const VideoRecorderModal = dynamic(() => import("../components/Home/Recorders/VideoRecorderModal"), {
-//     ssr: false,
-// });
-// const AudioRecorderModal = dynamic(() => import("../components/Home/Recorders/AudioRecorderModal"), {
-//     ssr: false,
-// });
 
 export default function Home() {
     const [startScreen, setStartScreen] = useState("stop");
@@ -40,9 +31,9 @@ export default function Home() {
                 setStartAudio={setStartAudio}
                 startAudio={startAudio}
             ></Recorders>
-            <ScreenRecorderModal startScreen={startScreen} setStartScreen={setStartScreen} />
-            <VideoRecorderModal startVideo={startVideo} setStartVideo={setStartVideo} />
-            <AudioRecorderModal startAudio={startAudio} setStartAudio={setStartAudio} />
+            <ScreenRecorder startScreen={startScreen} setStartScreen={setStartScreen} />
+            <VideoRecorder startVideo={startVideo} setStartVideo={setStartVideo} />
+            <AudioRecorder startAudio={startAudio} setStartAudio={setStartAudio} />
             <HowToRecord />
             <Features />
             <ReviewSlider />
