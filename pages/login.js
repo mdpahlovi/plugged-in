@@ -1,19 +1,19 @@
 import Image from "next/image";
 import Link from "next/link";
+import { useState } from "react";
+import { useRouter } from "next/router";
+import { toast } from "react-toastify";
+import { useForm } from "react-hook-form";
 import Main from "../components/Layout/Main";
 import googleImg from "../public/logo/google.svg";
 import githubImg from "../public/logo/github.svg";
-import { Button, ButtonOutline } from "../components/Common/Buttons";
-import { useForm } from "react-hook-form";
 import { useAuth } from "../hooks/useAuth";
-import { toast } from "react-toastify";
 import useSetUserToDb from "../hooks/useSetUserToDb";
-import { useState } from "react";
-import { useRouter } from "next/router";
 import Wavify from "../components/Common/Wavify";
+import { Button, ButtonOutline, SpinLoader } from "../components/Common/Buttons";
 
 const Login = () => {
-    const { loading, setLoading, login, loginWithGoogle, loginWithGithub } = useAuth();
+    const { userLoading, setLoading, login, loginWithGoogle, loginWithGithub } = useAuth();
     const [loggedInUser, setLoggedInUser] = useState(null);
     const { confirmation } = useSetUserToDb(loggedInUser);
     const router = useRouter();
@@ -97,7 +97,7 @@ const Login = () => {
                     </div>
                     <p className="text-indigo-900 font-bold">Forgot Password ?</p>
                     <Button className="w-full" type="submit">
-                        {loading ? "Loading..." : "Login"}
+                        {userLoading ? <SpinLoader /> : "Login"}
                     </Button>
                 </form>
                 <p className="divider">Login with social accounts</p>

@@ -1,14 +1,20 @@
 import { toast } from "react-toastify";
+import { useAuth } from "../../../hooks/useAuth";
 import { jwt_axios } from "../../../utilities/api";
 import AllUsersRow from "./AllUsersRow";
 
 const AllUsers = ({ users, refetch }) => {
+    const { user, userRefetch } = useAuth();
+
     const handleEdit = (value, email) => {
         jwt_axios
             .patch(`/user/${email}`, { role: value })
             .then((res) => {
                 refetch();
                 toast.success("Role updated successfully");
+                if (user?.email === email) {
+                    userRefetch();
+                }
             })
             .catch((error) => console.log(error));
     };

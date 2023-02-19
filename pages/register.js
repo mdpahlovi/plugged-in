@@ -1,6 +1,6 @@
 import Link from "next/link";
 import Main from "../components/Layout/Main";
-import { Button } from "../components/Common/Buttons";
+import { Button, SpinLoader } from "../components/Common/Buttons";
 import { useForm } from "react-hook-form";
 import { useAuth } from "../hooks/useAuth";
 import { toast } from "react-toastify";
@@ -10,7 +10,7 @@ import { useState } from "react";
 import Wavify from "../components/Common/Wavify";
 
 const Registration = () => {
-    const { loading, setLoading, createUser, updateUserProfile, authRefetch, setAuthRefetch } = useAuth();
+    const { userLoading, setLoading, createUser, updateUserProfile, authRefetch, setAuthRefetch } = useAuth();
     const router = useRouter();
     const [createdUser, setCreatedUser] = useState("");
     const { confirmation } = useSetUserToDb(createdUser);
@@ -119,7 +119,7 @@ const Registration = () => {
                     </div>
                     <div className="pt-2">
                         <Button className="w-full" type="submit">
-                            {loading ? "Loading..." : "Register"}
+                            {userLoading ? <SpinLoader /> : "Register"}
                         </Button>
                     </div>
                 </form>

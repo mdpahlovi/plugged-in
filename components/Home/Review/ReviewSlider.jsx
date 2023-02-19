@@ -11,6 +11,7 @@ import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
 import { toast } from "react-toastify";
 import ReviewLoader from "./ReviewLoader";
+import { api_url } from "../../../utilities/api";
 
 SwiperCore.use([Autoplay]);
 
@@ -25,7 +26,7 @@ const ReviewSlider = () => {
         refetch,
     } = useQuery({
         queryKey: ["reviews"],
-        queryFn: () => fetch(`https://plugged-in-server.onrender.com/reviews`).then((res) => res.json()),
+        queryFn: () => axios(`${api_url}/reviews`).then((res) => res.data),
     });
 
     const handleEdit = (data) => {
@@ -36,7 +37,7 @@ const ReviewSlider = () => {
         data.rating = rating;
 
         axios
-            .post(`https://plugged-in-server.onrender.com/reviews`, data)
+            .post(`${api_url}/reviews`, data)
             .then((res) => {
                 if (res.data) {
                     refetch();

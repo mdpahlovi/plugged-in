@@ -4,7 +4,7 @@ import Main from "../../components/Layout/Main";
 import checkImg from "../../public/images/checkImg.png";
 import { HiFlag, HiOutlineCreditCard, HiOutlineUserCircle } from "react-icons/hi2";
 import { MdAlternateEmail } from "react-icons/md";
-import { Button } from "../../components/Common/Buttons";
+import { Button, SpinLoader } from "../../components/Common/Buttons";
 import { Protect } from "../../components/Common/ProtectedRoute";
 import Header from "../../components/Common/Header";
 import Breadcrumbs from "../../components/Common/Breadcrumbs";
@@ -169,7 +169,7 @@ const Checkout = () => {
                         </div>
                     </div>
                     <Button type="submit" className="mt-6 w-full">
-                        {planLoading ? "Loading..." : "Place Order"}
+                        {planLoading ? <SpinLoader /> : "Place Order"}
                     </Button>
                 </form>
             </div>

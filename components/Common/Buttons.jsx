@@ -1,3 +1,5 @@
+import { ThreeCircles } from "react-loader-spinner";
+
 export const Button = ({ children, onClick, className, type }) => {
     return (
         <button
@@ -35,6 +37,15 @@ export const IconButton = ({ children, className, onClick }) => {
             <span className="relative p-2 transition-all ease-out bg-base-100 rounded-full group-hover:bg-opacity-0 duration-400">
                 <span className="relative text-base-content group-hover:text-white">{children}</span>
             </span>
+        </div>
+    );
+};
+
+export const SpinLoader = ({ children, black }) => {
+    return (
+        <div className="flex items-center justify-center gap-2.5">
+            <ThreeCircles height="24" width="24" color={black ? "#000" : "#fff"} />
+            {children ? children : "Loading"}
         </div>
     );
 };

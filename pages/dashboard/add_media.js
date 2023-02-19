@@ -2,7 +2,7 @@ import axios from "axios";
 import Image from "next/image";
 import { useState } from "react";
 import { toast } from "react-toastify";
-import { Button } from "../../components/Common/Buttons";
+import { Button, SpinLoader } from "../../components/Common/Buttons";
 import Dashboard from "../../components/Layout/Dashboard";
 import { useAuth } from "../../hooks/useAuth";
 import Light from "../../public/images/file_upload/light.svg";
@@ -101,7 +101,7 @@ const AddMedia = () => {
                 </p>
                 {updatedMedia ? (
                     <Button type="submit" className="w-full">
-                        {uploadLoading ? "Uploading..." : "Upload"}
+                        {uploadLoading ? <SpinLoader>Uploading</SpinLoader> : "Upload"}
                     </Button>
                 ) : (
                     ""

@@ -5,7 +5,7 @@ import { useRouter } from "next/router";
 import Logo from "../../public/logo/logo.png";
 import ThemeToggle from "../Common/ThemeToggle";
 import { CgMenuRightAlt, CgClose } from "react-icons/cg";
-import { ButtonOutline, IconButton } from "../Common/Buttons";
+import { ButtonOutline, IconButton, SpinLoader } from "../Common/Buttons";
 import { useAuth } from "../../hooks/useAuth";
 import NoPhoto from "../../public/images/no-photo.jpg";
 
@@ -45,7 +45,9 @@ const Navbar = () => {
                         ))}
                     </div>
                     {loading || userLoading ? (
-                        <ButtonOutline sm>Loading...</ButtonOutline>
+                        <ButtonOutline sm>
+                            <SpinLoader black />
+                        </ButtonOutline>
                     ) : user?._id ? (
                         user?.avatar ? (
                             <div className="relative">
