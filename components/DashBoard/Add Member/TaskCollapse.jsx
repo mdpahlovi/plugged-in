@@ -9,16 +9,16 @@ const TaskCollapse = ({ task, tasksRefetch, team }) => {
   const { data: media = {} } = useQuery({
     queryKey: [task, "media"],
     queryFn: () =>
-      fetch(`http://localhost:5000/media/${task?.media_id}`).then((res) =>
-        res.json()
-      ),
+      fetch(
+        `https://plugged-in-server.onrender.com/media/${task?.media_id}`
+      ).then((res) => res.json()),
   });
 
   console.log("media", media);
   console.log("team", team);
 
   const handleClick = (event) => {
-    fetch(`http://localhost:5000/giveRward?id=${task?._id}`, {
+    fetch(`https://plugged-in-server.onrender.com/giveRward?id=${task?._id}`, {
       method: "PUT",
       headers: {
         "content-type": "application/json",

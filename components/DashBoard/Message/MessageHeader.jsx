@@ -6,9 +6,9 @@ const MessageHeader = ({ userLoading, user, roomName }) => {
   const { data: room } = useQuery({
     queryKey: ["singleRoom", roomName],
     queryFn: () =>
-      fetch(`http://localhost:5000/singleRoom?roomName=${roomName}`).then(
-        (res) => res.json()
-      ),
+      fetch(
+        `https://plugged-in-server.onrender.com/singleRoom?roomName=${roomName}`
+      ).then((res) => res.json()),
   });
 
   if (userLoading) {

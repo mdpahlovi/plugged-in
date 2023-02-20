@@ -19,7 +19,7 @@ const TaskDetailsModal = ({
     queryKey: ["media", selectedMemberTask],
     queryFn: () =>
       fetch(
-        `http://localhost:5000/media?email=${selectedMemberTask?.email}`
+        `https://plugged-in-server.onrender.com/media?email=${selectedMemberTask?.email}`
       ).then((res) => res.json()),
   });
 

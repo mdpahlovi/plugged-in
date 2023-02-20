@@ -10,7 +10,7 @@ export const useIsPending = (pendingUserEmail) => {
       queryKey: ["isPending", user, pendingUserEmail],
       queryFn: () =>
         fetch(
-          `http://localhost:5000/isPending?userEmail=${user?.email}&pendingUserEmail=${pendingUserEmail}`
+          `https://plugged-in-server.onrender.com/isPending?userEmail=${user?.email}&pendingUserEmail=${pendingUserEmail}`
         ).then((res) => res.json()),
     });
     return { pendingStatus: status?.status, pendingRefetch };

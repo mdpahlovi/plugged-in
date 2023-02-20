@@ -12,7 +12,7 @@ const TaskList = ({ task, refetch, editor }) => {
 
   const handleDelete = (id, button) => {
     axios
-      .delete(`http://localhost:5000/task/${id}`)
+      .delete(`https://plugged-in-server.onrender.com/task/${id}`)
       .then((res) => {
         if (res.data) {
           refetch();
@@ -30,7 +30,7 @@ const TaskList = ({ task, refetch, editor }) => {
   const handleDone = (id) => {
     const task = { done: done ? false : true };
     axios
-      .put(`http://localhost:5000/task/${id}`, task)
+      .put(`https://plugged-in-server.onrender.com/task/${id}`, task)
       .then((res) => {
         if (res.data) {
           refetch();

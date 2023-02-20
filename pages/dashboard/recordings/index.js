@@ -21,9 +21,9 @@ const Recordings = () => {
   } = useQuery({
     queryKey: ["userMedia", user],
     queryFn: () =>
-      fetch(`http://localhost:5000/userMedia?email=${user?.email}`).then(
-        (res) => res.json()
-      ),
+      fetch(
+        `https://plugged-in-server.onrender.com/userMedia?email=${user?.email}`
+      ).then((res) => res.json()),
   });
 
   return (

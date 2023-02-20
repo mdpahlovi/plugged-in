@@ -7,8 +7,8 @@ const MediaCollapse = ({ media, open, toggle }) => {
   const { data: tasks = [] } = useQuery({
     queryKey: ["tasks", media],
     queryFn: () =>
-      fetch(`http://localhost:5000/tasks/${media?._id}`).then((res) =>
-        res.json()
+      fetch(`https://plugged-in-server.onrender.com/tasks/${media?._id}`).then(
+        (res) => res.json()
       ),
   });
 

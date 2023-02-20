@@ -29,7 +29,7 @@ const ChatSection = () => {
     queryKey: ["singleRoom", query],
     queryFn: () =>
       fetch(
-        `http://localhost:5000/singleRoom?roomName=${query?.roomName}`
+        `https://plugged-in-server.onrender.com/singleRoom?roomName=${query?.roomName}`
       ).then((res) => res.json()),
   });
 
@@ -51,7 +51,7 @@ const ChatSection = () => {
     queryKey: ["getMessages", query],
     queryFn: () =>
       fetch(
-        `http://localhost:5000/getMessages?roomName=${query?.roomName}`
+        `https://plugged-in-server.onrender.com/getMessages?roomName=${query?.roomName}`
       ).then((res) => res.json()),
   });
 
@@ -98,7 +98,7 @@ const ChatSection = () => {
 
   const sendMsgToDb = (sendingMsg) => {
     jwt_axios
-      .put("http://localhost:5000/messageStore", sendingMsg)
+      .put("https://plugged-in-server.onrender.com/messageStore", sendingMsg)
       .then((res) => {
         if (res?.data?.acknowledged) {
           messagesRefetch();

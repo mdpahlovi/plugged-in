@@ -19,9 +19,9 @@ const Friends = () => {
   } = useQuery({
     queryKey: ["friends", user],
     queryFn: () =>
-      fetch(`http://localhost:5000/friends?email=${user?.email}`).then((res) =>
-        res.json()
-      ),
+      fetch(
+        `https://plugged-in-server.onrender.com/friends?email=${user?.email}`
+      ).then((res) => res.json()),
   });
 
   return (

@@ -21,7 +21,10 @@ const useSetMediaToDb = (media, blob_url) => {
             .then((res) => {
               media.mediaUrl = res.data.url;
               axios
-                .post("http://localhost:5000/userRecords", media)
+                .post(
+                  "https://plugged-in-server.onrender.com/userRecords",
+                  media
+                )
                 .then((res) => setConfirmation(res.data))
                 .catch((error) => console.log(error.message));
             })

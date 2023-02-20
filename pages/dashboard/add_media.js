@@ -49,7 +49,7 @@ const AddMedia = () => {
           title: event.target.title.value,
         };
         axios
-          .post("http://localhost:5000/userRecords", mediaData)
+          .post("https://plugged-in-server.onrender.com/userRecords", mediaData)
           .then((res) => {
             setUploadLoading(false);
             setUpdatedMediaUrl("");

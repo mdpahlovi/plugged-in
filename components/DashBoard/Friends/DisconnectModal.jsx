@@ -29,7 +29,7 @@ const DisconnectModal = ({
       email,
       room,
     };
-    fetch("http://localhost:5000/disconnect", {
+    fetch("https://plugged-in-server.onrender.com/disconnect", {
       method: "PUT",
       headers: {
         "content-type": "application/json",
@@ -41,9 +41,12 @@ const DisconnectModal = ({
         if (data.friendDisconnectingResult && data.userDisconnectingResult) {
           // friendListRefetch();
           // friendRefetch();
-          fetch(`http://localhost:5000/deleteRoom?roomName=${room}`, {
-            method: "DELETE",
-          })
+          fetch(
+            `https://plugged-in-server.onrender.com/deleteRoom?roomName=${room}`,
+            {
+              method: "DELETE",
+            }
+          )
             .then((res) => res.json())
             .then((data) => {
               if (data.acknowledged) {

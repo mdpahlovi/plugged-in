@@ -9,7 +9,7 @@ const SeeRewardModal = ({ setSelectedMemberTask, selectedMemberTask }) => {
     queryKey: ["taskByUser", selectedMemberTask],
     queryFn: () =>
       fetch(
-        `http://localhost:5000/taskByUser?email=${selectedMemberTask?.email}`
+        `https://plugged-in-server.onrender.com/taskByUser?email=${selectedMemberTask?.email}`
       ).then((res) => res.json()),
   });
 

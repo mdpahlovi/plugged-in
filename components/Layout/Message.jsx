@@ -12,7 +12,9 @@ const Message = ({ children }) => {
   const { data: rooms = [], refetch: roomsRefetch } = useQuery({
     queryKey: ["getRooms"],
     queryFn: () =>
-      fetch("http://localhost:5000/getRooms").then((res) => res.json()),
+      fetch("https://plugged-in-server.onrender.com/getRooms").then((res) =>
+        res.json()
+      ),
   });
 
   return (

@@ -15,7 +15,7 @@ const DeleteConfirmModal = ({
 
   const handleYes = (id) => {
     axios
-      .delete(`http://localhost:5000/record/${id}`)
+      .delete(`https://plugged-in-server.onrender.com/record/${id}`)
       .then((res) => {
         if (res.data.deletedCount > 0) {
           refetch();

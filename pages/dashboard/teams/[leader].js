@@ -56,7 +56,7 @@ const TeamMembers = () => {
                   roomName: team?.roomName,
                 };
                 console.log(memberData);
-                fetch("http://localhost:5000/addRoomMate", {
+                fetch("https://plugged-in-server.onrender.com/addRoomMate", {
                   method: "PUT",
                   headers: {
                     "content-type": "application/json",
@@ -100,16 +100,19 @@ const TeamMembers = () => {
               .patch(`/user/${email}`, { role: "basic", team: [...restTeam] })
               .then((res) => {
                 if (res.data) {
-                  fetch(`http://localhost:5000/deleteRoomMate`, {
-                    method: "PUT",
-                    headers: {
-                      "content-type": "application/json",
-                    },
-                    body: JSON.stringify({
-                      memberEmail: email,
-                      roomName: team?.roomName,
-                    }),
-                  })
+                  fetch(
+                    `https://plugged-in-server.onrender.com/deleteRoomMate`,
+                    {
+                      method: "PUT",
+                      headers: {
+                        "content-type": "application/json",
+                      },
+                      body: JSON.stringify({
+                        memberEmail: email,
+                        roomName: team?.roomName,
+                      }),
+                    }
+                  )
                     .then((res) => res.json())
                     .then((data) => {
                       console.log(data);

@@ -21,7 +21,7 @@ const RequestCard = ({ request, connectionRequestRefetch }) => {
       email: auth_user?.email,
     };
 
-    fetch("http://localhost:5000/calcelConnect", {
+    fetch("https://plugged-in-server.onrender.com/calcelConnect", {
       method: "PUT",
       headers: {
         "content-type": "application/json",
@@ -46,7 +46,7 @@ const RequestCard = ({ request, connectionRequestRefetch }) => {
       email: auth_user?.email,
     };
 
-    fetch("http://localhost:5000/makeFriend", {
+    fetch("https://plugged-in-server.onrender.com/makeFriend", {
       method: "PUT",
       headers: {
         "content-type": "application/json",
@@ -68,7 +68,7 @@ const RequestCard = ({ request, connectionRequestRefetch }) => {
             members: [auth_user?.email, email],
           };
 
-          fetch(`http://localhost:5000/makeRoom`, {
+          fetch(`https://plugged-in-server.onrender.com/makeRoom`, {
             method: "POST",
             headers: {
               "content-type": "application/json",

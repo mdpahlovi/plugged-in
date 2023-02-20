@@ -36,7 +36,7 @@ const MediaCard = ({
   const handleEdit = ({ title, teamName }) => {
     const updatingRecord = { _id, title, teamName };
     axios
-      .put(`http://localhost:5000/record`, updatingRecord)
+      .put(`https://plugged-in-server.onrender.com/record`, updatingRecord)
       .then((res) => {
         if (res.data.matchedCount > 0) {
           refetch();
@@ -50,9 +50,9 @@ const MediaCard = ({
   const { data: teams } = useQuery({
     queryKey: ["team", user],
     queryFn: () =>
-      fetch(`http://localhost:5000/teamByUser?email=${user?.email}`).then(
-        (res) => res.json()
-      ),
+      fetch(
+        `https://plugged-in-server.onrender.com/teamByUser?email=${user?.email}`
+      ).then((res) => res.json()),
   });
 
   return (

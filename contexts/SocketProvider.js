@@ -1,7 +1,7 @@
 import React, { createContext } from "react";
 import { io } from "socket.io-client";
 
-const socket = io.connect("http://localhost:5000/");
+const socket = io.connect("https://plugged-in-server.onrender.com/");
 export const SocketContext = createContext();
 
 const SocketProvider = ({ children }) => {

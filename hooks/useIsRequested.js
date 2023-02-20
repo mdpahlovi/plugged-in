@@ -9,7 +9,7 @@ const useIsRequested = (requestedUserEmail) => {
       queryKey: ["isRequested", user, requestedUserEmail],
       queryFn: () =>
         fetch(
-          `http://localhost:5000/isRequested?userEmail=${user?.email}&friendUserEmail=${requestedUserEmail}`
+          `https://plugged-in-server.onrender.com/isRequested?userEmail=${user?.email}&friendUserEmail=${requestedUserEmail}`
         ).then((res) => res.json()),
     });
     return { requestStatus: status?.status, requestRefetch };

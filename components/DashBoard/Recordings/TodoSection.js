@@ -40,7 +40,7 @@ const TodoSection = ({ tasks, media_id, refetch }) => {
       assignedTo: user?.email,
     };
     axios
-      .post(`http://localhost:5000/task`, task)
+      .post(`https://plugged-in-server.onrender.com/task`, task)
       .then((res) => {
         if (res.data) {
           refetch();

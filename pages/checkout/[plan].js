@@ -70,7 +70,7 @@ const Checkout = () => {
                 teamName: name,
               };
 
-              fetch("http://localhost:5000/makeRoom", {
+              fetch("https://plugged-in-server.onrender.com/makeRoom", {
                 method: "POST",
                 headers: {
                   "content-type": "application/json",
