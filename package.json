@@ -10,7 +10,6 @@
     },
     "dependencies": {
         "@emailjs/browser": "^3.10.0",
-        "@fortawesome/fontawesome-svg-core": "^6.3.0",
         "@headlessui/react": "^1.7.7",
         "@next/font": "13.1.1",
         "@stripe/react-stripe-js": "^1.16.4",
@@ -39,7 +38,6 @@
         "react-dom": "18.2.0",
         "react-drag-and-drop": "^3.0.0",
         "react-dropbox-chooser": "^0.0.5",
-        "react-files": "^3.0.0",
         "react-hook-form": "^7.43.1",
         "react-icons": "^4.7.1",
         "react-loader-spinner": "^5.3.4",

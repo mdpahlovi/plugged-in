@@ -36,11 +36,6 @@ const useDashboardRoutes = (user) => {
                         icon: <SiGooglemessages />,
                     },
                     {
-                        href: "/dashboard/requests",
-                        name: "Requests",
-                        icon: <GoGitPullRequest className="text-lg" />,
-                    },
-                    {
                         href: "/dashboard/peoples",
                         name: "Peoples",
                         icon: <FaUsers className="text-lg" />,
@@ -49,6 +44,11 @@ const useDashboardRoutes = (user) => {
                         href: "/dashboard/friends",
                         name: "Friends",
                         icon: <MdConnectWithoutContact className="text-lg" />,
+                    },
+                    {
+                        href: "/dashboard/requests",
+                        name: "Requests",
+                        icon: <GoGitPullRequest className="text-lg" />,
                     },
                 ]);
             } else if (user.role === "pro") {

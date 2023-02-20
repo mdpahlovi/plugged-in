@@ -23,11 +23,14 @@ const FriendCard = ({ friend, setDisconnectingFriend }) => {
                 <Image src={user?.avatar ? user?.avatar : NoPhoto} className="mb-3 rounded-full shadow-lg" alt="" width={112} height={112} />
                 <h2 className="text-center">{user?.name}</h2>
                 <p>{email}</p>
-                <div className="mt-3 flex space-x-4">
+                <div className="mt-3 w-4/5 xs:w-auto grid xs:grid-cols-2 gap-4">
                     <Button onClick={handleMessage}>Message</Button>
-                    <label htmlFor="disconnectModal" onClick={() => setDisconnectingFriend(friend)}>
-                        <ButtonOutline>Unfriend</ButtonOutline>
-                    </label>
+
+                    <ButtonOutline>
+                        <label htmlFor="disconnectModal" onClick={() => setDisconnectingFriend(friend)}>
+                            Unfriend
+                        </label>
+                    </ButtonOutline>
                 </div>
             </div>
         </div>
