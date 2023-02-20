@@ -2,10 +2,11 @@ import React, { useEffect, useRef, useState } from "react";
 import { HiOutlinePlay, HiOutlinePause, HiOutlinePlayPause } from "react-icons/hi2";
 import { BsDownload } from "react-icons/bs";
 import { CgClose } from "react-icons/cg";
-import { IconButton } from "../../Common/Buttons";
+import { Button, ButtonOutline, IconButton, SpinLoader } from "../../Common/Buttons";
 import { useAuth } from "../../../hooks/useAuth";
 import useSetMediaToDb from "../../../hooks/useSetMediaToDb";
 import { toast } from "react-toastify";
+import { useForm } from "react-hook-form";
 
 const VideoPreview = ({ stream }) => {
     const videoRef = useRef(null);
@@ -38,9 +39,12 @@ const RecordModal = ({
     const [enable, setEnable] = useState(true);
     const [media, setMedia] = useState(null);
     const { confirmation } = useSetMediaToDb(media, mediaBlobUrl);
+    const [uploading, setUploading] = useState(false);
 
     useEffect(() => {
         if (confirmation.acknowledged) {
+            setMedia(null);
+            setUploading(false);
             toast.success("Media saved successfully");
         }
     }, [confirmation]);
@@ -49,6 +53,9 @@ const RecordModal = ({
         if (start === "start") {
             setEnable(true);
             startRecording();
+            if (mediaBlobUrl) {
+                clearBlobUrl();
+            }
             if (status === "recording") {
                 setStart("recording");
             } else {
@@ -58,23 +65,23 @@ const RecordModal = ({
             setEnable(false);
             stopRecording();
         }
-    }, [start, startRecording, stopRecording, setStart, status]);
+    }, [start, startRecording, stopRecording, setStart, status, clearBlobUrl, mediaBlobUrl]);
 
-    useEffect(() => {
-        if (mediaBlobUrl && user) {
-            setMedia({
-                date: new Date(),
-                authorEmail: user?.email,
-                mediaType: mode === "Audio Record" ? "audio" : "video",
-            });
+    const { register, handleSubmit } = useForm();
+    const handleEdit = ({ title, teamName }) => {
+        setUploading(true);
+        const media = { date: new Date(), authorEmail: user?.email, mediaType: mode === "Audio Record" ? "audio" : "video", title };
+        if (teamName) {
+            media.teamName = teamName;
         }
-    }, [mediaBlobUrl, mode, user]);
+        setMedia(media);
+    };
 
     return (
         <div>
             <input type="checkbox" id={mode} className="modal-toggle" />
             <div className="modal">
-                <div className="modal-box relative">
+                <div className="modal-box rounded-lg relative">
                     <label
                         htmlFor={mode}
                         className="absolute right-2 top-2"
@@ -87,7 +94,7 @@ const RecordModal = ({
                         </IconButton>
                     </label>
                     <div>
-                        <h5 className={`font-bold mb-2`}>
+                        <h5 className={`font-bold mb-4`}>
                             Status :
                             <span
                                 className={`ml-2 btn btn-xs ${
@@ -98,8 +105,9 @@ const RecordModal = ({
                             </span>
                         </h5>
                         <div className="flex flex-col-reverse">
-                            <div className="flex items-center justify-evenly my-4">
-                                <IconButton
+                            <div className="grid grid-cols-2 gap-4 mt-4">
+                                <ButtonOutline
+                                    disabled={status === "paused" ? true : false}
                                     onClick={() => {
                                         if (status === "recording") {
                                             setStart("stop");
@@ -108,10 +116,13 @@ const RecordModal = ({
                                         }
                                     }}
                                 >
-                                    {status === "recording" ? <HiOutlinePause className="text-2xl" /> : <HiOutlinePlay className="text-2xl" />}
-                                </IconButton>
+                                    <div className="flex items-center justify-center gap-2">
+                                        {status === "recording" ? "Stop Recording" : "Start Recording"}
+                                        {status === "recording" ? <HiOutlinePause className="text-lg" /> : <HiOutlinePlay className="text-lg" />}
+                                    </div>
+                                </ButtonOutline>
                                 {(status === "recording" || status === "paused") && (
-                                    <IconButton
+                                    <ButtonOutline
                                         onClick={() => {
                                             if (status === "recording") {
                                                 pauseRecording();
@@ -120,17 +131,38 @@ const RecordModal = ({
                                             }
                                         }}
                                     >
-                                        <HiOutlinePlayPause className="text-2xl" />
-                                    </IconButton>
+                                        <div className="flex items-center justify-center gap-2">
+                                            {status === "paused" ? "Resume" : "Pause"}
+                                            <HiOutlinePlayPause className="text-lg" />
+                                        </div>
+                                    </ButtonOutline>
                                 )}
                                 {mediaBlobUrl && (
-                                    <IconButton>
-                                        <a href={mediaBlobUrl} download="media/mp4">
-                                            <BsDownload className="text-2xl" />
+                                    <ButtonOutline>
+                                        <a href={mediaBlobUrl} download="media/mp4" className="flex items-center justify-center gap-2">
+                                            Download
+                                            <BsDownload className="text-lg" />
                                         </a>
-                                    </IconButton>
+                                    </ButtonOutline>
                                 )}
                             </div>
+                            {user?._id && !enable ? (
+                                <form onSubmit={handleSubmit(handleEdit)} className="mt-4 space-y-4">
+                                    <input {...register("title")} className="input" placeholder="Recording Title" />
+                                    <select {...register("teamName")} className={`select select-bordered w-full ${user?.role !== "team" && "hidden"}`}>
+                                        {user?.team?.map((team, index) => (
+                                            <option key={index} value={`${team?.name}`}>
+                                                {team?.name}
+                                            </option>
+                                        ))}
+                                    </select>
+                                    <Button type="submit" className="w-full">
+                                        {uploading ? <SpinLoader>Uploading</SpinLoader> : "Upload Now"}
+                                    </Button>
+                                </form>
+                            ) : (
+                                ""
+                            )}
                             {enable ? (
                                 <VideoPreview stream={previewStream} />
                             ) : (

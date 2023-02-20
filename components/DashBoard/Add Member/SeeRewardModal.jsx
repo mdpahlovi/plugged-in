@@ -14,7 +14,7 @@ const SeeRewardModal = ({ selectedMemberTask }) => {
         <div>
             <input type="checkbox" id="seeRewardModal" className="modal-toggle" />
             <label htmlFor="seeRewardModal" className="modal cursor-pointer">
-                <label className="modal-box relative" htmlFor="">
+                <label className="modal-box rounded-lg relative" htmlFor="">
                     {tasks?.map((task, index) => (
                         <div key={index} className="flex items-center justify-between bg-primary rounded-lg px-5 py-2 mt-2 text-white">
                             <p className="text-xl font-bold">{task?.details.replace(/(<([^>]+)>)/gi, "")}</p>

@@ -22,7 +22,7 @@ const TaskDetailsModal = ({ team, selectedMemberTask }) => {
         <div>
             <input type="checkbox" id="taskDetailsModal" className="modal-toggle" />
             <label htmlFor="taskDetailsModal" className="modal cursor-pointer">
-                <label className="space-y-4 modal-box relative" htmlFor="">
+                <label className="space-y-4 modal-box rounded-lg relative" htmlFor="">
                     {mediaLoading ? (
                         [...Array(5)].map((media, index) => <div key={index} className="h-16 bg-base-content/10 rounded-lg animate-pulse" />)
                     ) : teamMedias?.length ? (

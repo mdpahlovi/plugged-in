@@ -64,7 +64,7 @@ const DisconnectModal = ({ disconnectingFriend, friendListRefetch, peoplesRefetc
         <div>
             <input type="checkbox" id="disconnectModal" className="modal-toggle" />
             <div className="modal">
-                <div className="modal-box max-w-md">
+                <div className="modal-box rounded-lg max-w-md">
                     <TiWarningOutline className="w-20 h-20 mx-auto" />
                     <h3 className="text-lg text-center font-medium my-4">
                         Are you sure you want to disconnect <br />

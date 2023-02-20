@@ -103,7 +103,7 @@ const MediaCard = ({ media, refetch, setShareMedia, setDeletingRecordId, childre
                     </form>
                 ) : (
                     <h2>
-                        {title} <span className="-translate-y-1.5 badge badge-accent">{teamName}</span>
+                        {title} {teamName ? <span className="-translate-y-1.5 badge badge-accent">{teamName}</span> : ""}
                     </h2>
                 )}
                 <div className="mt-2 grid xs:grid-cols-[auto_auto] gap-4">

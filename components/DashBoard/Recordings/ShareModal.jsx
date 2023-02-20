@@ -15,6 +15,7 @@ import {
 } from "next-share";
 import React, { Fragment, useState } from "react";
 import CopyToClipboard from "react-copy-to-clipboard";
+import { CgClose } from "react-icons/cg";
 import { MdContentCopy, MdOutlineFileDownloadDone } from "react-icons/md";
 import { IconButton } from "../../Common/Buttons";
 
@@ -47,11 +48,13 @@ const ShareModal = ({ shareMedia, setShareMedia }) => {
                             leaveFrom="opacity-100 scale-100"
                             leaveTo="opacity-0 scale-95"
                         >
-                            <Dialog.Panel className="w-full max-w-md transform overflow-hidden rounded-2xl bg-base-100 p-6 text-left align-middle shadow-xl transition-all">
+                            <Dialog.Panel className="w-full max-w-md transform overflow-hidden rounded-lg bg-base-100 p-6 text-left align-middle shadow-xl transition-all">
                                 <Dialog.Title as="div">
                                     <h2 className="-mt-2 mb-4">Share this media</h2>
-                                    <label className="btn btn-sm btn-circle absolute right-2 top-2" onClick={() => setShareMedia(null)}>
-                                        ✕
+                                    <label className="absolute right-2 top-2">
+                                        <IconButton onClick={() => setShareMedia(null)}>
+                                            <CgClose />
+                                        </IconButton>
                                     </label>
                                 </Dialog.Title>
                                 <div>

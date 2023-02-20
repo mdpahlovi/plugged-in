@@ -34,7 +34,7 @@ const ReviewModal = ({ isOpen, setIsOpen, handleEdit, setRating }) => {
                             leaveFrom="opacity-100 scale-100"
                             leaveTo="opacity-0 scale-95"
                         >
-                            <Dialog.Panel className="w-full max-w-md transform overflow-hidden rounded-2xl bg-base-100 p-6 text-left align-middle shadow-xl transition-all">
+                            <Dialog.Panel className="w-full max-w-md transform overflow-hidden rounded-lg bg-base-100 p-6 text-left align-middle shadow-xl transition-all">
                                 <form action="" onSubmit={handleSubmit(handleEdit)} className="space-y-2">
                                     <div className="flex flex-col xs:flex-row xs:justify-between gap-2">
                                         <h2>Add Your Review</h2>
