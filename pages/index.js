@@ -10,6 +10,8 @@ import FaqData from "../components/Home/Faq/FaqData";
 import ScreenRecorder from "../components/Home/Recorders/ScreenRecorder";
 import VideoRecorder from "../components/Home/Recorders/VideoRecorder";
 import AudioRecorder from "../components/Home/Recorders/AudioRecorder";
+import { BrowserView, MobileView } from "react-device-detect";
+import MobileScreen from "../components/Home/Recorders/MobileScreen";
 
 const ReviewSlider = dynamic(() => import("../components/Home/Review/ReviewSlider"), {
     ssr: false,
@@ -31,7 +33,12 @@ export default function Home() {
                 setStartAudio={setStartAudio}
                 startAudio={startAudio}
             ></Recorders>
-            <ScreenRecorder startScreen={startScreen} setStartScreen={setStartScreen} />
+            <BrowserView>
+                <ScreenRecorder startScreen={startScreen} setStartScreen={setStartScreen} />
+            </BrowserView>
+            <MobileView>
+                <MobileScreen />
+            </MobileView>
             <VideoRecorder startVideo={startVideo} setStartVideo={setStartVideo} />
             <AudioRecorder startAudio={startAudio} setStartAudio={setStartAudio} />
             <HowToRecord />
