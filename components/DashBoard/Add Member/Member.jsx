@@ -61,7 +61,7 @@ const Member = ({
                 <label
                   htmlFor="seeRewardModal"
                   className="w-full cursor-pointer"
-                  onClick={() => setSelectedMemberTask(member)}
+                  onClick={() => setSeerewardMember(member)}
                 >
                   See Rewards
                 </label>
@@ -71,7 +71,7 @@ const Member = ({
                 <label
                   htmlFor="giveRewardModal"
                   className="w-full cursor-pointer"
-                  setGiveRewardMember={() => setSelectedMemberTask(member)}
+                  onClick={() => setGiveRewardMember(member)}
                 >
                   Give Rewards
                 </label>
@@ -81,7 +81,7 @@ const Member = ({
                 <label
                   htmlFor="seeRewardModal"
                   className="w-full cursor-pointer"
-                  onClick={() => setSelectedMemberTask(member)}
+                  onClick={() => setSeerewardMember(member)}
                 >
                   See Rewards
                 </label>
