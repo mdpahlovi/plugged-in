@@ -59,11 +59,11 @@ const Contact = () => {
                         </div>
                     </div>
                     <div className="flex gap-8  justify-center md:justify-start ">
-                        <FaInstagram className="text-2xl hover:text-indigo-900 cursor-pointer" />
-                        <FaTwitter className="text-2xl hover:text-indigo-900 cursor-pointer" />
-                        <FaYoutube className="text-2xl hover:text-indigo-900 cursor-pointer" />
-                        <FaPinterest className="text-2xl hover:text-indigo-900 cursor-pointer" />
-                        <FaGithub className="text-2xl hover:text-indigo-900 cursor-pointer" />
+                        <FaInstagram className="text-2xl hover:text-primary cursor-pointer" />
+                        <FaTwitter className="text-2xl hover:text-primary cursor-pointer" />
+                        <FaYoutube className="text-2xl hover:text-primary cursor-pointer" />
+                        <FaPinterest className="text-2xl hover:text-primary cursor-pointer" />
+                        <FaGithub className="text-2xl hover:text-primary cursor-pointer" />
                     </div>
                 </div>
                 {/* Contact form */}

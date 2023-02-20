@@ -24,7 +24,7 @@ export function Protect(Component) {
         if (screenLoading) {
             return (
                 <div className="w-screen h-screen flex justify-center items-center">
-                    <CirclesWithBar height="160" width="160" color={theme === "light" ? "#201172" : "#6f2d97"} />
+                    <CirclesWithBar height="160" width="160" color={theme === "light" ? "#362c75" : "#7565d9"} />
                 </div>
             );
         } else {

@@ -49,7 +49,7 @@ const Registration = () => {
     return (
         <Main title="Registration to PluggedIn">
             <div className="section-gap bg-base-100 max-w-lg sm:mx-auto shadow-lg drop-shadow p-8 space-y-6 rounded-lg mx-8">
-                <h2 className="text-center">Create your account</h2>
+                <h1 className="mb-0">Create your account</h1>
                 <form action="" onSubmit={handleSubmit(handleRegistration)} className="space-y-4">
                     <div className="space-y-1">
                         <label htmlFor="name" className="block font-semibold">
@@ -124,8 +124,8 @@ const Registration = () => {
                     </div>
                 </form>
                 <p className="text-center">
-                    Already have a account?
-                    <Link href="/login" className="ml-2 text-indigo-900 font-semibold underline">
+                    Already have a account? <br className="xs:hidden" />
+                    <Link href="/login" className="ml-2 text-primary font-semibold underline">
                         Login Now
                     </Link>
                 </p>

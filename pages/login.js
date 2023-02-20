@@ -65,7 +65,7 @@ const Login = () => {
     return (
         <Main title="Login to PluggedIn">
             <div className="section-gap bg-base-100 max-w-lg sm:mx-auto shadow-lg drop-shadow p-8 space-y-6 rounded-lg mx-8">
-                <h2 className="text-center">Login to your account</h2>
+                <h1 className="mb-0">Login to your account</h1>
                 <form action="" onSubmit={handleSubmit(handleLogin)} className="space-y-4">
                     <div className="space-y-1">
                         <label htmlFor="email" className="block font-semibold">
@@ -117,7 +117,8 @@ const Login = () => {
                 </div>
                 <p className="text-center">
                     Don&apos;t have a account?
-                    <Link href="/register" className="ml-2 text-indigo-900 font-semibold underline">
+                    <br className="xs:hidden" />
+                    <Link href="/register" className="ml-2 text-primary font-semibold underline">
                         Register Now
                     </Link>
                 </p>
