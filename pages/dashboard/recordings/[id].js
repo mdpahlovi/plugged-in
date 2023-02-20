@@ -24,8 +24,8 @@ const RecordDetails = () => {
   } = useQuery({
     queryKey: ["media", query?.id],
     queryFn: () =>
-      fetch(`https://plugged-in-server.onrender.com/media/${query?.id}`).then(
-        (res) => res.json()
+      fetch(`http://localhost:5000/media/${query?.id}`).then((res) =>
+        res.json()
       ),
   });
 
@@ -36,8 +36,8 @@ const RecordDetails = () => {
   } = useQuery({
     queryKey: ["tasks", query?.id],
     queryFn: () =>
-      fetch(`https://plugged-in-server.onrender.com/tasks/${query?.id}`).then(
-        (res) => res.json()
+      fetch(`http://localhost:5000/tasks/${query?.id}`).then((res) =>
+        res.json()
       ),
   });
 
