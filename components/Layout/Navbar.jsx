@@ -2,12 +2,14 @@ import { useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { useRouter } from "next/router";
-import Logo from "../../public/logo/logo.png";
+import Light from "../../public/logo/light.png";
+import Dark from "../../public/logo/dark.png";
 import ThemeToggle from "../Common/ThemeToggle";
 import { CgMenuRightAlt, CgClose } from "react-icons/cg";
 import { ButtonOutline, IconButton, SpinLoader } from "../Common/Buttons";
 import { useAuth } from "../../hooks/useAuth";
 import NoPhoto from "../../public/images/no-photo.jpg";
+import { useTheme } from "../../hooks/useTheme";
 
 const navItems = [
     { href: "/", name: "Home" },
@@ -18,15 +20,16 @@ const navItems = [
 ];
 
 const Navbar = () => {
-    const { user, loading, userLoading } = useAuth();
+    const { theme } = useTheme();
     const { pathname } = useRouter();
     const [open, setOpen] = useState(false);
+    const { user, loading, userLoading } = useAuth();
 
     return (
         <nav className="border-b fixed w-full z-10 bg-base-100">
             <div className="navbar justify-between container mx-auto px-6 sm:px-8">
                 <Link href="/" className="navbar-start w-max">
-                    <Image src={Logo} alt="logo" width={100} />
+                    <Image src={theme === "dark" ? Dark : Light} alt="logo" width={100} />
                 </Link>
 
                 <div className="navbar-end w-max gap-4">
@@ -47,7 +50,9 @@ const Navbar = () => {
                     {loading || userLoading ? (
                         <div>
                             <ButtonOutline sm>
-                                <SpinLoader black />
+                                <SpinLoader black>
+                                    <span className="hidden xs:block">Loading</span>
+                                </SpinLoader>
                             </ButtonOutline>
                         </div>
                     ) : user?._id ? (

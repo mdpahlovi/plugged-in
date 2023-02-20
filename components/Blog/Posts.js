@@ -6,22 +6,12 @@ export default function section4() {
     return (
         <section className="container section-gap">
             <div className="grid lg:grid-cols-2 gap-8">
-                <div className="item">
-                    <h1>Business</h1>
-                    <div className="flex flex-col gap-6">
-                        {Post()}
-                        {Post()}
-                        {Post()}
-                    </div>
-                </div>
-                <div className="item">
-                    <h1>Travel</h1>
-                    <div className="flex flex-col gap-6">
-                        {Post()}
-                        {Post()}
-                        {Post()}
-                    </div>
-                </div>
+                {Post()}
+                {Post()}
+                {Post()}
+                {Post()}
+                {Post()}
+                {Post()}
             </div>
         </section>
     );

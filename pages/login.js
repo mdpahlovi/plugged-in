@@ -95,7 +95,7 @@ const Login = () => {
                         />
                         <div className="text-red-600">{errors?.password?.type === "required" && "Password is required"}</div>
                     </div>
-                    <p className="text-indigo-900 font-bold">Forgot Password ?</p>
+                    <p className="text-primary font-bold">Forgot Password ?</p>
                     <Button className="w-full" type="submit">
                         {userLoading ? <SpinLoader /> : "Login"}
                     </Button>

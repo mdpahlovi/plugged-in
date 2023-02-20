@@ -17,7 +17,7 @@ const MobileScreen = () => {
                         <TfiFaceSad className="mx-auto text-6xl" />
                         <h2>Sorry!</h2>
                         <h3>
-                            It isn&apos;t to record mobile screen javascript. <br className="hidden xs:block" /> Please, use your desktop browser
+                            It isn&apos;t possible to record your screen in mobile when javascript as core language. Please, use your desktop browser. Thank You
                         </h3>
                     </div>
                 </div>

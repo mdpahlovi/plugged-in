@@ -105,7 +105,7 @@ const RecordModal = ({
                             </span>
                         </h5>
                         <div className="flex flex-col-reverse">
-                            <div className="grid grid-cols-2 gap-4 mt-4">
+                            <div className="grid sm:grid-cols-2 gap-4 mt-4">
                                 <ButtonOutline
                                     disabled={status === "paused" ? true : false}
                                     onClick={() => {

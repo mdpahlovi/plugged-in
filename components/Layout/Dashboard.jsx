@@ -2,6 +2,8 @@ import Image from "next/image";
 import Link from "next/link";
 import Head from "next/head";
 import { useRouter } from "next/router";
+import Light from "../../public/logo/light.png";
+import Dark from "../../public/logo/dark.png";
 import NoPhoto from "../../public/images/no-photo.jpg";
 import { Button, ButtonOutline, IconButton } from "../Common/Buttons";
 import ThemeToggle from "../Common/ThemeToggle";
@@ -15,10 +17,12 @@ import { useQuery } from "@tanstack/react-query";
 import { useContext, useEffect, useState } from "react";
 import { SocketContext } from "../../contexts/SocketProvider";
 import useDashboardRoutes from "../../hooks/useDashboardRoutes";
+import { useTheme } from "../../hooks/useTheme";
 
 const Dashboard = ({ title, children, className }) => {
     const { userLoading, user, logout } = useAuth();
     const { pathname } = useRouter();
+    const { theme } = useTheme();
     const { socket } = useContext(SocketContext);
     const { routes } = useDashboardRoutes(user);
 
@@ -52,19 +56,9 @@ const Dashboard = ({ title, children, className }) => {
                                     <MdMenuOpen className="text-xl" />
                                 </IconButton>
                             </label>
-                            <h2>Dashboard</h2>
+                            <Image src={theme === "dark" ? Dark : Light} alt="logo" width={80} />
                         </div>
-                        <div className="flex items-center gap-6">
-                            <div hidden className="relative h-full sm:flex items-center">
-                                <ImSearch className="absolute text-xl left-2.5" />
-                                <div className="absolute w-[1px] h-full bg-base-content/10 left-[38px]" />
-                                <input type="search" name="search" placeholder="Search here" className="input h-10 focus:outline-none pl-12" />
-                            </div>
-                            <IconButton className="h-max sm:hidden">
-                                <ImSearch className="text-xl" />
-                            </IconButton>
-                            <ThemeToggle />
-                        </div>
+                        <ThemeToggle />
                     </header>
                     <div className="py-8"></div>
                     {/*  Content Here */}

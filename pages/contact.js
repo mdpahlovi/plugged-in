@@ -67,7 +67,7 @@ const Contact = () => {
                     </div>
                 </div>
                 {/* Contact form */}
-                <div className="h-max bg-accent p-8 rounded-lg shadow-lg">
+                <div className="h-max bg-base-300 p-8 rounded-lg shadow-lg">
                     <form ref={form} onSubmit={sendEmail} className="space-y-5">
                         <div className="grid sm:grid-cols-2 gap-5">
                             <input className="input" type="text" name="first_name" placeholder="First Name" />

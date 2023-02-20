@@ -12,7 +12,7 @@ const AboutSubscribeSection = () => {
     };
 
     return (
-        <div className="bg-accent section-gap rounded p-8">
+        <div className="bg-base-300 section-gap rounded p-8">
             <h1 className="mb-3 text-3xl">
                 Receive product updates and news,
                 <br /> direct to your inbox.

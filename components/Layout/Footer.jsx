@@ -1,15 +1,19 @@
 import Image from "next/image";
-import Logo from "../../public/logo/logo.png";
+import Light from "../../public/logo/light.png";
+import Dark from "../../public/logo/dark.png";
 import { FaFacebook, FaGithub, FaLinkedin } from "react-icons/fa";
 import Link from "next/link";
+import { useTheme } from "../../hooks/useTheme";
 
 const Footer = () => {
+    const { theme } = useTheme();
+
     return (
         <footer className="section-gap border-t">
             <div className="container mx-auto px-6 sm:px-8 divide-y">
                 <div className="py-8 flex flex-col md:flex-row gap-4 md:justify-between">
                     <div>
-                        <Image src={Logo} alt="logo" width={100} />
+                        <Image src={theme === "dark" ? Dark : Light} alt="logo" width={100} />
                         <p className="mt-2">Online meeting recording and media management application.</p>
                     </div>
                     <div className="flex flex-wrap gap-6 md:gap-12 justify-between">

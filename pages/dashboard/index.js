@@ -8,10 +8,9 @@ import { useAuth } from "../../hooks/useAuth";
 import NoPhoto from "../../public/images/no-photo.jpg";
 import { jwt_axios } from "../../utilities/api";
 import { getImageUrl } from "../../utilities/getImageUrl";
-import { FaUser } from "react-icons/fa";
-import { MdEmail, MdLocalActivity } from "react-icons/md";
-import { MdLocationPin } from "react-icons/md";
+import { FaUser, FaUserEdit } from "react-icons/fa";
 import { BsFillTelephoneFill } from "react-icons/bs";
+import { MdEmail, MdLocalActivity, MdLocationPin } from "react-icons/md";
 
 const Profile = () => {
     const { userLoading, user, userRefetch } = useAuth();
@@ -60,8 +59,8 @@ const Profile = () => {
                     </div>
 
                     <div>
-                        <button className="absolute rounded top-0 right-0 text-white px-1.5 py-0.5 bg-gradient-to-br from-secondary via-primary to-accent hover:from-accent hover:via-primary hover:to-secondary cursor-pointer">
-                            Edit Profile
+                        <button className="absolute rounded top-0 right-0 text-white px-1.5 py-0.5 flex items-center gap-2 bg-gradient-to-br from-secondary via-primary to-accent hover:from-accent hover:via-primary hover:to-secondary">
+                            <FaUserEdit /> <span className="hidden xs:block">Profile</span>
                         </button>
                         <div>
                             <h2 className="py-4 pl-6">Personal Details</h2>

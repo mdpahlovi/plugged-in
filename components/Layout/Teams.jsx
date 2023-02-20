@@ -28,7 +28,7 @@ const Teams = ({ className, children, title }) => {
                                   {asPath === `/dashboard/teams/${isTeam?.leader}` ? (
                                       <Button>{isTeam?.name}</Button>
                                   ) : (
-                                      <div className="px-6 py-3 rounded-full text-blue-500 underline hover:bg-base-content/10">
+                                      <div className="px-6 py-3 rounded-full text-primary underline hover:bg-base-content/10">
                                           <Link href={`/dashboard/teams/${isTeam?.leader}`}>{isTeam?.name}</Link>
                                       </div>
                                   )}
