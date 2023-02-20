@@ -12,9 +12,13 @@ export const Button = ({ children, onClick, className, type }) => {
     );
 };
 
-export const ButtonOutline = ({ children, onClick, sm }) => {
+export const ButtonOutline = ({ children, onClick, sm, disabled }) => {
     return (
-        <div onClick={onClick} className="relative h-max p-[1px] flex items-center justify-center overflow-hidden group rounded-full cursor-pointer">
+        <button
+            onClick={onClick}
+            className="relative w-full h-max p-[1px] flex items-center justify-center overflow-hidden group rounded-full cursor-pointer"
+            disabled={disabled}
+        >
             <span className="w-full h-full bg-gradient-to-br from-secondary via-primary to-accent  group-hover:from-accent group-hover:via-primary group-hover:to-secondary absolute"></span>
             <span
                 className={`w-full text-center relative ${
@@ -23,7 +27,7 @@ export const ButtonOutline = ({ children, onClick, sm }) => {
             >
                 <span className="relative text-base-content group-hover:text-white">{children}</span>
             </span>
-        </div>
+        </button>
     );
 };
 

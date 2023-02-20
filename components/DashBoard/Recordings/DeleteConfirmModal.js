@@ -57,7 +57,7 @@ const DeleteConfirmModal = ({
               leaveFrom="opacity-100 scale-100"
               leaveTo="opacity-0 scale-95"
             >
-              <Dialog.Panel className="w-full max-w-md transform overflow-hidden rounded-2xl bg-base-100 p-6 space-y-4 align-middle shadow-xl transition-all">
+              <Dialog.Panel className="w-full max-w-md transform overflow-hidden rounded-lg bg-base-100 p-6 space-y-4 align-middle shadow-xl transition-all">
                 <TiWarningOutline className="w-20 h-20 mx-auto" />
                 <Dialog.Title as="h3" className="text-lg font-medium">
                   Are you sure , you want to delete this record ?

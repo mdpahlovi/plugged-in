@@ -90,6 +90,7 @@ const MediaCard = ({
               aria-hidden="true"
               className={`${enabled ? "translate-x-[26px]" : "translate-x-0.5"}
             pointer-events-none mt-[0.35px] h-7 w-7 transform rounded-full bg-base-100 shadow-lg transition duration-300`}
+
             />
           </Switch>
           <div

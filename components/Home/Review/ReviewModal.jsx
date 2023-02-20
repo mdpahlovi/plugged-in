@@ -2,12 +2,11 @@ import { Dialog, Transition } from "@headlessui/react";
 import { Fragment } from "react";
 import { useForm } from "react-hook-form";
 import { Button } from "../../Common/Buttons";
-import { useTheme } from "../../../hooks/useTheme";
-import ReactStars from "react-rating-stars-component";
+import Rating from "react-rating";
+import { HiOutlineStar, HiStar } from "react-icons/hi2";
 
 const ReviewModal = ({ isOpen, setIsOpen, handleEdit, setRating }) => {
     const { register, handleSubmit } = useForm();
-    const { theme } = useTheme();
 
     return (
         <Transition appear show={isOpen} as={Fragment}>
@@ -35,16 +34,15 @@ const ReviewModal = ({ isOpen, setIsOpen, handleEdit, setRating }) => {
                             leaveFrom="opacity-100 scale-100"
                             leaveTo="opacity-0 scale-95"
                         >
-                            <Dialog.Panel className="w-full max-w-md transform overflow-hidden rounded-2xl bg-base-100 p-6 text-left align-middle shadow-xl transition-all">
+                            <Dialog.Panel className="w-full max-w-md transform overflow-hidden rounded-lg bg-base-100 p-6 text-left align-middle shadow-xl transition-all">
                                 <form action="" onSubmit={handleSubmit(handleEdit)} className="space-y-2">
-                                    <div className="flex justify-between">
+                                    <div className="flex flex-col xs:flex-row xs:justify-between gap-2">
                                         <h2>Add Your Review</h2>
-                                        <ReactStars
-                                            count={5}
-                                            size={28}
-                                            isHalf={true}
-                                            activeColor={theme === "light" ? "#201172" : "#6f2d97"}
-                                            onChange={(newRating) => setRating(newRating)}
+                                        <Rating
+                                            onChange={(value) => setRating(value)}
+                                            fullSymbol={<HiStar className="text-2xl text-primary" />}
+                                            emptySymbol={<HiOutlineStar className="text-2xl text-primary" />}
+                                            fractions={2}
                                         />
                                     </div>
                                     <textarea

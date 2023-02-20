@@ -67,6 +67,7 @@ const DisconnectModal = ({
       });
   };
 
+
   return (
     <div>
       <input type="checkbox" id="disconnectModal" className="modal-toggle" />

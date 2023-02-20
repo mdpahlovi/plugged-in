@@ -1,16 +1,20 @@
 import Image from "next/image";
 import { useState } from "react";
 import { toast } from "react-toastify";
-import { Button, ButtonOutline } from "../../components/Common/Buttons";
+import { Button, ButtonOutline, SpinLoader } from "../../components/Common/Buttons";
 import ProfileLoading from "../../components/DashBoard/ProfileLoading";
 import Dashboard from "../../components/Layout/Dashboard";
 import { useAuth } from "../../hooks/useAuth";
 import NoPhoto from "../../public/images/no-photo.jpg";
 import { jwt_axios } from "../../utilities/api";
 import { getImageUrl } from "../../utilities/getImageUrl";
+import { FaUser } from "react-icons/fa";
+import { MdEmail, MdLocalActivity } from "react-icons/md";
+import { MdLocationPin } from "react-icons/md";
+import { BsFillTelephoneFill } from "react-icons/bs";
 
 const Profile = () => {
-    const { userLoading, user, updateUserAvatar, authRefetch, setAuthRefetch } = useAuth();
+    const { userLoading, user, userRefetch } = useAuth();
     const [updateLoading, setUpdateLoading] = useState(false);
 
     if (userLoading) {
@@ -28,13 +32,9 @@ const Profile = () => {
                     jwt_axios
                         .patch(`/user/${user?.email}`, { avatar: data.url })
                         .then((res) => {
-                            updateUserAvatar(data.url)
-                                .then(() => {
-                                    setAuthRefetch(!authRefetch);
-                                    setUpdateLoading(false);
-                                    toast.success("Profile Uploaded");
-                                })
-                                .catch((error) => console.log(error));
+                            userRefetch();
+                            setUpdateLoading(false);
+                            toast.success("Profile avatar uploaded");
                         })
                         .catch((error) => console.log(error));
                 })
@@ -43,73 +43,70 @@ const Profile = () => {
 
         return (
             <Dashboard title={`${user?.name} in PluggedIn`}>
-                <h1 className="mt-8 mb-5 text-center">Welcome {user?.name} To PluggedIn</h1>
-                <div className={`mx-auto ${user?.avatar ? "-mb-16" : "-mb-32"} w-max h-max`}>
-                    {user?.avatar ? (
-                        <Image src={user.avatar} alt="" width={128} height={128} className="profile-avatar" />
-                    ) : (
-                        <div className="flex flex-col items-center">
-                            <Image src={NoPhoto} alt="" width={128} height={128} className="profile-avatar" />
-                            <div className="mt-6 relative text-lg text-center px-4 py-2 border rounded-lg">
-                                {updateLoading ? "Updating..." : "Upload Your Profile"}
-                                <input type="file" onChange={(event) => handleProfile(event)} className="absolute w-full h-full inset-0 opacity-0" />
+                <h1 className="text-center">Welcome {user?.name} To PluggedIn</h1>
+                <div className="relative shadow rounded-lg border pt-16 mt-20">
+                    <div className={`flex justify-center mx-auto`}>
+                        {user?.avatar ? (
+                            <Image src={user.avatar} alt="" width={128} height={128} className="profile-avatar absolute -top-16" />
+                        ) : (
+                            <div className="flex flex-col items-center">
+                                <Image src={NoPhoto} alt="" width={128} height={128} className="profile-avatar absolute -top-16" />
+                                <div className="mt-6 relative text-lg text-center px-4 py-2 border rounded-lg">
+                                    {updateLoading ? <SpinLoader black>Uploading</SpinLoader> : "Upload Your Profile"}
+                                    <input type="file" onChange={(event) => handleProfile(event)} className="absolute w-full h-full inset-0 opacity-0" />
+                                </div>
                             </div>
-                        </div>
-                    )}
-                </div>
-                <div className={`shadow rounded-lg space-y-6 ${user?.avatar ? "pt-20" : "pt-36"} px-6`}>
-                    <div className="text-center">
-                        <h2>{user?.name}</h2>
-                        <p className="text-sm -mb-2">Online Video Service System</p>
-                    </div>
-                    <Button className="w-full">
-                        Connect with <span className="font-bold">@pluggedin</span>
-                    </Button>
-                    <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-                        <ButtonOutline>Facebook</ButtonOutline>
-                        <ButtonOutline>Twitter</ButtonOutline>
-                        <ButtonOutline>Instagram</ButtonOutline>
-                        <ButtonOutline>Email</ButtonOutline>
+                        )}
                     </div>
 
-                    <div className="space-y-4">
-                        <h3 className="font-medium -mt-2">Recent activities</h3>
-                        <div className="w-full flex flex-col items-center overflow-hidden text-sm">
-                            <a href="#" className="w-full border-t opacity-75 py-4 block hover:bg-base-content/10 transition">
-                                <Image
-                                    src="https://avatars0.githubusercontent.com/u/35900628?v=4"
-                                    alt=""
-                                    className="rounded-full shadow-md inline-block mr-2"
-                                    width={24}
-                                    height={24}
-                                />
-                                Joined a Video
-                                <span className="text-gray-500 text-xs ml-2">24 min ago</span>
-                            </a>
-                            <a href="#" className="w-full border-t opacity-75 py-4 block hover:bg-base-content/10 transition">
-                                <Image
-                                    src="https://avatars0.githubusercontent.com/u/35900628?v=4"
-                                    alt=""
-                                    className="rounded-full shadow-md inline-block mr-2"
-                                    width={24}
-                                    height={24}
-                                />
-                                Edited Profile settings
-                                <span className="text-gray-500 text-xs ml-2">1 day ago</span>
-                            </a>
-                            <a href="#" className="w-full border-t opacity-75 py-4 block hover:bg-base-content/10 transition">
-                                <Image
-                                    src="https://avatars0.githubusercontent.com/u/35900628?v=4"
-                                    alt=""
-                                    className="rounded-full shadow-md inline-block mr-2"
-                                    width={24}
-                                    height={24}
-                                />
-                                You have Record Total 10 Videos
-                            </a>
+                    <div>
+                        <button className="absolute rounded top-0 right-0 text-white px-1.5 py-0.5 bg-gradient-to-br from-secondary via-primary to-accent hover:from-accent hover:via-primary hover:to-secondary cursor-pointer">
+                            Edit Profile
+                        </button>
+                        <div>
+                            <h2 className="py-4 pl-6">Personal Details</h2>
+                            <div className="w-full flex flex-col">
+                                <h3 className="profile-info">
+                                    <FaUser className="text-lg mr-3" />
+                                    Name : {user.name}
+                                </h3>
+                                <h3 className="profile-info">
+                                    <MdEmail className="text-lg mr-3" />
+                                    Email : {user.email}
+                                </h3>
+                                <h3 className="profile-info">
+                                    <MdLocationPin className="text-lg mr-3" />
+                                    Address : Please Set Your Address
+                                </h3>
+                                <h3 className="profile-info">
+                                    <BsFillTelephoneFill className="text-lg mr-3" />
+                                    Contact No : Please Set Your Contact No
+                                </h3>
+                            </div>
                         </div>
                     </div>
                 </div>
+                {/* Start Recent Activities */}
+                <div className="mt-8 shadow rounded-lg border">
+                    <h2 className="py-4 pl-6">Recent activities</h2>
+                    <div className="w-full flex flex-col items-center overflow-hidden text-sm">
+                        <a href="#" className="profile-info">
+                            <MdLocalActivity className="text-lg mr-3" />
+                            Joined a Video
+                            <span className="text-gray-500 text-xs ml-2">24 min ago</span>
+                        </a>
+                        <a href="#" className="profile-info">
+                            <MdLocalActivity className="text-lg mr-3" />
+                            Edited Profile settings
+                            <span className="text-gray-500 text-xs ml-2">1 day ago</span>
+                        </a>
+                        <a href="#" className="profile-info">
+                            <MdLocalActivity className="text-lg mr-3" />
+                            You have Record Total 10 Videos
+                        </a>
+                    </div>
+                </div>
+                {/* End Recent Activities */}
             </Dashboard>
         );
     }
