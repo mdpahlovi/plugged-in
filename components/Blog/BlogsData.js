@@ -11,6 +11,7 @@ export const BlogsData = [
     },
     {
         "category": "Experiences",
+        "status": "latest",
         "title": "Share the experiences of Screen Recording",
         "img": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTsvV_xZOt7CaTG86XMByHmpN1SgBb4ZrxfIQ&usqp=CAU",
         "author": "korim@gmail.com",
@@ -28,6 +29,7 @@ export const BlogsData = [
     },
     {
         "category": "Best Pricing",
+        "status": "latest",
         "title": "Telling the best Pricing that's will help you",
         "img": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRAj7m4yOBJg6cYjcA496zvphHdE68TzheqEg&usqp=CAU",
         "author": "joseph@gmail.com",
@@ -62,8 +64,9 @@ export const BlogsData = [
     },
     {
         "category": "Add Friend",
+        "status": "latest",
         "title": "Choose the People and decide add friend",
-        "img": "https://i.ibb.co/tPbqVRP/add-media.png",
+        "img": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRtSYUlPN27MuRgUysBOIjcODUPk20Z4mzm-g&usqp=CAU",
         "author": "Faize@gmail.com",
         "date": "26 Jan, 2023",
         "description": "You can view the people routes on dashboard page. Then you can view all the user. Then you can send friend request. Wheb the other man accept my request it will visit friends routes. This is the good feture on this web application."
@@ -76,5 +79,5 @@ export const BlogsData = [
         "date": "07 Feb, 2023",
         "description": "It was really a good website. Because pluggedin offers a good services than other appllication. When you use this application you can understands this opinion. So you can try to acces the premium services."
     }
-    
+
 ];
