@@ -35,7 +35,7 @@ const HowToRecord = () => {
                     ))}
                 </RadioGroup>
             </div>
-            <Image className="w-full rounded-lg shadow-lg lg:max-w-lg ml-auto" src={Image01} alt="" />
+            <Image className="hidden lg:block w-full rounded-lg shadow-lg lg:max-w-lg ml-auto" src={Image01} alt="" />
         </div>
     );
 };

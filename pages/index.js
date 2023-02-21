@@ -4,7 +4,7 @@ import Main from "../components/Layout/Main";
 import Hero from "../components/Home/Hero";
 import Recorders from "../components/Home/Recorders/Recorders";
 import HowToRecord from "../components/Home/HowToRecord/HowToRecord";
-import Features from "../components/Home/Features";
+import Features from "../components/Home/Features/Features";
 import FaqData from "../components/Home/Faq/FaqData";
 // import ReviewSlider from "../components/Home/Review/ReviewSlider";
 import ScreenRecorder from "../components/Home/Recorders/ScreenRecorder";
