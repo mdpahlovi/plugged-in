@@ -1,8 +1,10 @@
-import Image from "next/image";
+
 import Author from "./Components/author";
 import { Swiper, SwiperSlide } from "swiper/react";
 import SwiperCore, { Autoplay } from "swiper";
 import "swiper/css";
+import { BlogsData } from "./BlogsData";
+import Image from "next/image";
 
 export default function section1() {
     SwiperCore.use([Autoplay]);
@@ -18,14 +20,13 @@ export default function section1() {
                 slidesPerView={1}
             >
                 <SwiperSlide>{Slide()}</SwiperSlide>
-                <SwiperSlide>{Slide()}</SwiperSlide>
-                <SwiperSlide>{Slide()}</SwiperSlide>
             </Swiper>
         </div>
     );
 }
 
 function Slide() {
+
     return (
         <div className="grid md:grid-cols-2 gap-8">
             <Image src={"/images/Socket.io--2-.jpg"} className="rounded-lg" width={600} height={600} alt="" />
@@ -45,5 +46,6 @@ function Slide() {
                 </div>
             </div>
         </div>
+
     );
 }

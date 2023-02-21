@@ -61,7 +61,7 @@ const Profile = () => {
                     </div>
 
                     <div>
-                        <button htmlFor="my-modal" className="absolute rounded top-0 right-0 text-white px-1.5 py-0.5 flex items-center gap-2 bg-gradient-to-br from-secondary via-primary to-accent hover:from-accent hover:via-primary hover:to-secondary">
+                        <button className="absolute rounded top-0 right-0 text-white px-1.5 py-0.5 flex items-center gap-2 bg-gradient-to-br from-secondary via-primary to-accent hover:from-accent hover:via-primary hover:to-secondary">
                             <FaUserEdit /><label htmlFor="my-modal" className="hidden xs:block">Profile</label>
                         </button>
                         <div>
