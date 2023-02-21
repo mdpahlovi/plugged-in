@@ -10,7 +10,9 @@ import { jwt_axios } from "../../utilities/api";
 import { getImageUrl } from "../../utilities/getImageUrl";
 import { FaUser, FaUserEdit } from "react-icons/fa";
 import { BsFillTelephoneFill } from "react-icons/bs";
+import { GrClose } from "react-icons/gr";
 import { MdEmail, MdLocalActivity, MdLocationPin } from "react-icons/md";
+import UpdateProfile from "./update_profile";
 
 const Profile = () => {
     const { userLoading, user, userRefetch } = useAuth();
@@ -59,8 +61,8 @@ const Profile = () => {
                     </div>
 
                     <div>
-                        <button className="absolute rounded top-0 right-0 text-white px-1.5 py-0.5 flex items-center gap-2 bg-gradient-to-br from-secondary via-primary to-accent hover:from-accent hover:via-primary hover:to-secondary">
-                            <FaUserEdit /> <span className="hidden xs:block">Profile</span>
+                        <button htmlFor="my-modal" className="absolute rounded top-0 right-0 text-white px-1.5 py-0.5 flex items-center gap-2 bg-gradient-to-br from-secondary via-primary to-accent hover:from-accent hover:via-primary hover:to-secondary">
+                            <FaUserEdit /><label htmlFor="my-modal" className="hidden xs:block">Profile</label>
                         </button>
                         <div>
                             <h2 className="py-4 pl-6">Personal Details</h2>
@@ -106,6 +108,18 @@ const Profile = () => {
                     </div>
                 </div>
                 {/* End Recent Activities */}
+{/* Modal */}
+<input type="checkbox" id="my-modal" className="modal-toggle" />
+<div className="modal">
+  <div className="modal-box">
+    <UpdateProfile/>
+    <div className="modal-action">
+    <button htmlFor="my-modal" className="absolute rounded top-2 right-1 text-white px-1.5 py-0.5 flex items-center gap-2  hover:from-accent hover:via-primary hover:to-secondary">
+                            <label htmlFor="my-modal" className="hidden text-2xl xs:block"><GrClose/></label>
+                        </button>
+    </div>
+  </div>
+</div>
             </Dashboard>
         );
     }
