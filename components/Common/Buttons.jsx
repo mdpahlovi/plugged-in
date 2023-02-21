@@ -2,11 +2,7 @@ import { ThreeCircles } from "react-loader-spinner";
 
 export const Button = ({ children, onClick, className, type }) => {
     return (
-        <button
-            type={type}
-            onClick={onClick}
-            className={`px-6 py-3 text-white transition-all duration-300 rounded-full bg-gradient-to-br from-secondary via-primary to-accent  hover:from-accent hover:via-primary hover:to-secondary cursor-pointer ${className}`}
-        >
+        <button type={type} onClick={onClick} className={`px-6 py-3 transition-all duration-300 rounded-full button cursor-pointer ${className}`}>
             {children}
         </button>
     );
