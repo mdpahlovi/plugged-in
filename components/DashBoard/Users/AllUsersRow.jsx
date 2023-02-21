@@ -1,5 +1,7 @@
 import Image from "next/image";
+import { RiDeleteBin5Fill } from "react-icons/ri";
 import NoPhoto from "../../../public/images/no-photo.jpg";
+import { IconButton } from "../../Common/Buttons";
 
 const roles = [
     { value: "admin", name: "Admin" },
@@ -8,8 +10,8 @@ const roles = [
     { value: "basic", name: "Basic" },
 ];
 
-const AllUsersRow = ({ user, index, handleEdit }) => {
-    const { name, avatar, role, email } = user;
+const AllUsersRow = ({ user, index, handleEdit, handleOpen }) => {
+    const { _id, name, avatar, role, email } = user;
 
     return (
         <tr>
@@ -30,6 +32,11 @@ const AllUsersRow = ({ user, index, handleEdit }) => {
                         </option>
                     ))}
                 </select>
+            </td>
+            <td>
+                <IconButton onClick={() => handleOpen({ _id, name })}>
+                    <RiDeleteBin5Fill />
+                </IconButton>
             </td>
         </tr>
     );

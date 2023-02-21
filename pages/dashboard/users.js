@@ -8,6 +8,8 @@ import ProUsers from "../../components/DashBoard/Users/ProUsers";
 import TeamUsers from "../../components/DashBoard/Users/TeamUsers";
 import Dashboard from "../../components/Layout/Dashboard";
 import UsersLoading from "../../components/DashBoard/Users/UsersLoading";
+import DeleteUserModal from "../../components/DashBoard/Users/DeleteUserModal";
+import { useState } from "react";
 
 function classNames(...classes) {
     return classes.filter(Boolean).join(" ");
@@ -16,6 +18,19 @@ function classNames(...classes) {
 const roles = ["All Users", "Team Users", "Pro Users", "Basic Users"];
 
 const Users = () => {
+    const [user, setUser] = useState(null);
+    const [isOpen, setIsOpen] = useState(false);
+
+    const handleClose = () => {
+        setUser(null);
+        setIsOpen(false);
+    };
+
+    const handleOpen = (user) => {
+        setUser(user);
+        setIsOpen(true);
+    };
+
     const {
         data: users = [],
         isLoading: usersLoading,
@@ -31,7 +46,7 @@ const Users = () => {
                 <UsersLoading />
             ) : (
                 <Tab.Group>
-                    <Tab.List className="flex space-x-1 rounded-lg bg-base-content/5 p-1">
+                    <Tab.List className="grid xs:grid-cols-2 sm:grid-cols-4 space-x-1 rounded-lg bg-base-content/5 p-1">
                         {roles.map((tab, index) => (
                             <Tab
                                 key={index}
@@ -49,20 +64,21 @@ const Users = () => {
                     </Tab.List>
                     <Tab.Panels className="mt-6">
                         <Tab.Panel className={classNames("mt-4 ring-offset-0 focus:outline-none focus:ring-0")}>
-                            <AllUsers users={users} refetch={usersRefetch} />
+                            <AllUsers users={users} refetch={usersLoading} handleOpen={handleOpen} />
                         </Tab.Panel>
                         <Tab.Panel className={classNames("mt-4 ring-offset-0 focus:outline-none focus:ring-0")}>
-                            <TeamUsers users={users} refetch={usersRefetch} />
+                            <TeamUsers users={users} handleOpen={handleOpen} />
                         </Tab.Panel>
                         <Tab.Panel className={classNames("mt-4 ring-offset-0 focus:outline-none focus:ring-0")}>
-                            <ProUsers users={users} refetch={usersRefetch} />
+                            <ProUsers users={users} handleOpen={handleOpen} />
                         </Tab.Panel>
                         <Tab.Panel className={classNames("mt-4 ring-offset-0 focus:outline-none focus:ring-0")}>
-                            <BasicUsers users={users} refetch={usersRefetch} />
+                            <BasicUsers users={users} handleOpen={handleOpen} />
                         </Tab.Panel>
                     </Tab.Panels>
                 </Tab.Group>
             )}
+            <DeleteUserModal handleClose={handleClose} user={user} isOpen={isOpen} refetch={usersRefetch} />
         </Dashboard>
     );
 };

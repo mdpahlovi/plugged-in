@@ -3,7 +3,7 @@ import { useAuth } from "../../../hooks/useAuth";
 import { jwt_axios } from "../../../utilities/api";
 import AllUsersRow from "./AllUsersRow";
 
-const AllUsers = ({ users, refetch }) => {
+const AllUsers = ({ users, refetch, handleOpen }) => {
     const { user, userRefetch } = useAuth();
 
     const handleEdit = (value, email) => {
@@ -29,11 +29,12 @@ const AllUsers = ({ users, refetch }) => {
                         <th>Name</th>
                         <th>Role</th>
                         <th>Set Role</th>
+                        <th>Delete</th>
                     </tr>
                 </thead>
                 <tbody>
                     {users.map((user, index) => (
-                        <AllUsersRow key={user._id} user={user} index={index} handleEdit={handleEdit} />
+                        <AllUsersRow key={user._id} user={user} index={index} handleEdit={handleEdit} handleOpen={handleOpen} />
                     ))}
                 </tbody>
             </table>
