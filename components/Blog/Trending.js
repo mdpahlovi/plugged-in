@@ -20,8 +20,7 @@ export default function section1() {
                 slidesPerView={1}
             >
                 <SwiperSlide>{Slide()}</SwiperSlide>
-                <SwiperSlide>{Slide()}</SwiperSlide>
-                <SwiperSlide>{Slide()}</SwiperSlide>
+
             </Swiper>
         </div>
     );
