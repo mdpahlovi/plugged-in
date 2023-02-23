@@ -30,9 +30,7 @@ const ReviewSlider = () => {
     });
 
     const handleEdit = (data) => {
-        data.avatar = user?.avatar;
-        data.name = user?.name;
-        data.location = "C&B Road, Barisal";
+        data.author = user?.email;
         data.time = new Date();
         data.rating = rating;
 

@@ -1,23 +1,19 @@
 import Image from "next/image";
-import Author from "./Components/author";
-import { BlogsData } from "./BlogsData";
+import Author from "../Common/Author";
 
-const LatestPosts = () => {
-
-    const filterdata = BlogsData?.filter(singleData => singleData.status === "latest")
-
+const LatestPosts = ({ blogs }) => {
     return (
         <section className="container section-gap">
             <h1>Latest Posts</h1>
             <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-                {filterdata?.map((data, i) => (
+                {blogs?.map((data, i) => (
                     <div key={i} className="">
                         <div className="w-full h-[250px] overflow-hidden">
                             <Image src={data.img} width={600} height={600} className="rounded scale-100 hover:scale-110 transition duration-400 h-full w-full" alt="" />
                         </div>
                         <div className="flex justify-center flex-col">
                             <div className="mt-2 mb-0.5">
-                                <span className="badge badge-accent text-white">{data.category}</span>
+                                <span className="badge badge-accent">{data.category}</span>
                                 <span className="ml-3">{data.date}</span>
                             </div>
                             <div className="space-y-1">

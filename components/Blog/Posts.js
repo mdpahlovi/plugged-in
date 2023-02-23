@@ -1,21 +1,18 @@
-import Link from "next/link";
 import Image from "next/image";
-import Author from "./Components/author";
-import { BlogsData } from "./BlogsData";
-const Posts = () => {
+import Author from "../Common/Author";
+
+const Posts = ({ blogs }) => {
     return (
         <section className="container section-gap">
             <div className="grid lg:grid-cols-3 gap-10">
-                {BlogsData?.map((data, i) => (
+                {blogs?.map((data, i) => (
                     <div key={i} className="">
                         <div className="w-full h-[250px] overflow-hidden">
-                            <img src={data.img} className="rounded scale-100 hover:scale-110 transition duration-400 h-full w-full" alt="" />
-
+                            <Image src={data.img} className="rounded scale-100 hover:scale-105 transition duration-300 w-full" alt="" width={200} height={200} />
                         </div>
-
                         <div className="info flex justify-center flex-col">
                             <div className="mt-2 mb-0.5">
-                                <span className="badge badge-accent text-white">{data.category}</span>
+                                <span className="badge badge-accent">{data.category}</span>
                                 <span className="ml-3">{data.date}</span>
                             </div>
                             <div className="title">
