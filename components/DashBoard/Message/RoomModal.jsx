@@ -21,32 +21,32 @@ const RoomModal = () => {
       socket.emit("send_peerid", { room: query?.roomName, id });
     });
 
-    // peer.on("call", (call) => {
-    //   const getUserMedia =
-    //     window.navigator?.getUserMedia ||
-    //     window.navigator?.webkitGetUserMedia ||
-    //     window.navigator?.mozGetUserMedia;
-    //   console.log("from Effect", call);
-    //   getUserMedia(
-    //     { video: true, audio: true },
-    //     (mediaStream) => {
-    //       currentUserVideoRef.current.srcObject = mediaStream;
-    //       currentUserVideoRef.current.play();
+    peer.on("call", (call) => {
+      const getUserMedia =
+        window.navigator?.getUserMedia ||
+        window.navigator?.webkitGetUserMedia ||
+        window.navigator?.mozGetUserMedia;
+      console.log("from Effect", call);
+      getUserMedia(
+        { video: true, audio: true },
+        (mediaStream) => {
+          currentUserVideoRef.current.srcObject = mediaStream;
+          currentUserVideoRef.current.play();
 
-    //       // const call = peerInstance.current.call(remotePeerId, mediaStream);
+          // const call = peerInstance.current.call(remotePeerId, mediaStream);
 
-    //       call.answer(mediaStream);
-    //       call.on("stream", function (remoteStream) {
-    //         console.log("calling");
-    //         remoteVideoRef.current.srcObject = remoteStream;
-    //         remoteVideoRef.current.play();
-    //       });
-    //     },
-    //     (error) => {
-    //       console.error(error);
-    //     }
-    //   );
-    // });
+          call.answer(mediaStream);
+          call.on("stream", function (remoteStream) {
+            console.log("calling");
+            remoteVideoRef.current.srcObject = remoteStream;
+            remoteVideoRef.current.play();
+          });
+        },
+        (error) => {
+          console.error(error);
+        }
+      );
+    });
 
     peerInstance.current = peer;
   }, [query, socket]);
@@ -97,33 +97,33 @@ const RoomModal = () => {
     });
   }, [socket]);
 
-  const handleReceive = (mypeerId) => {
-    const getUserMedia =
-      window.navigator?.getUserMedia ||
-      window.navigator?.webkitGetUserMedia ||
-      window.navigator?.mozGetUserMedia;
-    console.log("getting user media");
-    getUserMedia(
-      { video: true, audio: true },
-      (mediaStream) => {
-        console.log("inside media stream");
-        currentUserVideoRef.current.srcObject = mediaStream;
-        currentUserVideoRef.current.play();
+  //   const handleReceive = (mypeerId) => {
+  //     const getUserMedia =
+  //       window.navigator?.getUserMedia ||
+  //       window.navigator?.webkitGetUserMedia ||
+  //       window.navigator?.mozGetUserMedia;
+  //     console.log("getting user media");
+  //     getUserMedia(
+  //       { video: true, audio: true },
+  //       (mediaStream) => {
+  //         console.log("inside media stream");
+  //         currentUserVideoRef.current.srcObject = mediaStream;
+  //         currentUserVideoRef.current.play();
 
-        const call = peerInstance.current.call(mypeerId, mediaStream);
-        console.log("from Answer", call);
-        call.answer(mediaStream);
-        call.on("stream", function (remoteStream) {
-          console.log("calling");
-          remoteVideoRef.current.srcObject = remoteStream;
-          remoteVideoRef.current.play();
-        });
-      },
-      (error) => {
-        console.error(error);
-      }
-    );
-  };
+  //         const call = peerInstance.current.call(mypeerId, mediaStream);
+  //         console.log("from Answer", call);
+  //         call.answer(mediaStream);
+  //         call.on("stream", function (remoteStream) {
+  //           console.log("calling");
+  //           remoteVideoRef.current.srcObject = remoteStream;
+  //           remoteVideoRef.current.play();
+  //         });
+  //       },
+  //       (error) => {
+  //         console.error(error);
+  //       }
+  //     );
+  //   };
 
   return (
     <div>
@@ -171,7 +171,7 @@ const RoomModal = () => {
               >
                 endCall
               </button>
-              <button onClick={() => handleReceive(peerId)}>Receive</button>
+              {/* <button onClick={() => handleReceive(peerId)}>Receive</button> */}
               <div>
                 <div>
                   <video ref={currentUserVideoRef} />
