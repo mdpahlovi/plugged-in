@@ -29,7 +29,7 @@ const HowToRecord = () => {
         <div className="section-gap max-w-screen-sm lg:max-w-full mx-auto grid lg:grid-cols-2 items-center">
             <div>
                 <h1 className="lg:text-left">How to Record and Manage media with PluggedIn</h1>
-                <RadioGroup value={plan} onChange={setPlan} className="mr-8">
+                <RadioGroup value={plan} onChange={setPlan} className="lg:mr-8">
                     {data.map((data, index) => (
                         <HowToRecordCard key={index} data={data} index={index} />
                     ))}

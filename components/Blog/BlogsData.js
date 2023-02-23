@@ -25,7 +25,7 @@ export const BlogsData = [
         "img": "https://img.freepik.com/free-photo/close-up-hands-with-different-photos_1134-604.jpg?size=626&ext=jpg&ga=GA1.1.245939490.1665506832&semt=ais",
         "author": "Joy@gmail.com",
         "date": "19 Jan, 2023",
-        "description": "Here’s the truth: It is really amazing ‘team chatting’ services for communicate with anyone. Basically it's work for user role. When the user buy this service, user can see what type accout buy. Today’s corporate messengers are not just about communication anymore. As business demands have risen, team chat apps have turned into powerful collaboration tools."
+        "description": "Here’s the truth: It is really amazing ‘team chatting’ services for communicate with anyone. Basically it's work for user role. When the user buy this service, user can see what type account buy. Today’s corporate messengers are not just about communication anymore. As business demands have risen, team chat apps have turned into powerful collaboration tools."
     },
     {
         "category": "Free Trail",
@@ -70,7 +70,7 @@ export const BlogsData = [
         "img": "https://img.freepik.com/premium-vector/group-friends-cartoon_18591-42831.jpg?size=338&ext=jpg&ga=GA1.2.245939490.1665506832&semt=ais",
         "author": "Faize@gmail.com",
         "date": "26 Jan, 2023",
-        "description": "You can view the people routes on dashboard page. Then you can view all the user. Then you can send friend request. Wheb the other man accept my request it will visit friends routes. This is the good feture on this web application."
+        "description": "You can view the people routes on dashboard page. Then you can view all the user. Then you can send friend request. When the other man accept my request it will visit friends routes. This is the good feature on this web application."
     },
     {
         "category": "Useful",
@@ -78,7 +78,7 @@ export const BlogsData = [
         "img": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQHLVklm52xhPnjrL8TKiPOQTwQ4XiOMyW6xQ&usqp=CAU",
         "author": "Faize@gmail.com",
         "date": "07 Feb, 2023",
-        "description": "It was really a good website. Because pluggedin offers a good services than other appllication. When you use this application you can understands this opinion. So you can try to acces the premium services."
+        "description": "It was really a good website. Because pluggedin offers a good services than other application. When you use this application you can understands this opinion. So you can try to access the premium services."
     }
 
 ];

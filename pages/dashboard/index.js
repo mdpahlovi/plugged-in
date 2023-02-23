@@ -1,8 +1,8 @@
 import Image from "next/image";
 import { useState } from "react";
 import { toast } from "react-toastify";
-import { Button, ButtonOutline, SpinLoader } from "../../components/Common/Buttons";
-import ProfileLoading from "../../components/DashBoard/ProfileLoading";
+import { SpinLoader } from "../../components/Common/Buttons";
+import ProfileLoading from "../../components/DashBoard/Profile/ProfileLoading";
 import Dashboard from "../../components/Layout/Dashboard";
 import { useAuth } from "../../hooks/useAuth";
 import NoPhoto from "../../public/images/no-photo.jpg";
@@ -10,11 +10,11 @@ import { jwt_axios } from "../../utilities/api";
 import { getImageUrl } from "../../utilities/getImageUrl";
 import { FaUser, FaUserEdit } from "react-icons/fa";
 import { BsFillTelephoneFill } from "react-icons/bs";
-import { GrClose } from "react-icons/gr";
 import { MdEmail, MdLocalActivity, MdLocationPin } from "react-icons/md";
-import UpdateProfile from "./update_profile";
+import UploadProfileModal from "../../components/DashBoard/Profile/UploadProfileModal";
 
 const Profile = () => {
+    const [isOpen, setIsOpen] = useState(false);
     const { userLoading, user, userRefetch } = useAuth();
     const [updateLoading, setUpdateLoading] = useState(false);
 
@@ -27,19 +27,32 @@ const Profile = () => {
     } else {
         const handleProfile = (event) => {
             setUpdateLoading(true);
-            const file = event.target.files[0];
-            getImageUrl(file)
-                .then((data) => {
-                    jwt_axios
-                        .patch(`/user/${user?.email}`, { avatar: data.url })
-                        .then((res) => {
-                            userRefetch();
-                            setUpdateLoading(false);
-                            toast.success("Profile avatar uploaded");
-                        })
-                        .catch((error) => console.log(error));
-                })
-                .catch((error) => console.log(error));
+            const file = event?.type === "change" ? event?.target?.files[0] : event?.avatar[0];
+            if (file) {
+                getImageUrl(file)
+                    .then((data) => {
+                        jwt_axios
+                            .patch(`/user/${user?.email}`, event?.type !== "change" ? { ...event, avatar: data.url } : { avatar: data.url })
+                            .then((res) => {
+                                userRefetch();
+                                setUpdateLoading(false);
+                                setIsOpen(false);
+                                toast.success("Profile uploaded successfully");
+                            })
+                            .catch((error) => console.log(error));
+                    })
+                    .catch((error) => console.log(error));
+            } else {
+                jwt_axios
+                    .patch(`/user/${user?.email}`, { ...event, avatar: user?.avatar })
+                    .then((res) => {
+                        userRefetch();
+                        setUpdateLoading(false);
+                        setIsOpen(false);
+                        toast.success("Profile uploaded successfully");
+                    })
+                    .catch((error) => console.log(error));
+            }
         };
 
         return (
@@ -59,29 +72,29 @@ const Profile = () => {
                             </div>
                         )}
                     </div>
-
                     <div>
-                        <button className="absolute rounded top-0 right-0 text-white px-1.5 py-0.5 flex items-center gap-2 bg-gradient-to-br from-secondary via-primary to-accent hover:from-accent hover:via-primary hover:to-secondary">
-                            <FaUserEdit /><label htmlFor="my-modal" className="hidden xs:block">Profile</label>
+                        <button onClick={() => setIsOpen(true)} className="absolute rounded top-0 right-0 px-1.5 py-0.5 flex items-center gap-2 button">
+                            <FaUserEdit />
+                            Profile
                         </button>
                         <div>
                             <h2 className="py-4 pl-6">Personal Details</h2>
                             <div className="w-full flex flex-col">
                                 <h3 className="profile-info">
                                     <FaUser className="text-lg mr-3" />
-                                    Name : {user.name}
+                                    Name : {user?.name ? user.name : "No Name"}
                                 </h3>
                                 <h3 className="profile-info">
                                     <MdEmail className="text-lg mr-3" />
-                                    Email : {user.email}
+                                    Email : {user?.email}
                                 </h3>
                                 <h3 className="profile-info">
                                     <MdLocationPin className="text-lg mr-3" />
-                                    Address : Please Set Your Address
+                                    Address : {user?.address ? user.address : <span>Please Set Your Address</span>}
                                 </h3>
                                 <h3 className="profile-info">
                                     <BsFillTelephoneFill className="text-lg mr-3" />
-                                    Contact No : Please Set Your Contact No
+                                    Contact No : {user?.phone ? user.phone : <span>Please Set Your Contact No</span>}
                                 </h3>
                             </div>
                         </div>
@@ -107,19 +120,14 @@ const Profile = () => {
                         </a>
                     </div>
                 </div>
-                {/* End Recent Activities */}
-{/* Modal */}
-<input type="checkbox" id="my-modal" className="modal-toggle" />
-<div className="modal">
-  <div className="modal-box">
-    <UpdateProfile/>
-    <div className="modal-action">
-    <button htmlFor="my-modal" className="absolute rounded top-2 right-1 text-white px-1.5 py-0.5 flex items-center gap-2  hover:from-accent hover:via-primary hover:to-secondary">
-                            <label htmlFor="my-modal" className="hidden text-2xl xs:block"><GrClose/></label>
-                        </button>
-    </div>
-  </div>
-</div>
+                {/* Update Profile Modal */}
+                <UploadProfileModal
+                    isOpen={isOpen}
+                    handleClose={() => setIsOpen(false)}
+                    user={user}
+                    handleProfile={handleProfile}
+                    updateLoading={updateLoading}
+                />
             </Dashboard>
         );
     }
