@@ -28,7 +28,7 @@ const Price = () => {
                     <div key={plan.name} className="border p-8 shadow-lg rounded-lg relative">
                         <h2>{plan.name}</h2>
                         {plan.mostpopuler && (
-                            <p className="absolute top-0 px-3 py-0.5 text-sm font-semibold tracking-wide text-white rounded-full bg-gradient-to-br from-[#392f4f] via-primary to-accent shadow-md -translate-y-1/2">
+                            <p className="absolute top-0 px-3 py-0.5 rounded-full button shadow-md -translate-y-1/2">
                                 Most Popular
                             </p>
                         )}

@@ -2,7 +2,7 @@ import Image from "next/image";
 import { useState } from "react";
 import { toast } from "react-toastify";
 import { SpinLoader } from "../../components/Common/Buttons";
-import ProfileLoading from "../../components/DashBoard/ProfileLoading";
+import ProfileLoading from "../../components/DashBoard/Profile/ProfileLoading";
 import Dashboard from "../../components/Layout/Dashboard";
 import { useAuth } from "../../hooks/useAuth";
 import NoPhoto from "../../public/images/no-photo.jpg";
@@ -11,7 +11,7 @@ import { getImageUrl } from "../../utilities/getImageUrl";
 import { FaUser, FaUserEdit } from "react-icons/fa";
 import { BsFillTelephoneFill } from "react-icons/bs";
 import { MdEmail, MdLocalActivity, MdLocationPin } from "react-icons/md";
-import UploadProfileModal from "../../components/DashBoard/UploadProfileModal";
+import UploadProfileModal from "../../components/DashBoard/Profile/UploadProfileModal";
 
 const Profile = () => {
     const [isOpen, setIsOpen] = useState(false);

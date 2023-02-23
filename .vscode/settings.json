@@ -34,5 +34,8 @@
         "postcss.config.js": true,
         "README.md": true,
         "package-lock.json": true
+    },
+    "[javascript]": {
+        "editor.defaultFormatter": "vscode.typescript-language-features"
     }
 }
