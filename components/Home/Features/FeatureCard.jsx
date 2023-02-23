@@ -5,7 +5,7 @@ const FeatureCard = ({ feature }) => {
 
     return (
         <div className="group relative transition hover:z-[1] hover:shadow-2xl hover:shadow-gray-600/10">
-            <div className="relative space-y-4 pt-6 px-6 py-4">
+            <div className="relative space-y-4 px-6 pt-10 pb-8">
                 <Image src={image} className="w-32" alt={title} />
                 <div className="space-y-2">
                     <h2 className="transition group-hover:text-primary">{title}</h2>

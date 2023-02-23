@@ -5,7 +5,7 @@ import { AiOutlinePlus } from "react-icons/ai";
 const FaqCard = ({ open, toggle, question, answer }) => {
     return (
         <div className="border rounded-lg">
-            <div className="pt-4 pb-2 px-6 flex justify-between items-center cursor-pointer gap-4" onClick={toggle}>
+            <div className={`pt-4 ${open ? "pb-2" : "pb-4"} px-6 flex justify-between items-center cursor-pointer gap-4`} onClick={toggle}>
                 <h2>{question}</h2>
                 <div className="text-3xl">{open ? <AiOutlineMinus /> : <AiOutlinePlus />}</div>
             </div>
