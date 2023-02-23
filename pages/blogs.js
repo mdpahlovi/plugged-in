@@ -1,32 +1,62 @@
 import React from "react";
+import axios from "axios";
+import { api_url } from "../utilities/api";
+import { useQuery } from "@tanstack/react-query";
 import Main from "../components/Layout/Main";
 import Trending from "../components/Blog/Trending";
 import LatestPosts from "../components/Blog/LatestPosts";
 import Posts from "../components/Blog/Posts";
 import AddBlogs from "../components/Blog/AddBlogs";
 import { GrClose } from "react-icons/gr";
+import { CirclesWithBar } from "react-loader-spinner";
+import { Button } from "../components/Common/Buttons";
+import { useTheme } from "../hooks/useTheme";
+import Modal from "../components/Common/Modal";
+import { useState } from "react";
 
-const blog = () => {
-    return (
-        <Main title="Blogs - PluggedIn">
-            <button type='submit' className=" btn max-w-sm mx-auto flex justify-center mt-6 border-2 bg-gradient-to-br from-secondary via-primary to-accent border-violet-400 text-white rounded-2xl hover:bg-base-100 text shadow-sm shadow-yellow-400 hover:shadow-lg hover:shadow-primary duration-300"><label htmlFor="my-modal" className="hidden xs:block">Add Blogs</label></button>
-            {/* Modal */}
-            <input type="checkbox" id="my-modal" className="modal-toggle" />
-            <div className="modal">
-                <div className="modal-box">
-                    <AddBlogs />
-                    <div className="modal-action">
-                        <button className="absolute rounded top-2 right-1 text-white px-1.5 py-0.5 flex items-center gap-2  hover:from-accent hover:via-primary hover:to-secondary">
-                            <label htmlFor="my-modal" className="hidden text-2xl xs:block"><GrClose /></label>
-                        </button>
-                    </div>
+const Blogs = () => {
+    const { theme } = useTheme()
+    const [isOpen, setIsOpen] = useState(false);
+    const [updateLoading, setUpdateLoading] = useState(false);
+
+    const {
+        data: blogs = [],
+        isLoading: blogLoading,
+        refetch: blogRefetch,
+    } = useQuery({
+        queryKey: ["blogs"],
+        queryFn: () => axios(`${api_url}/blogs`).then((res) => res.data),
+    });
+
+    const handleAddBlog = (details) => {
+        console.log(details)
+
+    }
+
+    if (blogLoading) {
+        return (
+            <Main title="Blogs - PluggedIn">
+                <div className="w-full h-screen flex justify-center items-center">
+                    <CirclesWithBar height="160" width="160" color={theme === "light" ? "#362c75" : "#7565d9"} />
                 </div>
-            </div>
-            <Trending></Trending>
-            <LatestPosts></LatestPosts>
-            <Posts></Posts>
-        </Main>
-    );
+            </Main>
+        );
+    } else {
+        const trending = blogs.filter(blog => blog.status === "trending")
+        const latest = blogs.filter(blog => blog.status === "latest")
+
+        return (
+            <Main title="Blogs - PluggedIn">
+                <Trending blogs={trending} />
+                <LatestPosts blogs={latest} />
+                <Posts blogs={blogs} />
+                <div className="flex justify-center mt-6">
+                    <Button onClick={() => setIsOpen(true)}>Add Blogs</Button>
+                </div>
+                <Modal isOpen={isOpen} handleClose={() => setIsOpen(false)} ><AddBlogs updateLoading={updateLoading} handleAddBlog={handleAddBlog} /></Modal>
+            </Main>
+        );
+    }
 };
 
-export default blog;
+export default Blogs;

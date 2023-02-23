@@ -1,40 +1,34 @@
 import React from 'react';
+import { useForm } from 'react-hook-form';
+import { Button, SpinLoader } from '../Common/Buttons';
 
-const AddBlogs = () => {
+const AddBlogs = ({ updateLoading, handleAddBlog }) => {
+    const { register, handleSubmit } = useForm();
+
     return (
-        <div className='pb-10'>
-            <form className='max-w-4xl mx-auto'>
-                <div>
-                    <label className="label">
-                        <span className="label-text text-xl">Photo</span>
-                    </label>
-                    <input type="file" name='image' className="file-input  file-input-bordered file-input-primary w-full max-w-xs" />
-                </div>
-                <div className="form-control">
-                    <label className="label">
-                        <span className="label-text text-xl">Date</span>
-                    </label>
-                    <input type="text" name="category" placeholder="your category" className="input input-bordered" />
-                </div>
-                <div className="form-control">
-                    <label className="label">
-                        <span className="label-text text-xl">Your Title</span>
-                    </label>
-                    <input type="text" name="title" placeholder="your title" className="input input-bordered" />
-                </div>
-                <div className="form-control">
-                    <label className="label">
-                        <span className="label-text text-xl">Descriptions</span>
-                    </label>
-                    <textarea type="text" name="phone" placeholder="Your Blogs" className="input input-bordered h-40" />
-                </div>
-                <div>
-                    <button type='submit' className="btn max-w-sm mx-auto flex justify-center mt-6 border-2 bg-gradient-to-br from-secondary via-primary to-accent border-violet-400 text-white rounded-2xl hover:bg-base-100 text shadow-sm shadow-yellow-400 hover:shadow-lg hover:shadow-primary duration-300">Submit</button>
-                </div>
-
-
-            </form>
-        </div>
+        <form onSubmit={handleSubmit(handleAddBlog)} className="max-w-4xl space-y-3">
+            <div className="form-control space-y-1.5">
+                <label className="font-bold tracking-wide">Photo</label>
+                <input type="file" {...register("img")} className="file-input file-input-bordered file-input-primary focus:outline-none w-full" />
+            </div>
+            <div className="form-control space-y-1.5">
+                <label className="font-bold tracking-wide">Category</label>
+                <input type="text" {...register("category")} placeholder="Category" className="input" />
+            </div>
+            <div className="form-control space-y-1.5">
+                <label className="font-bold tracking-wide">Title</label>
+                <input type="text" {...register("title")} placeholder="Title" className="input" />
+            </div>
+            <div className="form-control space-y-1.5">
+                <label className="font-bold tracking-wide">Description</label>
+                <textarea {...register("description")} className="textarea focus:outline-none textarea-bordered w-full" placeholder="Description" rows={4} ></textarea>
+            </div>
+            <div>
+                <Button type="submit" className="w-full mt-1">
+                    {updateLoading ? <SpinLoader>Uploading</SpinLoader> : "Upload Now"}
+                </Button>
+            </div>
+        </form>
     );
 };
 
