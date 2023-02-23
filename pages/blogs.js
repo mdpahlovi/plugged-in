@@ -44,6 +44,7 @@ const Blogs = () => {
     } else {
         const trending = blogs.filter(blog => blog.status === "trending")
         const latest = blogs.filter(blog => blog.status === "latest")
+        console.log(blogs)
 
         return (
             <Main title="Blogs - PluggedIn">

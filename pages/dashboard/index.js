@@ -89,12 +89,14 @@ const Profile = () => {
                                     Email : {user?.email}
                                 </h3>
                                 <h3 className="profile-info">
-                                    <MdLocationPin className="text-lg mr-3" />
-                                    Address : {user?.address ? user.address : <span>Please Set Your Address</span>}
+                                    <MdLocationPin className="text-lg mr-3 mt-0.5" />
+                                    <span className="whitespace-nowrap">
+                                        Address :</span> {user?.address ? user.address : <span className="text-error ml-2">Address not updated</span>}
                                 </h3>
                                 <h3 className="profile-info">
-                                    <BsFillTelephoneFill className="text-lg mr-3" />
-                                    Contact No : {user?.phone ? user.phone : <span>Please Set Your Contact No</span>}
+                                    <BsFillTelephoneFill className="text-lg mr-3 mt-0.5" />
+                                    <span className="whitespace-nowrap">
+                                        Contact No :</span> {user?.phone ? user.phone : <span className="text-error ml-2">Contact not updated</span>}
                                 </h3>
                             </div>
                         </div>
