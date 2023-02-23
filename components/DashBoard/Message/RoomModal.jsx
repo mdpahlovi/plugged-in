@@ -1,6 +1,7 @@
 import { useRouter } from "next/router";
 import React, { useContext, useEffect, useRef, useState } from "react";
 import { SocketContext } from "../../../contexts/SocketProvider";
+
 import Peer from "peerjs";
 
 const RoomModal = () => {
@@ -61,10 +62,9 @@ const RoomModal = () => {
 
   const call = (remotePeerId) => {
     const getUserMedia =
-      window.navigator?.getUserMedia ||
-      window.navigator?.webkitGetUserMedia ||
-      window.navigator?.mozGetUserMedia;
-
+      window?.navigator?.getUserMedia ||
+      window?.navigator?.webkitGetUserMedia ||
+      window?.navigator?.mozGetUserMedia;
     getUserMedia(
       { video: true, audio: true },
       (mediaStream) => {

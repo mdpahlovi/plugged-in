@@ -17,7 +17,12 @@ import { ImAttachment } from "react-icons/im";
 import { MdSend } from "react-icons/md";
 import { useTheme } from "../../../hooks/useTheme";
 import DropboxChooser from "react-dropbox-chooser";
-import RoomModal from "../../../components/DashBoard/Message/RoomModal";
+// import RoomModal from "../../../components/DashBoard/Message/RoomModal";
+import dynamic from "next/dynamic";
+const RoomModal = dynamic(
+  () => import("../../../components/DashBoard/Message/RoomModal"),
+  { ssr: false }
+);
 
 const ChatSection = () => {
   const { query } = useRouter();
