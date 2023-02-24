@@ -168,9 +168,9 @@ const RecordModal = ({
                             ) : (
                                 status !== "idle" &&
                                 (mode === "Audio Record" ? (
-                                    <audio src={mediaBlobUrl} autoPlay controls loop className="w-full" />
+                                    <audio src={mediaBlobUrl} controls className="w-full" />
                                 ) : (
-                                    <video className="video" src={mediaBlobUrl} controls autoPlay loop />
+                                    <video className="video" src={mediaBlobUrl} controls />
                                 ))
                             )}
                         </div>

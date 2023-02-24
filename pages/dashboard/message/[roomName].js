@@ -381,7 +381,6 @@ const ChatSection = () => {
         >
           <ImAttachment className="text-2xl cursor-pointer" />
         </DropboxChooser>
-        <button onClick={() => call(remotePeerIdValue)}>Call</button>
         <input
           type="text"
           placeholder="Message"
