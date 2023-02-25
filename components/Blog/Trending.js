@@ -21,9 +21,9 @@ export default function Trending({ blogs }) {
             >
                 {blogs?.map((data, i) => (
                     <SwiperSlide key={i}>
-                        <div className="grid md:grid-cols-2 relative">
-                            <Image src={data.img} className="rounded-lg" width={600} height={600} alt="" />
-                            <div className="flex justify-center flex-col mt-2 p-6">
+                        <div className="grid lg:grid-cols-2 gap-4 lg:gap-8 relative">
+                            <Image src={data.img} className="rounded-lg mx-auto" width={600} height={600} alt="" />
+                            <div className="flex justify-center flex-col">
                                 <div className="mb-2">
                                     <span className="badge badge-accent">{data.category}</span>
                                     <span className="ml-3">{data.date}</span>

@@ -4,7 +4,9 @@ import Message from "../../../components/Layout/Message";
 const ChatIndex = () => {
     return (
         <Message>
-            <h1 className="h-full flex justify-center items-center">Chat With Your Team</h1>
+            <div></div>
+            <h1 className="h-full flex justify-center items-center pt-2 mb-0 px-6">Chat With Your Friends</h1>
+            <div></div>
         </Message>
     );
 };

@@ -1,17 +1,16 @@
 import React from "react";
 import axios from "axios";
-import { api_url } from "../utilities/api";
+import { api_url } from "../../utilities/api";
 import { useQuery } from "@tanstack/react-query";
-import Main from "../components/Layout/Main";
-import Trending from "../components/Blog/Trending";
-import LatestPosts from "../components/Blog/LatestPosts";
-import Posts from "../components/Blog/Posts";
-import AddBlogs from "../components/Blog/AddBlogs";
-import { GrClose } from "react-icons/gr";
+import Main from "../../components/Layout/Main";
+import Trending from "../../components/Blog/Trending";
+import LatestPosts from "../../components/Blog/LatestPosts";
+import Posts from "../../components/Blog/Posts";
+import AddBlogs from "../../components/Blog/AddBlogs";
 import { CirclesWithBar } from "react-loader-spinner";
-import { Button } from "../components/Common/Buttons";
-import { useTheme } from "../hooks/useTheme";
-import Modal from "../components/Common/Modal";
+import { Button } from "../../components/Common/Buttons";
+import { useTheme } from "../../hooks/useTheme";
+import Modal from "../../components/Common/Modal";
 import { useState } from "react";
 
 const Blogs = () => {
@@ -44,7 +43,6 @@ const Blogs = () => {
     } else {
         const trending = blogs.filter(blog => blog.status === "trending")
         const latest = blogs.filter(blog => blog.status === "latest")
-        console.log(blogs)
 
         return (
             <Main title="Blogs - PluggedIn">
