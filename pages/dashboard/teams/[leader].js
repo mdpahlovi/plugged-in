@@ -83,7 +83,7 @@ const TeamMembers = () => {
     }
   };
 
-  const handleDeleteCard = (email, role) => {
+  const handleDeleteCard = (email, role, setRole) => {
     if (role !== "leader") {
       const restMembers = team?.members?.filter(
         (member) => member?.email !== email
@@ -97,7 +97,7 @@ const TeamMembers = () => {
         .then((res) => {
           if (res.data.acknowledged) {
             jwt_axios
-              .patch(`/user/${email}`, { role: "basic", team: [...restTeam] })
+              .patch(`/user/${email}`, { role: setRole, team: [...restTeam] })
               .then((res) => {
                 if (res.data) {
                   fetch(

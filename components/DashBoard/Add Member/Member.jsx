@@ -12,13 +12,14 @@ const Member = ({ member, handleDeleteCard, team, current_user, setSelectedMembe
     if (userLoading) {
         return <MemberCardLoader />;
     } else {
-        const { avatar, name } = user;
+        const { avatar, name, team: user_teams = [] } = user;
+        const isTeam = user_teams.filter((user_team) => user_team.name !== team.name);
 
         return (
             <div className="relative border rounded-lg">
                 {team?.leader === current_user?.email ? (
                     <div className="absolute top-4 right-4">
-                        <IconButton onClick={() => handleDeleteCard(email, role)}>
+                        <IconButton onClick={() => handleDeleteCard(email, role, isTeam.length ? "team" : "basic")}>
                             <MdDeleteSweep className="text-lg" />
                         </IconButton>
                     </div>

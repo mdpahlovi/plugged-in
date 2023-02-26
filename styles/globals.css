@@ -71,4 +71,7 @@
     .button {
         @apply bg-gradient-to-br from-secondary via-primary to-accent hover:from-accent hover:via-primary hover:to-secondary text-white;
     }
+    .blog-body {
+        @apply shadow-lg bg-base-100 p-6 rounded-lg w-4/5 mx-auto -mt-20 z-[1];
+    }
 }

@@ -58,7 +58,7 @@ const PeopleCard = ({ people, peoplesRefetch, setDisconnectingFriend }) => {
       email,
     };
 
-    fetch("https://plugged-in-server.onrender.com/calcelConnect", {
+    fetch("https://plugged-in-server.onrender.com/cancelConnect", {
       method: "PUT",
       headers: {
         "content-type": "application/json",
@@ -85,7 +85,7 @@ const PeopleCard = ({ people, peoplesRefetch, setDisconnectingFriend }) => {
       email: auth_user?.email,
     };
 
-    fetch("https://plugged-in-server.onrender.com/calcelConnect", {
+    fetch("https://plugged-in-server.onrender.com/cancelConnect", {
       method: "PUT",
       headers: {
         "content-type": "application/json",
